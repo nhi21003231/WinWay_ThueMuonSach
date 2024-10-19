@@ -20,7 +20,7 @@
 
 <body>
     <div class="container-fluid">
-        @yield('app')
+        @yield('main')
     </div>
 
     {{-- link js bootstrap --}}

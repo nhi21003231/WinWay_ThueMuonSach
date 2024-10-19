@@ -1,7 +1,7 @@
 @extends('app')
 
-@section('app')
-    <div class="header p-3" style="height: 300px; background-color: rgb(210, 163, 255)">
+@section('mail')
+    <div class="header p-3" style="height: 400px; background-color: rgb(210, 163, 255)">
         @include('CuaHang.layouts.header')
     </div>
 
