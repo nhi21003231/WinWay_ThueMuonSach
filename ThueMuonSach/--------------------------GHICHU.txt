@@ -1,0 +1,20 @@
+----Ghi chú 
+
+css tại public/css/app.css 
+
+
+
+
+
+
+----------Git
+
+-- Trước khi code 
+ + Kéo về coi có code mới k:     git pull     (trước khi pull phải commit nếu chưa commit trước đó)
+ + Nếu có cập nhật phiên bản trong composer.json thì cần chạy để update gói:         composer update
+
+-- Đẩy code lên
+    + save code rồi thực hiện: 
+        git add .      
+        git commit -m "Tên - mô tả nội dung" 
+        git push
