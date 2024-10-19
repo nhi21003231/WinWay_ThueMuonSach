@@ -32,7 +32,6 @@ class XacThucController extends Controller
         //     // Nếu đăng nhập thành công, lưu thông tin vào session
         //     $request->session()->put('ten_tai_khoan', $taiKhoan->ten_tai_khoan);
         //     $request->session()->put('vai_tro', $taiKhoan->vai_tro);
-
         //     // Điều hướng về trang chủ hoặc trang phù hợp với vai trò
         //     switch ($taiKhoan->vai_tro) {
         //         case 'nhanvien':
@@ -44,7 +43,7 @@ class XacThucController extends Controller
         //         default:
         //             return redirect()->route('router-khachhang-trang-chu');
         //     }
-        // }
+        // }=
 
         // // Nếu thất bại, quay lại trang đăng nhập với lỗi
         // return back()->withErrors([

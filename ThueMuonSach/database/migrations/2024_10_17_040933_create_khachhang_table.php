@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tai_khoan', function (Blueprint $table) {
+        Schema::create('khachhang', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->string('ten_tai_khoan',50)->unique(); // Tên tài khoản duy nhất
-            $table->string('mat_khau'); // Mật khẩu (hashed)
-            $table->enum('vai_tro', ['khachhang', 'nhanvien', 'quanlycuahang', 'quanlykho'])->default('khachhang'); // Các vai trò
+            $table->string('name',50);
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tai_khoan');
+        Schema::dropIfExists('khachhang');
     }
 };
