@@ -29,9 +29,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('hoadonthue');
-        Schema::table('hoadonthue',function($table){
-            $table->dropForeign('id_khachhang');
-            $table->dropForeign('id_anpham');
-        });
+        // Schema::table('hoadonthue',function($table){
+        //     $table->dropForeign('id_khachhang');
+        //     $table->dropForeign('id_anpham');
+        // });
     }
 };

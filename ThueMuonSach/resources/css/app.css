@@ -11,20 +11,19 @@ body{
   box-shadow: 1px 1px #eeee;
 }
 
-.content{
+/* .content{
   display: flex;
   width: 100%;
   height: auto;
   min-height: 650px;
-  /* background-color: aqua; */
-}
+  background-color: aqua; 
+} */
 
-.left{
-  width: 20%;
-  height: auto;
+/* .left{ 
+  height: 500px;
   background-color: #343A40;
 }
 .right{
   width: 80%;
   height: auto;
-}
+} */

@@ -18,13 +18,13 @@ class DonDatTruocController extends Controller
         // $hoadon = HoaDonThue::whereIn('id_khachhang',$khachhang->pluck('id'))->where('LoaiDon','Đơn đặt trước')->paginate(8);
         $hoadon = HoaDonThue::where('LoaiDon','Đơn đặt trước')->paginate(8);
         // dd($hoadon);
-        return view('NhanVienThueTra.re-order',compact('hoadon'));
+        return view('CuaHang.pages.NhanVien.re-order',compact('hoadon'));
     }
     // Lấy thông tin chi tiết
 
     public function reOrderDetail(HoaDonThue $hoaDonThue){
 
-        return view('NhanVienThueTra.re-order-detail',compact('hoaDonThue'));
+        return view('CuaHang.pages.NhanVien.re-order-detail',compact('hoaDonThue'));
     }
     /**
      * Show the form for creating a new resource.
