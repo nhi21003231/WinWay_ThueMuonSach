@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\DonDatTruocController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//////////////////////////////////////////////////////////////////////////////////
+// NHÂN VIÊN THUÊ TRẢ
+
+Route::get('re-order',[DonDatTruocController::class,'index']);
+Route::get('re-order/{hoaDonThue}/detail',[DonDatTruocController::class,'reOrderDetail']);
