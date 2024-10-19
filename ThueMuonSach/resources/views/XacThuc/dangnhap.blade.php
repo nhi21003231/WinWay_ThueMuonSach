@@ -8,7 +8,7 @@
                     <h4>Đăng nhập</h4>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('route-dang-nhap') }}">
+                    <form method="POST" action="{{ route('route-dangnhap') }}">
 
                         @csrf
 

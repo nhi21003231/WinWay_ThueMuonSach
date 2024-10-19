@@ -4,7 +4,10 @@ css tại public/css/app.css
 
 
 
-
+--------lộ trình chung
+-- tạo view tại resoures/views
+-- tạo controller -> php artisan make:controller TenController
+-- tạo route tại routes/web.php trỏ đến controller 
 
 
 ----------Git

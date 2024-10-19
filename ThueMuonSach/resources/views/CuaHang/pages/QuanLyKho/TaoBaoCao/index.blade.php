@@ -1,6 +1,5 @@
 @extends('CuaHang.layouts.index')
 
 @section('content')
-<h1>Quản lý cửa hàng</h1>
+<h1>Quản lý kho - Tạo báo cáo</h1>
 @endsection
-
