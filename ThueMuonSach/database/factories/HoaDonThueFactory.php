@@ -8,7 +8,7 @@ use App\Models\KhachHang;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\HoaDonThue>
  */
 class HoaDonThueFactory extends Factory
 {

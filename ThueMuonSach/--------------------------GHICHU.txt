@@ -1,17 +1,16 @@
 ----Ghi chú 
-
+file html gốc: resoures/views/app.blade.php
 css tại public/css/app.css 
 
 
 
---------lộ trình chung
+------------------------lộ trình chung
 -- tạo view tại resoures/views
 -- tạo controller -> php artisan make:controller TenController
 -- tạo route tại routes/web.php trỏ đến controller 
 
 
-----------Git
-
+-----------------------Git
 -- Trước khi code 
  + Kéo về coi có code mới k:     git pull     (trước khi pull phải commit nếu chưa commit trước đó)
  + Nếu có cập nhật phiên bản trong composer.json thì cần chạy để update gói:         composer update

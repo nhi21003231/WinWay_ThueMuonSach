@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
 class TaiKhoan extends Model
 {
@@ -19,9 +20,8 @@ class TaiKhoan extends Model
     ];
 
     // Đảm bảo mật khẩu được mã hóa khi lưu vào cơ sở dữ liệu
-    public function setPasswordAttribute($value)
+    public function setMatKhauAttribute($value)
     {
-        $this->attributes['mat_khau'] = bcrypt($value);
+        $this->attributes['mat_khau'] = Hash::make($value);
     }
-
 }
