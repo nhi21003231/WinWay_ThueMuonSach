@@ -55,7 +55,7 @@ Route::prefix('/nhan-vien')->group(function () {
 
     // -------- Route quản lý ấn phẩm
     Route::get('/dang-bai-bao', [DangBaiBaoController::class, 'hienThiDangBaiBao'])->name('route-cuahang-nhanvien-dangbaibao');
-
+    
     // -------- Route đăng ký thành viên
     Route::get('/dang-ky-thanh-vien', [DangKyThanhVienController::class, 'hienThiDangKyThanhVien'])->name('route-cuahang-nhanvien-dangkythanhvien');
 

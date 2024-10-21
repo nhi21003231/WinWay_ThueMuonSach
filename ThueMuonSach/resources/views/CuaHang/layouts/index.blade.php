@@ -12,8 +12,10 @@
             </div>
         </div>
 
-        <div class="content col-9 p-3" style="background-color: rgb(234, 227, 240)">
-            @yield('content')
+        <div class="content col-9 py-2 ps-2">
+            <div class="p-3 bg-white border rounded shadow-sm">
+                @yield('content')
+            </div>
         </div>
     </div>
 @endsection
