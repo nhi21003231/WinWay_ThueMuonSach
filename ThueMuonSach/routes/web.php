@@ -57,13 +57,13 @@ Route::prefix('/nhan-vien')->group(function () {
 
     // -------- Route quản lý ấn phẩm
     Route::get('/dang-bai-bao', [DangBaiBaoController::class, 'hienThiDangBaiBao'])->name('route-cuahang-nhanvien-dangbaibao');
-
+    
     // -------- Route đăng ký thành viên
     Route::get('/dang-ky-thanh-vien', [DangKyThanhVienController::class, 'hienThiDangKyThanhVien'])->name('route-cuahang-nhanvien-dangkythanhvien');
 
     // -------- Route đơn đặc trước
     Route::get('/don-dac-truoc', [DonDacTruocController::class, 'hienThiDonDacTruoc'])->name('route-cuahang-nhanvien-dondactruoc');
-
+    Route::get('/don-dac-truoc/{hoaDonThue}/chi-tiet', [DonDacTruocController::class, 'chiTietDonDatTruoc'])->name('route-cuahang-nhanvien-dondactruoc-chitiet');
     // -------- Route quản lý ấn phẩm
     Route::get('/quan-ly-an-pham', [NhanVienQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])->name('route-cuahang-nhanvien-quanlyanpham');
 

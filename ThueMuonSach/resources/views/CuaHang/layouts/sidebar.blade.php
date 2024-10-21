@@ -101,7 +101,7 @@
         </li>
         <li>
             <a href="{{ route('route-cuahang-nhanvien-dondactruoc') }}"
-                class="nav-link {{ Request::is('nhan-vien/don-dac-truoc') ? 'active' : 'link-dark' }}">
+                class="nav-link {{ Request::is('nhan-vien/don-dac-truoc') || Request::is('nhan-vien/don-dac-truoc/*/chi-tiet') ? 'active' : 'link-dark' }}">
                 Đơn đặc trước
             </a>
         </li>

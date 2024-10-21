@@ -8,28 +8,23 @@ use Illuminate\Http\Request;
 
 class DonDacTruocController extends Controller
 {
-    public function hienThiDonDacTruoc()
-    {
-        return view('CuaHang.pages.NhanVien.DonDacTruoc.index');
-    }
-
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function hienThiDonDacTruoc()
     {
         //
         // $khachhang = KhachHang::where('name','like','Isai Luettgen')->get();
         // $hoadon = HoaDonThue::whereIn('id_khachhang',$khachhang->pluck('id'))->where('LoaiDon','Đơn đặt trước')->paginate(8);
         $hoadon = HoaDonThue::where('LoaiDon','Đơn đặt trước')->paginate(8);
         // dd($hoadon);
-        return view('CuaHang.pages.NhanVien.re-order',compact('hoadon'));
+        return view('CuaHang.pages.NhanVien.DonDacTruoc.index',compact('hoadon'));
     }
     // Lấy thông tin chi tiết
 
-    public function reOrderDetail(HoaDonThue $hoaDonThue){
+    public function chiTietDonDatTruoc(HoaDonThue $hoaDonThue){
 
-        return view('CuaHang.pages.NhanVien.re-order-detail',compact('hoaDonThue'));
+        return view('CuaHang.pages.NhanVien.DonDacTruoc.chi-tiet-don-dat-truoc',compact('hoaDonThue'));
     }
     /**
      * Show the form for creating a new resource.

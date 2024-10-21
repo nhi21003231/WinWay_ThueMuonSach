@@ -1,19 +1,20 @@
 ----Ghi chú 
-
+file html gốc: resoures/views/app.blade.php
 css tại public/css/app.css 
 
 
 
---------lộ trình chung
+------------------------lộ trình chung
 -- tạo view tại resoures/views
 -- tạo controller -> php artisan make:controller TenController
 -- tạo route tại routes/web.php trỏ đến controller 
 
 
-----------Git
-
+-----------------------Git
 -- Trước khi code 
  + Kéo về coi có code mới k:     git pull     (trước khi pull phải commit nếu chưa commit trước đó)
+ + Mở xampp tạo csdl tên 'db_thuesach'                                                                     <-------------------- GHI CHÚ MỚI
+ + Chạy "php artisan migrate:refresh --seed" để tải dữ liệu database đã thiết kế từ thư mục /database về (một số tính năng đã code bằng csdl rồi mà k tải về là k chạy đc) <-------------------- GHI CHÚ MỚI
  + Nếu có cập nhật phiên bản trong composer.json thì cần chạy để update gói:         composer update
 
 -- Đẩy code lên
@@ -22,6 +23,4 @@ css tại public/css/app.css
         git commit -m "Tên - mô tả nội dung" 
         git push
 
-----ngày 19/10/2024 (Huy) - Xây dựng chức năng đơn đặt trước
-    --- migration: tạo bảng ấn phẩm, khách hàng, hóa đơn thuê để test -> không đầy đủ thuộc tính
-    --- tạo Controller, route của chức năng đơn đặt trước, xem thông tin đơn đặt trước
+THƯỜNG XUYÊN PULL CODE, TẢI CSDL MỚI VỀ ĐỂ CHẠY, CŨNG THƯỜNG XUYÊN PUSH CODE LÊN (LÀM TỚI ĐÂU PUSH TỚI ĐÓ, ĐỂ NHIỀU PUSH LÊN DỄ BỊ TRÙNG SỬA THẤY BÀ LUÔN ĐÓ)
