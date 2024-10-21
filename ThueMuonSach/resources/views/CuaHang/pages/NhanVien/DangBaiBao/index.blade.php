@@ -1,10 +1,9 @@
 @extends('CuaHang.layouts.index')
 
 @section('content')
-<h1>Nhân viên - Đăng bài báo</h1>
-<!-- resources/views/create_article.blade.php -->
- 
-<body>
+    <h1>Nhân viên - Đăng bài báo</h1>
+    <!-- resources/views/create_article.blade.php -->
+
     <form method="POST" action="">
         @csrf
         <label for="title">Tiêu Đề:</label>
@@ -23,6 +22,4 @@
             document.getElementById('content').value = '';
         }
     </script>
-</body>
-</html>
 @endsection
