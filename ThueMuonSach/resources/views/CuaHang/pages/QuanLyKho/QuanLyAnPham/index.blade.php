@@ -1,7 +1,7 @@
 @extends('CuaHang.layouts.index')
 
 @section('content')
-    <h2 class="mb-3">Danh sách ấn phẩm</h2>
+    <h2 class="mb-4">Danh sách ấn phẩm</h2>
 
     <form action="" method="GET" class="hstack gap-2 mb-3">
         <div class="w-25">
