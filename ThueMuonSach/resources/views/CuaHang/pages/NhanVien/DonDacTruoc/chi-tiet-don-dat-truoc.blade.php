@@ -1,11 +1,11 @@
 @extends('CuaHang.layouts.index')
 @section('content')
-  <div class="right">
-    <div class="pt-3 text-center text-primary">
+  <div class="row">
+    <div class="pt-3 text-center text-primary col">
       <h3>Thông Tin Đơn Hàng</h3>
     </div>
-    <div class="p-2 d-flex justify-content-around">
-      <div class="text-start">
+    <div class="p-2 row">
+      <div class="text-start col-6">
         <p class="text-uppercase fs-6 fw-bold">Thông tin khách hàng</p>
         <div class="pt-3">
           <label for="name" class="form-label fw-bold">Tên khách hàng:</label>
@@ -18,7 +18,7 @@
           </select>
         </div>
       </div>
-      <div class="text-start">
+      <div class="text-start col-6">
         <p class="text-uppercase fs-6 fw-bold">Thông tin sản phẩm</p>
         <div class="pt-3">
           <label for="name" class="form-label fw-bold">Tên sản phẩm:</label>
