@@ -13,6 +13,8 @@ css tại public/css/app.css
 -----------------------Git
 -- Trước khi code 
  + Kéo về coi có code mới k:     git pull     (trước khi pull phải commit nếu chưa commit trước đó)
+ + Mở xampp tạo csdl tên 'db_thuesach'                                                                     <-------------------- GHI CHÚ MỚI
+ + Chạy "php artisan migrate:refresh --seed" để tải dữ liệu database đã thiết kế từ thư mục /database về (một số tính năng đã code bằng csdl rồi mà k tải về là k chạy đc) <-------------------- GHI CHÚ MỚI
  + Nếu có cập nhật phiên bản trong composer.json thì cần chạy để update gói:         composer update
 
 -- Đẩy code lên
@@ -20,3 +22,5 @@ css tại public/css/app.css
         git add .      
         git commit -m "Tên - mô tả nội dung" 
         git push
+
+THƯỜNG XUYÊN PULL CODE, TẢI CSDL MỚI VỀ ĐỂ CHẠY, CŨNG THƯỜNG XUYÊN PUSH CODE LÊN (LÀM TỚI ĐÂU PUSH TỚI ĐÓ, ĐỂ NHIỀU PUSH LÊN DỄ BỊ TRÙNG SỬA THẤY BÀ LUÔN ĐÓ)
