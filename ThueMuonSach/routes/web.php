@@ -33,6 +33,8 @@ Route::get('/dang-ky', [XacThucController::class, 'hienThiDangKy'])->name('route
 // ---- 1.3 > Route đăng xuất
 Route::get('/dang-xuat', [XacThucController::class, 'dangXuat'])->name('route-dangxuat');
 
+// muon admin moi cho vao cac route nhan vien va quan ly cua hang
+
 
 // 2 > Route bên cửa hàng (cần đăng nhập quản lý kho, nhân viên,...)
 // ---- 2.1 > Route nhân viên
@@ -116,7 +118,10 @@ Route::get('/', [TrangChuController::class, 'hienThiTrangChu'])->name('route-kha
 
 // -------- Route chi tiết ấn phẩm
 Route::get('/chi-tiet-an-pham', [ChiTietAnPhamController::class, 'hienThiChiTietAnPham'])->name('route-khachhang-chitietanpham');
-
+// -------- Route liên hệ
+Route::get('/lien-he', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-lienhe');
+// -------- Route chính sách
+Route::get('/chinh-sach', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-chinhsach');
 
 // ---- 3.2 > Route cần đăng nhập
 // -------- Route thuê ấn phẩm
@@ -124,4 +129,9 @@ Route::get('/thue-an-pham', [ThueAnPhamController::class, 'hienThiThueAnPham'])-
 
 // -------- Route giỏ hàng
 Route::get('/gio-hang', [GioHangController::class, 'hienThiGioHang'])->name('route-khachhang-giohang');
-
+// -------- Route tìm kiếm ấn phẩm
+Route::get('/tim-kiem-an-pham', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-timkiemanpham');
+// -------- Route quản lý mua hàng
+Route::get('/quan-ly-mua-hang', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-quanlymuahang');
+// -------- Route lịch sử mua hàng
+Route::get('/lich-su-mua-hang', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-lichsumuahang');
