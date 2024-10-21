@@ -7,18 +7,16 @@
         <div class="w-25">
             <input class="form-control me-2" type="text" name="tim_kiem" placeholder="Tìm kiếm..." aria-label="Search">
         </div>
-        <div class="me-auto">
-            <button class="btn btn-primary" type="submit">Tìm kiếm</button>
-        </div>
-        <div class="">
-            <button class="btn btn-outline-secondary" type="button">Cập nhật tình trạng ấn phẩm</button>
-        </div>
-        <div class="">
-            <button class="btn btn-outline-secondary" type="button">Thanh lý ấn phẩm</button>
-        </div>
-        <div class="">
-            <button class="btn btn-outline-secondary" type="button">Nhập ấn phẩm</button>
-        </div>
+        <button class="btn btn-primary me-auto" type="submit">Tìm kiếm</button>
+        <a href="{{ route('route-cuahang-quanlykho-quanlyanpham-nhapanpham') }}" class="btn btn-outline-secondary">
+            Cập nhật tình trạng ấn phẩm
+        </a>
+        <a href="{{ route('route-cuahang-quanlykho-quanlyanpham-nhapanpham') }}" class="btn btn-outline-secondary">
+            Thanh lý ấn phẩm
+        </a>
+        <a href="{{ route('route-cuahang-quanlykho-quanlyanpham-nhapanpham') }}" class="btn btn-outline-secondary">
+            Nhập ấn phẩm
+        </a>
     </form>
 
 

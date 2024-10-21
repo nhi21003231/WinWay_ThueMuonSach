@@ -21,17 +21,6 @@ use App\Http\Controllers\QuanLyKho\TaoBaoCaoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\XacThucController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 
 // 1 > Route đăng ký, đăng nhập (chung cho khách hàng và bên cửa hàng)
 // ---- 1.1 > Route đăng nhập
@@ -62,6 +51,7 @@ Route::prefix('/nhan-vien')->group(function () {
     // -------- Route đơn đặc trước
     Route::get('/don-dac-truoc', [DonDacTruocController::class, 'hienThiDonDacTruoc'])->name('route-cuahang-nhanvien-dondactruoc');
     Route::get('/don-dac-truoc/{hoaDonThue}/chi-tiet', [DonDacTruocController::class, 'chiTietDonDatTruoc'])->name('route-cuahang-nhanvien-dondactruoc-chitiet');
+
     // -------- Route quản lý ấn phẩm
     Route::get('/quan-ly-an-pham', [NhanVienQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])->name('route-cuahang-nhanvien-quanlyanpham');
 
@@ -109,6 +99,7 @@ Route::prefix('/quan-ly-kho')->group(function () {
 
     // -------- Route quản lý ấn phẩm
     Route::get('/quan-ly-an-pham', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])->name('route-cuahang-quanlykho-quanlyanpham');
+    Route::get('/quan-ly-an-pham/nhap-an-pham', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPham'])->name('route-cuahang-quanlykho-quanlyanpham-nhapanpham');
 
     // -------- Route quản lý danhh mục 
     Route::get('/quan-ly-danh-muc', [QuanLyDanhMucController::class, 'hienThiQuanLyDanhMuc'])->name('route-cuahang-quanlykho-quanlydanhmuc');
