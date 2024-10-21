@@ -20,7 +20,3 @@ css tại public/css/app.css
         git add .      
         git commit -m "Tên - mô tả nội dung" 
         git push
-
-----ngày 19/10/2024 (Huy) - Xây dựng chức năng đơn đặt trước
-    --- migration: tạo bảng ấn phẩm, khách hàng, hóa đơn thuê để test -> không đầy đủ thuộc tính
-    --- tạo Controller, route của chức năng đơn đặt trước, xem thông tin đơn đặt trước
