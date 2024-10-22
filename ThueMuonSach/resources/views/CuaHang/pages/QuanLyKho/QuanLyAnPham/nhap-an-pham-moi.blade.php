@@ -3,13 +3,13 @@
 @section('content')
     <h2 class="mt-5 mb-3 text-center">Nhập ấn phẩm mới</h2>
 
-    <form action="" method="GET" class="px-5 w-75 mx-auto py-5">
+    <form action="" method="GET" class="px-5 w-75 mx-auto py-5" enctype="multipart/form-data">
 
         <div class="row g-5 mb-4">
             <div class="col-6">
                 <label for="ten-an-pham" class="form-label h4">Tên ấn phẩm <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="ten-an-pham" id="ten-an-pham" placeholder="Nhập tên ấn phẩm"
-                    required>
+                <input type="text" class="form-control" name="ten-an-pham" id="ten-an-pham"
+                    placeholder="Nhập tên ấn phẩm" required>
             </div>
             <div class="col-6">
                 <label for="vi-tri" class="form-label h4">Vị trí</label>
@@ -45,13 +45,17 @@
         </div>
 
         <div class="row g-5 mb-4">
-            <div class="col-12">
+            <div class="col-6">
                 <label for="danh-muc" class="form-label h4">Danh mục</label>
                 <select class="form-select" name="danh-muc" id="danh-muc">
                     <option value="1" selected>Không có danh mục</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
+            </div>
+            <div class="col-6">
+                <label for="file-anh" class="form-label h4">Ảnh ấn phẩm <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" name="file-anh" id="file-anh" accept="image/*" required>
             </div>
         </div>
 

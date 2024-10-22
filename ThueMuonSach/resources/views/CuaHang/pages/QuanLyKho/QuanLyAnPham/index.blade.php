@@ -10,11 +10,11 @@
 
         <button class="btn btn-primary me-auto" type="submit">Tìm kiếm</button>
 
-        <a href="{{ route('route-cuahang-quanlykho-quanlyanpham-nhapanphammoi') }}" class="btn btn-secondary">
+        <a href="{{ route('route-cuahang-quanlykho-quanlyanpham-capnhattinhtrang') }}" class="btn btn-secondary">
             Cập nhật tình trạng ấn phẩm
         </a>
 
-        <a href="{{ route('route-cuahang-quanlykho-quanlyanpham-nhapanphammoi') }}" class="btn btn-secondary">
+        <a href="{{ route('route-cuahang-quanlykho-quanlyanpham-thanhlyanpham') }}" class="btn btn-secondary">
             Thanh lý ấn phẩm
         </a>
 
@@ -31,7 +31,7 @@
     </form>
 
 
-    <table class="table table-hover mb-3 text-center">
+    <table class="table table-hover mb-3 text-center align-middle">
         <thead>
             <tr>
                 <th scope="col">Mã ấn phẩm</th>

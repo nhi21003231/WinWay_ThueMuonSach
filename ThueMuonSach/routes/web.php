@@ -51,7 +51,7 @@ Route::prefix('/nhan-vien')->group(function () {
 
     // -------- Route quản lý ấn phẩm
     Route::get('/dang-bai-bao', [DangBaiBaoController::class, 'hienThiDangBaiBao'])->name('route-cuahang-nhanvien-dangbaibao');
-    
+
     // -------- Route đăng ký thành viên
     Route::get('/dang-ky-thanh-vien', [DangKyThanhVienController::class, 'hienThiDangKyThanhVien'])->name('route-cuahang-nhanvien-dangkythanhvien');
 
@@ -109,9 +109,23 @@ Route::prefix('/quan-ly-kho')->group(function () {
     })->name('route-cuahang-quanlykho');
 
     // -------- Route quản lý ấn phẩm
-    Route::get('/quan-ly-an-pham', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])->name('route-cuahang-quanlykho-quanlyanpham');
-    Route::get('/quan-ly-an-pham/nhap-an-pham-moi', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPhamMoi'])->name('route-cuahang-quanlykho-quanlyanpham-nhapanphammoi');
-    Route::get('/quan-ly-an-pham/nhap-an-pham-da-co', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPhamDaCo'])->name('route-cuahang-quanlykho-quanlyanpham-nhapanphamdaco');
+    Route::prefix('/quan-ly-an-pham')->group(function () {
+        Route::get('/', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])
+            ->name('route-cuahang-quanlykho-quanlyanpham');
+
+        Route::get('/nhap-an-pham-moi', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPhamMoi'])
+            ->name('route-cuahang-quanlykho-quanlyanpham-nhapanphammoi');
+
+        Route::get('/nhap-an-pham-da-co', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPhamDaCo'])
+            ->name('route-cuahang-quanlykho-quanlyanpham-nhapanphamdaco');
+
+        Route::get('/thanh-ly-an-pham', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiThanhLyAnPham'])
+            ->name('route-cuahang-quanlykho-quanlyanpham-thanhlyanpham');
+
+        Route::get('/cap-nhat-tinh-trang', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiCapNhatTinhTrang'])
+            ->name('route-cuahang-quanlykho-quanlyanpham-capnhattinhtrang');
+    });
+
 
     // -------- Route quản lý danhh mục 
     Route::get('/quan-ly-danh-muc', [QuanLyDanhMucController::class, 'hienThiQuanLyDanhMuc'])->name('route-cuahang-quanlykho-quanlydanhmuc');
