@@ -15,6 +15,7 @@
     <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/dangbao.css') }}  ">
     <link rel="stylesheet" href="{{ asset('css/header.css') }}  ">
+    <link rel="stylesheet" href="{{ asset('css/thanhba.css') }}  ">
     
     {{-- link js app --}}
     <link href="{{ URL::asset('js/app.js') }}" rel="script">
