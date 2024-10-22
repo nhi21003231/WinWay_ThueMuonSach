@@ -9,42 +9,25 @@
         </div>
 
         <button class="btn btn-primary me-auto" type="submit">Tìm kiếm</button>
-
-        <a href="{{ route('route-cuahang-quanlykho-quanlyanpham-nhapanphammoi') }}" class="btn btn-secondary">
-            Cập nhật tình trạng ấn phẩm
-        </a>
-
-        <a href="{{ route('route-cuahang-quanlykho-quanlyanpham-nhapanphammoi') }}" class="btn btn-secondary">
-            Thanh lý ấn phẩm
-        </a>
-
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Nhập ấn phẩm
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="{{ route('route-cuahang-quanlykho-quanlyanpham-nhapanphammoi') }}">Nhập ấn phẩm mới</a></li>
-                <li><a class="dropdown-item" href="{{ route('route-cuahang-quanlykho-quanlyanpham-nhapanphamdaco') }}">Nhập ấn phẩm đã có</a></li>
-            </ul>
-        </div>
     </form>
 
 
     <table class="table table-hover mb-3 text-center">
         <thead>
             <tr>
+                <th scope="col">Chọn</th>
                 <th scope="col">Mã ấn phẩm</th>
                 <th scope="col">Tên ấn phẩm</th>
                 <th scope="col">Tác giả</th>
                 <th scope="col">Danh mục</th>
                 <th scope="col">Hình ảnh</th>
                 <th scope="col">Tình trạng</th>
-                <th scope="col">Đã thuê</th>
+                <th scope="col">Số lượng</th>
             </tr>
         </thead>
         <tbody>
             <tr>
+                <td><input class="form-check-input " type="checkbox" value=""></td>
                 <th scope="row">1</th>
                 <td>row 1</td>
                 <td>row 1</td>
@@ -52,27 +35,39 @@
                 <td>
                     <img src="{{ asset('img/anh-an-pham/nha-gia-kim.jpg') }}" width="100" height="100" alt="">
                 </td>
-                <td>row 1</td>
-                <td>row 1</td>
+                <td width="200">
+                    <select class="form-select" name="tinh-trang" id="tinh-trang">
+                        <option value="Mới" selected>Mới</option>
+                        <option value="Cũ">Cũ</option>
+                        <option value="Hư hỏng">Hư hỏng</option>
+                    </select>
+                </td>
+                <td width="100">
+                    <input type="number" class="form-control text-center" name="so-luong" id="so-luong" value="0">
+                </td>
             </tr>
             <tr>
+                <td><input class="form-check-input " type="checkbox" value=""></td>
                 <th scope="row">2</th>
                 <td>row 2</td>
                 <td>row 2</td>
                 <td>row 2</td>
                 <td>
-                    <img src="{{ asset('img/anh-an-pham/phat-hoa-chan-dung-ke-pham-toi.jpg') }}" width="100" height="100" alt="">
+                    <img src="{{ asset('img/anh-an-pham/phat-hoa-chan-dung-ke-pham-toi.jpg') }}" width="100"
+                        height="100" alt="">
                 </td>
                 <td>row 2</td>
                 <td>row 2</td>
             </tr>
             <tr>
+                <td><input class="form-check-input " type="checkbox" value=""></td>
                 <th scope="row">3</th>
                 <td>row 3</td>
                 <td>row 3</td>
                 <td>row 3</td>
                 <td>
-                    <img src="{{ asset('img/anh-an-pham/su-im-lang-cua-bay-cuu.jpg') }}" width="100" height="100" alt="">
+                    <img src="{{ asset('img/anh-an-pham/su-im-lang-cua-bay-cuu.jpg') }}" width="100" height="100"
+                        alt="">
                 </td>
                 <td>row 3</td>
                 <td>row 3</td>

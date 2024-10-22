@@ -12,8 +12,13 @@ class QuanLyAnPhamController extends Controller
         return view('CuaHang.pages.QuanLyKho.QuanLyAnPham.index');
     }
 
-    public function hienThiNhapAnPham()
+    public function hienThiNhapAnPhamMoi()
     {
-        return view('CuaHang.pages.QuanLyKho.QuanLyAnPham.nhap-an-pham');
+        return view('CuaHang.pages.QuanLyKho.QuanLyAnPham.nhap-an-pham-moi');
+    }
+
+    public function hienThiNhapAnPhamDaCo()
+    {
+        return view('CuaHang.pages.QuanLyKho.QuanLyAnPham.nhap-an-pham-da-co');
     }
 }

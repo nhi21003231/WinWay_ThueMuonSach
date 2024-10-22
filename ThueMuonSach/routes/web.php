@@ -33,7 +33,12 @@ Route::get('/dang-ky', [XacThucController::class, 'hienThiDangKy'])->name('route
 // ---- 1.3 > Route đăng xuất
 Route::get('/dang-xuat', [XacThucController::class, 'dangXuat'])->name('route-dangxuat');
 
+
+
+
 // muon admin moi cho vao cac route nhan vien va quan ly cua hang
+
+
 
 
 // 2 > Route bên cửa hàng (cần đăng nhập quản lý kho, nhân viên,...)
@@ -65,6 +70,8 @@ Route::prefix('/nhan-vien')->group(function () {
 });
 
 
+
+
 // ---- 2.2 > Route của quản lý cửa hàng
 Route::prefix('/quan-ly-cua-hang')->group(function () {
 
@@ -92,6 +99,8 @@ Route::prefix('/quan-ly-cua-hang')->group(function () {
 });
 
 
+
+
 // ---- 2.3 > Route quản lý kho
 Route::prefix('/quan-ly-kho')->group(function () {
 
@@ -101,7 +110,8 @@ Route::prefix('/quan-ly-kho')->group(function () {
 
     // -------- Route quản lý ấn phẩm
     Route::get('/quan-ly-an-pham', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])->name('route-cuahang-quanlykho-quanlyanpham');
-    Route::get('/quan-ly-an-pham/nhap-an-pham', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPham'])->name('route-cuahang-quanlykho-quanlyanpham-nhapanpham');
+    Route::get('/quan-ly-an-pham/nhap-an-pham-moi', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPhamMoi'])->name('route-cuahang-quanlykho-quanlyanpham-nhapanphammoi');
+    Route::get('/quan-ly-an-pham/nhap-an-pham-da-co', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPhamDaCo'])->name('route-cuahang-quanlykho-quanlyanpham-nhapanphamdaco');
 
     // -------- Route quản lý danhh mục 
     Route::get('/quan-ly-danh-muc', [QuanLyDanhMucController::class, 'hienThiQuanLyDanhMuc'])->name('route-cuahang-quanlykho-quanlydanhmuc');
@@ -109,6 +119,10 @@ Route::prefix('/quan-ly-kho')->group(function () {
     // -------- Route tạo báo cáo
     Route::get('/tao-bao-cao', [TaoBaoCaoController::class, 'hienThiTaoBaoCao'])->name('route-cuahang-quanlykho-taobaocao');
 });
+
+
+
+
 
 
 // 3 > Route bên khách hàng
