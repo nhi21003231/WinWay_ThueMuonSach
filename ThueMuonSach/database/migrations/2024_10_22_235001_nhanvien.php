@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum('chucVu', ['Quản lý cửa hàng', 'Quản lý kho', 'Thuê trả']);
             $table->dateTime('ngayBoNhiem');
             $table->double('phuCap');
+            // $table->foreign('maTaiKhoan')->references('maTaiKhoan')->on('taikhoan')->onDelete('cascade');
             $table->timestamps(); // Thêm các cột created_at và updated_at
         });
     }

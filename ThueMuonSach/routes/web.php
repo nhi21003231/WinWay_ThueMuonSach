@@ -86,9 +86,9 @@ Route::prefix('/quan-ly-cua-hang')->group(function () {
     Route::get('/xem-bai-bao', [XemBaoCaoController::class, 'hienThiXemBaoCao'])->name('route-cuahang-quanlycuahang-xembaibao');
 
     // -------- Route chấm công: get
-    Route::get('/cham-cong', [ChamCongController::class, 'hienThiChamCong'])->name('route-cuahang-quanlycuahang-chamcong');
     // Phát 21/10
     // -------- Route chấm công: post
+    Route::get('/cham-cong', [ChamCongController::class, 'hienThiChamCong'])->name('route-cuahang-quanlycuahang-chamcong');
     Route::post('/cham-cong/update', [ChamCongController::class, 'updateChamCong'])->name('route-cuahang-quanlycuahang-chamcong.updateChamCong');
 
     // -------- Route định giá ấn phẩm

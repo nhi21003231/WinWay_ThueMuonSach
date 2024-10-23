@@ -5,7 +5,6 @@
 @section('content')
 
 <!-- Content -->
-<div class="container-fluid">
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center border-bottom py-3">
         <h1>Quản lý cửa hàng - Chấm công</h1>
@@ -28,9 +27,6 @@
                             <th>Mã CC</th>
                             <th>Mã NV</th>
                             <th>Họ tên</th>
-                            <th>Số điện thoại</th>
-                            <th>Email</th>
-                            <th>Chức vụ</th>
                             <th>Thời gian vào</th>
                             <th>Thời gian ra</th>
                             <th>Ghi nhận</th>
@@ -42,9 +38,6 @@
                             <td>{{ $ChamCong->maChamCong }}</td>
                             <td>{{ $ChamCong->nhanVien->maNhanVien }}</td>
                             <td>{{ $ChamCong->nhanVien->hoTen }}</td>
-                            <td>{{ $ChamCong->nhanVien->soDienThoai }}</td>
-                            <td>{{ $ChamCong->nhanVien->email }}</td>
-                            <td>{{ $ChamCong->nhanVien->chucVu }}</td>
                             <td>
                                 <input type="datetime-local" class="form-control" name="thoiGianVao[]" value="{{ \Carbon\Carbon::parse($ChamCong->thoiGianVao)->format('Y-m-d\TH:i') }}">
                             </td>
@@ -64,7 +57,15 @@
                 </table>
             </div>
             <button type="submit" class="btn btn-success">Cập nhật trạng thái</button>
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item"><a class="page-link" href="#">«</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">»</a></li>
+                </ul>
+            </nav>
         </form>
     </div>
-</div>
 @endsection
