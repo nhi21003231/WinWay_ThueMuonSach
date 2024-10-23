@@ -137,7 +137,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                {{-- Đang sửa --}}
+                                                {{-- Đang sửa nè --}}
                                                 <form id="deleteForm" action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien.deleteOneNhanVien', $NhanVien->maNhanVien) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
