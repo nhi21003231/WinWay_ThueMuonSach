@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\AnPham::factory(20)->create();
         \App\Models\KhachHang::factory(10)->create();
         \App\Models\HoaDonThue::factory(50)->create();
+        \App\Models\NhanVien::factory(50)->create();
+        \App\Models\ChamCong::factory(50)->create();
     }
 }

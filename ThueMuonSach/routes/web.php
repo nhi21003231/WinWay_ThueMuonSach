@@ -55,7 +55,7 @@ Route::prefix('/nhan-vien')->group(function () {
 
     // -------- Route quản lý ấn phẩm
     Route::get('/dang-bai-bao', [DangBaiBaoController::class, 'hienThiDangBaiBao'])->name('route-cuahang-nhanvien-dangbaibao');
-    
+
     // -------- Route đăng ký thành viên
     Route::get('/dang-ky-thanh-vien', [DangKyThanhVienController::class, 'hienThiDangKyThanhVien'])->name('route-cuahang-nhanvien-dangkythanhvien');
 
@@ -86,8 +86,11 @@ Route::prefix('/quan-ly-cua-hang')->group(function () {
     // -------- Route xem báo cáo
     Route::get('/xem-bai-bao', [XemBaoCaoController::class, 'hienThiXemBaoCao'])->name('route-cuahang-quanlycuahang-xembaibao');
 
-    // -------- Route chấm công
+    // -------- Route chấm công: get
     Route::get('/cham-cong', [ChamCongController::class, 'hienThiChamCong'])->name('route-cuahang-quanlycuahang-chamcong');
+    // Phát 21/10
+    // -------- Route chấm công: post
+    Route::post('/cham-cong/update', [ChamCongController::class, 'updateChamCong'])->name('route-cuahang-quanlycuahang-chamcong.updateChamCong');
 
     // -------- Route định giá ấn phẩm
     Route::get('/dinh-gia-an-pham', [DinhGiaAnPhamController::class, 'hienThiDinhGiaAnPham'])->name('route-cuahang-quanlycuahang-dinhgiaanpham');
@@ -133,4 +136,3 @@ Route::get('/thue-an-pham', [ThueAnPhamController::class, 'hienThiThueAnPham'])-
 
 // -------- Route giỏ hàng
 Route::get('/gio-hang', [GioHangController::class, 'hienThiGioHang'])->name('route-khachhang-giohang');
-

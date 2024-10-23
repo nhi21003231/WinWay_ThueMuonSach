@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\QuanLyCuaHang;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 
 class QuanLyNhanVienController extends Controller
 {
@@ -11,4 +11,5 @@ class QuanLyNhanVienController extends Controller
     {
         return view('CuaHang.pages.QuanLyCuaHang.QuanLyNhanVien.index');
     }
+
 }
