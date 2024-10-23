@@ -15,7 +15,7 @@
         </div>
 
         <div class="col-9 py-2 ps-2">
-            <div class="p-3 bg-white border rounded shadow-sm">
+            <div class="py-3 px-4 bg-white border rounded shadow-sm">
                 @yield('content')
             </div>
         </div>

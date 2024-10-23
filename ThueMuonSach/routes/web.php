@@ -21,17 +21,6 @@ use App\Http\Controllers\QuanLyKho\TaoBaoCaoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\XacThucController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 
 // 1 > Route đăng ký, đăng nhập (chung cho khách hàng và bên cửa hàng)
 // ---- 1.1 > Route đăng nhập
@@ -43,6 +32,13 @@ Route::get('/dang-ky', [XacThucController::class, 'hienThiDangKy'])->name('route
 
 // ---- 1.3 > Route đăng xuất
 Route::get('/dang-xuat', [XacThucController::class, 'dangXuat'])->name('route-dangxuat');
+
+
+
+
+// muon admin moi cho vao cac route nhan vien va quan ly cua hang
+
+
 
 
 // 2 > Route bên cửa hàng (cần đăng nhập quản lý kho, nhân viên,...)
@@ -62,6 +58,7 @@ Route::prefix('/nhan-vien')->group(function () {
     // -------- Route đơn đặc trước
     Route::get('/don-dac-truoc', [DonDacTruocController::class, 'hienThiDonDacTruoc'])->name('route-cuahang-nhanvien-dondactruoc');
     Route::get('/don-dac-truoc/{hoaDonThue}/chi-tiet', [DonDacTruocController::class, 'chiTietDonDatTruoc'])->name('route-cuahang-nhanvien-dondactruoc-chitiet');
+
     // -------- Route quản lý ấn phẩm
     Route::get('/quan-ly-an-pham', [NhanVienQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])->name('route-cuahang-nhanvien-quanlyanpham');
 
@@ -71,6 +68,8 @@ Route::prefix('/nhan-vien')->group(function () {
     // -------- Route thống kê doanh thu
     Route::get('/thong-ke-doanh-thu', [ThongKeDoanhThuController::class, 'hienThiThongKeDoanhThu'])->name('route-cuahang-nhanvien-thongkedoanhthu');
 });
+
+
 
 
 // ---- 2.2 > Route của quản lý cửa hàng
@@ -103,6 +102,8 @@ Route::prefix('/quan-ly-cua-hang')->group(function () {
 });
 
 
+
+
 // ---- 2.3 > Route quản lý kho
 Route::prefix('/quan-ly-kho')->group(function () {
 
@@ -111,7 +112,23 @@ Route::prefix('/quan-ly-kho')->group(function () {
     })->name('route-cuahang-quanlykho');
 
     // -------- Route quản lý ấn phẩm
-    Route::get('/quan-ly-an-pham', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])->name('route-cuahang-quanlykho-quanlyanpham');
+    Route::prefix('/quan-ly-an-pham')->group(function () {
+        Route::get('/', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])
+            ->name('route-cuahang-quanlykho-quanlyanpham');
+
+        Route::get('/nhap-an-pham-moi', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPhamMoi'])
+            ->name('route-cuahang-quanlykho-quanlyanpham-nhapanphammoi');
+
+        Route::get('/nhap-an-pham-da-co', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPhamDaCo'])
+            ->name('route-cuahang-quanlykho-quanlyanpham-nhapanphamdaco');
+
+        Route::get('/thanh-ly-an-pham', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiThanhLyAnPham'])
+            ->name('route-cuahang-quanlykho-quanlyanpham-thanhlyanpham');
+
+        Route::get('/cap-nhat-tinh-trang', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiCapNhatTinhTrang'])
+            ->name('route-cuahang-quanlykho-quanlyanpham-capnhattinhtrang');
+    });
+
 
     // -------- Route quản lý danhh mục 
     Route::get('/quan-ly-danh-muc', [QuanLyDanhMucController::class, 'hienThiQuanLyDanhMuc'])->name('route-cuahang-quanlykho-quanlydanhmuc');
@@ -121,6 +138,10 @@ Route::prefix('/quan-ly-kho')->group(function () {
 });
 
 
+
+
+
+
 // 3 > Route bên khách hàng
 // ---- 3.1 > Route không cần đăng nhập
 // -------- Route trang chủ
@@ -128,7 +149,10 @@ Route::get('/', [TrangChuController::class, 'hienThiTrangChu'])->name('route-kha
 
 // -------- Route chi tiết ấn phẩm
 Route::get('/chi-tiet-an-pham', [ChiTietAnPhamController::class, 'hienThiChiTietAnPham'])->name('route-khachhang-chitietanpham');
-
+// -------- Route liên hệ
+Route::get('/lien-he', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-lienhe');
+// -------- Route chính sách
+Route::get('/chinh-sach', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-chinhsach');
 
 // ---- 3.2 > Route cần đăng nhập
 // -------- Route thuê ấn phẩm
@@ -136,3 +160,9 @@ Route::get('/thue-an-pham', [ThueAnPhamController::class, 'hienThiThueAnPham'])-
 
 // -------- Route giỏ hàng
 Route::get('/gio-hang', [GioHangController::class, 'hienThiGioHang'])->name('route-khachhang-giohang');
+// -------- Route tìm kiếm ấn phẩm
+Route::get('/tim-kiem-an-pham', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-timkiemanpham');
+// -------- Route quản lý mua hàng
+Route::get('/quan-ly-mua-hang', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-quanlymuahang');
+// -------- Route lịch sử mua hàng
+Route::get('/lich-su-mua-hang', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-lichsumuahang');
