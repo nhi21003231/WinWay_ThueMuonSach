@@ -11,4 +11,9 @@ class QuanLyDanhMucController extends Controller
     {
         return view('CuaHang.pages.QuanLyKho.QuanLyDanhMuc.index');
     }
+
+    public function hienThiThemDanhMuc()
+    {
+        return view('CuaHang.pages.QuanLyKho.QuanLyDanhMuc.them-danh-muc');
+    }
 }
