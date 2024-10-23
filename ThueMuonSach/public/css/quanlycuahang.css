@@ -1,0 +1,44 @@
+/* Phát 23/10 */
+.truncate {
+    overflow: hidden;      /* Ẩn phần văn bản vượt ra ngoài */
+    white-space: nowrap;   /* Không xuống dòng */
+    text-overflow: ellipsis; /* Hiển thị dấu "..." */
+    max-width: 100px;     /* Chiều rộng tối đa cho phần tử */
+}
+
+/* CSS cho nút cuộn */
+#scrollToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff; /* Màu nền */
+    color: white; /* Màu chữ */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    display: none; /* Ẩn nút theo mặc định */
+    z-index: 1000; /* Đặt z-index cao để nút luôn nằm trên các phần tử khác */
+}
+
+/* CSS cho thanh cuộn dọc */
+.scrollable-container {
+    position: relative;
+    height: 80vh; /* Chiều cao của container có thể điều chỉnh */
+    overflow-y: auto; /* Cho phép cuộn dọc */
+    border: 1px solid #ddd; /* Đường viền cho container */
+    padding-right: 20px; /* Khoảng cách bên phải để không bị che khuất bởi thanh cuộn */
+}
+
+/* CSS cho thanh cuộn */
+.scrollable-container::-webkit-scrollbar {
+    width: 8px; /* Chiều rộng của thanh cuộn */
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+    background: #007bff; /* Màu của thanh cuộn */
+    border-radius: 10px; /* Đường viền bo góc cho thanh cuộn */
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Màu nền cho thanh cuộn */
+}

@@ -15,4 +15,22 @@ class QuanLyNhanVienController extends Controller
         $nhanVienList = NhanVien::all();
         return view('CuaHang.pages.QuanLyCuaHang.QuanLyNhanVien.index', compact('nhanVienList'));
     }
+    public function deleteOneNhanVien($id)
+    {
+        // $nhanVien = NhanVien::find($id); // Tìm nhân viên theo ID
+
+        // // Kiểm tra nếu nhân viên không tồn tại
+        // if (!$nhanVien) {
+        //     return redirect()->back()->with('error', 'Nhân viên không tồn tại.');
+        // }
+
+        // $nhanVien->delete(); // Xóa nhân viên
+
+        // return redirect()->back()->with('success', 'Nhân viên đã được xóa thành công.');
+
+        $nhanVien = NhanVien::findOrFail($id);
+        $nhanVien->delete();
+
+        return redirect()->back()->with('success', 'Nhân viên đã được xóa thành công.');
+    }
 }

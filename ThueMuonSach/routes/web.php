@@ -82,19 +82,25 @@ function QuanLyCuaHangRoutes($isAdmin = false)
 {
     $prefix = $isAdmin ? 'route-admin-quanlycuahang' : 'route-cuahang-quanlycuahang';
 
+
     Route::get('/', function () use ($prefix) {
         return redirect(route($prefix . '-quanlynhanvien'));
     })->name($prefix);
 
     // -------- Route quản lý nhân viên
+    // Phát 23/10
     Route::get('/quan-ly-nhan-vien', [QuanLyNhanVienController::class, 'hienThiQuanLyNhanVien'])
         ->name($prefix . '-quanlynhanvien');
+    // Đang sửa
+    Route::delete('/quan-ly-nhan-vien/delete/{id}', [QuanLyNhanVienController::class, 'deleteOneNhanVien'])
+        ->name($prefix . '-quanlynhanvien.deleteOneNhanVien');
 
     // -------- Route xem báo cáo
     Route::get('/xem-bai-bao', [XemBaoCaoController::class, 'hienThiXemBaoCao'])
         ->name($prefix . '-xembaibao');
 
     // -------- Route chấm công
+    // Phát 21/10
     Route::get('/cham-cong', [ChamCongController::class, 'hienThiChamCong'])
         ->name($prefix . '-chamcong');
     Route::post('/cham-cong/update', [ChamCongController::class, 'updateChamCong'])
