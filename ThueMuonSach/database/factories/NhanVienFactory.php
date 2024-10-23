@@ -25,6 +25,7 @@ class NhanVienFactory extends Factory
             'chucVu' => $this->faker->randomElement(['Quản lý cửa hàng', 'Quản lý kho', 'Thuê trả']),
             'ngayBoNhiem' => $this->faker->dateTime(),
             'phuCap' => $this->faker->randomFloat(2, 500000, 5000000), // Giá trị ngẫu nhiên từ 500k đến 5 triệu
+            // 'maTaiKhoan' => TaiKhoan::factory()
         ];
     }
 }
