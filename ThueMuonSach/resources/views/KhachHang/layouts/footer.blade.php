@@ -13,7 +13,7 @@
                     <div class="footer__widget">
                         <h4>Truy cập nhanh</h4>
                         <ul style="list-style-type: none; color: #333; margin: 10px 0 0 0">
-                            <li><a style="color: #333" href="{{ route('route-khachhang-trangchu') }}">Home</a></li>
+                            <li><a style="color: #333" href="{{ route('route-khachhang-trangchu') }}">Trang Chủ</a></li>
                             <li><a style="color: #333" href="{{ route('route-khachhang-chitietanpham') }}">Ấn Phẩm</a></li>
                             <li><a style="color: #333" href="{{ route('route-khachhang-lienhe') }}">Liên hệ</a></li>
                             <li><a style="color: #333" href="{{ route('route-khachhang-chinhsach') }}">Chính sách</a></li>

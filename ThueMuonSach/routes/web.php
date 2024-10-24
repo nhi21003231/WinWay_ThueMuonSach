@@ -18,6 +18,8 @@ use App\Http\Controllers\QuanLyCuaHang\XemBaoCaoController;
 use App\Http\Controllers\QuanLyKho\QuanLyAnPhamController as QuanLyKhoQuanLyAnPhamController;
 use App\Http\Controllers\QuanLyKho\QuanLyDanhMucController;
 use App\Http\Controllers\QuanLyKho\TaoBaoCaoController;
+use App\Http\Controllers\KhachHang\LienHeController;
+use App\Http\Controllers\KhachHang\ChinhSachController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\XacThucController;
 
@@ -203,9 +205,11 @@ Route::get('/', [TrangChuController::class, 'hienThiTrangChu'])->name('route-kha
 // -------- Route chi tiết ấn phẩm
 Route::get('/chi-tiet-an-pham', [ChiTietAnPhamController::class, 'hienThiChiTietAnPham'])->name('route-khachhang-chitietanpham');
 // -------- Route liên hệ
-Route::get('/lien-he', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-lienhe');
+// Route::get('/lien-he', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-lienhe');
+Route::get('/lien-he', [LienHeController::class, 'LienHe'])->name('route-khachhang-lienhe');
+
 // -------- Route chính sách
-Route::get('/chinh-sach', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-chinhsach');
+Route::get('/chinh-sach', [ChinhSachController::class, 'hienThiChinhSach'])->name('route-khachhang-chinhsach');
 
 // ---- 3.2 > Route cần đăng nhập
 // -------- Route thuê ấn phẩm

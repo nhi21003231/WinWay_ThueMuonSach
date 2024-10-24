@@ -1,18 +1,3 @@
-<!-- <h1>Header</h1> -->
-<!-- <a href="{{ route('route-dangnhap') }}">Đăng nhập</a><br>
-<a href="{{ route('route-dangky') }}">Đăng ký</a><br>
-<hr>
-<a href="{{ route('route-khachhang-trangchu') }}">Trang Chủ</a><br>
-<a href="{{ route('route-khachhang-giohang') }}">Giỏ hàng</a><br>
-<a href="{{ route('route-khachhang-thueanpham') }}">Thuê ấn phẩm</a><br>
-<a href="{{ route('route-khachhang-chitietanpham') }}">Chi tiết ấn phẩm</a>
-<hr>
-<a href="{{ route('route-cuahang-nhanvien') }}">Nhân viên</a><br>
-<a href="{{ route('route-cuahang-quanlycuahang') }}">Quản lý cửa hàng</a><br>
-<a href="{{ route('route-cuahang-quanlykho') }}">Quản lý kho</a> -->
-<head>
-    <link rel="stylesheet" href="{{ asset('css/header.css') }}  ">
-</head>
 <header class="header">
     <div class="header__top">
         <div class="container">
@@ -39,3 +24,37 @@
         </div>
     </div>
 </header>
+    <!-- Hero Section Begin -->
+    <div class="container">
+        <div class="row">
+
+            <!-- <div class="col-lg-3">
+                <div class="header__logo">
+                    <a href="./index.php"><img src="./img/logo1.png" alt="" width="40%" style="margin-left: 170px;"></a>
+                </div>
+            </div> -->
+            <div class="hero__search">
+                <div class="hero__search__form">
+                    <form action="#">
+                        <input type="text" name="search" placeholder="Nhập ấn phẩm cần tìm.">
+                        <button type="submit" class="site-btn">TÌM</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <nav class="header__menu">
+                    <ul>
+                        <li><a href="{{ route('route-khachhang-trangchu') }}">Trang Chủ</a></li>
+                        <li><a href="{{ route('route-khachhang-chitietanpham') }}">Ấn phẩm</a> </li>
+                        <li><a href="{{ route('route-khachhang-lienhe') }}">Liên hệ</a></li>
+                        <li><a href="{{ route('route-khachhang-chinhsach') }}">Chính sách</a></li>
+                        <li><a href="{{ route('route-khachhang-giohang') }}">Quản lý mua hàng</a>
+                            <ul class="header__menu__dropdown">
+                                <li><a href="{{ route('route-khachhang-giohang') }}">Đặt hàng</a></li>
+                                <li><a href="{{ route('route-khachhang-lichsumuahang') }}">Xem lịch sử mua hàng</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
