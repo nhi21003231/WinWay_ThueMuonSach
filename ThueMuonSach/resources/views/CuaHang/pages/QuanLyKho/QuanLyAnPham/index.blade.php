@@ -24,8 +24,10 @@
                 Nhập ấn phẩm
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="{{ route('route-cuahang-quanlykho-quanlyanpham-nhapanphammoi') }}">Nhập ấn phẩm mới</a></li>
-                <li><a class="dropdown-item" href="{{ route('route-cuahang-quanlykho-quanlyanpham-nhapanphamdaco') }}">Nhập ấn phẩm đã có</a></li>
+                <li><a class="dropdown-item" href="{{ route('route-cuahang-quanlykho-quanlyanpham-nhapanphammoi') }}">Nhập
+                        ấn phẩm mới</a></li>
+                <li><a class="dropdown-item" href="{{ route('route-cuahang-quanlykho-quanlyanpham-nhapanphamdaco') }}">Nhập
+                        ấn phẩm đã có</a></li>
             </ul>
         </div>
     </form>
@@ -61,7 +63,8 @@
                 <td>row 2</td>
                 <td>row 2</td>
                 <td>
-                    <img src="{{ asset('img/anh-an-pham/phat-hoa-chan-dung-ke-pham-toi.jpg') }}" width="100" height="100" alt="">
+                    <img src="{{ asset('img/anh-an-pham/phat-hoa-chan-dung-ke-pham-toi.jpg') }}" width="100"
+                        height="100" alt="">
                 </td>
                 <td>row 2</td>
                 <td>row 2</td>
@@ -72,7 +75,8 @@
                 <td>row 3</td>
                 <td>row 3</td>
                 <td>
-                    <img src="{{ asset('img/anh-an-pham/su-im-lang-cua-bay-cuu.jpg') }}" width="100" height="100" alt="">
+                    <img src="{{ asset('img/anh-an-pham/su-im-lang-cua-bay-cuu.jpg') }}" width="100" height="100"
+                        alt="">
                 </td>
                 <td>row 3</td>
                 <td>row 3</td>

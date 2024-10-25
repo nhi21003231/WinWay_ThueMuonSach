@@ -19,9 +19,8 @@
     <link rel="stylesheet" href="{{ asset('css/thanhba.css') }}  ">
     <link rel="stylesheet" href="{{ asset('css/nhi_contact.css') }}  ">
 
-
-    {{-- link js app --}}
-    <link href="{{ URL::asset('js/app.js') }}" rel="script">
+    {{-- link thư viện thông báo (Toastr.js) --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
     {{-- link icon font-awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -43,8 +42,37 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
     </script>
+
     {{-- Jquery --}}
     <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
+
+    {{-- app js --}}
+    <script src="{{ asset('js/app.js') }}"></script>
+
+    {{-- link thư viện thông báo (Toastr.js) --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    {{-- hiển thị thông báo --}}
+    <script>
+        @if (session('success'))
+            toastr.success("{{ session('success') }}", "Thành công!", {
+                positionClass: "toast-bottom-right", // Định vị trí thông báo
+                timeOut: "3000", // Thời gian tự động ẩn
+                closeButton: true,
+                newestOnTop: false,
+            });
+        @endif
+
+        @if (session('error'))
+            toastr.error("{{ session('error') }}", "Lỗi!", {
+                positionClass: "toast-bottom-right", // Định vị trí thông báo
+                timeOut: "3000", // Thời gian tự động ẩn
+                closeButton: true,
+                newestOnTop: false,
+            });
+        @endif
+    </script>
+
 </body>
 
 </html>

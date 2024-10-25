@@ -14,21 +14,15 @@
 
                         <div class="mb-3">
                             <label for="taikhoan" class="form-label">Tài khoản</label>
-                            <input type="text" name="ten_tai_khoan" class="form-control" id="taikhoan"
-                                placeholder="Nhập tên tài khoản">
+                            <input type="text" name="taikhoan" class="form-control" id="taikhoan"
+                                placeholder="Nhập tên tài khoản" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="matkhau" class="form-label">Mật khẩu</label>
-                            <input type="password" name="mat_khau" class="form-control" id="matkhau"
-                                placeholder="Nhập mật khẩu">
+                            <input type="password" name="matkhau" class="form-control" id="matkhau"
+                                placeholder="Nhập mật khẩu" required>
                         </div>
-
-                        @if ($errors->has('dangnhap'))
-                            <div class="mb-3">
-                                <strong>{{ $errors->first('dangnhap') }}</strong>
-                            </div>
-                        @endif
 
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Login</button>
