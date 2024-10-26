@@ -41,7 +41,7 @@
             <td>{{ $items->anpham->name }}</td>
             <td>{{ $items->NgayThue }}</td>
             <td><button type="button" class="btn btn-warning"><a class="nav-link text-white"
-                  href="{{ URL::to('nhan-vien/don-dac-truoc/'.$items->id.'/chi-tiet') }}">Xem</a></button></td>
+                  href="{{ URL::to('nhan-vien/don-dat-truoc/'.$items->id.'/chi-tiet') }}">Xem</a></button></td>
           </tr>
           @endforeach
         </tbody>
@@ -52,3 +52,9 @@
   </div>
 </div>
 @endsection
+
+@if (session('success'))
+    <script>
+        alert('{{ session('success') }}');
+    </script>
+@endif

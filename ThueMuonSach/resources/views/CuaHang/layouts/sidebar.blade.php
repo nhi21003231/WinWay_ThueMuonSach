@@ -129,8 +129,8 @@
             </a>
         </li>
         <li>
-            <a href="{{ $isAdmin ? route('route-admin-nhanvien-dondactruoc') : route('route-cuahang-nhanvien-dondactruoc') }}"
-                class="nav-link {{ Request::routeIs('route-cuahang-nhanvien-dondactruoc*') || Request::routeIs('route-admin-nhanvien-dondactruoc') ? 'active' : 'link-dark' }}">
+            <a href="{{ $isAdmin ? route('route-admin-nhanvien-dondattruoc') : route('route-cuahang-nhanvien-dondattruoc') }}"
+                class="nav-link {{ Request::routeIs('route-cuahang-nhanvien-dondattruoc*') || Request::routeIs('route-admin-nhanvien-dondattruoc') ? 'active' : 'link-dark' }}">
                 Đơn đặc trước
             </a>
         </li>

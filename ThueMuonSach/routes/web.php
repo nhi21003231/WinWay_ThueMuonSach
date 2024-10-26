@@ -6,7 +6,7 @@ use App\Http\Controllers\KhachHang\ThueAnPhamController;
 use App\Http\Controllers\KhachHang\TrangChuController;
 use App\Http\Controllers\NhanVien\DangBaiBaoController;
 use App\Http\Controllers\NhanVien\DangKyThanhVienController;
-use App\Http\Controllers\NhanVien\DonDacTruocController;
+use App\Http\Controllers\NhanVien\DonDatTruocController;
 use App\Http\Controllers\NhanVien\QuanLyAnPhamController as NhanVienQuanLyAnPhamController;
 use App\Http\Controllers\NhanVien\QuanLyKhachHangController;
 use App\Http\Controllers\NhanVien\ThongKeDoanhThuController;
@@ -58,11 +58,13 @@ function NhanVienRoutes($isAdmin = false)
         ->name($prefix . '-dangkythanhvien');
 
     // -------- Route đơn đặc trước
-    Route::get('/don-dac-truoc', [DonDacTruocController::class, 'hienThiDonDacTruoc'])
-        ->name($prefix . '-dondactruoc');
-    Route::get('/don-dac-truoc/{hoaDonThue}/chi-tiet', [DonDacTruocController::class, 'chiTietDonDatTruoc'])
-        ->name($prefix . '-dondactruoc-chitiet');
+    Route::get('/don-dat-truoc', [DonDatTruocController::class, 'hienThiDonDatTruoc'])
+        ->name($prefix . '-dondattruoc');
 
+    Route::get('/don-dat-truoc/{hoaDonThue}/chi-tiet', [DonDatTruocController::class, 'chiTietDonDatTruoc'])
+        ->name($prefix . '-dondattruoc-chitiet');
+
+    Route::post('/don-dat-truoc/{id}',[DonDatTruocController::class,'capNhatDonDatTruoc']);
     // -------- Route quản lý ấn phẩm
     Route::get('/quan-ly-an-pham', [NhanVienQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])
         ->name($prefix . '-quanlyanpham');
