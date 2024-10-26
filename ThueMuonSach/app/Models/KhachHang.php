@@ -12,7 +12,7 @@ class KhachHang extends Model
 
     protected $table = 'khachhang';
     protected $fillable = [
-        'ten'
+        'ten','SoDienThoai','Email','DiaChi'
     ];
 
     public function hoadonthuemuon():HasMany
