@@ -5,20 +5,30 @@
       <h3>Thông Tin Đơn Hàng</h3>
     </div>
     <form id="form-dondattruoc" action="{{ URL::to('nhan-vien/don-dat-truoc/'.$hoaDonThue->id) }}" method="POST">
-      {{-- @method('PUT') --}}
+      @method('PUT')
       @csrf
       <div class="p-2 row">
         <div class="text-start col-4">
           <p class="text-uppercase fs-6 fw-bold">Thông tin khách hàng</p>
           <div class="pt-3">
-            <label for="name" class="form-label fw-bold">Tên khách hàng:</label>
-            <input type="text" class="form-control" value="{{ old('tenkhachhang',$hoaDonThue->khachhang->name) }}" name="tenkhachhang">
-            <label for="loaiDon" class="form-label fw-bold pt-4">Loại Đơn</label>
-            <select name="loaidon" id="loaidon" class="form-select">
+            <div class="">
+              <label for="name" class="form-label fw-bold">Tên khách hàng:</label>
+              <input type="text" class="form-control" value="{{ old('tenkhachhang',$hoaDonThue->khachhang->name) }}" name="tenkhachhang">
+              @error('tenkhachhang')
+                <span class="text-danger fs-6 m-0 ps-1">{{ $message }}</span>
+              @enderror
+            </div>
+            <div class="pt-4">
+              <label for="loaiDon" class="form-label fw-bold">Loại Đơn</label>
+              <select name="loaidon" id="loaidon" class="form-select">
               <option value="" {{ old('loaidon', $hoaDonThue->LoaiDon) == '' ? 'selected' : '' }}>Chọn loại đơn...</option>
               <option value="Đơn đặt trước" {{ old('loaidon', $hoaDonThue->LoaiDon) == 'Đơn đặt trước' ? 'selected' : '' }}>Đơn đặt trước</option>
               <option value="Đơn Thuê" {{ old('loaidon', $hoaDonThue->LoaiDon) == 'Đơn Thuê' ? 'selected' : '' }}>Đơn Thuê</option>
-          </select>
+              </select>
+              @error('loaidon')
+                <span class="text-danger fs-6 m-0 ps-1">{{ $message }}</span>
+              @enderror
+            </div>
           </div>
         </div>
         <div class="text-start col-4">
@@ -40,13 +50,3 @@
     </form>
   </div>
 @endsection
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-

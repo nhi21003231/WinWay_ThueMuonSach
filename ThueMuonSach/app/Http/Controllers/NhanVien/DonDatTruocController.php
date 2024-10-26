@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\NhanVien;
+use Illuminate\Http\Request;
+use App\Http\Requests\ValidationFormRequest;
 
 use App\Models\KhachHang;
 use App\Models\HoaDonThue;
 use App\Http\Controllers\Controller;
 use App\Models\AnPham;
-use Illuminate\Http\Request;
 
 class DonDatTruocController extends Controller
 {
@@ -56,23 +57,11 @@ class DonDatTruocController extends Controller
 
     // Cập nhật đơn đặt trước
 
-    public function capNhatDonDatTruoc(Request $request, $id){
+    public function capNhatDonDatTruoc(ValidationFormRequest $request, $id){
 
-        $request->validate([
-
-            'tenkhachhang'=>'required',
-
-            'loaidon' =>'required'
-
-        ]);
+        $request->validated();
 
         $hoadon = HoaDonThue::find($id);
-    
-        if(!$hoadon){
-
-            return redirect()->back()->withErrors(['error','Hóa đơn không tồn tại']);
-
-        }
 
         $hoadon->LoaiDon = $request->loaidon;
 

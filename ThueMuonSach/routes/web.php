@@ -67,7 +67,7 @@ function NhanVienRoutes($isAdmin = false)
     Route::get('/don-dat-truoc/{hoaDonThue}/chi-tiet', [DonDatTruocController::class, 'chiTietDonDatTruoc'])
         ->name($prefix . '-dondattruoc-chitiet');
 
-    Route::post('/don-dat-truoc/{id}',[DonDatTruocController::class,'capNhatDonDatTruoc']);
+    Route::put('/don-dat-truoc/{id}',[DonDatTruocController::class,'capNhatDonDatTruoc']);
     // -------- Route quản lý ấn phẩm
     Route::get('/quan-ly-an-pham', [NhanVienQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])
         ->name($prefix . '-quanlyanpham');
