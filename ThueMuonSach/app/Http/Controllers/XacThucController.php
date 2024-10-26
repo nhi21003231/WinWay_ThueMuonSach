@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TaiKhoan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class XacThucController extends Controller
@@ -21,46 +22,42 @@ class XacThucController extends Controller
     {
         // Validate thông tin đăng nhập
         $request->validate([
-            'ten_tai_khoan' => 'required|string',
-            'mat_khau' => 'required|string',
+            'taikhoan' => 'required|string',
+            'matkhau' => 'required|string',
         ]);
 
         // Kiểm tra tài khoản trong cơ sở dữ liệu
-        $taiKhoan = TaiKhoan::where('ten_tai_khoan', $request->ten_tai_khoan)->first();
+        $taiKhoan = TaiKhoan::where('taikhoan', $request->taikhoan)->first();
 
-        if ($taiKhoan && Hash::check($request->mat_khau, $taiKhoan->mat_khau)) {
+        if ($taiKhoan && Hash::check($request->matkhau, $taiKhoan->matkhau)) {
             // Nếu đăng nhập thành công, lưu thông tin vào session
-            $request->session()->put('ten_tai_khoan', $taiKhoan->ten_tai_khoan);
-            $request->session()->put('vai_tro', $taiKhoan->vai_tro);
+            Auth::login($taiKhoan);
+
             // Điều hướng về trang chủ hoặc trang phù hợp với vai trò
-            switch ($taiKhoan->vai_tro) {
+            switch ($taiKhoan->vaitro) {
                 case 'nhanvien':
-                    return redirect()->route('route-cuahang-nhanvien');
+                    return redirect()->route('route-cuahang-nhanvien-quanlyanpham')->with('success', 'Đăng nhập thành công!');
                 case 'quanlycuahang':
-                    return redirect()->route('route-cuahang-quanlycuahang');
+                    return redirect()->route('route-cuahang-quanlycuahang-quanlynhanvien')->with('success', 'Đăng nhập thành công!');
                 case 'quanlykho':
-                    return redirect()->route('route-cuahang-quanlykho');
+                    return redirect()->route('route-cuahang-quanlykho-quanlyanpham')->with('success', 'Đăng nhập thành công!');
+                case 'admin':
+                    return redirect()->route('route-admin-nhanvien-quanlyanpham')->with('success', 'Đăng nhập thành công!');
                 default:
-                    return redirect()->route('router-khachhang-trangchu');
+                    return redirect()->route('route-khachhang-trangchu')->with('success', 'Đăng nhập thành công!');
             }
         }
 
-        // Nếu thất bại, quay lại trang đăng nhập với lỗi
-        return back()->withErrors([
-            'dangnhap' => 'Tên tài khoản hoặc mật khẩu không đúng',
-        ]);
+        return back()->with('error', 'Đăng nhập thất bại do sai tài khoản hoặt mật khẩu!');
 
-        // return 'xu ly dang nhap';
     }
 
     // Xử lý đăng xuất
     public function dangXuat(Request $request)
     {
-        // Xóa dữ liệu session
-        $request->session()->forget('ten_tai_khoan');
-        $request->session()->forget('vai_tro');
+        Auth::logout();
 
-        // Điều hướng về trang đăng nhập
+        // Điều hướng về trang chủ
         return redirect()->route('route-khachhang-trangchu');
     }
 }

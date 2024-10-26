@@ -13,29 +13,46 @@ class TaiKhoanSeeder extends Seeder
      */
     public function run(): void
     {
-        // Tạo các tài khoản mẫu với vai trò khác nhau
         TaiKhoan::create([
-            'ten_tai_khoan' => 'quanly',
-            'mat_khau' => '123', // Sẽ được mã hóa tự động nhờ model TaiKhoan
-            'vai_tro' => 'quanlycuahang',
+            'taikhoan' => 'admin',
+            'matkhau' => '123',
+            'vaitro' => 'admin',
         ]);
 
         TaiKhoan::create([
-            'ten_tai_khoan' => 'quanlykho',
-            'mat_khau' => '123',
-            'vai_tro' => 'quanlykho',
+            'taikhoan' => 'quanly',
+            'matkhau' => '123',
+            'vaitro' => 'quanlycuahang',
         ]);
 
         TaiKhoan::create([
-            'ten_tai_khoan' => 'nhanvien1',
-            'mat_khau' => '123',
-            'vai_tro' => 'nhanvien',
+            'taikhoan' => 'quanlykho',
+            'matkhau' => '123',
+            'vaitro' => 'quanlykho',
         ]);
 
         TaiKhoan::create([
-            'ten_tai_khoan' => 'khachhang1',
-            'mat_khau' => '123',
-            'vai_tro' => 'khachhang',
+            'taikhoan' => 'nhanvien1',
+            'matkhau' => '123',
+            'vaitro' => 'nhanvien',
+        ]);
+
+        TaiKhoan::create([
+            'taikhoan' => 'nhanvien2',
+            'matkhau' => '123',
+            'vaitro' => 'nhanvien',
+        ]);
+
+        TaiKhoan::create([
+            'taikhoan' => 'nhanvien3',
+            'matkhau' => '123',
+            'vaitro' => 'nhanvien',
+        ]);
+
+        TaiKhoan::create([
+            'taikhoan' => 'khachhang',
+            'matkhau' => '123',
+            'vaitro' => 'khachhang',
         ]);
     }
 }

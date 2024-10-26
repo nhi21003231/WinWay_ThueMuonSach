@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         // Tạo dữ liệu cho bảng tài khoản 
         $this->call(TaiKhoanSeeder::class);
-        // \App\Models\TaiKhoan::factory(1)->create();
+        \App\Models\TaiKhoan::factory(10)->create();
 
         // Tạo dữ liệu cho các bảng khác
         \App\Models\AnPham::factory(20)->create();

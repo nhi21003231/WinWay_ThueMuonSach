@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tai_khoan', function (Blueprint $table) {
+        Schema::create('taikhoan', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->string('ten_tai_khoan',50)->unique(); 
-            $table->string('mat_khau'); 
-            $table->enum('vai_tro', ['khachhang', 'nhanvien', 'quanlycuahang', 'quanlykho'])->default('khachhang');
+            $table->string('taikhoan',50)->unique(); 
+            $table->string('matkhau'); 
+            $table->enum('vaitro', ['khachhang', 'nhanvien', 'quanlycuahang', 'quanlykho', 'admin'])->default('khachhang');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tai_khoan');
+        Schema::dropIfExists('taikhoan');
     }
 };
