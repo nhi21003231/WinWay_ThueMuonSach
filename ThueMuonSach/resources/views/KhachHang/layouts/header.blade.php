@@ -16,7 +16,12 @@
                             <a href="{{ route('route-dangnhap') }}"><i class="fa fa-user"></i></a>
                             <a href="{{ route('route-khachhang-lienhe')}}"><i class="fa fa-phone"></i></a>
                             <a href="{{ route('route-khachhang-giohang') }}"><i class="fa fa-shopping-bag"></i></a>
-                            <a href="{{ route('route-dangnhap') }}">Đăng nhập</a><br>
+                            @auth
+                                <a href="{{ route('route-dangxuat') }}">Đăng xuất</a><br>
+                            @else
+                                <a href="{{ route('route-dangnhap') }}">Đăng nhập</a><br>
+                                <a href="{{ route('route-dangky') }}">Đăng ký</a><br>
+                            @endauth
                         </div>
                     </div>
                 </div>
