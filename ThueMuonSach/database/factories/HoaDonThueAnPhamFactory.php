@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\HoaDonThueAnPham;
+use App\Models\KhachHang;
 use App\Models\NhanVien;
 
 class HoaDonThueAnPhamFactory extends Factory
@@ -21,6 +22,7 @@ class HoaDonThueAnPhamFactory extends Factory
             'loaidon' => $this->faker->randomElement(['Đặt trước', 'Đơn thuê']),
             'trangthai' => $this->faker->randomElement(['Đang thuê', 'Đã trả']),
             'manhanvien' => NhanVien::inRandomOrder()->first()->manhanvien, // Lấy nhân viên ngẫu nhiên
+            'makhachhang' => KhachHang::inRandomOrder()->first()->makhachhang, // Lấy khách hàng ngẫu nhiên
         ];
     }
 }
