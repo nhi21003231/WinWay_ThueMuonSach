@@ -4,7 +4,8 @@ namespace Database\Factories;
 
 use App\Models\KhachHang;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+ 
+use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\KhachHang>
  */
@@ -20,6 +21,10 @@ class KhachHangFactory extends Factory
     {
         return [
             'name' =>$this->faker->name(),
+            'soDienThoai'=> $this->faker->randomNumber(9,true),
+            'Email' => $this->faker->unique()->safeEmail(),
+            'DiaChi' => Str::random(20)
+
             //
         ];
     }

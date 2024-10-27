@@ -76,6 +76,9 @@ function NhanVienRoutes($isAdmin = false)
     Route::get('/quan-ly-khach-hang', [QuanLyKhachHangController::class, 'hienThiQuanLyKhachHang'])
         ->name($prefix . '-quanlykhachhang');
 
+    Route::get('quan-ly-khach-hang/cap-nhat',[QuanLyKhachHangController::class,'hienThiChiTietKhachHang'])
+        ->name($prefix. '-quanlykhachhang-chitiet');
+
     // -------- Route thống kê doanh thu
     Route::get('/thong-ke-doanh-thu', [ThongKeDoanhThuController::class, 'hienThiThongKeDoanhThu'])
         ->name($prefix . '-thongkedoanhthu');

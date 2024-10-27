@@ -13,14 +13,16 @@
         <option value="Ngày Mới Nhất">Sắp xếp theo cũ nhất</option>
       </select>
     </div>
-    
+
   </form>
   <div class="p-2 text-center">
     <div class="table-responsive">
       <table class="table table-striped table-hover">
         <thead>
           <tr>
-            <td colspan="5" class="bg-primary text-white text-start opacity-75"><p class="m-0 p-1 fs-5">Đơn đặt trước</p></td>
+            <td colspan="5" class="bg-primary text-white text-start opacity-75">
+              <p class="m-0 p-1 fs-5">Đơn đặt trước</p>
+            </td>
           </tr>
           <tr>
             <th scope="col"></th>
