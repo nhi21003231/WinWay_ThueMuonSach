@@ -15,7 +15,7 @@ class TaiKhoan extends Authenticatable
 
     // Các trường có thể gán giá trị (mass assignable)
     protected $fillable = [
-        'taikhoan',
+        'tentaikhoan',
         'matkhau',
         'vaitro',
     ];

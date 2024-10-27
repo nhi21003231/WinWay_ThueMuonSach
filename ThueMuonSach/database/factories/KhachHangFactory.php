@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\KhachHang;
+use App\Models\TaiKhoan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -11,16 +12,16 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class KhachHangFactory extends Factory
 {
     protected $model = KhachHang::class;
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+
     public function definition(): array
     {
         return [
-            'name' =>$this->faker->name(),
-            //
+            'hoten' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'dienthoai' => $this->faker->phoneNumber(),
+            'diachi' => $this->faker->address(),
+            'lathanhvien' => $this->faker->boolean(),
+            'mataikhoan' => TaiKhoan::where('vaitro', 'khachhang')->inRandomOrder()->first()->mataikhoan, // Chỉ chọn tài khoản có vai trò "khachhang"
         ];
     }
 }

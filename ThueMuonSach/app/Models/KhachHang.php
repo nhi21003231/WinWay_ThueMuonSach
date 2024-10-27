@@ -4,19 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class KhachHang extends Model
 {
     use HasFactory;
 
     protected $table = 'khachhang';
+    protected $primaryKey = 'makhachhang';
+    public $timestamps = true;
+
     protected $fillable = [
-        'ten','SoDienThoai','Email','DiaChi'
+        'hoten',
+        'email',
+        'dienthoai',
+        'diachi',
+        'lathanhvien',
+        'mataikhoan',
     ];
 
-    public function hoadonthuemuon():HasMany
+    // Định nghĩa quan hệ với bảng TaiKhoan
+    public function taikhoan()
     {
-        return $this->hasMany(HoaDonThue::class);
+        return $this->belongsTo(TaiKhoan::class, 'mataikhoan', 'mataikhoan');
     }
 }
