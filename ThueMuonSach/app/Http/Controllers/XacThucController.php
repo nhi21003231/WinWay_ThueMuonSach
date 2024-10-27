@@ -22,12 +22,12 @@ class XacThucController extends Controller
     {
         // Validate thông tin đăng nhập
         $request->validate([
-            'taikhoan' => 'required|string',
+            'tentaikhoan' => 'required|string',
             'matkhau' => 'required|string',
         ]);
 
         // Kiểm tra tài khoản trong cơ sở dữ liệu
-        $taiKhoan = TaiKhoan::where('taikhoan', $request->taikhoan)->first();
+        $taiKhoan = TaiKhoan::where('tentaikhoan', $request->tentaikhoan)->first();
 
         if ($taiKhoan && Hash::check($request->matkhau, $taiKhoan->matkhau)) {
             // Nếu đăng nhập thành công, lưu thông tin vào session

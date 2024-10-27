@@ -17,7 +17,7 @@ class TaiKhoanFactory extends Factory
     {
         return [
             'tentaikhoan' => $this->faker->unique()->userName,
-            'matkhau' => Hash::make('123'), 
+            'matkhau' => '123', 
             'vaitro' => 'khachhang', 
         ];
     }

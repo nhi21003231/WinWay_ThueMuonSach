@@ -13,8 +13,8 @@
                         @csrf
 
                         <div class="mb-3">
-                            <label for="taikhoan" class="form-label">Tài khoản</label>
-                            <input type="text" name="taikhoan" class="form-control" id="taikhoan"
+                            <label for="tentaikhoan" class="form-label">Tài khoản</label>
+                            <input type="text" name="tentaikhoan" class="form-control" id="tentaikhoan"
                                 placeholder="Nhập tên tài khoản" required>
                         </div>
 
