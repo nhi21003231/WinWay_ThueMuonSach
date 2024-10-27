@@ -5,9 +5,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ValidationFormRequest;
 
 use App\Models\KhachHang;
-use App\Models\HoaDonThue;
+use App\Models\HoaDonThueAnPham;
 use App\Http\Controllers\Controller;
-use App\Models\AnPham;
 
 class DonDatTruocController extends Controller
 {
@@ -17,7 +16,7 @@ class DonDatTruocController extends Controller
 
     public function hienThiDonDatTruoc(Request $request)
     {
-        // $hoadon = HoaDonThue::find(1);
+        // $hoadon = HoaDonThueAnPham::find(1);
         // $khachhang = $hoadon->khachhang;
         // dd($khachhang);
     //    $hoadon = $request->TimKiem;
@@ -27,29 +26,29 @@ class DonDatTruocController extends Controller
 
             $khachhang = KhachHang::where('name','like','%'.$request->TimKiem.'%')->get();
 
-            $anpham = AnPham::where('name','like','%'.$request->TimKiem.'%')->get();
+            $anpham = HoaDonThueAnPham::where('name','like','%'.$request->TimKiem.'%')->get();
 
-            $hoadon = $hoadon = HoaDonThue::where('LoaiDon','Đơn đặt trước')
+            $hoadon = $hoadon = HoaDonThueAnPham::where('loaidon','Đặt trước')
 
-                                            ->whereIn('id_khachhang',$khachhang->pluck('id'))
+                                            ->whereIn('makhachhang',$khachhang->pluck('makhachhang'))
 
-                                            ->orWhereIn('id_anpham',$anpham->pluck('id'))->paginate(8);
+                                            ->orWhereIn('maanpham',$anpham->pluck('maanpham'))->paginate(8);
         }
         else
         {
 
-            $hoadon = HoaDonThue::where('LoaiDon','Đơn đặt trước')->paginate(8);
+            $hoadon = HoaDonThueAnPham::where('loaidon','Đặt trước')->paginate(8);
 
         }
         // $khachhang = KhachHang::where('name','like','Isai Luettgen')->get();
-        // $hoadon = HoaDonThue::whereIn('id_khachhang',$khachhang->pluck('id'))->where('LoaiDon','Đơn đặt trước')->paginate(8);
+        // $hoadon = HoaDonThueAnPham::whereIn('id_khachhang',$khachhang->pluck('id'))->where('LoaiDon','Đơn đặt trước')->paginate(8);
         // dd($hoadon);
 
         return view('CuaHang.pages.NhanVien.DonDatTruoc.index',compact('hoadon'));
     }
 
     // Lấy thông tin chi tiết
-    public function chiTietDonDatTruoc(HoaDonThue $hoaDonThue){
+    public function chiTietDonDatTruoc(HoaDonThueAnPham $hoaDonThue){
 
         return view('CuaHang.pages.NhanVien.DonDatTruoc.chi-tiet-don-dat-truoc',compact('hoaDonThue'));
 
@@ -61,9 +60,9 @@ class DonDatTruocController extends Controller
 
         $request->validated();
 
-        $hoadon = HoaDonThue::find($id);
+        $hoadon = HoaDonThueAnPham::find($id);
 
-        $hoadon->LoaiDon = $request->loaidon;
+        $hoadon->loaidon = $request->loaidon;
 
         $hoadon->save();
 

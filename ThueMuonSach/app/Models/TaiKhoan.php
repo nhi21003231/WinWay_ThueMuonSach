@@ -13,15 +13,17 @@ class TaiKhoan extends Authenticatable
 
     protected $table = 'taikhoan'; // Liên kết tới bảng tai_khoan
 
+    protected $primaryKey = 'mataikhoan';
+
     // Các trường có thể gán giá trị (mass assignable)
     protected $fillable = [
-        'taikhoan',
+        'tentaikhoan',
         'matkhau',
         'vaitro',
     ];
 
     protected $hidden = [
-        'matKhau',
+        'matkhau',
     ];
 
     // Đảm bảo mật khẩu được mã hóa khi lưu vào cơ sở dữ liệu
@@ -30,9 +32,9 @@ class TaiKhoan extends Authenticatable
         $this->attributes['matkhau'] = Hash::make($value);
     }
 
-    // Sử dụng trường 'matKhau' làm mật khẩu
+    // Sử dụng trường 'matkhau' làm mật khẩu
     public function getAuthPassword()
     {
-        return $this->matKhau;
+        return $this->matkhau;
     }
 }

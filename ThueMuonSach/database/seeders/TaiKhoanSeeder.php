@@ -14,45 +14,47 @@ class TaiKhoanSeeder extends Seeder
     public function run(): void
     {
         TaiKhoan::create([
-            'taikhoan' => 'admin',
+            'tentaikhoan' => 'admin',
             'matkhau' => '123',
             'vaitro' => 'admin',
         ]);
 
         TaiKhoan::create([
-            'taikhoan' => 'quanly',
+            'tentaikhoan' => 'quanly',
             'matkhau' => '123',
             'vaitro' => 'quanlycuahang',
         ]);
 
         TaiKhoan::create([
-            'taikhoan' => 'quanlykho',
+            'tentaikhoan' => 'quanlykho',
             'matkhau' => '123',
             'vaitro' => 'quanlykho',
         ]);
 
         TaiKhoan::create([
-            'taikhoan' => 'nhanvien1',
+            'tentaikhoan' => 'nhanvien1',
             'matkhau' => '123',
             'vaitro' => 'nhanvien',
         ]);
 
         TaiKhoan::create([
-            'taikhoan' => 'nhanvien2',
+            'tentaikhoan' => 'nhanvien2',
             'matkhau' => '123',
             'vaitro' => 'nhanvien',
         ]);
 
         TaiKhoan::create([
-            'taikhoan' => 'nhanvien3',
+            'tentaikhoan' => 'nhanvien3',
             'matkhau' => '123',
             'vaitro' => 'nhanvien',
         ]);
 
         TaiKhoan::create([
-            'taikhoan' => 'khachhang',
+            'tentaikhoan' => 'khachhang',
             'matkhau' => '123',
             'vaitro' => 'khachhang',
         ]);
+
+        TaiKhoan::factory(10)->create();
     }
 }

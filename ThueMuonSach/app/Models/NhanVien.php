@@ -1,44 +1,28 @@
 <?php
-// phát 21/10
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class NhanVien extends Model
 {
     use HasFactory;
+
     protected $table = 'nhanvien';
-    protected $primaryKey = 'maNhanVien'; // Đặt maNhanVien làm khóa chính
-    public $timestamps = true; // Tắt tự động quản lý timestamp
+    protected $primaryKey = 'manhanvien';
+    public $timestamps = true;
+
     protected $fillable = [
-        'maNhanVien',
-        'hoTen',
-        'soDienThoai',
+        'hoten',
+        'sodienthoai',
         'email',
-        'chucVu',
-        'ngayBoNhiem',
-        'phuCap',
-        // 'maTaiKhoan'
+        'mataikhoan',
     ];
 
-    public function chamcong(): HasMany
+    // Định nghĩa quan hệ với bảng TaiKhoan
+    public function taiKhoan()
     {
-        return $this->hasMany(ChamCong::class);
+        return $this->belongsTo(TaiKhoan::class, 'mataikhoan', 'mataikhoan');
     }
-
-    // phat 23/10
-    public function taikhoan(): HasOne
-    {
-        return $this->hasOne(TaiKhoan::class);
-    }
-
-    // Phát 23/10
-    // public function taikhoan(): BelongsTo
-    // {
-    //     return $this->BelongsTo(taikhoan::class, 'id', 'id');
-    // }
 }

@@ -22,3 +22,7 @@
     scrollbar-width: thin; /* Độ dày của thanh cuộn */
     scrollbar-color: #888 #f1f1f1; /* Màu của thanh cuộn và nền */
 }
+
+.toast {
+    opacity: 1;
+}

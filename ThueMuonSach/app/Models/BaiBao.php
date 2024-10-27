@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ChamCong extends Model
+class BaiBao extends Model
 {
     use HasFactory;
 
-    protected $table = 'chamcong';
-    protected $primaryKey = 'machamcong';
+    protected $table = 'baibao';
+    protected $primaryKey = 'mabaibao';
     public $timestamps = true;
 
     protected $fillable = [
-        'ghinhan',
-        'thoigianvao',
-        'thoigianra',
+        'tieude',
+        'noidung',
+        'ngaydang',
         'manhanvien',
     ];
 

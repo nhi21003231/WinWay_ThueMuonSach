@@ -3,19 +3,19 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\ChamCong;
+use App\Models\BaiBao;
 use App\Models\NhanVien;
 
-class ChamCongFactory extends Factory
+class BaiBaoFactory extends Factory
 {
-    protected $model = ChamCong::class;
+    protected $model = BaiBao::class;
 
     public function definition(): array
     {
         return [
-            'ghinhan' => $this->faker->boolean(),
-            'thoigianvao' => $this->faker->dateTimeBetween('-1 month', 'now'),
-            'thoigianra' => $this->faker->dateTimeBetween('now', '+1 month'),
+            'tieude' => $this->faker->sentence(5),
+            'noidung' => $this->faker->paragraph(),
+            'ngaydang' => $this->faker->date(),
             'manhanvien' => NhanVien::inRandomOrder()->first()->manhanvien, // Lấy nhân viên ngẫu nhiên
         ];
     }

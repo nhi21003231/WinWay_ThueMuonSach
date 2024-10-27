@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('taikhoan', function (Blueprint $table) {
-            $table->integer('id')->autoIncrement();
-            $table->string('taikhoan',50)->unique(); 
-            $table->string('matkhau'); 
-            $table->enum('vaitro', ['khachhang', 'nhanvien', 'quanlycuahang', 'quanlykho', 'admin'])->default('khachhang');
+            $table->integer('mataikhoan')->autoIncrement();
+            $table->string('tentaikhoan', 100)->unique();
+            $table->string('matkhau');
+            $table->enum('vaitro', ['admin', 'quanlykho', 'nhanvien', 'quanlycuahang', 'khachhang'])->default('khachhang');
             $table->timestamps();
         });
     }
