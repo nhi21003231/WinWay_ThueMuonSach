@@ -48,7 +48,7 @@
 
     {{-- app js --}}
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/QuanLyCuaHang/quanlycuahang.js') }}"></script>
+    <script src="{{ asset('js/quanlycuahang.js') }}"></script>
 
     {{-- link thư viện thông báo (Toastr.js) --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

@@ -92,18 +92,6 @@ class QuanLyNhanVienController extends Controller
         return redirect()->back()->with('success', 'Nhân viên đã được xóa thành công.');
     }
 
-    // public function suaNhanVien(Request $request)
-    // {
-    //     // Validate dữ liệu
-    //     $request->validate([
-    //         'id' => 'required|array',
-    //         'hoten.*' => 'required|string|max:255',
-    //         'ghinhan.*' => 'required|string',
-    //         'matkhau.*' => 'required|string|min:6', // Điều chỉnh theo yêu cầu
-    //         'email.*' => 'required|email',
-    //         'sodienthoai.*' => 'required|string|max:15', // Điều chỉnh theo yêu cầu
-    //     ]);
-
     public function suaNhanVien(Request $request)
     {
         // Lặp qua từng nhân viên để cập nhật thông tin
@@ -131,7 +119,6 @@ class QuanLyNhanVienController extends Controller
             }
         }
 
-        // Redirect về trang trước và thông báo thành công
         return redirect()->back()->with('success', 'Cập nhật nhân viên thành công.');
     }
 }
