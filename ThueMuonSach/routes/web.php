@@ -101,8 +101,12 @@ function QuanLyCuaHangRoutes($isAdmin = false)
     Route::get('/quan-ly-nhan-vien', [QuanLyNhanVienController::class, 'hienThiQuanLyNhanVien'])
         ->name($prefix . '-quanlynhanvien');
     // Đang sửa
-    Route::delete('/quan-ly-nhan-vien/delete/{id}', [QuanLyNhanVienController::class, 'deleteOneNhanVien'])
-        ->name($prefix . '-quanlynhanvien.deleteOneNhanVien');
+    Route::post('/quan-ly-nhan-vien/them', [QuanLyNhanVienController::class, 'themNhanVien'])
+        ->name($prefix . '-quanlynhanvien.themNhanVien');
+    Route::delete('/quan-ly-nhan-vien/{id}', [QuanLyNhanVienController::class, 'xoaNhanVien'])
+        ->name($prefix . '-quanlynhanvien.xoaNhanVien');
+    Route::post('/quan-ly-nhan-vien/sua', [QuanLyNhanVienController::class, 'suaNhanVien'])
+        ->name($prefix . '-quanlynhanvien.suaNhanVien');
 
     // -------- Route xem báo cáo
     Route::get('/xem-bai-bao', [XemBaoCaoController::class, 'hienThiXemBaoCao'])

@@ -18,10 +18,16 @@
             <div class="ms-4">Thứ 6, 20/09/2024</div>
         </div>
     </div>
-
+    
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalID">
         Thêm nhân viên
     </button>
+
+    <!-- Form Tìm Kiếm -->
+    <form action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien') }}" method="GET" class="d-flex my-3">
+        <input type="text" name="keyword" class="form-control w-50" placeholder="Tìm kiếm nhân viên...">
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+    </form>
 
     <!-- Form thêm nhân viên -->
     <div class="modal fade" id="modalID">
@@ -30,7 +36,7 @@
                 <div class="modal-header d-flex justify-content-center">
                     <h3 class="text-uppercase text-danger">Thêm nhân viên mới</h3>
                 </div>
-                <form class="modal-body" action="" method="POST">
+                <form class="modal-body" action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien.themNhanVien') }}" method="POST">
                     @csrf
                     <div class="d-flex gap-3 justify-content-around align-content-around">
                         <div class="w-100">
@@ -60,9 +66,9 @@
                                 <label for="chucVu" class="form-label">Chức vụ <span class="text-danger">(*)</span></label>
                                 <select class="form-select" id="chucVu" name="chucVu" required>
                                     <option value="">Chọn chức vụ</option>
-                                    <option value="Quản lý cửa hàng">Quản lý cửa hàng</option>
-                                    <option value="Nhân viên kho">Nhân viên kho</option>
-                                    <option value="Thuê trả">Thuê trả</option>
+                                    <option value="quanlycuahang">Quản lý cửa hàng</option>
+                                    <option value="quanlykho">Nhân viên kho</option>
+                                    <option value="nhanvien">Thuê trả</option>
                                 </select>
                             </div>
                         </div>
@@ -76,10 +82,9 @@
         </div>
     </div>
 
-    <!-- Table -->
     <div class="mt-4">
         <h2>Danh sách nhân viên</h2>
-        <form action="" method="POST">
+        <form action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien.suaNhanVien') }}" method="POST">
             @csrf
             <div class="scrollable-container"> <!-- Container cuộn -->
                 <div class="table-responsive">
@@ -97,35 +102,43 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($nhanVienList as $NhanVien)
+                            @foreach ($nhanvienList as $nhanvien)
                             <tr>
-                                <td>{{ $NhanVien->maNhanVien }}</td>
-                                <td class="truncate">{{ $NhanVien->hoTen }}</td>
+                                <td>{{ $nhanvien->manhanvien }}</td>
+                                <td class="truncate">
+                                    <input type="hidden" name="id[]" value="{{ $nhanvien->manhanvien }}"> <!-- Trường ẩn cho ID -->
+                                    <input type="text" class="form-control" name="hoten[]" value="{{ $nhanvien->hoten }}" required>
+                                </td>
                                 <td>
-                                    <select class="form-select" name="ghiNhan[]">
-                                        <option value="Quản lý cửa hàng" {{ $NhanVien->chucVu == 'Quản lý cửa hàng' ? 'selected' : '' }}>Quản lý cửa hàng</option>
-                                        <option value="Quản lý kho" {{ $NhanVien->chucVu == 'Quản lý kho' ? 'selected' : '' }}>Quản lý kho</option>
-                                        <option value="Thuê trả" {{ $NhanVien->chucVu == 'Thuê trả' ? 'selected' : '' }}>Thuê trả</option>
+                                    <select class="form-select" name="ghinhan[]">
+                                        <option value="quanlycuahang" {{ $nhanvien->taikhoan->vaitro == 'quanlycuahang' ? 'selected' : '' }}>Quản lý cửa hàng</option>
+                                        <option value="quanlykho" {{ $nhanvien->taikhoan->vaitro == 'quanlykho' ? 'selected' : '' }}>Quản lý kho</option>
+                                        <option value="nhanvien" {{ $nhanvien->taikhoan->vaitro == 'nhanvien' ? 'selected' : '' }}>Thuê trả</option>
                                     </select>
                                 </td>
-                                <td>{{ $NhanVien->maNhanVien }}</td>
-                                <td>{{ $NhanVien->maNhanVien }}</td>
-                                <td class="truncate">{{ $NhanVien->email }}</td>
-                                <td class="truncate">{{ $NhanVien->soDienThoai }}</td>
+                                <td>{{ $nhanvien->taikhoan->tentaikhoan }}</td>
+                                <td class="truncate">
+                                    <input type="text" class="form-control" name="matkhau[]" value="{{ optional($nhanvien->taikhoan)->matkhau }}" required>
+                                </td>
+                                <td class="truncate">
+                                    <input type="email" class="form-control" name="email[]" value="{{ $nhanvien->email }}" required>
+                                </td>
+                                <td class="truncate">
+                                    <input type="text" class="form-control" name="sodienthoai[]" value="{{ $nhanvien->sodienthoai }}" required>
+                                </td>
                                 <td>
-                                    <button data-bs-toggle="modal" data-bs-target="#update" style="outline: none; border: none;" type="button"><i class="fas fa-edit text-warning"></i></button>
                                     <button 
                                         data-bs-toggle="modal" 
-                                        data-bs-target="#delete" 
+                                        data-bs-target="#delete{{ $nhanvien->manhanvien }}" 
                                         style="outline: none; border: none;" 
                                         type="button" 
-                                        data-id="{{ $NhanVien->maNhanVien }}"
+                                        data-id="{{ $nhanvien->manhanvien }}"
                                         class="btnDelete">
                                         <i class="fas fa-trash text-danger"></i>
-                                    </button>
+                                    </button> 
                                 </td>
                                 <!-- Modal Xóa -->
-                                <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
+                                <div class="modal fade" id="delete{{ $nhanvien->manhanvien }}" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -137,8 +150,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                {{-- Đang sửa nè --}}
-                                                <form id="deleteForm" action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien.deleteOneNhanVien', $NhanVien->maNhanVien) }}" method="POST">
+                                                <form id="deleteForm" action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien.xoaNhanVien', $nhanvien->manhanvien) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
@@ -151,8 +163,25 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <button type="submit" class="btn btn-success">Lưu</button>
                 </div>
             </div> 
         </form>
     </div> 
 @endsection
+
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif

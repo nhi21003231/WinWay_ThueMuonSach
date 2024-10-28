@@ -10,10 +10,31 @@ class NhanVienSeeder extends Seeder
     public function run(): void
     {
         NhanVien::create([
-            'hoten' => 'ho ten admin',
-            'sodienthoai' => '123',
-            'email' => 'admin@gmail.com',
-            'mataikhoan' => '1',
+            'hoten' => 'Thành Phát',
+            'sodienthoai' => '0901234567',
+            'email' => 'quanly@gmail.com',
+            'mataikhoan' => '2',
+        ]);
+
+        NhanVien::create([
+            'hoten' => 'Quang Huy',
+            'sodienthoai' => '0901234568',
+            'email' => 'quanlykho@gmail.com',
+            'mataikhoan' => '3',
+        ]);
+
+        NhanVien::create([
+            'hoten' => 'Thanh Bá',
+            'sodienthoai' => '0901234569',
+            'email' => 'nhanvien1@gmail.com',
+            'mataikhoan' => '4',
+        ]);
+
+        NhanVien::create([
+            'hoten' => 'Duy Cường',
+            'sodienthoai' => '0901234589',
+            'email' => 'nhanvien2@gmail.com',
+            'mataikhoan' => '4',
         ]);
 
         NhanVien::create([
