@@ -42,7 +42,7 @@ class XacThucController extends Controller
                 case 'quanlykho':
                     return redirect()->route('route-cuahang-quanlykho-quanlyanpham')->with('success', 'Đăng nhập thành công!');
                 case 'admin':
-                    return redirect()->route('route-admin-nhanvien-quanlyanpham')->with('success', 'Đăng nhập thành công!');
+                    return redirect()->route('route-cuahang-quanlycuahang-quanlynhanvien')->with('success', 'Đăng nhập thành công!');
                 default:
                     return redirect()->route('route-khachhang-trangchu')->with('success', 'Đăng nhập thành công!');
             }

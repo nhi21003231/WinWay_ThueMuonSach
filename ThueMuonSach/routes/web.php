@@ -25,17 +25,17 @@ use App\Http\Controllers\XacThucController;
 
 
 // 1 > Route đăng ký, đăng nhập (chung cho khách hàng và bên cửa hàng)
-Route::middleware('guest')->group(function () {
+Route::middleware('check_guest')->group(function () {
     // ---- 1.1 > Route đăng nhập
     Route::get('/dang-nhap', [XacThucController::class, 'hienThiDangNhap'])->name('route-dangnhap');
-    Route::post('/dang-nhap', [XacThucController::class, 'dangNhap'])->name('route-dangnhap');
+    Route::post('/dang-nhap', [XacThucController::class, 'dangNhap']);
 
     // ---- 1.2 > Route đăng ký
     Route::get('/dang-ky', [XacThucController::class, 'hienThiDangKy'])->name('route-dangky');
 });
 
 // ---- 1.3 > Route đăng xuất
-Route::middleware('auth')->group(function () {
+Route::middleware('check_auth')->group(function () {
     Route::get('/dang-xuat', [XacThucController::class, 'dangXuat'])->name('route-dangxuat');
 });
 
@@ -46,164 +46,119 @@ Route::middleware('auth')->group(function () {
 
 // 2 > Route bên cửa hàng (cần đăng nhập quản lý kho, nhân viên,...)
 // ---- 2.1 > Route nhân viên
-function NhanVienRoutes($isAdmin = false)
-{
-    $prefix = $isAdmin ? 'route-admin-nhanvien' : 'route-cuahang-nhanvien';
-
-    Route::get('/', function () use ($prefix) {
-        return redirect(route($prefix . '-quanlyanpham'));
-    })->name($prefix);
+Route::prefix('/nhan-vien')->middleware('xac_thuc:nhanvien,admin')->group(function () {
+    Route::get('/', function () {
+        return redirect(route('route-cuahang-nhanvien-quanlyanpham'));
+    })->name('route-cuahang-nhanvien');
 
     // -------- Route quản lý ấn phẩm
     Route::get('/dang-bai-bao', [DangBaiBaoController::class, 'hienThiDangBaiBao'])
-        ->name($prefix . '-dangbaibao');
+        ->name('route-cuahang-nhanvien-dangbaibao');
 
     // -------- Route đăng ký thành viên
     Route::get('/dang-ky-thanh-vien', [DangKyThanhVienController::class, 'hienThiDangKyThanhVien'])
-        ->name($prefix . '-dangkythanhvien');
+        ->name('route-cuahang-nhanvien-dangkythanhvien');
 
     // -------- Route đơn đặc trước
     Route::get('/don-dat-truoc', [DonDatTruocController::class, 'hienThiDonDatTruoc'])
-        ->name($prefix . '-dondattruoc');
+        ->name('route-cuahang-nhanvien-dondattruoc');
 
     Route::get('/don-dat-truoc/{hoaDonThue}/chi-tiet', [DonDatTruocController::class, 'chiTietDonDatTruoc'])
-        ->name($prefix . '-dondattruoc-chitiet');
+        ->name('route-cuahang-nhanvien-dondattruoc-chitiet');
 
     Route::put('/don-dat-truoc/{id}', [DonDatTruocController::class, 'capNhatDonDatTruoc']);
     // -------- Route quản lý ấn phẩm
     Route::get('/quan-ly-an-pham', [NhanVienQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])
-        ->name($prefix . '-quanlyanpham');
+        ->name('route-cuahang-nhanvien-quanlyanpham');
 
     // -------- Route quản lý khách hàng
     Route::get('/quan-ly-khach-hang', [QuanLyKhachHangController::class, 'hienThiQuanLyKhachHang'])
-        ->name($prefix . '-quanlykhachhang');
+        ->name('route-cuahang-nhanvien-quanlykhachhang');
 
     // -------- Route thống kê doanh thu
     Route::get('/thong-ke-doanh-thu', [ThongKeDoanhThuController::class, 'hienThiThongKeDoanhThu'])
-        ->name($prefix . '-thongkedoanhthu');
-};
+        ->name('route-cuahang-nhanvien-thongkedoanhthu');
+});
 
 
 
 
 // ---- 2.2 > Route của quản lý cửa hàng
-function QuanLyCuaHangRoutes($isAdmin = false)
-{
-    $prefix = $isAdmin ? 'route-admin-quanlycuahang' : 'route-cuahang-quanlycuahang';
-
-
-    Route::get('/', function () use ($prefix) {
-        return redirect(route($prefix . '-quanlynhanvien'));
-    })->name($prefix);
+Route::prefix('/quan-ly-cua-hang')->middleware('xac_thuc:quanlycuahang,admin')->group(function () {
+    Route::get('/', function () {
+        return redirect(route('route-cuahang-quanlycuahang-quanlynhanvien'));
+    })->name('route-cuahang-quanlycuahang');
 
     // -------- Route quản lý nhân viên
-    // Phát 23/10
     Route::get('/quan-ly-nhan-vien', [QuanLyNhanVienController::class, 'hienThiQuanLyNhanVien'])
-        ->name($prefix . '-quanlynhanvien');
-    // Đang sửa
+        ->name('route-cuahang-quanlycuahang-quanlynhanvien');
     Route::post('/quan-ly-nhan-vien/them', [QuanLyNhanVienController::class, 'themNhanVien'])
-        ->name($prefix . '-quanlynhanvien.themNhanVien');
+        ->name('route-cuahang-quanlycuahang-quanlynhanvien.themNhanVien');
     Route::delete('/quan-ly-nhan-vien/{id}', [QuanLyNhanVienController::class, 'xoaNhanVien'])
-        ->name($prefix . '-quanlynhanvien.xoaNhanVien');
+        ->name('route-cuahang-quanlycuahang-quanlynhanvien.xoaNhanVien');
     Route::post('/quan-ly-nhan-vien/sua', [QuanLyNhanVienController::class, 'suaNhanVien'])
-        ->name($prefix . '-quanlynhanvien.suaNhanVien');
+        ->name('route-cuahang-quanlycuahang-quanlynhanvien.suaNhanVien');
 
     // -------- Route xem báo cáo
     Route::get('/xem-bai-bao', [XemBaoCaoController::class, 'hienThiXemBaoCao'])
-        ->name($prefix . '-xembaibao');
+        ->name('route-cuahang-quanlycuahang-xembaibao');
 
     // -------- Route chấm công
-    // Phát 21/10
     Route::get('/cham-cong', [ChamCongController::class, 'hienThiChamCong'])
-        ->name($prefix . '-chamcong');
+        ->name('route-cuahang-quanlycuahang-chamcong');
     Route::post('/cham-cong/update', [ChamCongController::class, 'updateChamCong'])
-        ->name($prefix . '-chamcong.updateChamCong');
+        ->name('route-cuahang-quanlycuahang-chamcong.updateChamCong');
 
     // -------- Route định giá ấn phẩm
     Route::get('/dinh-gia-an-pham', [DinhGiaAnPhamController::class, 'hienThiDinhGiaAnPham'])
-        ->name($prefix . '-dinhgiaanpham');
+        ->name('route-cuahang-quanlycuahang-dinhgiaanpham');
 
     // -------- Route tạo khuyến mãi
     Route::get('/tao-khuyen-mai', [TaoKhuyenMaiController::class, 'hienThiTaoKhuyenMai'])
-        ->name($prefix . '-taokhuyenmai');
+        ->name('route-cuahang-quanlycuahang-taokhuyenmai');
 
     // -------- Route quản lý đánh giá
     Route::get('/quan-ly-danh-gia', [QuanLyNhanVienController::class, 'hienThiQuanLyNhanVien'])
-        ->name($prefix . '-quanlydanhgia');
-};
+        ->name('route-cuahang-quanlycuahang-quanlydanhgia');
+});
 
 
 
 
 // ---- 2.3 > Route quản lý kho
-function QuanLyKhoRoutes($isAdmin = false)
-{
-    $prefix = $isAdmin ? 'route-admin-quanlykho' : 'route-cuahang-quanlykho';
-
-    Route::get('/', function () use ($prefix) {
-        return redirect(route($prefix . '-quanlyanpham'));
-    })->name($prefix);
+Route::prefix('/quan-ly-kho')->middleware('xac_thuc:quanlykho,admin')->group(function () {
+    Route::get('/', function () {
+        return redirect(route('route-cuahang-quanlykho-quanlyanpham'));
+    })->name('route-cuahang-quanlykho');
 
     // -------- Route quản lý ấn phẩm
-    Route::prefix('/quan-ly-an-pham')->group(function () use ($prefix) {
+    Route::prefix('/quan-ly-an-pham')->group(function () {
         Route::get('/', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])
-            ->name($prefix . '-quanlyanpham');
+            ->name('route-cuahang-quanlykho-quanlyanpham');
 
         Route::get('/nhap-an-pham-moi', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPhamMoi'])
-            ->name($prefix . '-quanlyanpham-nhapanphammoi');
+            ->name('route-cuahang-quanlykho-quanlyanpham-nhapanphammoi');
 
         Route::get('/nhap-an-pham-da-co', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPhamDaCo'])
-            ->name($prefix . '-quanlyanpham-nhapanphamdaco');
+            ->name('route-cuahang-quanlykho-quanlyanpham-nhapanphamdaco');
 
         Route::get('/thanh-ly-an-pham', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiThanhLyAnPham'])
-            ->name($prefix . '-quanlyanpham-thanhlyanpham');
+            ->name('route-cuahang-quanlykho-quanlyanpham-thanhlyanpham');
 
         Route::get('/cap-nhat-tinh-trang', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiCapNhatTinhTrang'])
-            ->name($prefix . '-quanlyanpham-capnhattinhtrang');
+            ->name('route-cuahang-quanlykho-quanlyanpham-capnhattinhtrang');
     });
 
     // -------- Route quản lý danh mục
-    Route::prefix('/quan-ly-danh-muc')->group(function () use ($prefix) {
-        Route::get('/', [QuanLyDanhMucController::class, 'hienThiQuanLyDanhMuc'])
-            ->name($prefix . '-quanlydanhmuc');
+    Route::get('/quan-ly-danh-muc', [QuanLyDanhMucController::class, 'hienThiQuanLyDanhMuc'])
+        ->name('route-cuahang-quanlykho-quanlydanhmuc');
 
-        Route::get('/them-danh-muc', [QuanLyDanhMucController::class, 'hienThiThemDanhMuc'])
-            ->name($prefix . '-quanlydanhmuc-themdanhmuc');
-    });
+    Route::get('/them-danh-muc', [QuanLyDanhMucController::class, 'hienThiThemDanhMuc'])
+        ->name('route-cuahang-quanlykho-quanlydanhmuc-themdanhmuc');
 
     // -------- Route tạo báo cáo
     Route::get('/tao-bao-cao', [TaoBaoCaoController::class, 'hienThiTaoBaoCao'])
-        ->name($prefix . '-taobaocao');
-}
-
-
-
-// ---- Route cho bên cửa hàng
-Route::prefix('/nhan-vien')->middleware(['auth', 'kiem_tra_vai_tro:nhanvien'])->group(function () {
-    NhanVienRoutes();
-});
-Route::prefix('/quan-ly-cua-hang')->middleware(['auth', 'kiem_tra_vai_tro:quanlycuahang'])->group(function () {
-    QuanLyCuaHangRoutes();
-});
-Route::prefix('/quan-ly-kho')->middleware(['auth', 'kiem_tra_vai_tro:quanlykho'])->group(function () {
-    QuanLyKhoRoutes();
-});
-
-
-// ---- Route cho admin
-Route::prefix('/admin')->middleware(['auth', 'kiem_tra_vai_tro:admin'])->group(function () {
-    Route::get('/', function () {
-        return redirect(route('route-admin-nhanvien'));
-    })->name('route-admin');
-    Route::prefix('/nhan-vien')->group(function () {
-        NhanVienRoutes(true);
-    });
-    Route::prefix('/quan-ly-cua-hang')->group(function () {
-        QuanLyCuaHangRoutes(true);
-    });
-    Route::prefix('/quan-ly-kho')->group(function () {
-        QuanLyKhoRoutes(true);
-    });
+        ->name('route-cuahang-quanlykho-taobaocao');
 });
 
 
@@ -211,27 +166,29 @@ Route::prefix('/admin')->middleware(['auth', 'kiem_tra_vai_tro:admin'])->group(f
 // 3 > Route bên khách hàng
 
 // ---- 3.1 > Route không cần đăng nhập
-// -------- Route trang chủ
-Route::get('/', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-trangchu');
+Route::middleware('check_guest_or_customer')->group(function () {
+    // -------- Route trang chủ
+    Route::get('/', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-trangchu');
 
-// -------- Route chi tiết ấn phẩm
-Route::get('/chi-tiet-an-pham', [ChiTietAnPhamController::class, 'hienThiChiTietAnPham'])->name('route-khachhang-chitietanpham');
+    // -------- Route chi tiết ấn phẩm
+    Route::get('/chi-tiet-an-pham', [ChiTietAnPhamController::class, 'hienThiChiTietAnPham'])->name('route-khachhang-chitietanpham');
 
-// -------- Route liên hệ
-// Route::get('/lien-he', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-lienhe');
-Route::get('/lien-he', [LienHeController::class, 'LienHe'])->name('route-khachhang-lienhe');
+    // -------- Route liên hệ
+    // Route::get('/lien-he', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-lienhe');
+    Route::get('/lien-he', [LienHeController::class, 'LienHe'])->name('route-khachhang-lienhe');
 
-// -------- Route tìm kiếm ấn phẩm
-Route::get('/tim-kiem-an-pham', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-timkiemanpham');
+    // -------- Route tìm kiếm ấn phẩm
+    Route::get('/tim-kiem-an-pham', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-timkiemanpham');
 
-// -------- Route chính sách
-Route::get('/chinh-sach', [ChinhSachController::class, 'hienThiChinhSach'])->name('route-khachhang-chinhsach');
+    // -------- Route chính sách
+    Route::get('/chinh-sach', [ChinhSachController::class, 'hienThiChinhSach'])->name('route-khachhang-chinhsach');
+});
 
 
 
 // ---- 3.2 > Route cần đăng nhập
 // -------- Route thuê ấn phẩm
-Route::middleware(['auth', 'kiem_tra_vai_tro:khachhang'])->group(function () {
+Route::middleware('xac_thuc:khachhang')->group(function () {
     Route::get('/thue-an-pham', [ThueAnPhamController::class, 'hienThiThueAnPham'])->name('route-khachhang-thueanpham');
 
     // -------- Route giỏ hàng

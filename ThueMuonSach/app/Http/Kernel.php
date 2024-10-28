@@ -66,6 +66,9 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
         // tự tạo
-        'kiem_tra_vai_tro' => \App\Http\Middleware\KiemTraVaiTro::class,
+        'xac_thuc' => \App\Http\Middleware\XacThuc::class,
+        'check_guest_or_customer' => \App\Http\Middleware\CheckGuestOrCustomer::class,
+        'check_guest' => \App\Http\Middleware\CheckGuest::class,
+        'check_auth' => \App\Http\Middleware\CheckAuth::class,
     ];
 }
