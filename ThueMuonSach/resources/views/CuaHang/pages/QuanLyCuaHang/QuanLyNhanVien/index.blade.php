@@ -1,5 +1,4 @@
 
-
 @extends('CuaHang.layouts.index')
 
 @section('content')
@@ -68,7 +67,7 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <button type="button" class="w-25 btn btn-danger" id="btnCancelAdd">Hủy</button>
+                        <button type="button" class="w-25 btn btn-danger" id="btnCancelAdd" data-bs-dismiss="modal">Hủy</button>
                         <button type="submit" class="w-25 btn btn-primary">Thêm</button>
                     </div>
                 </form>
@@ -144,9 +143,8 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                <form id="deleteForm" action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien.xoaNhanVien', $nhanvien->manhanvien) }}" method="POST">
+                                                <form action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien.xoaNhanVien', $nhanvien->manhanvien) }}" method="POST">
                                                     @csrf
-                                                    @method('DELETE')
                                                     <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
                                                 </form>
                                             </div>

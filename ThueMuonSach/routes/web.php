@@ -101,9 +101,9 @@ function QuanLyCuaHangRoutes($isAdmin = false)
     // Đang sửa
     Route::post('/quan-ly-nhan-vien/them', [QuanLyNhanVienController::class, 'themNhanVien'])
         ->name($prefix . '-quanlynhanvien.themNhanVien');
-    Route::delete('/quan-ly-nhan-vien/{id}', [QuanLyNhanVienController::class, 'xoaNhanVien'])
+    Route::post('/quan-ly-nhan-vien/{id}', [QuanLyNhanVienController::class, 'xoaNhanVien'])
         ->name($prefix . '-quanlynhanvien.xoaNhanVien');
-    Route::post('/quan-ly-nhan-vien/sua', [QuanLyNhanVienController::class, 'suaNhanVien'])
+    Route::post('/quan-ly-nhan-vien', [QuanLyNhanVienController::class, 'suaNhanVien'])
         ->name($prefix . '-quanlynhanvien.suaNhanVien');
 
     // -------- Route xem báo cáo
