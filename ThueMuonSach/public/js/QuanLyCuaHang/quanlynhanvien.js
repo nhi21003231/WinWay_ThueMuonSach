@@ -7,4 +7,6 @@ $(document).ready(function() {
         const newAction = "{{ route('route-cuahang-quanlycuahang-quanlynhanvien.deleteOneNhanVien', ['id' => '']) }}" + employeeId;
         deleteForm.attr('action', newAction); 
     });
+
 });
+

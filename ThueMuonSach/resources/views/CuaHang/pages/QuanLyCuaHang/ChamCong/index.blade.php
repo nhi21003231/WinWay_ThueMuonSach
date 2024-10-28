@@ -18,6 +18,12 @@
         </div>
     </div>
 
+    <!-- Form Tìm Kiếm -->
+    <form action="{{ route('route-cuahang-quanlycuahang-chamcong') }}" method="GET" class="d-flex">
+        <input type="text" name="keyword" class="form-control w-50" placeholder="Tìm kiếm nhân viên...">
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+    </form>
+
     <!-- Table -->
     <div class="mt-4">
         <h2>Danh sách nhân viên</h2> 
@@ -37,31 +43,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($chamCongList as $ChamCong)
+                            @foreach ($chamcongList as $chamcong)
                             <tr>
-                                <td>{{ $ChamCong->maChamCong }}</td>
-                                <td>{{ $ChamCong->nhanVien->maNhanVien }}</td>
-                                <td class="truncate">{{ $ChamCong->nhanVien->hoTen }}</td>
+                                <td>{{ $chamcong->machamcong }}</td>
+                                <td>{{ $chamcong->nhanVien->manhanvien }}</td>
+                                <td class="truncate">{{ $chamcong->nhanVien->hoten }}</td>
                                 <td>
-                                    <input type="datetime-local" class="form-control" name="thoiGianVao[]" value="{{ \Carbon\Carbon::parse($ChamCong->thoiGianVao)->format('Y-m-d\TH:i') }}">
+                                    <input type="datetime-local" class="form-control" name="thoigianvao[]" value="{{ \Carbon\Carbon::parse($chamcong->thoigianvao)->format('Y-m-d\TH:i') }}">
                                 </td>
                                 <td>
-                                    <input type="datetime-local" class="form-control" name="thoiGianRa[]" value="{{ \Carbon\Carbon::parse($ChamCong->thoiGianRa)->format('Y-m-d\TH:i') }}">
+                                    <input type="datetime-local" class="form-control" name="thoigianra[]" value="{{ \Carbon\Carbon::parse($chamcong->thoigianra)->format('Y-m-d\TH:i') }}">
                                 </td> 
                                 <td>
-                                    <select class="form-select" name="ghiNhan[]">
-                                        <option value="Có mặt" {{ $ChamCong->ghiNhan == 'Có mặt' ? 'selected' : '' }}>Có mặt</option>
-                                        <option value="Vắng mặt" {{ $ChamCong->ghiNhan == 'Vắng mặt' ? 'selected' : '' }}>Vắng mặt</option>
+                                    <select class="form-select" name="ghinhan[]">
+                                        <option value="1" {{ $chamcong->ghinhan == '1' ? 'selected' : '' }}>Có mặt</option>
+                                        <option value="0" {{ $chamcong->ghinhan == '0' ? 'selected' : '' }}>Vắng mặt</option>
                                     </select>
                                 </td>
-                                <input type="hidden" name="maChamCong[]" value="{{ $ChamCong->maChamCong }}">
+                                <input type="hidden" name="machamcong[]" value="{{ $chamcong->machamcong }}">
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success">Cập nhật trạng thái</button>
+            <button type="submit" class="btn btn-success">Cập nhật</button>
         </form> 
     </div>
 @endsection
