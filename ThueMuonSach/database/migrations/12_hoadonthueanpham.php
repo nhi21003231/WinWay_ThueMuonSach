@@ -21,8 +21,8 @@ return new class extends Migration
             $table->enum('loaidon', ['Đặt trước', 'Đơn thuê']);
             $table->enum('trangthai', ['Đang thuê', 'Đã trả']);
             $table->integer('manhanvien'); // Thêm cột khóa ngoại
-            $table->integer('makhachhang')->nullable();
-
+            $table->integer('makhachhang'); // Thêm cột khóa ngoại
+            
             $table->foreign('manhanvien')->references('manhanvien')->on('nhanvien')->onDelete('cascade');
             $table->foreign('makhachhang')->references('makhachhang')->on('khachhang')->onDelete('cascade');
 
@@ -37,7 +37,7 @@ return new class extends Migration
     {
         Schema::table('hoadonthueanpham', function (Blueprint $table) {
             $table->dropForeign(['manhanvien']);
-            $table->dropForeign('makhachhang');
+            $table->dropForeign(['makhachhang']);
         });
         
         Schema::dropIfExists('hoadonthueanpham');

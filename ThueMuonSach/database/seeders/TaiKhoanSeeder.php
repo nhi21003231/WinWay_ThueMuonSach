@@ -20,7 +20,7 @@ class TaiKhoanSeeder extends Seeder
         ]);
 
         TaiKhoan::create([
-            'tentaikhoan' => 'quanly',
+            'tentaikhoan' => 'quanlycuahang',
             'matkhau' => '123',
             'vaitro' => 'quanlycuahang',
         ]);

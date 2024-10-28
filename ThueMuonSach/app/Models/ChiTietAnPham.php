@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ChiTietAnPham extends Model
 {
@@ -14,6 +15,7 @@ class ChiTietAnPham extends Model
     public $timestamps = true;
 
     protected $fillable = [
+        'mactanpham',
         'tenanpham', 
         'tacgia', 
         'namxuatban', 
@@ -25,5 +27,12 @@ class ChiTietAnPham extends Model
     public function danhmuc()
     {
         return $this->belongsTo(DanhMuc::class, 'madanhmuc', 'madanhmuc');
+    }
+
+    public function anPham()
+    {
+
+        return $this->belongsTo(DsAnPham::class,'mactanpham','mactanpham');
+        
     }
 }

@@ -10,6 +10,6 @@ class HoaDonThueAnPhamSeeder extends Seeder
     public function run(): void
     {
         // Tạo một số hóa đơn thuê ngẫu nhiên
-        HoaDonThueAnPham::factory()->count(20)->create();
+        HoaDonThueAnPham::factory()->count(50)->create();
     }
 }

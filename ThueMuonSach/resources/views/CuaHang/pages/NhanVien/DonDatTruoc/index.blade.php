@@ -7,7 +7,7 @@
       <button type="submit" class="ms-2 btn btn-primary col-3" value="TimKiem">Tìm kiếm</button>
     </div>
     <div class="col-6 d-flex justify-content-end">
-      <select name="" id="TimKiem" class="form-select w-50 ">
+      <select name="sapxepDDT" id="TimKiem" class="form-select w-50 ">
         <option value="">Sắp xếp theo...</option>
         <option value="Ngày Mới Nhất">Sắp xếp theo mới nhất</option>
         <option value="Ngày Mới Nhất">Sắp xếp theo cũ nhất</option>
@@ -38,12 +38,16 @@
           @endphp
           @foreach ($hoadon as $items)
           <tr class="">
-            <td scope="row">{{ $stt++ }}</td>
-            <td>{{ $items->khachhang->name }}</td>
-            <td>{{ $items->anpham->name }}</td>
-            <td>{{ $items->NgayThue }}</td>
-            <td><button type="button" class="btn btn-warning"><a class="nav-link text-white"
-                  href="{{ URL::to('nhan-vien/don-dat-truoc/'.$items->id.'/chi-tiet') }}">Xem</a></button></td>
+            <td class="align-middle" scope="row">{{ $stt++ }}</td>
+            <td class="align-middle">{{ $items->khachHang->hoten }}</td>
+            <td class="align-middle">
+              @foreach ($items->chiTietHoaDons as $chitiet)
+                <p>{{ $chitiet->dsAnPham->chitietanpham->tenanpham }}</p>
+              @endforeach
+            </td class="align-middle"d>
+            <td class="align-middle">{{ $items->ngaythue }}</td>
+            <td class="align-middle"><button type="button" class="btn btn-warning"><a class="nav-link text-white"
+                  href="{{ URL::to('nhan-vien/don-dat-truoc/'.$items->mahoadon.'/chi-tiet') }}">Xem</a></button></td>
           </tr>
           @endforeach
         </tbody>

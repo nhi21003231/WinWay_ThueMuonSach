@@ -25,7 +25,15 @@ class ValidationFormRequest extends FormRequest
             //
             'tenkhachhang'=>'required',
 
-            'loaidon' => 'required'
+            'sodienthoai' => 'required|min:10|max:20',
+
+            'loaidon' => 'required',
+
+            'diachi' => 'required',
+
+            'ngaythue' => 'required|date',
+
+            'ngaydukien' => 'required|date|after_or_equal:ngaythue',
         ];
     }
 
@@ -35,7 +43,19 @@ class ValidationFormRequest extends FormRequest
 
             'tenkhachhang.required' => 'Vui lòng nhập tên khách hàng',
             
-            'loaidon.required' => 'Vui lòng chọn loại đơn'
+            'sodienthoai.required' => 'vui lòng nhập số điện thoại',
+
+            'sodienthoai.min' => 'Số điện thoại phải đủ 10 số',
+
+            'sodienthoai.max' => 'Số điện thoại không vượt quá 10 số',
+
+            'diachi.required' => 'Vui lòng nhập địa chỉ',
+
+            'ngaydukien.required' => 'Vui lòng chọn ngày dự kiến nhận',
+
+            'ngaydukien.after_or_equal' => 'Vui lòng chọn ngày dự kiến nhận lớn hơn ngày thuê',
+
+            'loaidon.required' => 'Vui lòng chọn loại đơn',
         ];
     }
 }

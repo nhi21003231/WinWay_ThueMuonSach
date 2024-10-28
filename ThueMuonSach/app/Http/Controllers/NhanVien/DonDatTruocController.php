@@ -7,6 +7,9 @@ use App\Http\Requests\ValidationFormRequest;
 use App\Models\KhachHang;
 use App\Models\HoaDonThueAnPham;
 use App\Http\Controllers\Controller;
+use App\Models\ChiTietAnPham;
+use App\Models\ChiTietHoaDonThue;
+use App\Models\DsAnPham;
 
 class DonDatTruocController extends Controller
 {
@@ -17,22 +20,38 @@ class DonDatTruocController extends Controller
     public function hienThiDonDatTruoc(Request $request)
     {
         // $hoadon = HoaDonThueAnPham::find(1);
-        // $khachhang = $hoadon->khachhang;
+        // $khachhang = $hoadon->khachhang->hoten;
         // dd($khachhang);
     //    $hoadon = $request->TimKiem;
     //    $a = $hoadon['TimKiem'];
         if($request->TimKiem != '')
         {
 
-            $khachhang = KhachHang::where('name','like','%'.$request->TimKiem.'%')->get();
+            $khachhang = KhachHang::where('hoten','like','%'.$request->TimKiem.'%')->get();
 
-            $anpham = HoaDonThueAnPham::where('name','like','%'.$request->TimKiem.'%')->get();
+            $chiTietAnPham = ChiTietAnPham::where('tenanpham','like','%'.$request->TimKiem.'%')->get();
 
-            $hoadon = $hoadon = HoaDonThueAnPham::where('loaidon','Đặt trước')
+            // $anpham = DsAnPham::where('mactanpham',$chiTietAnPham->mactanpham)->get();
+            
+            foreach ($chiTietAnPham as $item) {
+
+                $ctHD = ChiTietHoaDonThue::where('maanpham',$item->anPham->maanpham)->get();
+
+                // foreach($ctHD as $item){
+                    $hoadon = $hoadon = HoaDonThueAnPham::where('loaidon','Đặt trước')
+            
+                                            ->whereIn('mahoadon',$ctHD->pluck('mahoadon'))
 
                                             ->whereIn('makhachhang',$khachhang->pluck('makhachhang'))
 
-                                            ->orWhereIn('maanpham',$anpham->pluck('maanpham'))->paginate(8);
+                                            ->paginate(8);
+                dd($ctHD->pluck('mahoadon'));
+                // }
+            }
+
+            
+
+                                            // ->orWhereIn('maanpham',$anpham->pluck('maanpham'))->paginate(8);
         }
         else
         {
@@ -66,7 +85,7 @@ class DonDatTruocController extends Controller
 
         $hoadon->save();
 
-        $hoadon->khachhang->name = $request->tenkhachhang;
+        $hoadon->khachhang->hoten = $request->tenkhachhang;
 
         $hoadon->khachhang->save();
 
