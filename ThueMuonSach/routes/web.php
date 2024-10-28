@@ -25,12 +25,14 @@ use App\Http\Controllers\XacThucController;
 
 
 // 1 > Route đăng ký, đăng nhập (chung cho khách hàng và bên cửa hàng)
-// ---- 1.1 > Route đăng nhập
-Route::get('/dang-nhap', [XacThucController::class, 'hienThiDangNhap'])->name('route-dangnhap');
-Route::post('/dang-nhap', [XacThucController::class, 'dangNhap'])->name('route-dangnhap');
+Route::middleware('guest')->group(function () {
+    // ---- 1.1 > Route đăng nhập
+    Route::get('/dang-nhap', [XacThucController::class, 'hienThiDangNhap'])->name('route-dangnhap');
+    Route::post('/dang-nhap', [XacThucController::class, 'dangNhap'])->name('route-dangnhap');
 
-// ---- 1.2 > Route đăng ký
-Route::get('/dang-ky', [XacThucController::class, 'hienThiDangKy'])->name('route-dangky');
+    // ---- 1.2 > Route đăng ký
+    Route::get('/dang-ky', [XacThucController::class, 'hienThiDangKy'])->name('route-dangky');
+});
 
 // ---- 1.3 > Route đăng xuất
 Route::middleware('auth')->group(function () {
@@ -67,7 +69,7 @@ function NhanVienRoutes($isAdmin = false)
     Route::get('/don-dat-truoc/{hoaDonThue}/chi-tiet', [DonDatTruocController::class, 'chiTietDonDatTruoc'])
         ->name($prefix . '-dondattruoc-chitiet');
 
-    Route::put('/don-dat-truoc/{id}',[DonDatTruocController::class,'capNhatDonDatTruoc']);
+    Route::put('/don-dat-truoc/{id}', [DonDatTruocController::class, 'capNhatDonDatTruoc']);
     // -------- Route quản lý ấn phẩm
     Route::get('/quan-ly-an-pham', [NhanVienQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])
         ->name($prefix . '-quanlyanpham');
