@@ -94,9 +94,9 @@ Route::prefix('/quan-ly-cua-hang')->middleware('xac_thuc:quanlycuahang,admin')->
         ->name('route-cuahang-quanlycuahang-quanlynhanvien');
     Route::post('/quan-ly-nhan-vien/them', [QuanLyNhanVienController::class, 'themNhanVien'])
         ->name('route-cuahang-quanlycuahang-quanlynhanvien.themNhanVien');
-    Route::delete('/quan-ly-nhan-vien/{id}', [QuanLyNhanVienController::class, 'xoaNhanVien'])
+    Route::post('/quan-ly-nhan-vien/{id}', [QuanLyNhanVienController::class, 'xoaNhanVien'])
         ->name('route-cuahang-quanlycuahang-quanlynhanvien.xoaNhanVien');
-    Route::post('/quan-ly-nhan-vien/sua', [QuanLyNhanVienController::class, 'suaNhanVien'])
+    Route::post('/quan-ly-nhan-vien', [QuanLyNhanVienController::class, 'suaNhanVien'])
         ->name('route-cuahang-quanlycuahang-quanlynhanvien.suaNhanVien');
 
     // -------- Route xem báo cáo
