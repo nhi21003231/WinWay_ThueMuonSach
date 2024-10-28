@@ -2,12 +2,6 @@
 
 @extends('CuaHang.layouts.index')
 
-<head>
-    <link rel="stylesheet" href="{{ asset('css/quanlycuahang.css') }}">
-    <script src="{{ asset('js/QuanLyCuaHang/quanlycuahang.js') }}"></script>
-
-</head>
-
 @section('content')
 <!-- Content -->
     <!-- Header -->
@@ -169,19 +163,3 @@
         </form>
     </div> 
 @endsection
-
-@if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-
-@if($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
