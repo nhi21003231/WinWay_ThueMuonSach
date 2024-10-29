@@ -17,6 +17,8 @@ class DanhGia extends Model
         'binhluan',
         'trangthai',
         'sosao',
+        // bổ sung 30/10
+        'ngaydanhgia',
         'maanpham',
         'makhachhang',
     ];

@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('baibao', function (Blueprint $table) {
             $table->integer('mabaibao')->autoIncrement();
             $table->string('tieude', 100);
-            $table->string('noidung');
+            // 30/10 đổi noidung từ string thành text
+            $table->text('noidung');
             $table->date('ngaydang');
             $table->integer('manhanvien'); // Thêm cột khóa ngoại
-            
+
             $table->foreign('manhanvien')->references('manhanvien')->on('nhanvien')->onDelete('cascade');
 
             $table->timestamps();

@@ -20,6 +20,7 @@ use App\Http\Controllers\QuanLyKho\QuanLyDanhMucController;
 use App\Http\Controllers\QuanLyKho\TaoBaoCaoController;
 use App\Http\Controllers\KhachHang\LienHeController;
 use App\Http\Controllers\KhachHang\ChinhSachController;
+use App\Http\Controllers\QuanLyCuaHang\QuanLyDanhGiaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\XacThucController;
 
@@ -120,8 +121,10 @@ Route::prefix('/quan-ly-cua-hang')->middleware('xac_thuc:quanlycuahang,admin')->
         ->name('route-cuahang-quanlycuahang-taokhuyenmai.themCTKhuyenMai');
 
     // -------- Route quản lý đánh giá
-    Route::get('/quan-ly-danh-gia', [QuanLyNhanVienController::class, 'hienThiQuanLyNhanVien'])
+    Route::get('/quan-ly-danh-gia', [QuanLyDanhGiaController::class, 'hienThiDanhGia'])
         ->name('route-cuahang-quanlycuahang-quanlydanhgia');
+    Route::post('/quan-ly-danh-gia', [QuanLyDanhGiaController::class, 'suaDanhGia'])
+        ->name('route-cuahang-quanlycuahang-quanlydanhgia.suaDanhGia');
 });
 
 
