@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\NhanVien;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\ValidationFormRequest;
 
-use App\Models\KhachHang;
-use App\Models\HoaDonThue;
+
+use App\Models\HoaDonThueAnPham;
 use App\Http\Controllers\Controller;
-use App\Models\AnPham;
+
 
 class DonDatTruocController extends Controller
 {
@@ -17,64 +18,76 @@ class DonDatTruocController extends Controller
 
     public function hienThiDonDatTruoc(Request $request)
     {
-        // $hoadon = HoaDonThue::find(1);
-        // $khachhang = $hoadon->khachhang;
-        // dd($khachhang);
-    //    $hoadon = $request->TimKiem;
-    //    $a = $hoadon['TimKiem'];
-        if($request->TimKiem != '')
-        {
+        if ($request->ajax()) {
 
-            $khachhang = KhachHang::where('name','like','%'.$request->TimKiem.'%')->get();
+            $query = HoaDonThueAnPham::where('loaidon', 'Đặt trước');
 
-            $anpham = AnPham::where('name','like','%'.$request->TimKiem.'%')->get();
+            if ($request->search == 'moinhat') {
 
-            $hoadon = $hoadon = HoaDonThue::where('LoaiDon','Đơn đặt trước')
+                $hoaDons = $query->orderBy('ngaythue', 'desc')->paginate(8);
 
-                                            ->whereIn('id_khachhang',$khachhang->pluck('id'))
+            } else if ($request->search === 'cunhat') {
 
-                                            ->orWhereIn('id_anpham',$anpham->pluck('id'))->paginate(8);
+                $hoaDons = $query->orderBy('ngaythue', 'asc')->paginate(8);
+
+            } else {
+
+                $hoaDons = $query->paginate(8);
+            }
+
+            return view('CuaHang.pages.NhanVien.DonDatTruoc.ajax-don-dat-truoc', compact('hoaDons'));
         }
-        else
-        {
 
-            $hoadon = HoaDonThue::where('LoaiDon','Đơn đặt trước')->paginate(8);
+        // Xử lý tìm kiếm
+        if ($request->TimKiem != '') {
 
+            $hoaDons = HoaDonThueAnPham::whereHas('chiTietHoaDons.dsAnPham.chiTietAnPhams', function ($query) use ($request) {
+
+                $query->where('tenanpham', 'like', '%' . $request->TimKiem . '%');
+
+            })->orWhereHas('khachHang', function ($query) use ($request) {
+
+                $query->where('hoten', 'like', '%' . $request->TimKiem . '%');
+
+            })->paginate(7);
+            
+        } else {
+
+            $hoaDons = HoaDonThueAnPham::where('loaidon', 'Đặt trước')->paginate(7);
         }
-        // $khachhang = KhachHang::where('name','like','Isai Luettgen')->get();
-        // $hoadon = HoaDonThue::whereIn('id_khachhang',$khachhang->pluck('id'))->where('LoaiDon','Đơn đặt trước')->paginate(8);
-        // dd($hoadon);
 
-        return view('CuaHang.pages.NhanVien.DonDatTruoc.index',compact('hoadon'));
+        return view('CuaHang.pages.NhanVien.DonDatTruoc.index', compact('hoaDons'));
     }
 
+
     // Lấy thông tin chi tiết
-    public function chiTietDonDatTruoc(HoaDonThue $hoaDonThue){
+    public function chiTietDonDatTruoc(HoaDonThueAnPham $hoaDonThue)
+    {
 
-        return view('CuaHang.pages.NhanVien.DonDatTruoc.chi-tiet-don-dat-truoc',compact('hoaDonThue'));
-
+        return view('CuaHang.pages.NhanVien.DonDatTruoc.chi-tiet-don-dat-truoc', compact('hoaDonThue'));
     }
 
     // Cập nhật đơn đặt trước
 
-    public function capNhatDonDatTruoc(ValidationFormRequest $request, $id){
+    public function capNhatDonDatTruoc(ValidationFormRequest $request, $id)
+    {
 
         $request->validated();
 
-        $hoadon = HoaDonThue::find($id);
+        $hoadon = HoaDonThueAnPham::find($id);
 
-        $hoadon->LoaiDon = $request->loaidon;
+        $hoadon->loaidon = $request->loaidon;
 
         $hoadon->save();
 
-        $hoadon->khachhang->name = $request->tenkhachhang;
+        $hoadon->khachHang->hoten = $request->tenkhachhang;
 
-        $hoadon->khachhang->save();
+        $hoadon->khachHang->diachi = $request->diachi;
+
+        $hoadon->khachHang->save();
 
         // dd('update success');
 
-        return redirect('nhan-vien/don-dat-truoc')->with('success','Cập nhật thành công');
+        return redirect('nhan-vien/don-dat-truoc')->with('success', 'Cập nhật thành công');
     }
-
-
 }

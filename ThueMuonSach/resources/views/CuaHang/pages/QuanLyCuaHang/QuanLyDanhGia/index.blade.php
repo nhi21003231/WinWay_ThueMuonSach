@@ -24,7 +24,7 @@
                                 <th>Mã ĐG</th>
                                 <th>Mã AP</th>
                                 <th>Mã KH</th>
-                                {{-- <th>Tên AP</th> --}}
+                                <th>Tên AP</th>
                                 <th>Tên KH</th>
                                 <th>Bình luận</th>
                                 <th>Số sao</th>
@@ -40,7 +40,7 @@
                                 <td>{{ $danhgia->maanpham }}</td>
                                 <td>{{ $danhgia->makhachhang }}</td>
                                 {{-- <td>{{ $danhgia->ds_anpham ? $danhgia->ds_anpham->vitri : 'Không có dữ liệu' }}</td> --}}
-                                {{-- <td>{{ $danhgia->ds_anpham->chitietanpham ? $danhgia->ds_anpham->chitietanpham->tenanpham : 'Không có dữ liệu' }}</td> --}}
+                                <td>{{ $danhgia->ds_anpham->chitietanpham ? $danhgia->ds_anpham->chitietanpham->tenanpham : 'Không có dữ liệu' }}</td>
                                 <td>{{ $danhgia->khachhang->hoten }}</td>
                                 <td class="truncate">
                                     <input type="hidden" name="id[]" value="{{ $danhgia->madanhgia }}"> <!-- Trường ẩn cho ID -->

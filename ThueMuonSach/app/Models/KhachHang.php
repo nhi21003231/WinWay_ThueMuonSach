@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class KhachHang extends Model
 {
@@ -26,5 +27,12 @@ class KhachHang extends Model
     public function taikhoan()
     {
         return $this->belongsTo(TaiKhoan::class, 'mataikhoan', 'mataikhoan');
+    }
+
+    public function hoadons(): HasMany
+    {
+
+        return $this->hasMany(HoaDonThueAnPham::class);
+
     }
 }

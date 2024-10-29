@@ -5,7 +5,8 @@ namespace Database\Factories;
 use App\Models\KhachHang;
 use App\Models\TaiKhoan;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+ 
+use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\KhachHang>
  */
@@ -22,6 +23,7 @@ class KhachHangFactory extends Factory
             'diachi' => $this->faker->address(),
             'lathanhvien' => $this->faker->boolean(),
             'mataikhoan' => TaiKhoan::where('vaitro', 'khachhang')->inRandomOrder()->first()->mataikhoan, // Chỉ chọn tài khoản có vai trò "khachhang"
+
         ];
     }
 }

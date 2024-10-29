@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ChiTietHoaDonThue extends Model
 {
@@ -22,7 +23,7 @@ class ChiTietHoaDonThue extends Model
     ];
 
     // Định nghĩa quan hệ với bảng HoaDonThueAnPham
-    public function hoaDonThue()
+    public function hoaDonThue(): BelongsTo
     {
         return $this->belongsTo(HoaDonThueAnPham::class, 'mahoadon', 'mahoadon');
     }

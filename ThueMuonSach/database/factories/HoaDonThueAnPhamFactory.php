@@ -23,6 +23,7 @@ class HoaDonThueAnPhamFactory extends Factory
             'trangthai' => $this->faker->randomElement(['Đang thuê', 'Đã trả']),
             'manhanvien' => NhanVien::inRandomOrder()->first()->manhanvien, // Lấy nhân viên ngẫu nhiên
             'makhachhang' => KhachHang::inRandomOrder()->first()->makhachhang, // Lấy khách hàng ngẫu nhiên
+
         ];
     }
 }

@@ -12,5 +12,10 @@ class QuanLyKhachHangController extends Controller
         return view('CuaHang.pages.NhanVien.QuanLyKhachHang.index');
     }
 
-    
+    public function hienThiChiTietKhachHang()
+    {
+
+        return view('CuaHang.pages.NhanVien.QuanLyKhachHang.capnhatthongtin');
+
+    }
 }
