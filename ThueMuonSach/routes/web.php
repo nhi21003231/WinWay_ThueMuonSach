@@ -149,6 +149,7 @@ Route::prefix('/quan-ly-kho')->middleware('xac_thuc:quanlykho,admin')->group(fun
 
         Route::get('/cap-nhat-tinh-trang', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiCapNhatTinhTrang'])
             ->name('route-cuahang-quanlykho-quanlyanpham-capnhattinhtrang');
+        Route::post('/cap-nhat-tinh-trang', [QuanLyKhoQuanLyAnPhamController::class, 'xuLyCapNhatTinhTrang']);
     });
 
     // -------- Route quản lý danh mục

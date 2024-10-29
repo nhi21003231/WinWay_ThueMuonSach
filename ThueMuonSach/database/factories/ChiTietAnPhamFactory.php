@@ -20,7 +20,7 @@ class ChiTietAnPhamFactory extends Factory
             'tenanpham' => $this->faker->words(3, true),
             'tacgia' => $this->faker->name(),
             'namxuatban' => $this->faker->year(),
-            'hinhanh' => './img/anh-an-pham/nha-gia-kim.jpg', // Hình ảnh mặc định
+            'hinhanh' => 'nha-gia-kim.jpg', // Hình ảnh mặc định
             'madanhmuc' => DanhMuc::inRandomOrder()->first()->madanhmuc,
         ];
     }
