@@ -24,7 +24,7 @@ class ChiTietAnPham extends Model
     ];
 
     // Định nghĩa quan hệ với bảng DanhMuc
-    public function danhmuc()
+    public function danhMuc()
     {
         return $this->belongsTo(DanhMuc::class, 'madanhmuc', 'madanhmuc');
     }

@@ -75,7 +75,7 @@ Route::prefix('/nhan-vien')->middleware('xac_thuc:nhanvien,admin')->group(functi
     Route::get('/quan-ly-khach-hang', [QuanLyKhachHangController::class, 'hienThiQuanLyKhachHang'])
         ->name('route-cuahang-nhanvien-quanlykhachhang');
 
-    Route::get('quan-ly-khach-hang/cap-nhat',[QuanLyKhachHangController::class,'hienThiChiTietKhachHang'])
+    Route::get('quan-ly-khach-hang/cap-nhat', [QuanLyKhachHangController::class, 'hienThiChiTietKhachHang'])
         ->name('route-cuahang=nhanvien-quanlykhachhang-chitiet');
 
     // -------- Route thống kê doanh thu
@@ -147,9 +147,12 @@ Route::prefix('/quan-ly-kho')->middleware('xac_thuc:quanlykho,admin')->group(fun
         Route::get('/nhap-an-pham-da-co', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPhamDaCo'])
             ->name('route-cuahang-quanlykho-quanlyanpham-nhapanphamdaco');
 
+        // ------------ Route thanh lý ấn phẩm
         Route::get('/thanh-ly-an-pham', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiThanhLyAnPham'])
             ->name('route-cuahang-quanlykho-quanlyanpham-thanhlyanpham');
+        Route::post('/thanh-ly-an-pham', [QuanLyKhoQuanLyAnPhamController::class, 'xuLyThanhLyAnPham']);
 
+        // ------------ Route cập nhật tình trạng
         Route::get('/cap-nhat-tinh-trang', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiCapNhatTinhTrang'])
             ->name('route-cuahang-quanlykho-quanlyanpham-capnhattinhtrang');
         Route::post('/cap-nhat-tinh-trang', [QuanLyKhoQuanLyAnPhamController::class, 'xuLyCapNhatTinhTrang']);

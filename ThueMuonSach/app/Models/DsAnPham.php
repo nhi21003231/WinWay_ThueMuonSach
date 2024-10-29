@@ -24,7 +24,7 @@ class DsAnPham extends Model
     ];
 
     // Định nghĩa quan hệ với bảng ChiTietAnPham
-    public function chiTietAnPhams()
+    public function chiTietAnPham()
     {
         return $this->belongsTo(ChiTietAnPham::class, 'mactanpham', 'mactanpham');
     }

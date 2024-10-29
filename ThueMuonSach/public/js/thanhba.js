@@ -20,6 +20,33 @@ function toMauDong() {
     });
 }
 
+// Hàm tô màu dòng khi chọn ấn phẩm thanh lý
+function chonDongThanhLy() {
+    // Lấy tất cả các hàng có checkbox
+    const rows = document.querySelectorAll("#ba-danhsach tbody tr");
+
+    rows.forEach((row) => {
+        // Tìm checkbox trong mỗi hàng
+        const checkbox = row.querySelector(".ba-form-check-input");
+
+        // Gắn sự kiện click cho toàn bộ hàng
+        row.addEventListener("click", function(event) {
+            // Bỏ qua click trên chính checkbox để tránh xung đột
+            if (event.target !== checkbox) {
+                // Đổi trạng thái của checkbox
+                checkbox.checked = !checkbox.checked;
+                // Thêm hoặc xóa lớp table-info
+                row.classList.toggle("table-info", checkbox.checked);
+            }
+        });
+
+        // Gắn sự kiện click cho checkbox để đồng bộ với lớp của hàng
+        checkbox.addEventListener("click", function() {
+            row.classList.toggle("table-info", checkbox.checked);
+        });
+    });
+}
+
 // Hàm tìm kiếm
 function timKiemAnPham() {
     const searchInput = document.getElementById("ba-timkiem");
