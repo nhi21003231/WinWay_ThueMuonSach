@@ -1,15 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\NhanVien;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\ValidationFormRequest;
 
-use App\Models\KhachHang;
+
 use App\Models\HoaDonThueAnPham;
 use App\Http\Controllers\Controller;
-use App\Models\ChiTietAnPham;
-use App\Models\ChiTietHoaDonThue;
-use App\Models\DsAnPham;
+
 
 class DonDatTruocController extends Controller
 {
@@ -19,63 +18,59 @@ class DonDatTruocController extends Controller
 
     public function hienThiDonDatTruoc(Request $request)
     {
-        // $hoadon = HoaDonThueAnPham::find(1);
-        // $khachhang = $hoadon->khachhang->hoten;
-        // dd($khachhang);
-    //    $hoadon = $request->TimKiem;
-    //    $a = $hoadon['TimKiem'];
-        if($request->TimKiem != '')
-        {
+        if ($request->ajax()) {
 
-            $khachhang = KhachHang::where('hoten','like','%'.$request->TimKiem.'%')->get();
+            $query = HoaDonThueAnPham::where('loaidon', 'Đặt trước');
 
-            $chiTietAnPham = ChiTietAnPham::where('tenanpham','like','%'.$request->TimKiem.'%')->get();
+            if ($request->search == 'moinhat') {
 
-            // $anpham = DsAnPham::where('mactanpham',$chiTietAnPham->mactanpham)->get();
-            
-            foreach ($chiTietAnPham as $item) {
+                $hoaDons = $query->orderBy('ngaythue', 'desc')->paginate(8);
 
-                $ctHD = ChiTietHoaDonThue::where('maanpham',$item->anPham->maanpham)->get();
+            } else if ($request->search === 'cunhat') {
 
-                // foreach($ctHD as $item){
-                    $hoadon = $hoadon = HoaDonThueAnPham::where('loaidon','Đặt trước')
-            
-                                            ->whereIn('mahoadon',$ctHD->pluck('mahoadon'))
+                $hoaDons = $query->orderBy('ngaythue', 'asc')->paginate(8);
 
-                                            ->whereIn('makhachhang',$khachhang->pluck('makhachhang'))
+            } else {
 
-                                            ->paginate(8);
-                dd($ctHD->pluck('mahoadon'));
-                // }
+                $hoaDons = $query->paginate(8);
             }
 
+            return view('CuaHang.pages.NhanVien.DonDatTruoc.ajax-don-dat-truoc', compact('hoaDons'));
+        }
+
+        // Xử lý tìm kiếm
+        if ($request->TimKiem != '') {
+
+            $hoaDons = HoaDonThueAnPham::whereHas('chiTietHoaDons.dsAnPham.chiTietAnPhams', function ($query) use ($request) {
+
+                $query->where('tenanpham', 'like', '%' . $request->TimKiem . '%');
+
+            })->orWhereHas('khachHang', function ($query) use ($request) {
+
+                $query->where('hoten', 'like', '%' . $request->TimKiem . '%');
+
+            })->paginate(7);
             
+        } else {
 
-                                            // ->orWhereIn('maanpham',$anpham->pluck('maanpham'))->paginate(8);
+            $hoaDons = HoaDonThueAnPham::where('loaidon', 'Đặt trước')->paginate(7);
         }
-        else
-        {
 
-            $hoadon = HoaDonThueAnPham::where('loaidon','Đặt trước')->paginate(8);
-
-        }
-        // $khachhang = KhachHang::where('name','like','Isai Luettgen')->get();
-        // $hoadon = HoaDonThueAnPham::whereIn('id_khachhang',$khachhang->pluck('id'))->where('LoaiDon','Đơn đặt trước')->paginate(8);
-        // dd($hoadon);
-
-        return view('CuaHang.pages.NhanVien.DonDatTruoc.index',compact('hoadon'));
+        return view('CuaHang.pages.NhanVien.DonDatTruoc.index', compact('hoaDons'));
     }
 
+
     // Lấy thông tin chi tiết
-    public function chiTietDonDatTruoc(HoaDonThueAnPham $hoaDonThue){
+    public function chiTietDonDatTruoc(HoaDonThueAnPham $hoaDonThue)
+    {
 
-        return view('CuaHang.pages.NhanVien.DonDatTruoc.chi-tiet-don-dat-truoc',compact('hoaDonThue'));
-
+        return view('CuaHang.pages.NhanVien.DonDatTruoc.chi-tiet-don-dat-truoc', compact('hoaDonThue'));
     }
 
     // Cập nhật đơn đặt trước
 
-    public function capNhatDonDatTruoc(ValidationFormRequest $request, $id){
+    public function capNhatDonDatTruoc(ValidationFormRequest $request, $id)
+    {
 
         $request->validated();
 
@@ -85,14 +80,14 @@ class DonDatTruocController extends Controller
 
         $hoadon->save();
 
-        $hoadon->khachhang->hoten = $request->tenkhachhang;
+        $hoadon->khachHang->hoten = $request->tenkhachhang;
 
-        $hoadon->khachhang->save();
+        $hoadon->khachHang->diachi = $request->diachi;
+
+        $hoadon->khachHang->save();
 
         // dd('update success');
 
-        return redirect('nhan-vien/don-dat-truoc')->with('success','Cập nhật thành công');
+        return redirect('nhan-vien/don-dat-truoc')->with('success', 'Cập nhật thành công');
     }
-
-
 }

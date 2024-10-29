@@ -32,7 +32,7 @@ class ChiTietAnPham extends Model
     public function anPham()
     {
 
-        return $this->belongsTo(DsAnPham::class,'mactanpham','mactanpham');
+        return $this->hasMany(DsAnPham::class,'mactanpham','mactanpham');
         
     }
 }

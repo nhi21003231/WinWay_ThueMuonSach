@@ -46,7 +46,7 @@
     <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
 
     {{-- app js --}}
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/NhanVien/app.js') }}"></script>
 
     {{-- link thư viện thông báo (Toastr.js) --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -71,6 +71,8 @@
             });
         @endif
     </script>
+
+    
 
 </body>
 

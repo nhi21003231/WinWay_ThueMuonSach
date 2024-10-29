@@ -33,7 +33,7 @@
           {{-- Địa chỉ khách hàng --}}
           <div class="pt-4">
             <label for="diachi" class="form-label fw-bold ps-2">Địa chỉ</label>
-            <input type="text" class="form-control overflow-hidden" value="{{ $hoaDonThue->khachHang->diachi }}"
+            <input type="text" class="form-control overflow-hidden" value="{{ old('diachi',$hoaDonThue->khachHang->diachi) }}"
               name="diachi">
             @error('diachi')
             <span class="text-danger fs-6 m-0 ps-1">{{ $message }}</span>
@@ -45,7 +45,7 @@
             <select name="loaidon" id="loaidon" class="form-select">
               <option value="" {{ old('loaidon',$hoaDonThue->loaidon == '' ? 'selected':'') }}>Chọn loại đơn...
               </option>
-              <option value="Đơn đặt trước" {{ old('loaidon',$hoaDonThue->loaidon == 'Đặt trước'?'selected':'') }}>Đơn
+              <option value="Đặt trước" {{ old('loaidon',$hoaDonThue->loaidon == 'Đặt trước'?'selected':'') }}>Đơn
                 đặt trước</option>
               <option value="Đơn Thuê" {{ old('loaidon',$hoaDonThue->loaidon == 'Đặt thuê'?'selected':'') }}>Đơn
                 Thuê</option>
@@ -58,7 +58,7 @@
       </div>
       {{-- Thông tin ấn phẩm --}}
       <div class="text-start col-8 row">
-        <div class="col-12 row">
+        <div class="col-12 row mb-3">
           <p class="text-uppercase fs-6 fw-bold">Thông tin sản phẩm</p>
           {{-- Hiển thị thông tin ấn phẩm --}}
           @php
@@ -70,7 +70,7 @@
             <div class="bbbbb">
               <label for="name" class="form-label fw-bold ps-2">Ấn phẩm {{ $stt++ }}</label>
               <input type="text" class="form-control overflow-hidden"
-                value="{{ $chitiet->dsAnPham->chitietanpham->tenanpham }}" readonly>
+                value="{{ $chitiet->dsAnPham->chiTietAnPhams->tenanpham }}" readonly>
             </div>
             <div class="text-center mt-2 overflow-hidden">
               <img src="{{ asset('storage/images/images.jpg') }}" alt="" width="120px" height="160px">
