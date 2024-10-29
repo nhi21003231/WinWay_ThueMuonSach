@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{ asset('css/nhi_header.css') }}  ">
     <link rel="stylesheet" href="{{ asset('css/thanhba.css') }}  ">
     <link rel="stylesheet" href="{{ asset('css/nhi_contact.css') }}  ">
+    <link rel="stylesheet" href="{{ asset('css/quanlycuahang.css') }}">
 
 </head>
 
@@ -44,9 +45,11 @@
 
     {{-- Jquery --}}
     <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
-
     {{-- app js --}}
     <script src="{{ asset('js/NhanVien/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/thanhba.js') }}"></script>
+    <script src="{{ asset('js/quanlycuahang.js') }}"></script>
 
     {{-- link thư viện thông báo (Toastr.js) --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

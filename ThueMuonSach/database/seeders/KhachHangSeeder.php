@@ -22,6 +22,6 @@ class KhachHangSeeder extends Seeder
             'mataikhoan' => 7,
         ]);
 
-        KhachHang::factory()->count(10)->create();
+        KhachHang::factory()->count(50)->create();
     }
 }

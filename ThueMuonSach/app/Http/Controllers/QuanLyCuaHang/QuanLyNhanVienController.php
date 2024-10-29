@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\NhanVien;
 use App\Models\TaiKhoan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class QuanLyNhanVienController extends Controller
@@ -91,81 +92,33 @@ class QuanLyNhanVienController extends Controller
         return redirect()->back()->with('success', 'Nhân viên đã được xóa thành công.');
     }
 
-    // public function suaNhanVien(Request $request)
-    // {
-    //     // Validate dữ liệu
-    //     $request->validate([
-    //         'id' => 'required|array',
-    //         'hoten.*' => 'required|string|max:255',
-    //         'ghinhan.*' => 'required|string',
-    //         'matkhau.*' => 'required|string|min:6', // Điều chỉnh theo yêu cầu
-    //         'email.*' => 'required|email',
-    //         'sodienthoai.*' => 'required|string|max:15', // Điều chỉnh theo yêu cầu
-    //     ]);
-
-    //     // Lặp qua từng nhân viên và cập nhật thông tin
-    //     foreach ($request->id as $index => $id) {
-    //         $nhanvien = NhanVien::find($id);
-    //         if ($nhanvien) {
-    //             $nhanvien->hoten = $request->hoten[$index];
-    //             $nhanvien->email = $request->email[$index];
-    //             $nhanvien->sodienthoai = $request->sodienthoai[$index];
-
-    //             // Cập nhật thông tin tài khoản (nếu cần)
-    //             $taikhoan = $nhanvien->taikhoan; // Lấy tài khoản liên quan
-    //             if ($taikhoan) {
-    //                 $taikhoan->vaitro = $request->ghinhan[$index];
-    //                 $taikhoan->matkhau = bcrypt($request->matkhau[$index]); // Băm mật khẩu
-    //                 $taikhoan->save(); // Lưu tài khoản
-    //             }
-
-    //             $nhanvien->save(); // Lưu nhân viên
-    //         }
-    //     }
-
-    //     return redirect()->back()->with('success', 'Cập nhật nhân viên thành công.');
-    // }
     public function suaNhanVien(Request $request)
     {
-        // Validate dữ liệu
-        $request->validate([
-            'id' => 'required|array',
-            'hoten.*' => 'required|string|max:255',
-            'ghinhan.*' => 'required|string',
-            'matkhau.*' => 'required|string|min:6', // Điều chỉnh theo yêu cầu
-            'email.*' => 'required|email',
-            'sodienthoai.*' => 'required|string|max:15', // Điều chỉnh theo yêu cầu
-        ]);
-
-        // Khởi tạo biến để lưu số lượng cập nhật thành công
-        $updatedCount = 0;
-
-        // Lặp qua từng nhân viên và cập nhật thông tin
+        // Lặp qua từng nhân viên để cập nhật thông tin
         foreach ($request->id as $index => $id) {
             $nhanvien = NhanVien::find($id);
             if ($nhanvien) {
-                // Cập nhật thông tin nhân viên
+                // Cập nhật các thông tin cơ bản của nhân viên
                 $nhanvien->hoten = $request->hoten[$index];
                 $nhanvien->email = $request->email[$index];
                 $nhanvien->sodienthoai = $request->sodienthoai[$index];
-                $nhanvien->save(); // Lưu nhân viên
-                $updatedCount++;
 
-                // Cập nhật thông tin tài khoản (nếu cần)
-                $taikhoan = $nhanvien->taikhoan; // Lấy tài khoản liên quan
-                if ($taikhoan) {
-                    $taikhoan->vaitro = $request->ghinhan[$index];
-                    $taikhoan->matkhau = bcrypt($request->matkhau[$index]); // Băm mật khẩu
-                    $taikhoan->save(); // Lưu tài khoản
+                // Cập nhật chức vụ nếu có
+                if (isset($request->ghinhan[$index])) {
+                    $nhanvien->taikhoan->vaitro = $request->ghinhan[$index];
                 }
+
+                // Cập nhật mật khẩu nếu có mật khẩu mới
+                if (!empty($request->matkhau[$index])) {
+                    $nhanvien->taikhoan->matkhau = Hash::make($request->matkhau[$index]);
+                }
+
+                // Lưu các thay đổi
+                $nhanvien->taikhoan->save(); // Lưu tài khoản
+                $nhanvien->save(); // Lưu nhân viên
             }
         }
 
-        // Kiểm tra xem có nhân viên nào được cập nhật không
-        if ($updatedCount > 0) {
-            return redirect()->back()->with('success', 'Cập nhật ' . $updatedCount . ' nhân viên thành công.');
-        } else {
-            return redirect()->back()->with('error', 'Không có nhân viên nào được cập nhật.');
-        }
+        return redirect()->back()->with('success', 'Cập nhật nhân viên thành công.');
     }
 }

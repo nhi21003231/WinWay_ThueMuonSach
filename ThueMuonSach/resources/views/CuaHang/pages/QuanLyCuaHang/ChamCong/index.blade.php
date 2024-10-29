@@ -2,10 +2,6 @@
 
 @extends('CuaHang.layouts.index')
 
-<head>
-    <link rel="stylesheet" href="{{ asset('css/quanlycuahang.css') }}  ">
-</head>
-
 @section('content')
 
 <!-- Content -->
