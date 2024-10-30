@@ -40,7 +40,8 @@
                                 <td>{{ $danhgia->maanpham }}</td>
                                 <td>{{ $danhgia->makhachhang }}</td>
                                 {{-- <td>{{ $danhgia->ds_anpham ? $danhgia->ds_anpham->vitri : 'Không có dữ liệu' }}</td> --}}
-                                <td>{{ $danhgia->ds_anpham->chitietanpham ? $danhgia->ds_anpham->chitietanpham->tenanpham : 'Không có dữ liệu' }}</td>
+                                {{-- <td>{{ $danhgia->ds_anpham->chitietanpham ? $danhgia->ds_anpham->chitietanpham->tenanpham : 'Không có dữ liệu' }}</td> --}}
+                                <td>{{ $danhgia->dsanpham->chitietanpham ? $danhgia->dsanpham->chitietanpham->tenanpham : 'Không có dữ liệu' }}</td>
                                 <td>{{ $danhgia->khachhang->hoten }}</td>
                                 <td class="truncate">
                                     <input type="hidden" name="id[]" value="{{ $danhgia->madanhgia }}"> <!-- Trường ẩn cho ID -->
@@ -60,7 +61,7 @@
                                     </select>
                                 </td>
                                 
-                                {{-- <td>
+                                <td>
                                     <button 
                                         data-bs-toggle="modal" 
                                         data-bs-target="#delete{{ $danhgia->madanhgia }}" 
@@ -70,9 +71,9 @@
                                         class="btnDelete">
                                         <i class="fas fa-trash text-danger"></i>
                                     </button> 
-                                </td> --}}
+                                </td>
                                 <!-- Modal Xóa -->
-                                {{-- <div class="modal fade" id="delete{{ $danhgia->madanhgia }}" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
+                                <div class="modal fade" id="delete{{ $danhgia->madanhgia }}" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -91,7 +92,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
                             </tr>  
                             @endforeach
                         </tbody>
