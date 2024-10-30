@@ -11,6 +11,35 @@ use Illuminate\Support\Facades\Validator;
 
 class QuanLyNhanVienController extends Controller
 {
+    // public function hienThiQuanLyNhanVien(Request $request)
+    // {
+    //     // Lấy từ khóa tìm kiếm từ yêu cầu
+    //     $keyword = $request->input('keyword');
+
+    //     // Tạo query cơ bản để tìm kiếm
+    //     $query = NhanVien::query();
+
+    //     // Nếu có từ khóa tìm kiếm, thêm điều kiện tìm kiếm vào query
+    //     if ($keyword) {
+    //         $query->where(function ($query) use ($keyword) {
+    //             $query->where('manhanvien', 'LIKE', '%' . $keyword . '%')
+    //                 ->orWhere('hoten', 'LIKE', '%' . $keyword . '%')
+    //                 ->orWhere('email', 'LIKE', '%' . $keyword . '%')
+    //                 ->orWhere('sodienthoai', 'LIKE', '%' . $keyword . '%')
+    //                 ->orWhereHas('taikhoan', function ($q) use ($keyword) {
+    //                     $q->where('tentaikhoan', 'LIKE', '%' . $keyword . '%')
+    //                         ->orWhere('vaitro', 'LIKE', '%' . $keyword . '%'); // Tìm kiếm theo vaitro
+    //                 });
+    //         });
+    //     }
+
+    //     // Thực hiện truy vấn và lấy kết quả
+    //     $nhanvienList = $query->get();
+
+    //     // Trả về view với danh sách nhân viên
+    //     return view('CuaHang.pages.QuanLyCuaHang.QuanLyNhanVien.index', compact('nhanvienList'));
+    // }
+
     public function hienThiQuanLyNhanVien(Request $request)
     {
         // Lấy từ khóa tìm kiếm từ yêu cầu
@@ -36,10 +65,12 @@ class QuanLyNhanVienController extends Controller
         // Thực hiện truy vấn và lấy kết quả
         $nhanvienList = $query->get();
 
-        // Trả về view với danh sách nhân viên
-        return view('CuaHang.pages.QuanLyCuaHang.QuanLyNhanVien.index', compact('nhanvienList'));
-    }
+        // Nếu không có kết quả, tạo thông báo "Không có dữ liệu"
+        $message = $nhanvienList->isEmpty() ? 'Không có dữ liệu' : null;
 
+        // Trả về view với danh sách nhân viên và thông báo nếu có
+        return view('CuaHang.pages.QuanLyCuaHang.QuanLyNhanVien.index', compact('nhanvienList', 'message'));
+    }
 
     public function themNhanVien(Request $request)
     {
