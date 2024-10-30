@@ -116,6 +116,8 @@ Route::prefix('/quan-ly-cua-hang')->middleware('xac_thuc:quanlycuahang,admin')->
     // -------- Route định giá ấn phẩm
     Route::get('/dinh-gia-an-pham', [DinhGiaAnPhamController::class, 'hienThiDinhGiaAnPham'])
         ->name('route-cuahang-quanlycuahang-dinhgiaanpham');
+    Route::post('/quan-ly-an-pham', [DinhGiaAnPhamController::class, 'suaDinhGiaAnPham'])
+        ->name('route-cuahang-quanlycuahang-dinhgiaanpham.suaDinhGiaAnPham');
 
     // -------- Route tạo khuyến mãi
     Route::get('/tao-khuyen-mai', [TaoKhuyenMaiController::class, 'hienThiTaoKhuyenMai'])

@@ -14,7 +14,7 @@
 
     <div class="mt-4">
         <h2>Danh sách ấn phẩm</h2>
-        <form action="{{ route('route-cuahang-quanlycuahang-quanlydanhgia.suaDanhGia') }}" method="POST">
+        <form action="{{ route('route-cuahang-quanlycuahang-dinhgiaanpham.suaDinhGiaAnPham') }}" method="POST">
             @csrf
             <div class="scrollable-container"> <!-- Container cuộn -->
                 <div class="table-responsive">
@@ -27,7 +27,7 @@
                                 <th>Giá cọc</th>
                                 <th>Năm xuất bản</th>
                                 <th>Hình ảnh</th>
-                                <th>Actions</th>
+                                {{-- <th>Actions</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -35,19 +35,18 @@
                             <tr>
                                 <input type="hidden" name="id[]" value="{{ $anpham->maanpham }}"> <!-- Trường ẩn cho ID -->
                                 <td>{{ $anpham->maanpham }}</td>
-                                <td>{{ $anpham->tenanpham }}</td>
+                                <td>{{ $anpham->chitietanpham->tenanpham }}</td>
                                 <td>
                                     <input type="text" class="form-control" name="giathue[]" value="{{ $anpham->giathue }}" required>
                                 </td>
-                                <td>
                                 <td>
                                     <input type="text" class="form-control" name="giacoc[]" value="{{ $anpham->giacoc }}" required>
                                 </td>
                                 <td>{{ $anpham->chitietanpham->namxuatban }}</td>
                                 <td>
-                                    <img src="{{ $anpham->chitietanpham->hinhanh }}" alt="">
+                                    <img class="img-anpham w-50" src="{{ asset('img/anh-an-pham/' . $anpham->chitietanpham->hinhanh) }} " alt="">
                                 </td>                                
-                                <td>
+                                {{-- <td>
                                     <button 
                                         data-bs-toggle="modal" 
                                         data-bs-target="#delete{{ $anpham->maanpham }}" 
@@ -57,7 +56,7 @@
                                         class="btnDelete">
                                         <i class="fas fa-trash text-danger"></i>
                                     </button> 
-                                </td>
+                                </td> --}}
                                 <!-- Modal Xóa -->
                                 {{-- <div class="modal fade" id="delete{{ $danhgia->madanhgia }}" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -83,9 +82,9 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <button type="submit" class="btn btn-success">Lưu</button>
                 </div>
             </div> 
+            <button type="submit" class="btn btn-success">Lưu</button>
         </form>
     </div> 
 @endsection
