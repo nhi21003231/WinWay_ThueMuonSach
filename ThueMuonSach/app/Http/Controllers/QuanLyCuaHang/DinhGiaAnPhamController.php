@@ -8,9 +8,29 @@ use Illuminate\Http\Request;
 
 class DinhGiaAnPhamController extends Controller
 {
-    public function hienThiDinhGiaAnPham()
+    // public function hienThiDinhGiaAnPham()
+    // {
+    //     $dsanphamList = DsAnPham::all();
+    //     return view('CuaHang.pages.QuanLyCuaHang.DinhGiaAnPham.index', compact('dsanphamList'));
+    // }
+
+    public function hienThiDinhGiaAnPham(Request $request)
     {
-        $dsanphamList = DsAnPham::all();
+        $keyword = $request->input('keyword');
+
+        $dsanphamList = DsAnPham::with('chitietanpham')
+            ->when($keyword, function ($query, $keyword) {
+                $query->where('maanpham', 'like', '%' . $keyword . '%')
+                      ->orWhere('giathue', 'like', '%' . $keyword . '%')
+                      ->orWhere('giacoc', 'like', '%' . $keyword . '%')
+                      ->orWhereHas('chitietanpham', function ($query) use ($keyword) {
+                          $query->where('tenanpham', 'like', '%' . $keyword . '%')
+                                ->orWhere('namxuatban', 'like', '%' . $keyword . '%')
+                                ->orWhere('hinhanh', 'like', '%' . $keyword . '%');
+                      });
+            })
+            ->get();
+
         return view('CuaHang.pages.QuanLyCuaHang.DinhGiaAnPham.index', compact('dsanphamList'));
     }
 
