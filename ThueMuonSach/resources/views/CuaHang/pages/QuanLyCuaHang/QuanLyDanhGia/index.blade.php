@@ -11,6 +11,11 @@
         </div>
     </div>    
 
+    <!-- Form Tìm Kiếm -->
+    <form action="{{ route('route-cuahang-quanlycuahang-quanlydanhgia') }}" method="GET" class="d-flex my-3">
+        <input type="text" name="keyword" class="form-control w-50" placeholder="Tìm kiếm đánh giá...">
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+    </form>
 
     <div class="mt-4">
         <h2>Danh sách đánh giá</h2>
