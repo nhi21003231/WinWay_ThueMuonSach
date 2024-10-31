@@ -35,7 +35,7 @@
         <div style="overflow-y: auto; max-height: 60vh;" class="scroll-container-ba">
             <table class="table table-hover mb-3 text-center align-middle" id="ba-danhsach">
                 <tbody>
-                    @foreach ($anPhams as $anPham)
+                    @forelse ($anPhams as $anPham)
                         <tr>
                             <td width="12%">{{ $anPham->chiTietAnPham->tenanpham }}</td>
                             <td width="9%">{{ $anPham->chiTietAnPham->tacgia }}</td>
@@ -61,12 +61,16 @@
                                 </select>
                             </td>
                         </tr>
-                    @endforeach
-                    <tr id="khong-an-pham" style="display: none;">
-                        <td colspan="9" class="py-5">Không có ấn phẩm sản phẩm nào.</td>
-                    </tr>
+                    @empty
+                        <tr>
+                            <td colspan="10" class="py-5">Không có ấn phẩm tồn kho nào để cập nhật.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
+            <div class="text-center py-5" id="khong-an-pham" style="display: none;">
+                Không có ấn phẩm nào.
+            </div>
         </div>
 
         <div class="row g-5 mb-3 pt-4 w-75 mx-auto">
@@ -82,7 +86,11 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        toMauDong();
-        timKiemAnPham();
+        var anPhams = @json($anPhams);
+
+        if (anPhams.length !== 0) {
+            toMauDong();
+            timKiemAnPham();
+        }
     });
 </script>

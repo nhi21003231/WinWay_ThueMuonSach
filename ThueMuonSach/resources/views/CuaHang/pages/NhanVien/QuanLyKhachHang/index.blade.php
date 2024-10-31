@@ -52,9 +52,9 @@
         <td scope="row" class="align-middle"><input type="checkbox" class="form-check-control" {{
             $khachHang->lathanhvien == 1 ? 'checked':'' }} disabled></td>
         <td scope="row" class="align-middle">
-          <button type="submit" class="btn btn-warning"><a
-              href="{{ URL::to('nhan-vien/quan-ly-khach-hang/cap-nhat') }}"><i
-                class="fa-regular fa-pen-to-square text-black"></i></a></button>
+          <button type="button" class="btn btn-warning btn-update" data-bs-toggle="modal"
+            data-event-id="{{ $khachHang->makhachhang }}" data-bs-target="#modal-khachhang"><i
+              class="fa-regular fa-pen-to-square text-black"></i></button>
           <form class="m-0 mt-2" action="{{ URL::to('nhan-vien/quan-ly-khach-hang/'.$khachHang->makhachhang) }}"
             method="post">
             @csrf
@@ -72,5 +72,28 @@
   </table>
   {{ $khachHangs->onEachSide(1)->links() }}
 </div>
+<!-- Modal -->
+<form id="form-capnhatCustomer" method="post">
+  @csrf
+  <input type="hidden" name="customerID" id="customerID" value="">
+  <div class="modal fade" id="modal-khachhang" tabindex="-1" aria-labelledby="modalkhachhang" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header bg-info opacity-75 bg-gradient text-center">
+          <h5 class="modal-title fw-bold text-uppercase" id="modalkhachhang">Thông tin khách hàng</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          {{-- Nội dung modal --}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          <button type="submit" class="btn btn-primary btn-modal-update" disabled id="btn-capnhatKH">Cập nhật</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+</form>
 @endsection

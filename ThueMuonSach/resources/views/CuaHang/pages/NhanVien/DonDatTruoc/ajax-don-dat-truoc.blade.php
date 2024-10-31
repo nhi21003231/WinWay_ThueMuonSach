@@ -25,7 +25,7 @@
           <td class="text-center align-middle">{{ $items->khachHang->hoten }}</td>
           <td class="text-center align-middle">
             @foreach ($items->chiTietHoaDons as $chitiet)
-            <p class="m-0 p-1">{{ $chitiet->dsAnPham->chiTietAnPhams->tenanpham }}</p>
+            <p class="m-0 p-1">{{ $chitiet->dsAnPham->chiTietAnPham->tenanpham }}</p>
             @endforeach
           </td>
           <td class="text-center align-middle">{{ $items->ngaythue }}</td>

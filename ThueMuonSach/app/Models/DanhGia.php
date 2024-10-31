@@ -17,12 +17,14 @@ class DanhGia extends Model
         'binhluan',
         'trangthai',
         'sosao',
+        // bổ sung 30/10
+        'ngaydanhgia',
         'maanpham',
         'makhachhang',
     ];
 
     // Định nghĩa quan hệ với bảng DS_AnPham
-    public function sanPham()
+    public function dsAnPham()
     {
         return $this->belongsTo(DsAnPham::class, 'maanpham', 'maanpham');
     }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('binhluan', 1000);
             $table->boolean('trangthai')->default(true);
             $table->integer('sosao');
+            $table->dateTime('ngaydanhgia');
             $table->integer('maanpham');
             $table->integer('makhachhang');
 

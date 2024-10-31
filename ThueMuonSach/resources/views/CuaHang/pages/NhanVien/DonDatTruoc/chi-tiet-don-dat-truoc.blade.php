@@ -70,7 +70,7 @@
             <div class="bbbbb">
               <label for="name" class="form-label fw-bold ps-2">Ấn phẩm {{ $stt++ }}</label>
               <input type="text" class="form-control overflow-hidden"
-                value="{{ $chitiet->dsAnPham->chiTietAnPhams->tenanpham }}" readonly>
+                value="{{ $chitiet->dsAnPham->chiTietAnPham->tenanpham }}" readonly>
             </div>
             <div class="text-center mt-2 overflow-hidden">
               <img src="{{ asset('storage/images/images.jpg') }}" alt="" width="120px" height="160px">
@@ -88,7 +88,7 @@
           <label for="ngaydukien" class="form-label fw-bold ps-2">Ngày dự kiến nhận:</label>
           <input type="date" class="form-control"
             value="{{ old('ngaydukien',\Carbon\Carbon::parse($hoaDonThue->ngaythue)->addDays(7)->format('Y-m-d')) }}"
-            name="ngaydukien">
+            name="ngaydukien" readonly>
           @error('ngaydukien')
           <span class="text-danger fs-6 m-0 ps-1">{{ $message }}</span>
           @enderror

@@ -41,7 +41,7 @@ class DonDatTruocController extends Controller
         // Xử lý tìm kiếm
         if ($request->TimKiem != '') {
 
-            $hoaDons = HoaDonThueAnPham::whereHas('chiTietHoaDons.dsAnPham.chiTietAnPhams', function ($query) use ($request) {
+            $hoaDons = HoaDonThueAnPham::whereHas('chiTietHoaDons.dsAnPham.chiTietAnPham', function ($query) use ($request) {
 
                 $query->where('tenanpham', 'like', '%' . $request->TimKiem . '%');
 
