@@ -1,5 +1,16 @@
-.scroll-container-ba::-webkit-scrollbar {
+.ba-scroll-container::-webkit-scrollbar {
     display: none !important;
+}
+
+.ba-fixed-header-table {
+    overflow-y: auto;
+    max-height: 60vh;
+}
+
+.ba-fixed-header-table thead tr th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .toast {

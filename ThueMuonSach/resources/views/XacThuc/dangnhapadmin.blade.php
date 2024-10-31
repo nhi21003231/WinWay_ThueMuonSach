@@ -5,7 +5,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header text-center">
-                    <h4>Đăng nhập khách hàng</h4>
+                    <h4>Đăng nhập cửa hàng</h4>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('route-dangnhap') }}">
