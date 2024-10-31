@@ -36,10 +36,12 @@ class QuanLyNhanVienController extends Controller
         // Thực hiện truy vấn và lấy kết quả
         $nhanvienList = $query->get();
 
-        // Trả về view với danh sách nhân viên
-        return view('CuaHang.pages.QuanLyCuaHang.QuanLyNhanVien.index', compact('nhanvienList'));
-    }
+        // Nếu không có kết quả, tạo thông báo "Không có dữ liệu"
+        $message = $nhanvienList->isEmpty() ? 'Không có dữ liệu' : null;
 
+        // Trả về view với danh sách nhân viên và thông báo nếu có
+        return view('CuaHang.pages.QuanLyCuaHang.QuanLyNhanVien.index', compact('nhanvienList', 'message'));
+    }
 
     public function themNhanVien(Request $request)
     {

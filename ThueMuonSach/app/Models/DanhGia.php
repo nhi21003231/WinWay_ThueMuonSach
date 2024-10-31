@@ -24,7 +24,7 @@ class DanhGia extends Model
     ];
 
     // Định nghĩa quan hệ với bảng DS_AnPham
-    public function sanPham()
+    public function dsAnPham()
     {
         return $this->belongsTo(DsAnPham::class, 'maanpham', 'maanpham');
     }

@@ -28,4 +28,10 @@ class DsAnPham extends Model
     {
         return $this->belongsTo(ChiTietAnPham::class, 'mactanpham', 'mactanpham');
     }
+
+    public function danhGia()
+    {
+
+        return $this->hasMany(DanhGia::class, 'maanpham', 'maanpham');
+    }
 }
