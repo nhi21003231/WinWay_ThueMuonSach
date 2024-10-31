@@ -122,6 +122,8 @@ Route::prefix('/quan-ly-cua-hang')->middleware('xac_thuc:quanlycuahang,admin')->
     // -------- Route tạo khuyến mãi
     Route::get('/tao-khuyen-mai', [TaoKhuyenMaiController::class, 'hienThiTaoKhuyenMai'])
         ->name('route-cuahang-quanlycuahang-taokhuyenmai');
+    Route::post('/tao-khuyen-mai', [TaoKhuyenMaiController::class, 'suaCTKhuyenMai'])
+        ->name('route-cuahang-quanlycuahang-taokhuyenmai.suaCTKhuyenMai');
     Route::post('/tao-khuyen-mai/them', [TaoKhuyenMaiController::class, 'themCTKhuyenMai'])
         ->name('route-cuahang-quanlycuahang-taokhuyenmai.themCTKhuyenMai');
 
@@ -130,6 +132,8 @@ Route::prefix('/quan-ly-cua-hang')->middleware('xac_thuc:quanlycuahang,admin')->
         ->name('route-cuahang-quanlycuahang-quanlydanhgia');
     Route::post('/quan-ly-danh-gia', [QuanLyDanhGiaController::class, 'suaDanhGia'])
         ->name('route-cuahang-quanlycuahang-quanlydanhgia.suaDanhGia');
+    Route::post('/quan-ly-danh-gia/{id}', [QuanLyDanhGiaController::class, 'xoaDanhGia'])
+        ->name('route-cuahang-quanlycuahang-quanlydanhgia.xoaDanhGia');
 });
 
 

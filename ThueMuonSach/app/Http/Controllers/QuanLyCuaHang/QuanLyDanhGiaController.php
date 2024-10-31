@@ -58,4 +58,20 @@ class QuanLyDanhGiaController extends Controller
         // Sau khi cập nhật, chuyển hướng về trang quản lý đánh giá và hiển thị thông báo
         return redirect()->back()->with('success', 'Cập nhật đánh giá thành công.');
     }
+
+    public function xoaDanhGia($id)
+    {
+        $danhGia = DanhGia::findOrFail($id);
+
+        // Xóa tài khoản tương ứng
+        $danhgia = DanhGia::find($danhGia->mataikhoan);
+        if ($danhgia) {
+            $danhgia->delete();
+        }
+
+        // Xóa nhân viên
+        $danhGia->delete();
+
+        return redirect()->back()->with('success', 'Đánh giá đã được xóa thành công.');
+    }
 }
