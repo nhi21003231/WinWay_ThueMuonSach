@@ -8,9 +8,21 @@ use Illuminate\Http\Request;
 
 class TaoKhuyenMaiController extends Controller
 {
-    public function hienThiTaoKhuyenMai()
+    public function hienThiTaoKhuyenMai(Request $request)
     {
-        $khuyenmaiList = ChuongTrinhKhuyenMai::all();
+        // Lấy từ khóa tìm kiếm từ request
+        $keyword = $request->input('keyword');
+
+        // Kiểm tra nếu có từ khóa thì tìm kiếm, nếu không thì lấy tất cả
+        $khuyenmaiList = ChuongTrinhKhuyenMai::when($keyword, function ($query, $keyword) {
+            return $query->where('mactkm', 'like', '%' . $keyword . '%')
+                ->orWhere('tenchuongtrinhkm', 'like', '%' . $keyword . '%')
+                ->orWhere('mota', 'like', '%' . $keyword . '%')
+                ->orWhere('ngayapdung', 'like', '%' . $keyword . '%')
+                ->orWhere('ngayketthuc', 'like', '%' . $keyword . '%');
+        })->get();
+
+        // Trả về view với danh sách kết quả tìm kiếm
         return view('CuaHang.pages.QuanLyCuaHang.TaoKhuyenMai.index', compact('khuyenmaiList'));
     }
 
@@ -36,5 +48,35 @@ class TaoKhuyenMaiController extends Controller
 
         // Redirect về trang danh sách khuyến mãi hoặc một trang khác
         return redirect()->back()->with('success', 'Tạo khuyến mãi thành công.');
+    }
+
+    public function suaCTKhuyenMai(Request $request)
+    {
+        // Lấy danh sách các ID của chương trình khuyến mãi
+        $ids = $request->input('id');
+
+        // Lấy các giá trị cập nhật từ form
+        $tenchuongtrinhkms = $request->input('tenkhuyenmai');
+        $motas = $request->input('mota');
+        $ngayapdungs = $request->input('ngayapdung');
+        $ngayketthucs = $request->input('ngayketthuc');
+
+        // Kiểm tra dữ liệu đầu vào
+        if ($ids && $tenchuongtrinhkms && $motas && $ngayapdungs && $ngayketthucs) {
+            // Lặp qua từng ID để cập nhật thông tin
+            foreach ($ids as $index => $id) {
+                $khuyenmai = ChuongTrinhKhuyenMai::find($id);
+                if ($khuyenmai) {
+                    $khuyenmai->tenchuongtrinhkm = $tenchuongtrinhkms[$index];
+                    $khuyenmai->mota = $motas[$index];
+                    $khuyenmai->ngayapdung = $ngayapdungs[$index];
+                    $khuyenmai->ngayketthuc = $ngayketthucs[$index];
+                    $khuyenmai->save(); // Lưu bản ghi đã được cập nhật
+                }
+            }
+        }
+
+        // Điều hướng về trang khuyến mãi với thông báo cập nhật thành công
+        return redirect()->back()->with('success', 'Cập nhật khuyến mãi thành công.');
     }
 }
