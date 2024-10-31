@@ -115,8 +115,8 @@
                         </tbody>
                     </table>
                 </div>
+                <button type="submit" class="btn btn-danger mt-1">Cập nhật</button>
             </div> 
-            <button type="submit" class="btn btn-danger">Cập nhật</button>
         </form>
     </div> 
 @endsection

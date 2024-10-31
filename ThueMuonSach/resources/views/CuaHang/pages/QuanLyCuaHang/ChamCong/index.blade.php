@@ -75,7 +75,7 @@
                         </table>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-danger">Cập nhật</button>
+                <button type="submit" class="btn btn-danger mt-3">Cập nhật</button>
             </form> 
         </div>
     </div>
