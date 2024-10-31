@@ -75,8 +75,11 @@ Route::prefix('/nhan-vien')->middleware('xac_thuc:nhanvien,admin')->group(functi
     Route::get('/quan-ly-khach-hang', [QuanLyKhachHangController::class, 'hienThiQuanLyKhachHang'])
         ->name('route-cuahang-nhanvien-quanlykhachhang');
 
-    Route::get('quan-ly-khach-hang/cap-nhat',[QuanLyKhachHangController::class,'hienThiChiTietKhachHang'])
-        ->name('route-cuahang=nhanvien-quanlykhachhang-chitiet');
+    Route::get('/quan-ly-khach-hang/cap-nhat',[QuanLyKhachHangController::class,'hienThiChiTietKhachHang'])
+        ->name('route-cuahang-nhanvien-quanlykhachhang-chitiet');
+
+    Route::delete('/quan-ly-khach-hang/{id}',[QuanLyKhachHangController::class,'xoaKhachHang'])
+        ->name('route-cuahang-nhanvien-quanlykhachhang-xoakhachhang');
 
     // -------- Route thống kê doanh thu
     Route::get('/thong-ke-doanh-thu', [ThongKeDoanhThuController::class, 'hienThiThongKeDoanhThu'])

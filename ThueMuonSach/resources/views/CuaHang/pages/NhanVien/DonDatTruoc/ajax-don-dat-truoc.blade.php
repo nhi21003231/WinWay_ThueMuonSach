@@ -8,11 +8,11 @@
           </td>
         </tr>
         <tr>
-          <th scope="col"></th>
-          <th scope="col">Tên Khách Hàng</th>
-          <th scope="col">Tên Sản Phẩm</th>
-          <th scope="col">Ngày Đặt</th>
-          <th scope="col"></th>
+          <th scope="col" class="text-center"></th>
+          <th scope="col" class="text-center">Tên Khách Hàng</th>
+          <th scope="col" class="text-center">Tên Ấn phẩm</th>
+          <th scope="col" class="text-center">Ngày Đặt</th>
+          <th scope="col" class="text-center"></th>
         </tr>
       </thead>
       <tbody>
@@ -21,15 +21,15 @@
         @endphp
         @foreach ($hoaDons as $items)
         <tr>
-          <td class="align-middle" scope="row">{{ $stt++ }}</td>
-          <td class="align-middle">{{ $items->khachHang->hoten }}</td>
-          <td class="align-middle">
+          <td class="text-center align-middle" scope="row">{{ $stt++ }}</td>
+          <td class="text-center align-middle">{{ $items->khachHang->hoten }}</td>
+          <td class="text-center align-middle">
             @foreach ($items->chiTietHoaDons as $chitiet)
-            <p>{{ $chitiet->dsAnPham->chiTietAnPhams->tenanpham }}</p>
+            <p class="m-0 p-1">{{ $chitiet->dsAnPham->chiTietAnPhams->tenanpham }}</p>
             @endforeach
           </td>
-          <td class="align-middle">{{ $items->ngaythue }}</td>
-          <td class="align-middle"><button type="button" class="btn btn-warning"><a class="nav-link text-white"
+          <td class="text-center align-middle">{{ $items->ngaythue }}</td>
+          <td class="text-center align-middle"><button type="button" class="btn btn-warning"><a class="nav-link text-white"
                 href="{{ URL::to('nhan-vien/don-dat-truoc/'.$items->mahoadon.'/chi-tiet') }}">Xem</a></button></td>
         </tr>
         @endforeach

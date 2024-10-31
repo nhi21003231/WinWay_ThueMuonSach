@@ -46,10 +46,9 @@
     {{-- Jquery --}}
     <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
     {{-- app js --}}
-    <script src="{{ asset('js/NhanVien/app.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/huy.js') }}"></script>
     <script src="{{ asset('js/thanhba.js') }}"></script>
-    <script src="{{ asset('js/quanlycuahang.js') }}"></script>
+    <script src="{{ asset('js/quanlynhanvien.js') }}"></script>
 
     {{-- link thư viện thông báo (Toastr.js) --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -59,7 +58,7 @@
         @if (session('success'))
             toastr.success("{{ session('success') }}", "Thành công!", {
                 positionClass: "toast-bottom-right", // Định vị trí thông báo
-                timeOut: "3000", // Thời gian tự động ẩn
+                timeOut: "2000", // Thời gian tự động ẩn
                 closeButton: true,
                 newestOnTop: false,
             });
@@ -68,7 +67,7 @@
         @if (session('error'))
             toastr.error("{{ session('error') }}", "Lỗi!", {
                 positionClass: "toast-bottom-right", // Định vị trí thông báo
-                timeOut: "3000", // Thời gian tự động ẩn
+                timeOut: "2000", // Thời gian tự động ẩn
                 closeButton: true,
                 newestOnTop: false,
             });
