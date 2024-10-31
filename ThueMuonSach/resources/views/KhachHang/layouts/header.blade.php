@@ -20,7 +20,7 @@
                                 <a href="{{ route('route-dangxuat') }}">Đăng xuất</a><br>
                             @else
                                 <a href="{{ route('route-dangnhap') }}">Đăng nhập</a><br>
-                                <a href="{{ route('route-dangky') }}">Đăng ký</a><br>
+                                <!-- <a href="{{ route('route-dangky') }}">Đăng ký</a><br> -->
                             @endauth
                         </div>
                     </div>
