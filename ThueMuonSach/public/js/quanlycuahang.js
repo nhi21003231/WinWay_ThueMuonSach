@@ -1,5 +1,20 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const defaultColumns = ['manhanvien', 'hoten', 'chucvu'];
+    let defaultColumns;
+    if (document.getElementById('quanlynhanvienPage')) {
+        defaultColumns = ['manhanvien', 'hoten', 'chucvu', 'tentaikhoan', 'matkhau', 'email', 'sodienthoai'];   
+    } else if(document.getElementById('chamcongPage'))
+    {
+        defaultColumns = ['machamcong', 'manhanvien', 'hoten', 'checkin', 'checkout', 'ghinhan'];
+    } else if(document.getElementById('dinhgiaanphamPage'))
+    {
+        defaultColumns = ['maanpham', 'tenanpham', 'giathue', 'giacoc', 'namxuatban', 'hinhanh'];
+    } else if(document.getElementById('taokhuyenmaiPage'))
+    {
+        defaultColumns = ['mactkm', 'tenchuongtrinh', 'mota', 'ngayapdung', 'ngayketthuc'];
+    } else if(document.getElementById('quanlydanhgiaPage'))
+    {
+        defaultColumns = ['madanhgia', 'tenanpham', 'tenkhachhang', 'binhluan', 'sosao', 'ngaydanhgia', 'trangthai'];
+    }
 
     // Gán sự kiện click cho từng checkbox
     document.querySelectorAll('.column-toggle').forEach(function (checkbox) {
@@ -17,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         applyColumnSelection();
     });
 });
+
 
 
 function applyColumnSelection() {

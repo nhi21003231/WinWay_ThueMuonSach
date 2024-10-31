@@ -1,24 +1,38 @@
 @extends('CuaHang.layouts.index')
 
 @section('content')
-<!-- Content -->
-    <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center border-bottom py-3">
-        <h1>Quản lý cửa hàng - Quản lý đánh giá</h1>
-        <div class="d-flex align-items-center">
-            <i class="fas fa-user me-2"></i> Admin
-            <div class="ms-4">Thứ 6, 20/09/2024</div>
-        </div>
-    </div>    
-
+<!-- Content --> 
+<div id="quanlydanhgiaPage"></div>
     <!-- Form Tìm Kiếm -->
     <form action="{{ route('route-cuahang-quanlycuahang-quanlydanhgia') }}" method="GET" class="d-flex my-3">
         <input type="text" name="keyword" class="form-control w-50" placeholder="Tìm kiếm đánh giá...">
-        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+        <button type="submit" class="btn btn-dark">Tìm kiếm</button>
     </form>
 
     <div class="mt-4">
-        <h2>Danh sách đánh giá</h2>
+        <div class="d-flex justify-content-between align-content-center mb-2">
+            <h3>Danh sách đánh giá</h3>
+            <div class="dropdown ms-3">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                    Chọn cột hiển thị
+                </button>
+                <div class="dropdown-menu p-3" style="min-width: 200px;">
+                    <!-- Checkbox chọn cột -->
+                    <label><input type="checkbox" class="column-toggle" data-column="madanhgia" checked> Mã ĐG</label><br>
+                    <label><input type="checkbox" class="column-toggle" data-column="maanpham" checked> Mã AP</label><br>
+                    <label><input type="checkbox" class="column-toggle" data-column="makhachhang" checked> Mã KH</label><br>
+                    <label><input type="checkbox" class="column-toggle" data-column="tenanpham" checked> Tên AP</label><br>
+                    <label><input type="checkbox" class="column-toggle" data-column="tenkhachhang" checked> Tên KH</label><br>
+                    <label><input type="checkbox" class="column-toggle" data-column="binhluan" checked> Bình luận</label><br>
+                    <label><input type="checkbox" class="column-toggle" data-column="sosao" checked> Số sao</label><br>
+                    <label><input type="checkbox" class="column-toggle" data-column="ngaydanhgia" checked> Ngày đánh giá</label><br>
+                    <label><input type="checkbox" class="column-toggle" data-column="trangthai" checked> Trạng thái</label><br>
+                    
+                    <!-- Nút Bỏ chọn -->
+                    <button type="button" class="btn btn-link mt-2" id="resetColumns">Bỏ chọn</button>
+                </div>
+            </div>
+        </div>
         <form action="{{ route('route-cuahang-quanlycuahang-quanlydanhgia.suaDanhGia') }}" method="POST">
             @csrf
             <div class="scrollable-container"> <!-- Container cuộn -->
@@ -26,43 +40,41 @@
                     <table class="table table-striped table-hover table-bordered">
                         <thead class="table-light">
                             <tr>
-                                <th>Mã ĐG</th>
-                                <th>Mã AP</th>
-                                <th>Mã KH</th>
-                                <th>Tên AP</th>
-                                <th>Tên KH</th>
-                                <th>Bình luận</th>
-                                <th>Số sao</th>
-                                <th>Ngày đánh giá</th>
-                                <th>Trạng thái</th>
-                                {{-- <th>Actions</th> --}}
+                                <th id="col-madanhgia">Mã ĐG</th>
+                                <th id="col-maanpham">Mã AP</th>
+                                <th id="col-makhachhang">Mã KH</th>
+                                <th id="col-tenanpham">Tên AP</th>
+                                <th id="col-tenkhachhang">Tên KH</th>
+                                <th id="col-binhluan">Bình luận</th>
+                                <th id="col-sosao">Số sao</th>
+                                <th id="col-ngaydanhgia">Ngày đánh giá</th>
+                                <th id="col-trangthai">Trạng thái</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($danhgiaList as $danhgia)
                             <tr>
-                                <td>{{ $danhgia->madanhgia }}</td>
-                                <td>{{ $danhgia->maanpham }}</td>
-                                <td>{{ $danhgia->makhachhang }}</td>
-                                {{-- <td>{{ $danhgia->ds_anpham ? $danhgia->ds_anpham->vitri : 'Không có dữ liệu' }}</td> --}}
-                                {{-- <td>{{ $danhgia->ds_anpham->chitietanpham ? $danhgia->ds_anpham->chitietanpham->tenanpham : 'Không có dữ liệu' }}</td> --}}
-                                <td>{{ $danhgia->dsanpham->chitietanpham ? $danhgia->dsanpham->chitietanpham->tenanpham : 'Không có dữ liệu' }}</td>
-                                <td>{{ $danhgia->khachhang->hoten }}</td>
-                                <td class="truncate">
+                                <td class="col-madanhgia">{{ $danhgia->madanhgia }}</td>
+                                <td class="col-maanpham">{{ $danhgia->maanpham }}</td>
+                                <td class="col-makhachhang">{{ $danhgia->makhachhang }}</td>
+                                <td class="col-tenanpham">{{ $danhgia->dsanpham->chitietanpham ? $danhgia->dsanpham->chitietanpham->tenanpham : 'Không có dữ liệu' }}</td>
+                                <td class="col-tenkhachhang">{{ $danhgia->khachhang->hoten }}</td>
+                                <td class="col-binhluan truncate">
                                     <input type="hidden" name="id[]" value="{{ $danhgia->madanhgia }}"> <!-- Trường ẩn cho ID -->
                                     <input type="text" class="form-control" name="binhluan[]" value="{{ $danhgia->binhluan }}" required>
                                 </td>
-                                <td class="truncate">
+                                <td class="col-sosao truncate">
                                     <input type="text" class="form-control" name="sosao[]" value="{{ $danhgia->sosao }}" required>
                                 </td>
-                                <td class="truncate">
+                                <td class="col-ngaydanhgia truncate">
                                     <input type="datetime-local" class="form-control" name="ngaydanhgia[]" value="{{ \Carbon\Carbon::parse($danhgia->ngaydanhgia)->format('Y-m-d\TH:i') }}" required>
                                 </td> 
 
                                 <td>
-                                    <select class="form-select" name="trangthai[]">
-                                        <option value="1" {{ $danhgia->trangthai == '1' ? 'selected' : '' }}>Hiển đánh giá</option>
-                                        <option value="0" {{ $danhgia->trangthai == '0' ? 'selected' : '' }}>Ẩn đánh giá</option>
+                                    <select class="col-trangthai form-select" name="trangthai[]">
+                                        <option value="1" {{ $danhgia->trangthai == '1' ? 'selected' : '' }}>Hiện</option>
+                                        <option value="0" {{ $danhgia->trangthai == '0' ? 'selected' : '' }}>Ẩn</option>
                                     </select>
                                 </td>
                                 
@@ -90,7 +102,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                <form action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien.xoaNhanVien', $danhgia->madanhgia) }}" method="POST">
+                                                <form action="{{ route('route-cuahang-quanlycuahang-quanlydanhgia.xoaDanhGia', $danhgia->madanhgia) }}" method="POST">
                                                     @csrf
                                                     <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
                                                 </form>
@@ -102,8 +114,8 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <button type="submit" class="btn btn-success">Lưu</button>
                 </div>
+                <button type="submit" class="btn btn-danger mt-1">Cập nhật</button>
             </div> 
         </form>
     </div> 
