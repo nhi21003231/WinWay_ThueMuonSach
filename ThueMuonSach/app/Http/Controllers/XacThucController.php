@@ -13,6 +13,12 @@ class XacThucController extends Controller
     {
         return view('XacThuc.dangnhap');
     }
+
+    public function hienThiDangNhapAdmin()
+    {
+        return view('XacThuc.dangnhapadmin');
+    }
+
     public function hienThiDangKy()
     {
         return view('XacThuc.dangky');
@@ -49,7 +55,6 @@ class XacThucController extends Controller
         }
 
         return back()->with('error', 'Đăng nhập thất bại do sai tài khoản hoặt mật khẩu!');
-
     }
 
     // Xử lý đăng xuất

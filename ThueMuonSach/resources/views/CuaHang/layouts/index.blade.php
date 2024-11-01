@@ -21,15 +21,3 @@
         </div>
     </div>
 @endsection
-
-<!-- Modal để phóng to ảnh -->
-<div class="modal fade" id="modalAnhPhongTo" tabindex="-1" aria-labelledby="modalAnhPhongToLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content text-center">
-            <div class="modal-body">
-                <img id="imgPhongTo" src="" width="100%" style="max-height: 90vh" class="img-fluid"
-                    alt="#">
-            </div>
-        </div>
-    </div>
-</div>

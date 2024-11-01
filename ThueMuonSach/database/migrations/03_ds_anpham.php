@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('ds_anpham', function (Blueprint $table) {
             $table->integer('maanpham')->autoIncrement();
             $table->enum('tinhtrang', ['Mới', 'Cũ', 'Hư hỏng'])->default('Mới');
-            $table->decimal('giathue', 10, 2);
-            $table->decimal('giacoc', 10, 2);
+            $table->decimal('giathue', 10, 2)->nullable();
+            $table->decimal('giacoc', 10, 2)->nullable();
             $table->string('vitri', 100);
             $table->boolean('dathue')->default(false);
             $table->boolean('dathanhly')->default(false);

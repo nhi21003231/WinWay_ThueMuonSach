@@ -27,32 +27,32 @@
     <link rel="stylesheet" href="{{ asset('css/thanhba.css') }}  ">
     <link rel="stylesheet" href="{{ asset('css/nhi_contact.css') }}  ">
     <link rel="stylesheet" href="{{ asset('css/quanlycuahang.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/huynh_xacthuc.css') }}  ">
 
 </head>
 
-<body class="bg-light">
-    <div class="container-fluid">
-        @yield('main')
-    </div>
+@if (Request::routeIs('route-dangnhap*') || Request::routeIs('route-dangky*'))
 
-    {{-- link js bootstrap --}}
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
-    </script>
+    <body class="bg-light radiant-background">
+    @else
 
+<<<<<<< HEAD
     {{-- Jquery --}}
     <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
     {{-- app js --}}
     <script src="{{ asset('js/huy.js') }}"></script>
     <script src="{{ asset('js/thanhba.js') }}"></script>
     {{-- <script src="{{ asset('js/quanlynhanvien.js') }}"></script> --}}
+=======
+        <body class="bg-light">
+@endif
+>>>>>>> 175371771610e6ae5724282a18d168ccb040fd30
 
-    {{-- link thư viện thông báo (Toastr.js) --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<div class="container-fluid">
+    @yield('main')
+</div>
 
+<<<<<<< HEAD
     {{-- hiển thị thông báo --}}
     <script>
         @if (session('success'))
@@ -73,8 +73,48 @@
             });
         @endif
     </script>
+=======
+{{-- link js bootstrap --}}
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+</script>
 
-    
+{{-- Jquery --}}
+<script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
+{{-- app js --}}
+<script src="{{ asset('js/NhanVien/app.js') }}"></script>
+<script src="{{ asset('js/thanhba.js') }}"></script>
+<script src="{{ asset('js/quanlycuahang.js') }}"></script>
+
+{{-- link thư viện thông báo (Toastr.js) --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+{{-- hiển thị thông báo --}}
+<script>
+    @if (session('success'))
+        toastr.success("{{ session('success') }}", "Thành công!", {
+            positionClass: "toast-bottom-right", // Định vị trí thông báo
+            timeOut: "3000", // Thời gian tự động ẩn
+            closeButton: true,
+            newestOnTop: false,
+        });
+    @endif
+
+    @if (session('error'))
+        toastr.error("{{ session('error') }}", "Lỗi!", {
+            positionClass: "toast-bottom-right", // Định vị trí thông báo
+            timeOut: "3000", // Thời gian tự động ẩn
+            closeButton: true,
+            newestOnTop: false,
+        });
+    @endif
+</script>
+
+>>>>>>> 175371771610e6ae5724282a18d168ccb040fd30
+
 
 </body>
 
