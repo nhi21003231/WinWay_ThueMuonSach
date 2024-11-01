@@ -80,3 +80,10 @@
         </div>
     </div>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        getDefualtColumns();
+        preventDefaultSelection();
+    });
+</script>

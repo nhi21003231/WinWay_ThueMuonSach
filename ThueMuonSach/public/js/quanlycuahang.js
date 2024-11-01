@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', function () {
+
+function getDefualtColumns() {
     let defaultColumns;
     if (document.getElementById('quanlynhanvienPage')) {
         defaultColumns = ['manhanvien', 'hoten', 'chucvu', 'tentaikhoan', 'matkhau', 'email', 'sodienthoai'];   
@@ -31,8 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Hiển thị lại chỉ các cột mặc định
         applyColumnSelection();
     });
-});
-
+}
 
 
 function applyColumnSelection() {
@@ -52,7 +52,7 @@ function applyColumnSelection() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+function preventDefaultSelection() {
     // Lắng nghe sự kiện submit của form tìm kiếm
     document.getElementById('searchForm').addEventListener('submit', function (e) {
         e.preventDefault(); // Ngăn không cho form gửi yêu cầu tải lại trang
@@ -74,4 +74,4 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(error => console.error('Lỗi khi tìm kiếm:', error));
     });
-});
+}
