@@ -31,8 +31,6 @@ Route::middleware('check_guest')->group(function () {
     Route::get('/dang-nhap', [XacThucController::class, 'hienThiDangNhap'])->name('route-dangnhap');
     Route::post('/dang-nhap', [XacThucController::class, 'dangNhap']);
 
-    Route::get('/dang-nhap/admin', [XacThucController::class, 'hienThiDangNhapAdmin'])->name('route-dangnhap-admin');
-
     // ---- 1.2 > Route đăng ký
     Route::get('/dang-ky', [XacThucController::class, 'hienThiDangKy'])->name('route-dangky');
 });
@@ -106,8 +104,8 @@ Route::prefix('/quan-ly-cua-hang')->middleware('xac_thuc:quanlycuahang,admin')->
         ->name('route-cuahang-quanlycuahang-quanlynhanvien.suaNhanVien');
 
     // -------- Route xem báo cáo
-    Route::get('/xem-bai-bao', [XemBaoCaoController::class, 'hienThiXemBaoCao'])
-        ->name('route-cuahang-quanlycuahang-xembaibao');
+    Route::get('/xem-bao-cao', [XemBaoCaoController::class, 'hienThiXemBaoCao'])
+        ->name('route-cuahang-quanlycuahang-xembaocao');
 
     // -------- Route chấm công
     Route::get('/cham-cong', [ChamCongController::class, 'hienThiChamCong'])
@@ -154,7 +152,6 @@ Route::prefix('/quan-ly-kho')->middleware('xac_thuc:quanlykho,admin')->group(fun
 
         Route::get('/nhap-an-pham-moi', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPhamMoi'])
             ->name('route-cuahang-quanlykho-quanlyanpham-nhapanphammoi');
-        Route::post('/nhap-an-pham-moi', [QuanLyKhoQuanLyAnPhamController::class, 'xuLyNhapAnPhamMoi']);
 
         Route::get('/nhap-an-pham-da-co', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPhamDaCo'])
             ->name('route-cuahang-quanlykho-quanlyanpham-nhapanphamdaco');
