@@ -1,0 +1,15 @@
+.radiant-background {
+    background: linear-gradient(to bottom, #ffbbdd, #f2d4f1); 
+    min-height: 100vh;
+}
+.btn-xacthuc{
+    background-color: #e089b5;
+    border-radius: 100px;
+}
+.d-grid{
+    background-color: #e089b5;
+    border-radius: 100px;
+}
+.text-link:hover {
+    color: rgb(192, 48, 192); /* Change to purple on hover */
+}

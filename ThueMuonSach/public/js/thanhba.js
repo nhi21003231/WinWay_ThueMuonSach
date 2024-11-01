@@ -12,9 +12,9 @@ function toMauDong() {
 
             // Kiểm tra giá trị đã thay đổi
             if (selectedValue !== oldValue) {
-                row.classList.add("table-info"); // Thêm lớp table-info
+                row.classList.add("table-light"); // Thêm lớp table-light
             } else {
-                row.classList.remove("table-info"); // Xóa lớp table-info nếu chọn lại giá trị cũ
+                row.classList.remove("table-light"); // Xóa lớp table-light nếu chọn lại giá trị cũ
             }
         });
     });
@@ -35,14 +35,14 @@ function chonDongThanhLy() {
             if (event.target !== checkbox) {
                 // Đổi trạng thái của checkbox
                 checkbox.checked = !checkbox.checked;
-                // Thêm hoặc xóa lớp table-info
-                row.classList.toggle("table-info", checkbox.checked);
+                // Thêm hoặc xóa lớp table-light
+                row.classList.toggle("table-light", checkbox.checked);
             }
         });
 
         // Gắn sự kiện click cho checkbox để đồng bộ với lớp của hàng
         checkbox.addEventListener("click", function() {
-            row.classList.toggle("table-info", checkbox.checked);
+            row.classList.toggle("table-light", checkbox.checked);
         });
     });
 }
@@ -53,15 +53,17 @@ function timKiemAnPham() {
     const productTable = document.getElementById("ba-danhsach");
     const searchButton = document.getElementById("ba-nuttimkiem");
     const noResultsRow = document.getElementById("khong-an-pham");
-    const rows = productTable.getElementsByTagName("tr");
+    
+    // Lấy các hàng trong tbody
+    const tbodyRows = productTable.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
 
     searchButton.addEventListener("click", function () {
         const filter = searchInput.value.toLowerCase();
         let hasResults = false; // Biến để kiểm tra xem có kết quả hay không
 
-        // Lặp qua tất cả các hàng
-        for (let i = 0; i < rows.length; i++) {
-            const cells = rows[i].getElementsByTagName("td");
+        // Lặp qua tất cả các hàng trong tbody
+        for (let i = 0; i < tbodyRows.length; i++) {
+            const cells = tbodyRows[i].getElementsByTagName("td");
             let found = false;
 
             // Kiểm tra tất cả các ô trong hàng
@@ -77,11 +79,7 @@ function timKiemAnPham() {
             }
 
             // Hiển thị hoặc ẩn hàng dựa trên kết quả tìm kiếm
-            if (found) {
-                rows[i].style.display = ""; // Hiển thị
-            } else {
-                rows[i].style.display = "none"; // Ẩn
-            }
+            tbodyRows[i].style.display = found ? "" : "none"; // Hiển thị hoặc ẩn
         }
 
         // Kiểm tra xem có kết quả hay không và hiển thị thông báo
