@@ -18,16 +18,16 @@
             <input type="text" class="form-control" value="{{ old('tenkhachhang',$hoaDonThue->khachHang->hoten) }}"
               name="tenkhachhang" readonly>
             @error('tenkhachhang')
-            <span class="text-danger fs-6 m-0 ps-1">{{ $message }}</span>
+            <span class="text-danger ms-2 m-0 ps-1" style="font-size: 13px">{{ $message }}</span>
             @enderror
           </div>
           {{-- Số điện thoại --}}
           <div class="pt-4">
             <label for="sdt" class="form-label fw-bold ps-2">Số điện thoại</label>
-            <input type="text" class="form-control" value="{{ $hoaDonThue->khachHang->dienthoai }}" name="sodienthoai"
+            <input type="text" class="form-control" value="{{ old('sodienthoai',$hoaDonThue->khachHang->dienthoai) }}" name="sodienthoai"
               readonly>
             @error('sodienthoai')
-            <span class="text-danger fs-6 m-0 ps-1">{{ $message }}</span>
+            <span class="text-danger ms-2 m-0 ps-1" style="font-size: 13px">{{ $message }}</span>
             @enderror
           </div>
           {{-- Địa chỉ khách hàng --}}
@@ -36,7 +36,7 @@
             <input type="text" class="form-control overflow-hidden" value="{{ old('diachi',$hoaDonThue->khachHang->diachi) }}"
               name="diachi">
             @error('diachi')
-            <span class="text-danger fs-6 m-0 ps-1">{{ $message }}</span>
+            <span class="text-danger ms-2 m-0 ps-1" style="font-size: 13px">{{ $message }}</span>
             @enderror
           </div>
           {{-- Loại đơn --}}
@@ -51,7 +51,7 @@
                 Thuê</option>
             </select>
             @error('loaidon')
-            <span class="text-danger fs-6 m-0 ps-1">{{ $message }}</span>
+            <span class="text-danger ms-2 m-0 ps-1" style="font-size: 13px">{{ $message }}</span>
             @enderror
           </div>
         </div>
@@ -90,7 +90,7 @@
             value="{{ old('ngaydukien',\Carbon\Carbon::parse($hoaDonThue->ngaythue)->addDays(7)->format('Y-m-d')) }}"
             name="ngaydukien" readonly>
           @error('ngaydukien')
-          <span class="text-danger fs-6 m-0 ps-1">{{ $message }}</span>
+          <span class="text-danger ms-2 m-0 ps-1" style="font-size: 13px">{{ $message }}</span>
           @enderror
         </div>
       </div>

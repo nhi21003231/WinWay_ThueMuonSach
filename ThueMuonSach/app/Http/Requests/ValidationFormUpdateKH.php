@@ -23,9 +23,9 @@ class ValidationFormUpdateKH extends FormRequest
     {
         return [
 
-            'tenkh' => 'required',
+            'tenkh' => 'required|regex:/^[^!@#$%^&*()<>?\/\{}`~\.\,:;0-9\[\]]+$/',
 
-            'sdtkh' => 'required',
+            'sdtkh' => 'required|regex:/^0[1-9][0-9]{8}$/',
 
             'email' => 'required|email',
 
@@ -39,7 +39,11 @@ class ValidationFormUpdateKH extends FormRequest
         return [
             'tenkh.required' => 'Vui lòng nhập tên khách hàng',
 
+            'tenkh.regex' => 'Họ tên khách hàng không chứa kí tự đặc biệt và số',
+
             'sdtkh.required' => 'Vui lòng nhập số điện thoại khách hàng',
+
+            'sdtkh.regex' => 'Số điện thoại không đúng định dạng',
 
             'email.required' => 'Vui lòng nhập email khách hàng',
 
