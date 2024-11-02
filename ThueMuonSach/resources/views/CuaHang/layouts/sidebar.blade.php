@@ -42,9 +42,9 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('route-cuahang-quanlycuahang-xembaibao') }}"
-                class="nav-link {{ Request::routeIs('route-cuahang-quanlycuahang-xembaibao*') ? 'active' : 'link-dark' }}">
-                Xem bài báo
+            <a href="{{ route('route-cuahang-quanlycuahang-xembaocao') }}"
+                class="nav-link {{ Request::routeIs('route-cuahang-quanlycuahang-xembaocao*') ? 'active' : 'link-dark' }}">
+                Xem báo cáo
             </a>
         </li>
         <li>
