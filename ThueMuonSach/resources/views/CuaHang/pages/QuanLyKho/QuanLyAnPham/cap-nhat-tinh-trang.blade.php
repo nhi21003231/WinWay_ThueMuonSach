@@ -35,21 +35,22 @@
                 <tbody>
                     @forelse ($anPhams as $anPham)
                         <tr style="cursor: pointer">
-                            <td width="12%">{{ $anPham->chiTietAnPham->tenanpham }}</td>
-                            <td width="9%">{{ $anPham->chiTietAnPham->tacgia }}</td>
-                            <td width="11%">{{ $anPham->chiTietAnPham->danhMuc->tendanhmuc }}</td>
-                            <td width="13%">{{ $anPham->chiTietAnPham->namxuatban }}</td>
-                            <td width="9%">
-                                <img src="{{ asset('img/anh-an-pham/' . $anPham->chiTietAnPham->hinhanh) }}"
-                                    class="img-fluid" width="100" height="100"
-                                    alt="{{ $anPham->chiTietAnPham->tenanpham }}">
+                            <td>{{ $anPham->chiTietAnPham->tenanpham }}</td>
+                            <td>{{ $anPham->chiTietAnPham->tacgia }}</td>
+                            <td>{{ $anPham->chiTietAnPham->danhMuc->tendanhmuc }}</td>
+                            <td>{{ $anPham->chiTietAnPham->namxuatban }}</td>
+                            <td>
+                                <div class="ba-image-container">
+                                    <img src="{{ asset('img/anh-an-pham/' . $anPham->chiTietAnPham->hinhanh) }}"
+                                        class="img-fluid" alt="{{ $anPham->chiTietAnPham->tenanpham }}">
+                                </div>
                             </td>
                             <td>{{ $anPham->giathue > 0 ? number_format($anPham->giathue, 0, ',', '.') . 'VNĐ' : 'Chưa định giá' }}
                             </td>
                             <td>{{ $anPham->giacoc > 0 ? number_format($anPham->giacoc, 0, ',', '.') . 'VNĐ' : 'Chưa định giá' }}
                             </td>
-                            <td width="13%">{{ $anPham->vitri }}</td>
-                            <td width="15%">
+                            <td>{{ $anPham->vitri }}</td>
+                            <td>
                                 <input type="hidden" name="anpham_ids[]" value="{{ $anPham->maanpham }}">
                                 <select class="form-select" name="tinh_trang[{{ $anPham->maanpham }}]">
                                     <option value="Mới" {{ $anPham->tinhtrang === 'Mới' ? 'selected' : '' }}>Mới

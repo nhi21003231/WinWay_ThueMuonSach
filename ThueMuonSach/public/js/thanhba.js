@@ -12,16 +12,16 @@ function toMauDong() {
 
             // Kiểm tra giá trị đã thay đổi
             if (selectedValue !== oldValue) {
-                row.classList.add("table-light"); // Thêm lớp table-light
+                row.classList.add("table-info"); // Thêm lớp table-info
             } else {
-                row.classList.remove("table-light"); // Xóa lớp table-light nếu chọn lại giá trị cũ
+                row.classList.remove("table-info"); // Xóa lớp table-info nếu chọn lại giá trị cũ
             }
         });
     });
 }
 
 // Hàm tô màu dòng khi chọn ấn phẩm thanh lý
-function chonDongThanhLy() {
+function toMauDongThanhLy() {
     // Lấy tất cả các hàng có checkbox
     const rows = document.querySelectorAll("#ba-danhsach tbody tr");
 
@@ -30,19 +30,47 @@ function chonDongThanhLy() {
         const checkbox = row.querySelector(".ba-form-check-input");
 
         // Gắn sự kiện click cho toàn bộ hàng
-        row.addEventListener("click", function(event) {
+        row.addEventListener("click", function (event) {
             // Bỏ qua click trên chính checkbox để tránh xung đột
             if (event.target !== checkbox) {
                 // Đổi trạng thái của checkbox
                 checkbox.checked = !checkbox.checked;
-                // Thêm hoặc xóa lớp table-light
-                row.classList.toggle("table-light", checkbox.checked);
+                // Thêm hoặc xóa lớp table-info
+                row.classList.toggle("table-info", checkbox.checked);
             }
         });
 
         // Gắn sự kiện click cho checkbox để đồng bộ với lớp của hàng
-        checkbox.addEventListener("click", function() {
-            row.classList.toggle("table-light", checkbox.checked);
+        checkbox.addEventListener("click", function () {
+            row.classList.toggle("table-info", checkbox.checked);
+        });
+    });
+}
+
+// Hàm tô màu dòng khi nhập số lượng
+function toMauDongNhapAnPham() {
+    const quantityInputs = document.querySelectorAll('input[name^="soluong"]');
+
+    // Kiểm tra và tô màu ngay khi trang tải
+    quantityInputs.forEach((input) => {
+        const row = input.closest("tr");
+        const quantity = parseInt(input.value, 10);
+
+        // Tô màu cho các ô đã có số lượng khác 0 ngay từ đầu
+        if (quantity > 0) {
+            row.classList.add("table-info");
+        }
+
+        // Lắng nghe sự kiện thay đổi giá trị trong quá trình nhập
+        input.addEventListener("input", function () {
+            const newQuantity = parseInt(this.value, 10);
+
+            // Tô màu hoặc xóa màu dòng khi thay đổi số lượng
+            if (newQuantity > 0) {
+                row.classList.add("table-info");
+            } else {
+                row.classList.remove("table-info");
+            }
         });
     });
 }
@@ -53,36 +81,50 @@ function timKiemAnPham() {
     const productTable = document.getElementById("ba-danhsach");
     const searchButton = document.getElementById("ba-nuttimkiem");
     const noResultsRow = document.getElementById("khong-an-pham");
-    
-    // Lấy các hàng trong tbody
-    const tbodyRows = productTable.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
 
+    const tbodyRows = productTable
+        .getElementsByTagName("tbody")[0]
+        .getElementsByTagName("tr");
+
+    // Vô hiệu hóa nút tìm kiếm khi input rỗng
+    searchButton.disabled = !searchInput.value.trim();
+
+    // Kiểm tra khi người dùng nhập vào ô tìm kiếm
+    searchInput.addEventListener("input", function () {
+        searchButton.disabled = !this.value.trim();
+    });
+
+    // Kích hoạt tìm kiếm khi nhấn Enter trong ô tìm kiếm
+    searchInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Ngăn form submit nếu có
+            searchButton.click(); // Kích hoạt nút tìm kiếm
+        }
+    });
+
+    // Sự kiện khi nhấn vào nút tìm kiếm
     searchButton.addEventListener("click", function () {
         const filter = searchInput.value.toLowerCase();
-        let hasResults = false; // Biến để kiểm tra xem có kết quả hay không
+        let hasResults = false;
 
-        // Lặp qua tất cả các hàng trong tbody
         for (let i = 0; i < tbodyRows.length; i++) {
-            const cells = tbodyRows[i].getElementsByTagName("td");
+            const cells = tbodyRows[i].getElementsByClassName("search-column");
             let found = false;
 
-            // Kiểm tra tất cả các ô trong hàng
             for (let j = 0; j < cells.length; j++) {
-                if (cells[j]) {
-                    const cellText = cells[j].textContent || cells[j].innerText;
-                    if (cellText.toLowerCase().indexOf(filter) > -1) {
-                        found = true; // Nếu tìm thấy, đánh dấu là đã tìm thấy
-                        hasResults = true; // Đánh dấu rằng đã tìm thấy ít nhất 1 kết quả
-                        break;
-                    }
+                const cellText = cells[j].textContent || cells[j].innerText;
+                if (cellText.toLowerCase().indexOf(filter) > -1) {
+                    found = true;
+                    hasResults = true;
+                    break;
                 }
             }
 
             // Hiển thị hoặc ẩn hàng dựa trên kết quả tìm kiếm
-            tbodyRows[i].style.display = found ? "" : "none"; // Hiển thị hoặc ẩn
+            tbodyRows[i].style.display = found ? "" : "none";
         }
 
-        // Kiểm tra xem có kết quả hay không và hiển thị thông báo
-        noResultsRow.style.display = hasResults ? "none" : ""; // Hiển thị hoặc ẩn thông báo
+        // Hiển thị hoặc ẩn thông báo không có kết quả
+        noResultsRow.style.display = hasResults ? "none" : "";
     });
 }

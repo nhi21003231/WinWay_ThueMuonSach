@@ -1,7 +1,13 @@
+.toast {
+    opacity: 1 !important;
+}
+
+/* css cho thanh cuộn */
 .ba-scroll-container::-webkit-scrollbar {
     display: none !important;
 }
 
+/* css cho tiêu đề bảng đứng yên */
 .ba-fixed-header-table {
     overflow-y: auto;
     max-height: 60vh;
@@ -13,15 +19,23 @@
     z-index: 10;
 }
 
-.toast {
-    opacity: 1 !important;
-}
 
-.ba-pagination .text-muted {
-    display: none;
-}
-
+/* css cho check trong thanh lý */
 .ba-form-check-input {
     width: 25px;
     height: 25px;
+}
+
+/* css cho hiển thị hình ảnh trong bảng */
+.ba-image-container {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.ba-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }

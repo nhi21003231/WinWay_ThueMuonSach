@@ -7,6 +7,7 @@ use App\Models\ChiTietAnPham;
 use App\Models\DanhMuc;
 use App\Models\DsAnPham;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class QuanLyAnPhamController extends Controller
@@ -45,33 +46,33 @@ class QuanLyAnPhamController extends Controller
             'tenanpham.required' => 'Vui lòng nhập tên ấn phẩm.',
             'tenanpham.string' => 'Tên ấn phẩm phải là một chuỗi văn bản.',
             'tenanpham.max' => 'Tên ấn phẩm không được vượt quá 100 ký tự.',
-        
+
             'vitri.required' => 'Vui lòng nhập vị trí của ấn phẩm.',
             'vitri.string' => 'Vị trí phải là một chuỗi văn bản.',
             'vitri.max' => 'Vị trí không được vượt quá 100 ký tự.',
-        
+
             'soluong.required' => 'Vui lòng nhập số lượng.',
             'soluong.integer' => 'Số lượng phải là một số nguyên.',
             'soluong.min' => 'Số lượng phải ít nhất là 1.',
-        
+
             'tacgia.string' => 'Tên tác giả phải là một chuỗi văn bản.',
             'tacgia.max' => 'Tên tác giả không được vượt quá 100 ký tự.',
-        
+
             'namxuatban.integer' => 'Năm xuất bản phải là một số.',
             'namxuatban.between' => 'Năm xuất bản phải nằm trong khoảng từ 1800 đến năm hiện tại.',
-        
+
             'tinhtrang.required' => 'Vui lòng chọn tình trạng.',
             'tinhtrang.string' => 'Tình trạng phải là một chuỗi văn bản.',
             'tinhtrang.in' => 'Tình trạng phải là một trong các giá trị: Mới, Cũ, Hư hỏng.',
-        
+
             'madanhmuc.required' => 'Vui lòng chọn danh mục.',
             'madanhmuc.exists' => 'Danh mục không tồn tại.',
-        
+
             'fileanh.required' => 'Vui lòng chọn một ảnh.',
             'fileanh.image' => 'File phải là định dạng ảnh.',
             'fileanh.max' => 'Dung lượng ảnh không được vượt quá 2MB.'
         ]);
-        
+
 
         try {
             // Lấy file và tạo tên mới
@@ -111,8 +112,71 @@ class QuanLyAnPhamController extends Controller
     // Nhập ấn phẩm đã có
     public function hienThiNhapAnPhamDaCo()
     {
-        return view('CuaHang.pages.QuanLyKho.QuanLyAnPham.nhap-an-pham-da-co');
+        $dsCTAnPham = ChiTietAnPham::all();
+        return view('CuaHang.pages.QuanLyKho.QuanLyAnPham.nhap-an-pham-da-co', compact('dsCTAnPham'));
     }
+
+    public function xuLyNhapAnPhamDaCo(Request $request)
+    {
+        $rules = [];
+        $messages = [];
+
+        foreach ($request->input('soluong') as $index => $soluong) {
+            if ($soluong > 0) {
+                // Thêm các quy tắc cho các dòng có số lượng lớn hơn 0
+                $rules["vitri.$index"] = 'required|string|max:100';
+                $rules["tinhtrang.$index"] = 'required|in:Mới,Cũ,Hư hỏng';
+
+                // Tùy chỉnh thông báo lỗi cho từng dòng
+                $messages["vitri.$index.required"] = "Vui lòng nhập vị trí.";
+                $messages["tinhtrang.$index.required"] = "Vui lòng chọn tình trạng.";
+                $messages["tinhtrang.$index.in"] = "Tình trạng phải là một trong các giá trị: Mới, Cũ, Hư hỏng.";
+            }
+
+            // Quy tắc chung cho tất cả các trường số lượng
+            $rules["soluong.$index"] = 'integer|min:0';
+            $messages["soluong.$index.integer"] = "Số lượng phải là số nguyên.";
+            $messages["soluong.$index.min"] = "Số lượng không được nhỏ hơn 0.";
+        }
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        try {
+            $countInserted = 0; // Biến đếm số lượng ấn phẩm được nhập thành công
+
+            foreach ($request->input('ctanpham_ids') as $index => $ctanphamId) {
+                $soluong = $request->input("soluong.$index");
+
+                // Chỉ xử lý các bản ghi có số lượng lớn hơn 0
+                if ($soluong > 0) {
+                    for ($i = 0; $i < $soluong; $i++) {
+                        DsAnPham::create([
+                            'mactanpham' => $ctanphamId,
+                            'vitri' => $request->input("vitri.$index"),
+                            'tinhtrang' => $request->input("tinhtrang.$index")
+                        ]);
+                        $countInserted++;
+                    }
+                }
+            }
+
+            if ($countInserted > 0) {
+                return redirect()->route('route-cuahang-quanlykho-quanlyanpham')->with('success', 'Nhập ấn phẩm đã có thành công!');
+            } else {
+                return redirect()->back()->with('info', 'Không có ấn phẩm nào được nhập.');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Đã xảy ra lỗi khi nhập ấn phẩm!');
+        }
+    }
+
+
 
 
     // Thanh lý ấn phẩm
