@@ -82,8 +82,24 @@
             newestOnTop: false,
         });
     @endif
-        </script>
+    @if (session('info'))
+        toastr.info("{{ session('info') }}", "Thông báo!", {
+            positionClass: "toast-bottom-right", // Định vị trí thông báo
+            timeOut: "3000", // Thời gian tự động ẩn
+            closeButton: true,
+            newestOnTop: false,
+        });
+    @endif
 
+    @if (session('warning'))
+        toastr.warning("{{ session('warning') }}", "Cảnh báo!", {
+            positionClass: "toast-bottom-right", // Định vị trí thông báo
+            timeOut: "3000", // Thời gian tự động ẩn
+            closeButton: true,
+            newestOnTop: false,
+        });
+    @endif
+        </script>
 
     </body>
 

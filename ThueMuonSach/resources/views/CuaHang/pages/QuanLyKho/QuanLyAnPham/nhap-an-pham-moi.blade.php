@@ -1,7 +1,7 @@
 @extends('CuaHang.layouts.index')
 
 @section('content')
-    <h2 class="mt-5 mb-3 text-center">Nhập ấn phẩm mới</h2>
+    <h2 class="mt-5 mb-2 text-center">Nhập ấn phẩm mới</h2>
 
     <form action="{{ route('route-cuahang-quanlykho-quanlyanpham-nhapanphammoi') }}" method="POST"
         class="px-5 w-75 mx-auto py-5" enctype="multipart/form-data">
@@ -49,7 +49,7 @@
                 <label for="soluong" class="form-label h4">Số lượng <span class="text-danger">*</span></label>
                 <div class="position-relative">
                     <input type="number" class="form-control @error('soluong') is-invalid @enderror" name="soluong"
-                        id="soluong" value="{{ old('soluong', 1) }}" placeholder="Nhập số lượng">
+                        id="soluong" value="{{ old('soluong', 1) }}" placeholder="Nhập số lượng" min="1">
                     @error('soluong')
                         <div class="text-danger position-absolute" style="top: 106%; left: 0; font-size: 11px">
                             {{ $message }}</div>
@@ -88,7 +88,7 @@
 
         <div class="row g-5 mb-4">
             <div class="col-6">
-                <label for="madanhmuc" class="form-label h4">Danh mục</label>
+                <label for="madanhmuc" class="form-label h4">Danh mục <span class="text-danger">*</span></label>
                 <div class="position-relative">
                     <select class="form-select @error('madanhmuc') is-invalid @enderror" name="madanhmuc" id="madanhmuc">
                         <option value="" selected>Chưa chọn danh mục</option>
@@ -122,10 +122,7 @@
                 <a href="{{ route('route-cuahang-quanlykho-quanlyanpham') }}" class="btn btn-danger w-100">Hủy</a>
             </div>
             <div class="col-6">
-                <button type="reset" class="btn btn-outline-primary w-100">Làm mới</button>
-            </div>
-            <div class="col-12">
-                <button class="btn btn-success w-100">Nhập</button>
+                <button class="btn btn-success w-100" type="submit">Nhập</button>
             </div>
         </div>
     </form>

@@ -31,6 +31,8 @@ Route::middleware('check_guest')->group(function () {
     Route::get('/dang-nhap', [XacThucController::class, 'hienThiDangNhap'])->name('route-dangnhap');
     Route::post('/dang-nhap', [XacThucController::class, 'dangNhap']);
 
+    Route::get('/dang-nhap/admin', [XacThucController::class, 'hienThiDangNhapAdmin'])->name('route-dangnhap-admin');
+
     // ---- 1.2 > Route đăng ký
     Route::get('/dang-ky', [XacThucController::class, 'hienThiDangKy'])->name('route-dangky');
 });
@@ -155,11 +157,15 @@ Route::prefix('/quan-ly-kho')->middleware('xac_thuc:quanlykho,admin')->group(fun
         Route::get('/', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])
             ->name('route-cuahang-quanlykho-quanlyanpham');
 
+        // Route nhập ấn phẩm mới
         Route::get('/nhap-an-pham-moi', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPhamMoi'])
             ->name('route-cuahang-quanlykho-quanlyanpham-nhapanphammoi');
+        Route::post('/nhap-an-pham-moi', [QuanLyKhoQuanLyAnPhamController::class, 'xuLyNhapAnPhamMoi']);
 
+        // Route nhập ấn phẩm đã có
         Route::get('/nhap-an-pham-da-co', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiNhapAnPhamDaCo'])
             ->name('route-cuahang-quanlykho-quanlyanpham-nhapanphamdaco');
+        Route::post('/nhap-an-pham-da-co', [QuanLyKhoQuanLyAnPhamController::class, 'xuLyNhapAnPhamDaCo']);
 
         // ------------ Route thanh lý ấn phẩm
         Route::get('/thanh-ly-an-pham', [QuanLyKhoQuanLyAnPhamController::class, 'hienThiThanhLyAnPham'])

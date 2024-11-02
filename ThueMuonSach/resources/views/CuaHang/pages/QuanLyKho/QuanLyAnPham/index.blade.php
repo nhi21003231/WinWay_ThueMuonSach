@@ -35,7 +35,7 @@
     <div class="ba-scroll-container ba-fixed-header-table mb-4">
         <table class="table text-center align-middle" id="ba-danhsach">
             <thead>
-                <tr class="table-success table-bordered align-middle">
+                <tr class="table-primary align-middle">
                     <th scope="col" width="12%">Tên ấn phẩm</th>
                     <th scope="col" width="9%">Tác giả</th>
                     <th scope="col" width="9%">Danh mục</th>
@@ -52,21 +52,25 @@
             <tbody>
                 @forelse ($anPhams as $anPham)
                     <tr>
-                        <td>{{ $anPham->chiTietAnPham->tenanpham }}</td>
-                        <td>{{ $anPham->chiTietAnPham->tacgia }}</td>
-                        <td>{{ $anPham->chiTietAnPham->danhMuc->tendanhmuc }}</td>
-                        <td>{{ $anPham->chiTietAnPham->namxuatban }}</td>
+                        <td class="search-column">{{ $anPham->chiTietAnPham->tenanpham }}</td>
+                        <td class="search-column">{{ $anPham->chiTietAnPham->tacgia }}</td>
+                        <td class="search-column">{{ $anPham->chiTietAnPham->danhMuc->tendanhmuc }}</td>
+                        <td class="search-column">{{ $anPham->chiTietAnPham->namxuatban }}</td>
                         <td>
-                            <img src="{{ asset('img/anh-an-pham/' . $anPham->chiTietAnPham->hinhanh) }}" class="img-fluid"
-                                width="100" height="100" alt="{{ $anPham->chiTietAnPham->tenanpham }}">
+                            <div class="ba-image-container">
+                                <img src="{{ asset('img/anh-an-pham/' . $anPham->chiTietAnPham->hinhanh) }}"
+                                    class="img-fluid" alt="{{ $anPham->chiTietAnPham->tenanpham }}">
+                            </div>
                         </td>
-                        <td>{{ $anPham->giathue > 0 ? number_format($anPham->giathue, 0, ',', '.') . 'VNĐ' : 'Chưa định giá' }}
+                        <td class="search-column">
+                            {{ $anPham->giathue > 0 ? number_format($anPham->giathue, 0, ',', '.') . 'VNĐ' : 'Chưa định giá' }}
                         </td>
-                        <td>{{ $anPham->giacoc > 0 ? number_format($anPham->giacoc, 0, ',', '.') . 'VNĐ' : 'Chưa định giá' }}
+                        <td class="search-column">
+                            {{ $anPham->giacoc > 0 ? number_format($anPham->giacoc, 0, ',', '.') . 'VNĐ' : 'Chưa định giá' }}
                         </td>
-                        <td>{{ $anPham->vitri }}</td>
-                        <td>{{ $anPham->tinhtrang }}</td>
-                        <td>{{ $anPham->dathue ? 'Đã thuê' : 'Chưa thuê' }}</td>
+                        <td class="search-column">{{ $anPham->vitri }}</td>
+                        <td class="search-column">{{ $anPham->tinhtrang }}</td>
+                        <td class="search-column">{{ $anPham->dathue ? 'Đã thuê' : 'Chưa thuê' }}</td>
                     </tr>
                 @empty
                     <tr>
