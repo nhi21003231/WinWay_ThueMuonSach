@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('danhmuc', function (Blueprint $table) {
             $table->integer('madanhmuc')->autoIncrement();
-            $table->string('tendanhmuc', 100);
-            $table->string('mota', 1000);
+            $table->string('tendanhmuc', 100)->unique();
+            $table->string('mota', 1000)->nullable();
             $table->timestamps();
         });
     }

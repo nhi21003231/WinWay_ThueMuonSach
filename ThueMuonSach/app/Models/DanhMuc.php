@@ -13,4 +13,9 @@ class DanhMuc extends Model
     protected $primaryKey = 'madanhmuc';
     public $timestamps = true;
     protected $fillable = ['tendanhmuc', 'mota'];
+
+    public function chiTietAnPham()
+    {
+        return $this->hasMany(ChiTietAnPham::class, 'madanhmuc', 'madanhmuc');
+    }
 }

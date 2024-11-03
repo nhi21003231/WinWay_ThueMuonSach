@@ -1,33 +1,28 @@
-
-@if (Auth::check() && Auth::user()->vaitro == 'admin')
+@if (Auth::check() && Auth::user()->vaitro === 'admin')
     <div class="dropend w-100">
         <button class="btn fs-4 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            @if (Request::routeIs('route-cuahang-quanlycuahang*'))
-                Quản lý cửa hàng
-            @elseif (Request::routeIs('route-cuahang-quanlykho*'))
-                Quản lý kho
-            @elseif (Request::routeIs('route-cuahang-nhanvien*'))
-                Nhân viên
-            @endif
+            Admin
         </button>
-        <ul class="dropdown-menu ">
+        <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{{ route('route-cuahang-nhanvien') }}">Nhân viên</a></li>
             <li><a class="dropdown-item" href="{{ route('route-cuahang-quanlykho') }}">Quản lý kho</a></li>
             <li><a class="dropdown-item" href="{{ route('route-cuahang-quanlycuahang') }}">Quản lý cửa hàng</a></li>
         </ul>
     </div>
-@else
+@elseif (Auth::user()->vaitro === 'quanlycuahang')
     <a href="{{ route('route-cuahang-quanlycuahang') }}"
-        class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-        <span class="fs-4">
-            @if (Request::routeIs('route-cuahang-quanlycuahang*'))
-                Quản lý cửa hàng
-            @elseif (Request::routeIs('route-cuahang-quanlykho*'))
-                Quản lý kho
-            @elseif (Request::routeIs('route-cuahang-nhanvien*'))
-                Nhân viên
-            @endif
-        </span>
+        class="d-flex align-items-center me-md-auto link-dark text-decoration-none">
+        <span class="fs-4">Quản lý cửa hàng</span>
+    </a>
+@elseif (Auth::user()->vaitro === 'quanlykho')
+    <a href="{{ route('route-cuahang-quanlykho') }}"
+        class="d-flex align-items-center me-md-auto link-dark text-decoration-none">
+        <span class="fs-4">Quản lý kho</span>
+    </a>
+@elseif (Auth::user()->vaitro === 'nhanvien')
+    <a href="{{ route('route-cuahang-nhanvien') }}"
+        class="d-flex align-items-center me-md-auto link-dark text-decoration-none">
+        <span class="fs-4">Nhân viên</span>
     </a>
 @endif
 

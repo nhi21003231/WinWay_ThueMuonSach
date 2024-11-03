@@ -86,14 +86,6 @@ function timKiemAnPham() {
         .getElementsByTagName("tbody")[0]
         .getElementsByTagName("tr");
 
-    // Vô hiệu hóa nút tìm kiếm khi input rỗng
-    searchButton.disabled = !searchInput.value.trim();
-
-    // Kiểm tra khi người dùng nhập vào ô tìm kiếm
-    searchInput.addEventListener("input", function () {
-        searchButton.disabled = !this.value.trim();
-    });
-
     // Kích hoạt tìm kiếm khi nhấn Enter trong ô tìm kiếm
     searchInput.addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
