@@ -20,22 +20,26 @@
             <table class="table mb-3 text-center align-middle" id="ba-danhsach">
                 <thead>
                     <tr class="table-primary align-middle">
-                        <th scope="col" width="14%">Tên ấn phẩm</th>
-                        <th scope="col" width="10%">Tác giả</th>
-                        <th scope="col" width="11%">Danh mục</th>
-                        <th scope="col" width="15%">Năm xuất bản</th>
+                        <th scope="col" width="14%">Mã chi tiết ấn phẩm</th>
+                        <th scope="col" width="10%">Tên ấn phẩm</th>
+                        <th scope="col" width="8%">Tác giả</th>
+                        <th scope="col" width="9%">Danh mục</th>
+                        <th scope="col" width="14%">Năm xuất bản</th>
                         <th scope="col" width="11%">Hình ảnh</th>
-                        <th scope="col" width="16%">Vị trí</th>
-                        <th scope="col" width="13%">Tình trạng</th>
+                        <th scope="col" width="14%">Vị trí</th>
+                        <th scope="col" width="12%">Tình trạng</th>
                         <th scope="col" width="10%">Số lượng</th>
                     </tr>
                 </thead>
 
                 <tbody>
+                    @php
+                        $dsCTAnPham = [];
+                    @endphp
                     @forelse ($dsCTAnPham as $index => $CTAnPham)
                         <tr style="cursor: pointer">
                             <input type="hidden" name="ctanpham_ids[]" value="{{ $CTAnPham->mactanpham }}">
-
+                            <td class="search-column">{{ $CTAnPham->mactanpham }}</td>
                             <td class="search-column">{{ $CTAnPham->tenanpham }}</td>
                             <td class="search-column">{{ $CTAnPham->tacgia }}</td>
                             <td class="search-column">{{ $CTAnPham->danhMuc->tendanhmuc }}</td>
@@ -71,7 +75,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="10" class="py-5">Không có thông tin ấn phẩm nào.</td>
+                            <td colspan="20" class="py-5">Không có thông tin ấn phẩm nào.</td>
                         </tr>
                     @endforelse
 
@@ -79,7 +83,7 @@
 
                 <tfoot id="khong-an-pham" style="display: none">
                     <tr>
-                        <td colspan="10" class="py-5">Không có ấn phẩm nào.
+                        <td colspan="20" class="py-5">Không có ấn phẩm nào.
                         </td>
                     </tr>
                 </tfoot>

@@ -17,39 +17,43 @@
         @csrf
 
         <div class="ba-scroll-container ba-fixed-header-table mb-4">
-            <table class="table mb-3 text-center align-middle align-middle" id="ba-danhsach">
+            <table class="table mb-3 text-center align-middle" id="ba-danhsach">
                 <thead>
-                    <tr class="table-success">
-                        <th scope="col" width="14%">Tên ấn phẩm</th>
-                        <th scope="col" width="9%">Tác giả</th>
-                        <th scope="col" width="11%">Danh mục</th>
-                        <th scope="col" width="13%">Năm xuất bản</th>
-                        <th scope="col" width="9%">Hình ảnh</th>
-                        <th scope="col" width="9%">Giá thuê</th>
-                        <th scope="col" width="9%">Giá cọc</th>
-                        <th scope="col" width="13%">Vị trí</th>
-                        <th scope="col" width="13%">Tình trạng</th>
+                    <tr class="table-primary align-middle">
+                        <th scope="col" width="9%">Mã ấn phẩm</th>
+                        <th scope="col" width="13%">Tên ấn phẩm</th>
+                        <th scope="col" width="8%">Tác giả</th>
+                        <th scope="col" width="10%">Danh mục</th>
+                        <th scope="col" width="14%">Năm xuất bản</th>
+                        <th scope="col" width="8%">Hình ảnh</th>
+                        <th scope="col" width="8%">Giá thuê</th>
+                        <th scope="col" width="8%">Giá cọc</th>
+                        <th scope="col" width="12%">Vị trí</th>
+                        <th scope="col" width="12%">Tình trạng</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     @forelse ($anPhams as $anPham)
                         <tr style="cursor: pointer">
-                            <td>{{ $anPham->chiTietAnPham->tenanpham }}</td>
-                            <td>{{ $anPham->chiTietAnPham->tacgia }}</td>
-                            <td>{{ $anPham->chiTietAnPham->danhMuc->tendanhmuc }}</td>
-                            <td>{{ $anPham->chiTietAnPham->namxuatban }}</td>
+                            <td class="search-column">{{ $anPham->maanpham }}</td>
+                            <td class="search-column">{{ $anPham->chiTietAnPham->tenanpham }}</td>
+                            <td class="search-column">{{ $anPham->chiTietAnPham->tacgia }}</td>
+                            <td class="search-column">{{ $anPham->chiTietAnPham->danhMuc->tendanhmuc }}</td>
+                            <td class="search-column">{{ $anPham->chiTietAnPham->namxuatban }}</td>
                             <td>
                                 <div class="ba-image-container">
                                     <img src="{{ asset('img/anh-an-pham/' . $anPham->chiTietAnPham->hinhanh) }}"
                                         class="img-fluid" alt="{{ $anPham->chiTietAnPham->tenanpham }}">
                                 </div>
                             </td>
-                            <td>{{ $anPham->giathue > 0 ? number_format($anPham->giathue, 0, ',', '.') . 'VNĐ' : 'Chưa định giá' }}
+                            <td class="search-column">
+                                {{ $anPham->giathue > 0 ? number_format($anPham->giathue, 0, ',', '.') . 'VNĐ' : 'Chưa định giá' }}
                             </td>
-                            <td>{{ $anPham->giacoc > 0 ? number_format($anPham->giacoc, 0, ',', '.') . 'VNĐ' : 'Chưa định giá' }}
+                            <td class="search-column">
+                                {{ $anPham->giacoc > 0 ? number_format($anPham->giacoc, 0, ',', '.') . 'VNĐ' : 'Chưa định giá' }}
                             </td>
-                            <td>{{ $anPham->vitri }}</td>
+                            <td class="search-column">{{ $anPham->vitri }}</td>
                             <td>
                                 <input type="hidden" name="anpham_ids[]" value="{{ $anPham->maanpham }}">
                                 <select class="form-select" name="tinh_trang[{{ $anPham->maanpham }}]">
@@ -63,14 +67,14 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="10" class="py-5">Không có ấn phẩm tồn kho nào để cập nhật.</td>
+                            <td colspan="20" class="py-5">Không có ấn phẩm tồn kho nào để cập nhật.</td>
                         </tr>
                     @endforelse
                 </tbody>
 
                 <tfoot id="khong-an-pham" style="display: none">
                     <tr>
-                        <td colspan="10" class="py-5">Không có ấn phẩm nào.
+                        <td colspan="20" class="py-5">Không có ấn phẩm nào.
                         </td>
                     </tr>
                 </tfoot>

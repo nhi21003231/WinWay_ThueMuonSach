@@ -18,22 +18,24 @@
             <table class="table text-center align-middle" id="ba-danhsach">
                 <thead>
                     <tr class="table-primary align-middle">
-                        <th scope="col" width="12%">Tên ấn phẩm</th>
-                        <th scope="col" width="9%">Tác giả</th>
-                        <th scope="col" width="9%">Danh mục</th>
-                        <th scope="col" width="15%">Năm xuất bản</th>
-                        <th scope="col" width="9%">Hình ảnh</th>
-                        <th scope="col" width="9%">Giá thuê</th>
-                        <th scope="col" width="9%">Giá cọc</th>
-                        <th scope="col" width="9%">Vị trí</th>
-                        <th scope="col" width="10%">Tình trạng</th>
-                        <th scope="col" width="9%">Thanh lý</th>
+                        <th scope="col" width="10%">Mã ấn phẩm</th>
+                        <th scope="col" width="11%">Tên ấn phẩm</th>
+                        <th scope="col" width="8%">Tác giả</th>
+                        <th scope="col" width="8%">Danh mục</th>
+                        <th scope="col" width="14%">Năm xuất bản</th>
+                        <th scope="col" width="8%">Hình ảnh</th>
+                        <th scope="col" width="8%">Giá thuê</th>
+                        <th scope="col" width="8%">Giá cọc</th>
+                        <th scope="col" width="8%">Vị trí</th>
+                        <th scope="col" width="9%">Tình trạng</th>
+                        <th scope="col" width="8%">Thanh lý</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     @forelse($anPhams as $anPham)
                         <tr style="cursor: pointer">
+                            <td class="search-column">{{ $anPham->maanpham }}</td>
                             <td class="search-column">{{ $anPham->chiTietAnPham->tenanpham }}</td>
                             <td class="search-column">{{ $anPham->chiTietAnPham->tacgia }}</td>
                             <td class="search-column">{{ $anPham->chiTietAnPham->danhMuc->tendanhmuc }}</td>
@@ -59,14 +61,14 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="10" class="py-5">Không có ấn phẩm tồn kho nào để thanh lý.</td>
+                            <td colspan="20" class="py-5">Không có ấn phẩm tồn kho nào để thanh lý.</td>
                         </tr>
                     @endforelse
                 </tbody>
 
                 <tfoot>
                     <tr>
-                        <td colspan="10" class="py-5" id="khong-an-pham" style="display: none">Không có ấn phẩm nào.
+                        <td colspan="20" class="py-5" id="khong-an-pham" style="display: none">Không có ấn phẩm nào.
                         </td>
                     </tr>
                 </tfoot>

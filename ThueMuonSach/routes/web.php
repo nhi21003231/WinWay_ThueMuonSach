@@ -179,11 +179,14 @@ Route::prefix('/quan-ly-kho')->middleware('xac_thuc:quanlykho,admin')->group(fun
     });
 
     // -------- Route quản lý danh mục
-    Route::get('/quan-ly-danh-muc', [QuanLyDanhMucController::class, 'hienThiQuanLyDanhMuc'])
-        ->name('route-cuahang-quanlykho-quanlydanhmuc');
+    Route::prefix('/quan-ly-danh-muc')->group(function () {
+        Route::get('/', [QuanLyDanhMucController::class, 'hienThiQuanLyDanhMuc'])
+            ->name('route-cuahang-quanlykho-quanlydanhmuc');
 
-    Route::get('/them-danh-muc', [QuanLyDanhMucController::class, 'hienThiThemDanhMuc'])
-        ->name('route-cuahang-quanlykho-quanlydanhmuc-themdanhmuc');
+        Route::get('/them-danh-muc', [QuanLyDanhMucController::class, 'hienThiThemDanhMuc'])
+            ->name('route-cuahang-quanlykho-quanlydanhmuc-themdanhmuc');
+        Route::post('/them-danh-muc', [QuanLyDanhMucController::class, 'xuLyThemDanhMuc']);
+    });
 
     // -------- Route tạo báo cáo
     Route::get('/tao-bao-cao', [TaoBaoCaoController::class, 'hienThiTaoBaoCao'])
