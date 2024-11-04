@@ -31,7 +31,8 @@ Route::middleware('check_guest')->group(function () {
     Route::get('/dang-nhap', [XacThucController::class, 'hienThiDangNhap'])->name('route-dangnhap');
     Route::post('/dang-nhap', [XacThucController::class, 'dangNhap']);
 
-    Route::get('/dang-nhap/admin', [XacThucController::class, 'hienThiDangNhapAdmin'])->name('route-dangnhap-admin');
+    Route::get('/dang-nhap/quan-tri', [XacThucController::class, 'hienThiDangNhapQuanTri'])->name('route-dangnhap-quantri');
+    Route::post('/dang-nhap/quan-tri', [XacThucController::class, 'dangNhapQuanTri']);
 
     // ---- 1.2 > Route đăng ký
     Route::get('/dang-ky', [XacThucController::class, 'hienThiDangKy'])->name('route-dangky');
