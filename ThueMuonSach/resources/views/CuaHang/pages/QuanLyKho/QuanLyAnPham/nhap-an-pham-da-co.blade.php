@@ -33,9 +33,6 @@
                 </thead>
 
                 <tbody>
-                    @php
-                        $dsCTAnPham = [];
-                    @endphp
                     @forelse ($dsCTAnPham as $index => $CTAnPham)
                         <tr style="cursor: pointer">
                             <input type="hidden" name="ctanpham_ids[]" value="{{ $CTAnPham->mactanpham }}">
