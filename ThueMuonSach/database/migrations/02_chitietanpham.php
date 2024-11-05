@@ -15,7 +15,7 @@ return new class extends Migration
             $table->integer('mactanpham')->autoIncrement();
             $table->string('tenanpham', 100);
             $table->string('tacgia', 100)->nullable();
-            $table->year('namxuatban')->nullable();
+            $table->integer('namxuatban')->nullable();
             $table->string('hinhanh', 100);
             $table->integer('madanhmuc'); // Thêm cột khóa ngoại
             
