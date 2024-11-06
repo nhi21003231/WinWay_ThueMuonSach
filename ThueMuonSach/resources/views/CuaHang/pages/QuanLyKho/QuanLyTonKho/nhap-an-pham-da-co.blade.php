@@ -12,7 +12,7 @@
     </div>
 
 
-    <form method="POST" action="{{ route('route-cuahang-quanlykho-quanlyanpham-nhapanphamdaco') }}">
+    <form method="POST" action="{{ route('route-cuahang-quanlykho-quanlytonkho-nhapanphamdaco') }}">
 
         @csrf
 
@@ -89,7 +89,7 @@
 
         <div class="row g-5 mb-3 w-75 mx-auto">
             <div class="col-6">
-                <a href="{{ route('route-cuahang-quanlykho-quanlyanpham') }}" class="btn btn-danger w-100">Hủy</a>
+                <a href="{{ route('route-cuahang-quanlykho-quanlytonkho') }}" class="btn btn-danger w-100">Hủy</a>
             </div>
             <div class="col-6">
                 <button class="btn btn-success w-100">Nhập</button>

@@ -75,6 +75,12 @@
                 Quản lý ấn phẩm
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('route-cuahang-quanlykho-quanlytonkho') }}"
+                class="nav-link {{ Request::routeIs('route-cuahang-quanlykho-quanlytonkho*') ? 'active' : 'link-dark' }}">
+                Quản lý tồn kho
+            </a>
+        </li>
         <li>
             <a href="{{ route('route-cuahang-quanlykho-quanlydanhmuc') }}"
                 class="nav-link {{ Request::routeIs('route-cuahang-quanlykho-quanlydanhmuc*') ? 'active' : 'link-dark' }}">
