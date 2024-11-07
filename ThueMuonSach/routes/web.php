@@ -193,6 +193,10 @@ Route::prefix('/quan-ly-kho')->middleware('xac_thuc:quanlykho,admin')->group(fun
         Route::get('/them-danh-muc', [QuanLyDanhMucController::class, 'hienThiThemDanhMuc'])
             ->name('route-cuahang-quanlykho-quanlydanhmuc-themdanhmuc');
         Route::post('/them-danh-muc', [QuanLyDanhMucController::class, 'xuLyThemDanhMuc']);
+
+        Route::get('/cap-nhat-danh-muc/{madanhmuc}', [QuanLyDanhMucController::class, 'hienThiCapNhatDanhMuc'])
+            ->name('route-cuahang-quanlykho-quanlydanhmuc-capnhatdanhmuc');
+        Route::post('/cap-nhat-danh-muc/{madanhmuc}', [QuanLyDanhMucController::class, 'xuLyCapNhatDanhMuc']);
     });
 
     // -------- Route tạo báo cáo

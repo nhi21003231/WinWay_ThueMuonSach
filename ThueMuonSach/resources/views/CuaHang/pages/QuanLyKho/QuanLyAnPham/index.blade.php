@@ -20,14 +20,14 @@
             <table class="table mb-3 text-center align-middle" id="ba-danhsach">
                 <thead>
                     <tr class="table-primary align-middle">
-                        <th scope="col" width="14%">Mã chi tiết ấn phẩm</th>
-                        <th scope="col" width="10%">Tên ấn phẩm</th>
-                        <th scope="col" width="8%">Tác giả</th>
-                        <th scope="col" width="9%">Danh mục</th>
-                        <th scope="col" width="14%">Năm xuất bản</th>
+                        <th scope="col" width="18%">Mã chi tiết ấn phẩm</th>
+                        <th scope="col" width="15%">Tên ấn phẩm</th>
+                        <th scope="col" width="10%">Tác giả</th>
+                        <th scope="col" width="10%">Danh mục</th>
+                        <th scope="col" width="16%">Năm xuất bản</th>
                         <th scope="col" width="11%">Hình ảnh</th>
                         <th scope="col" width="10%">Số lượng</th>
-                        <th scope="col" width="10%">Hành động</th>
+                        <th scope="col" width="10%">Chỉnh sửa</th>
                     </tr>
                 </thead>
 
