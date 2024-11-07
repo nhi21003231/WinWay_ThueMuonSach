@@ -25,7 +25,8 @@ class ChamCongController extends Controller
         }
 
         $chamcongList = $query->get();
-        return view('CuaHang.pages.QuanLyCuaHang.ChamCong.index', compact('chamcongList'));
+        $message = $chamcongList->isEmpty() ? 'Không có dữ liệu' : null;
+        return view('CuaHang.pages.QuanLyCuaHang.ChamCong.index', compact('chamcongList', 'message'));
     }
 
 

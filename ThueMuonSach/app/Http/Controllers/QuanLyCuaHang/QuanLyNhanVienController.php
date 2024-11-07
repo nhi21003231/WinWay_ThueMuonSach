@@ -28,18 +28,13 @@ class QuanLyNhanVienController extends Controller
                     ->orWhere('sodienthoai', 'LIKE', '%' . $keyword . '%')
                     ->orWhereHas('taikhoan', function ($q) use ($keyword) {
                         $q->where('tentaikhoan', 'LIKE', '%' . $keyword . '%')
-                            ->orWhere('vaitro', 'LIKE', '%' . $keyword . '%'); // Tìm kiếm theo vaitro
+                            ->orWhere('vaitro', 'LIKE', '%' . $keyword . '%');
                     });
             });
         }
 
-        // Thực hiện truy vấn và lấy kết quả
         $nhanvienList = $query->get();
-
-        // Nếu không có kết quả, tạo thông báo "Không có dữ liệu"
         $message = $nhanvienList->isEmpty() ? 'Không có dữ liệu' : null;
-
-        // Trả về view với danh sách nhân viên và thông báo nếu có
         return view('CuaHang.pages.QuanLyCuaHang.QuanLyNhanVien.index', compact('nhanvienList', 'message'));
     }
 

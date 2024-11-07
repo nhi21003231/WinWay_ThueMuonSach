@@ -10,11 +10,15 @@
         </button>
      
         <!-- Form Tìm Kiếm -->
-        <form action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien') }}" method="GET" class="d-flex my-3">
+        {{-- <form action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien') }}" method="GET" class="d-flex my-3">
             <input type="text" name="keyword" class="form-control w-50" placeholder="Tìm kiếm nhân viên...">
             <button type="submit" class="btn btn-dark">Tìm kiếm</button>
-        </form> 
+        </form>  --}}
     
+        <form id="searchForm" action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien') }}" method="GET" class="d-flex my-3">
+            <input type="text" name="keyword" id="searchInput" class="form-control w-50" placeholder="Tìm kiếm nhân viên...">
+        </form>
+
         <!-- Form thêm nhân viên -->
         <div class="modal fade" id="modalID">
             <div class="modal-dialog modal-lg">
@@ -107,7 +111,7 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="searchResults">
                                 @if ($message)
                                     <tr>
                                         <td colspan="8" class="text-center">{{ $message }}</td>
@@ -157,7 +161,25 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        autoResearch();
         getDefualtColumns();
         preventDefaultSelection();
     });
+
+    function autoResearch(){
+        $('#searchInput').on('input', function() {
+            let keyword = $(this).val();
+
+            // Gửi yêu cầu AJAX lên server để tìm kiếm
+            $.ajax({
+                url: "{{ route('route-cuahang-quanlycuahang-quanlynhanvien') }}",
+                method: 'GET',
+                data: { keyword: keyword },
+                success: function(response) {
+                    // Cập nhật lại nội dung của #searchResults trong bảng
+                    $('#searchResults').html($(response).find('#searchResults').html());
+                }
+            });
+        });
+    }
 </script>

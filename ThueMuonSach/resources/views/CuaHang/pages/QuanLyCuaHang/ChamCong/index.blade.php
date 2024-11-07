@@ -8,9 +8,13 @@
 
     <div id="chamcongPage">
         <!-- Form Tìm Kiếm -->
-        <form action="{{ route('route-cuahang-quanlycuahang-chamcong') }}" method="GET" class="d-flex">
+        {{-- <form action="{{ route('route-cuahang-quanlycuahang-chamcong') }}" method="GET" class="d-flex">
             <input type="text" name="keyword" class="form-control w-50" placeholder="Tìm kiếm nhân viên...">
             <button type="submit" class="btn btn-dark">Tìm kiếm</button>
+        </form> --}}
+
+        <form id="searchForm" action="{{ route('route-cuahang-quanlycuahang-chamcong') }}" method="GET" class="d-flex my-3">
+            <input type="text" name="keyword" id="searchInput" class="form-control w-50" placeholder="Tìm kiếm nhân viên...">
         </form>
 
         <!-- Table -->
@@ -50,27 +54,33 @@
                                     <th id="col-ghinhan">Ghi nhận</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($chamcongList as $chamcong)
-                                <tr>
-                                    <td class="col-machamcong">{{ $chamcong->machamcong }}</td>
-                                    <td class="col-manhanvien">{{ $chamcong->nhanVien->manhanvien }}</td>
-                                    <td class="col-hoten truncate">{{ $chamcong->nhanVien->hoten }}</td>
-                                    <td class="col-checkin">
-                                        <input type="datetime-local" class="form-control" name="thoigianvao[]" value="{{ \Carbon\Carbon::parse($chamcong->thoigianvao)->format('Y-m-d\TH:i') }}">
-                                    </td>
-                                    <td class="col-checkout">
-                                        <input type="datetime-local" class="form-control" name="thoigianra[]" value="{{ \Carbon\Carbon::parse($chamcong->thoigianra)->format('Y-m-d\TH:i') }}">
-                                    </td> 
-                                    <td>
-                                        <select class="col-ghinhan form-select" name="ghinhan[]">
-                                            <option value="1" {{ $chamcong->ghinhan == '1' ? 'selected' : '' }}>Có mặt</option>
-                                            <option value="0" {{ $chamcong->ghinhan == '0' ? 'selected' : '' }}>Vắng mặt</option>
-                                        </select>
-                                    </td>
-                                    <input type="hidden" name="machamcong[]" value="{{ $chamcong->machamcong }}">
-                                </tr>
-                                @endforeach
+                            <tbody id="searchResults">
+                                @if ($message)
+                                    <tr>
+                                        <td colspan="8" class="text-center">{{ $message }}</td>
+                                    </tr>
+                                @else
+                                    @foreach ($chamcongList as $chamcong)
+                                    <tr>
+                                        <td class="col-machamcong">{{ $chamcong->machamcong }}</td>
+                                        <td class="col-manhanvien">{{ $chamcong->nhanVien->manhanvien }}</td>
+                                        <td class="col-hoten truncate">{{ $chamcong->nhanVien->hoten }}</td>
+                                        <td class="col-checkin">
+                                            <input type="datetime-local" class="form-control" name="thoigianvao[]" value="{{ \Carbon\Carbon::parse($chamcong->thoigianvao)->format('Y-m-d\TH:i') }}">
+                                        </td>
+                                        <td class="col-checkout">
+                                            <input type="datetime-local" class="form-control" name="thoigianra[]" value="{{ \Carbon\Carbon::parse($chamcong->thoigianra)->format('Y-m-d\TH:i') }}">
+                                        </td> 
+                                        <td>
+                                            <select class="col-ghinhan form-select" name="ghinhan[]">
+                                                <option value="1" {{ $chamcong->ghinhan == '1' ? 'selected' : '' }}>Có mặt</option>
+                                                <option value="0" {{ $chamcong->ghinhan == '0' ? 'selected' : '' }}>Vắng mặt</option>
+                                            </select>
+                                        </td>
+                                        <input type="hidden" name="machamcong[]" value="{{ $chamcong->machamcong }}">
+                                    </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -83,7 +93,25 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        autoResearch();
         getDefualtColumns();
         preventDefaultSelection();
     });
+
+    function autoResearch(){
+        $('#searchInput').on('input', function() {
+            let keyword = $(this).val();
+
+            // Gửi yêu cầu AJAX lên server để tìm kiếm
+            $.ajax({
+                url: "{{ route('route-cuahang-quanlycuahang-chamcong') }}",
+                method: 'GET',
+                data: { keyword: keyword },
+                success: function(response) {
+                    // Cập nhật lại nội dung của #searchResults trong bảng
+                    $('#searchResults').html($(response).find('#searchResults').html());
+                }
+            });
+        });
+    }
 </script>

@@ -31,7 +31,8 @@ class DinhGiaAnPhamController extends Controller
             })
             ->get();
 
-        return view('CuaHang.pages.QuanLyCuaHang.DinhGiaAnPham.index', compact('dsanphamList'));
+        $message = $dsanphamList->isEmpty() ? 'Không có dữ liệu' : null;
+        return view('CuaHang.pages.QuanLyCuaHang.DinhGiaAnPham.index', compact('dsanphamList', 'message'));
     }
 
     public function suaDinhGiaAnPham(Request $request)

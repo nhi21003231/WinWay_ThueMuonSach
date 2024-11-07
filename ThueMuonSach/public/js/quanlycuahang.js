@@ -75,3 +75,20 @@ function preventDefaultSelection() {
         .catch(error => console.error('Lỗi khi tìm kiếm:', error));
     });
 }
+
+// function autoResearch(){
+//     $('#searchInput').on('input', function() {
+//         let keyword = $(this).val();
+
+//         // Gửi yêu cầu AJAX lên server để tìm kiếm
+//         $.ajax({
+//             url: "{{ route('route-cuahang-quanlycuahang-dinhgiaanpham') }}",
+//             method: 'GET',
+//             data: { keyword: keyword },
+//             success: function(response) {
+//                 // Cập nhật lại nội dung của #searchResults trong bảng
+//                 $('#searchResults').html($(response).find('#searchResults').html());
+//             }
+//         });
+//     });
+// }
