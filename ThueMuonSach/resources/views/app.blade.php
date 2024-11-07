@@ -51,15 +51,12 @@
     integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
 </script>
 
-{{-- Jquery --}}
-<script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
-{{-- app js --}}
-<script src="{{ asset('js/NhanVien/app.js') }}"></script>
-<script src="{{ asset('js/thanhba.js') }}"></script>
-<script src="{{ asset('js/quanlycuahang.js') }}"></script>
-
 {{-- link thư viện thông báo (Toastr.js) --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+{{-- Jquery --}}
+<script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
+
 
 {{-- hiển thị thông báo --}}
 <script>
@@ -100,7 +97,10 @@
     @endif
 </script>
 
-
+{{-- app js --}}
+<script src="{{ asset('js/NhanVien/app.js') }}"></script>
+<script src="{{ asset('js/thanhba.js') }}"></script>
+<script src="{{ asset('js/quanlycuahang.js') }}"></script>
 
 </body>
 
