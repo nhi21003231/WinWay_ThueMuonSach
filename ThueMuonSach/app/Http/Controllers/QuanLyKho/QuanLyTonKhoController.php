@@ -198,7 +198,7 @@ class QuanLyTonKhoController extends Controller
 
         // Kiểm tra nếu không có ấn phẩm nào được chọn để thanh lý
         if (empty($anPhamIds)) {
-            return redirect()->back()->with('error', 'Chưa chọn ấn phẩm nào!');
+            return redirect()->back()->with('info', 'Không có ấn phẩm nào được thanh lý.');
         }
 
         try {
@@ -231,16 +231,22 @@ class QuanLyTonKhoController extends Controller
         $anPhamIds = $request->input('anpham_ids');
         $tinhTrangs = $request->input('tinh_trang');
 
-        foreach ($anPhamIds as $id) {
-            if (isset($tinhTrangs[$id])) {
-                $anPham = DsAnPham::find($id);
-                if ($anPham) {
-                    $anPham->tinhtrang = $tinhTrangs[$id];
-                    $anPham->save();
+        try {
+            foreach ($anPhamIds as $id) {
+                if (isset($tinhTrangs[$id])) {
+                    $anPham = DsAnPham::find($id);
+                    if ($anPham) {
+                        $anPham->tinhtrang = $tinhTrangs[$id];
+                        $anPham->save();
+                    }
                 }
             }
-        }
 
-        return redirect()->route('route-cuahang-quanlykho-quanlytonkho')->with('success', 'Cập nhật tình trạng ấn phẩm thành công!');
+            return redirect()->route('route-cuahang-quanlykho-quanlytonkho')
+                ->with('success', 'Cập nhật tình trạng ấn phẩm thành công.');
+        } catch (\Exception $e) {
+            return redirect()->route('route-cuahang-quanlykho-quanlytonkho')
+                ->with('error', 'Đã xảy ra lỗi khi cập nhật tình trạng ấn phẩm!');
+        }
     }
 }
