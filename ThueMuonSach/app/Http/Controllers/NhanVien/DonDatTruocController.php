@@ -20,7 +20,7 @@ class DonDatTruocController extends Controller
     {
         if ($request->ajax()) {
 
-            $query = HoaDonThueAnPham::where('loaidon', 'Đặt trước');
+            $query = HoaDonThueAnPham::where('loaidon', 'Đặt trước')->where('trangthai','Đang thuê');
 
             if ($request->search == 'moinhat') {
 
@@ -41,19 +41,27 @@ class DonDatTruocController extends Controller
         // Xử lý tìm kiếm
         if ($request->TimKiem != '') {
 
-            $hoaDons = HoaDonThueAnPham::whereHas('chiTietHoaDons.dsAnPham.chiTietAnPham', function ($query) use ($request) {
+            $hoaDons = HoaDonThueAnPham::where('loaidon','Đặt trước')->where('trangthai','Đang thuê')
+            
+            ->whereHas('chiTietHoaDons.dsAnPham.chiTietAnPham', function ($query) use ($request) {
 
                 $query->where('tenanpham', 'like', '%' . $request->TimKiem . '%');
 
-            })->orWhereHas('khachHang', function ($query) use ($request) {
+            })
+            
+            ->orWhere(function ($query) use ($request) {
 
-                $query->where('hoten', 'like', '%' . $request->TimKiem . '%');
+                $query->whereHas('khachHang', function ($query) use ($request) {
+
+                    $query->where('hoten', 'like', '%' . $request->TimKiem . '%');
+
+                });
 
             })->paginate(7);
             
         } else {
 
-            $hoaDons = HoaDonThueAnPham::where('loaidon', 'Đặt trước')->paginate(7);
+            $hoaDons = HoaDonThueAnPham::where('loaidon', 'Đặt trước')->where('trangthai','Đang thuê')->paginate(7);
         }
 
         return view('CuaHang.pages.NhanVien.DonDatTruoc.index', compact('hoaDons'));

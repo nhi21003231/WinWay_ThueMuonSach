@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\NhanVien;
 
+use App\Exports\CustomerExport;
 use App\Http\Controllers\Controller;
 use App\Models\HoaDonThueAnPham;
 use App\Models\KhachHang;
 use Illuminate\Http\Request;
 use App\Http\Requests\ValidationFormUpdateKH;
-
+use Maatwebsite\Excel\Facades\Excel;
 class QuanLyKhachHangController extends Controller
 {
     public function hienThiQuanLyKhachHang(Request $request)
@@ -21,10 +22,10 @@ class QuanLyKhachHangController extends Controller
 
                 ->orwhere('dienthoai', 'like', '%' . $request->TimKiem . '%')
 
-                ->paginate(5);
+                ->paginate(7);
         } else {
 
-            $khachHangs = KhachHang::orderBy('hoten', 'asc')->paginate(5);
+            $khachHangs = KhachHang::orderBy('hoten', 'asc')->paginate(7);
         }
 
         return view('CuaHang.pages.NhanVien.QuanLyKhachHang.index', compact('khachHangs'));
@@ -87,5 +88,12 @@ class QuanLyKhachHangController extends Controller
         $khachHang->delete();
 
         return redirect('nhan-vien/quan-ly-khach-hang')->with('success', 'Xóa khách hàng thành công');
+    }
+
+    // -------------Xuất file Excel
+    public function exportExcel(){
+
+        return Excel::download(new CustomerExport, 'customers-excel.xlsx');
+        
     }
 }

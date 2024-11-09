@@ -2,29 +2,29 @@
 
 @section('content')
 <div class="row">
-  <div class="col-6">
+  <div class="col-4">
     <form action="{{ URL::to('nhan-vien/quan-ly-khach-hang') }}" class="input-group" method="get">
-      <input type="text" class="form-control" name="TimKiem" placeholder="Nhập tên khách hàng...">
-      <button type="submit" class=" btn btn-primary">Tìm kiếm</button>
+      <input type="text" class="form-control input-tk" name="TimKiem" placeholder="Nhập tên khách hàng...">
+      <button type="submit" class=" btn btn-primary btn-tk" disabled>Tìm kiếm</button>
     </form>
   </div>
 </div>
-<div class="row mt-3 bg-primary opacity-75 bg-gradient align-items-center" style="height: 50px">
+<div class="row mt-3 bg-primary opacity-75 bg-gradient align-items-center" style="height: 60px">
   <div class="col-8">
     <p class="text-white m-0 fs-5 fw-bold p-1">Danh sách khách hàng</p>
   </div>
   <div class="col-4 row p-0 justify-content-around">
     <div class="border border-1 bg-white col-5 rounded d-flex align-items-center justify-content-center ps-1 btn">
       <i class="fa-solid fa-file"></i>
-      <a href="" class="text-black ms-1">Export to Excel</a>
+      <a href="{{ URL::to('nhan-vien/quan-ly-khach-hang/export') }}" class="text-black ms-1">Export to Excel</a>
     </div>
-    <div class="border border-1 bg-white col-5 rounded d-flex align-items-center justify-content-center ps-1 btn">
-      <i class="fa-solid fa-file"></i>
-      <a href="" class="text-black ms-1">Export to Excel</a>
+    <div class="col-5 rounded d-flex align-items-center justify-content-center btn bg-success px-0">
+      <a href="" class="text-white fw-bold">Thêm Khách Hàng</a>
     </div>
   </div>
 </div>
 <div class="table-responsive mt-3">
+  @if (!empty($khachHangs) && $khachHangs->count() > 0)
   <table class="table table-hover">
     <thead>
       <tr class="text-center">
@@ -38,7 +38,6 @@
       </tr>
     </thead>
     <tbody>
-      @if (!empty($khachHangs))
       @php
       $stt = 1
       @endphp
@@ -59,14 +58,16 @@
             method="post">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-warning btn-xoakh"><i
+            <button type="button" class="btn btn-warning btn-xoakh"><i
                 class="fa-regular fa-trash-can text-danger"></i></button>
           </form>
         </td>
       </tr>
       @endforeach
       @else
-      <p class="text-center text-danger mt-3 fs-5 fw-bold">Không có khách hàng để hiển thị</p>
+      <div class="alert alert-info text-center fw-bold" role="alert">
+        Không có khách hàng được tìm thấy.
+      </div>
       @endif
     </tbody>
   </table>
@@ -94,6 +95,6 @@
       </div>
     </div>
   </div>
-</div>
+  </div>
 </form>
 @endsection

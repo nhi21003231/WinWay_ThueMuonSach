@@ -1,7 +1,7 @@
 $(document).ready(function () {
   // -------------Remove disable for button Search
-  $('#timkiem-ddt').on('input', function () {
-    $('#btn-tkddt').removeAttr('disabled');
+  $('.input-tk').on('input', function () {
+    $('.btn-tk').removeAttr('disabled');
   });
 
   // -----------Thay đổi nút lưu

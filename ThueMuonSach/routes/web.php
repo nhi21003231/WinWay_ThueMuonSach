@@ -86,7 +86,7 @@ Route::prefix('/nhan-vien')->middleware('xac_thuc:nhanvien,admin')->group(functi
     Route::delete('/quan-ly-khach-hang/{id}',[QuanLyKhachHangController::class,'xoaKhachHang'])
         ->name('route-cuahang-nhanvien-quanlykhachhang-xoakhachhang');
 
-    
+    Route::get('/quan-ly-khach-hang/export',[QuanLyKhachHangController::class,'exportExcel']);
     // -------- Route thống kê doanh thu
     Route::get('/thong-ke-doanh-thu', [ThongKeDoanhThuController::class, 'hienThiThongKeDoanhThu'])
         ->name('route-cuahang-nhanvien-thongkedoanhthu');
@@ -192,6 +192,8 @@ Route::prefix('/quan-ly-kho')->middleware('xac_thuc:quanlykho,admin')->group(fun
     // -------- Route tạo báo cáo
     Route::get('/tao-bao-cao', [TaoBaoCaoController::class, 'hienThiTaoBaoCao'])
         ->name('route-cuahang-quanlykho-taobaocao');
+
+    Route::get('/tao-bao-cao/getdata',[TaoBaoCaoController::class,'taoBC']);
 });
 
 
@@ -233,3 +235,4 @@ Route::middleware('xac_thuc:khachhang')->group(function () {
     // -------- Route lịch sử mua hàng
     Route::get('/lich-su-mua-hang', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-lichsumuahang');
 });
+

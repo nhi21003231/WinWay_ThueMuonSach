@@ -12,7 +12,7 @@
 </div>
 <div class="email mt-2">
   <label for="email" class="form-lable ps-2 fw-bold mb-2">Email</label>
-  <input type="email" class="form-control" name="email" id="email" value="{{ $item->email }}">
+  <input type="text" class="form-control" name="email" id="email" value="{{ $item->email }}">
   <span class="text-danger m-0 ps-1 ms-2" style="font-size: 13px" id="error-email"></span>
 </div>
 <div class="diachi mt-2">

@@ -73,7 +73,7 @@
                 value="{{ $chitiet->dsAnPham->chiTietAnPham->tenanpham }}" readonly>
             </div>
             <div class="text-center mt-2 overflow-hidden">
-              <img src="{{ asset('storage/images/images.jpg') }}" alt="" width="120px" height="160px">
+              <img src="{{ asset('img/anh-an-pham/'.$chitiet->dsanpham->chitietanpham->hinhanh) }}" alt="" width="120px" height="160px">
             </div>
           </div>
           @endforeach
