@@ -28,7 +28,7 @@
                                             <label for="username" class="form-label">Tên đăng nhập</label>
                                             <div class="input-group">
                                                 <span class="input-group-text bg-light"><i class="fas fa-user"></i></span>
-                                                <input type="text" name="tendangnhap" class="form-control" id="username"
+                                                <input type="text" name="tentaikhoan" class="form-control" id="username"
                                                     placeholder="Tên đăng nhập" required>
                                             </div>
                                         </div>
@@ -46,8 +46,17 @@
                                             <label for="phone" class="form-label">Số điện thoại</label>
                                             <div class="input-group">
                                                 <span class="input-group-text bg-light"><i class="fas fa-phone"></i></span>
-                                                <input type="text" name="sodienthoai" class="form-control" id="phone"
+                                                <input type="text" name="dienthoai" class="form-control" id="phone"
                                                     placeholder="Số điện thoại" required>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                                <label for="email" class="form-label">Email</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text bg-light"><i class="fas fa-envelope"></i></span>
+                                                <input type="email" name="email" class="form-control" id="email"
+                                                    placeholder="Nhập email" required>
                                             </div>
                                         </div>
 
@@ -61,13 +70,12 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="confirm_password" class="form-label">Xác nhận mật khẩu</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text bg-light"><i class="fas fa-lock"></i></span>
-                                                <input type="password" name="xacnhanmatkhau" class="form-control" id="confirm_password"
-                                                    placeholder="Nhập lại mật khẩu" required>
-                                            </div>
+                                        <label for="confirm_password" class="form-label">Xác nhận mật khẩu</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light"><i class="fas fa-lock"></i></span>
+                                            <input type="password" name="matkhau_confirmation" class="form-control" id="confirm_password" placeholder="Nhập lại mật khẩu" required>
                                         </div>
+                                    </div>
 
                                         @if ($errors->any())
                                             <div class="alert alert-danger text-center">

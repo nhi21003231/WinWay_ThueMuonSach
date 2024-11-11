@@ -31,12 +31,14 @@ Route::middleware('check_guest')->group(function () {
     // ---- 1.1 > Route đăng nhập
     Route::get('/dang-nhap', [XacThucController::class, 'hienThiDangNhap'])->name('route-dangnhap');
     Route::post('/dang-nhap', [XacThucController::class, 'dangNhap']);
+    
 
     Route::get('/dang-nhap/quan-tri', [XacThucController::class, 'hienThiDangNhapQuanTri'])->name('route-dangnhap-quantri');
     Route::post('/dang-nhap/quan-tri', [XacThucController::class, 'dangNhapQuanTri']);
 
     // ---- 1.2 > Route đăng ký
     Route::get('/dang-ky', [XacThucController::class, 'hienThiDangKy'])->name('route-dangky');
+    Route::post('/dang-ky', [XacThucController::class, 'xuLyDangKy'])->name('route-dangky-xuly');
 });
 
 // ---- 1.3 > Route đăng xuất

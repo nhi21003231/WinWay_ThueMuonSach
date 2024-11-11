@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\Validator;
+use App\Models\KhachHang;
+
 class XacThucController extends Controller
 {
     public function hienThiDangNhap()
@@ -26,22 +29,29 @@ class XacThucController extends Controller
 
     public function dangNhap(Request $request)
     {
-        // Xác thực tài khoản khách hàng
+        // Xác thực thông tin đăng nhập
         $request->validate([
             'tentaikhoan' => 'required|string',
             'matkhau' => 'required|string',
         ]);
-
+    
+        // Tìm tài khoản theo tên tài khoản
         $taiKhoan = TaiKhoan::where('tentaikhoan', $request->tentaikhoan)->first();
-
-        if ($taiKhoan && Hash::check($request->matkhau, $taiKhoan->matkhau) && $taiKhoan->vaitro === 'khachhang') {
-            Auth::login($taiKhoan);
-            return redirect()->route('route-khachhang-trangchu')->with('success', 'Đăng nhập thành công!');
+    
+        // Kiểm tra tài khoản và xác thực mật khẩu
+        if ($taiKhoan && Hash::check($request->matkhau, $taiKhoan->matkhau)) {
+            // Kiểm tra vai trò
+            if ($taiKhoan->vaitro === 'khachhang') {
+                Auth::login($taiKhoan);
+                return redirect()->route('route-khachhang-trangchu')->with('success', 'Đăng nhập thành công!');
+            } else {
+                return redirect()->back()->with('error', 'Bạn không có quyền truy cập.');
+            }
         }
-
+    
+        // Nếu không tìm thấy tài khoản hoặc mật khẩu không đúng
         return redirect()->back()->with('error', 'Đăng nhập thất bại! Kiểm tra tài khoản hoặc mật khẩu.');
     }
-
     public function dangNhapQuanTri(Request $request)
     {
         // Xác thực tài khoản quản trị
@@ -79,4 +89,38 @@ class XacThucController extends Controller
         // Điều hướng về trang chủ
         return redirect()->route('route-khachhang-trangchu')->with('success', 'Đăng xuất thành công!');
     }
+
+    public function xuLyDangKy(Request $request)
+{
+   
+    $request->validate([
+        'tentaikhoan' => 'required|string|max:255|unique:taikhoan',
+        'hoten' => 'required|string|max:255',
+        'dienthoai' => 'required|string|digits_between:10,15',
+        'email' => 'required|email|unique:khachhang',
+        'matkhau' => 'required|string|min:3|confirmed', // Kiểm tra mật khẩu và xác nhận
+    ]);
+
+   
+    $taiKhoan = new TaiKhoan();
+    $taiKhoan->tentaikhoan = $request->tentaikhoan;
+    $taiKhoan->matkhau = $request->matkhau; // Mã hóa mật khẩu
+    $taiKhoan->save(); // Lưu tài khoản
+
+  
+    $mataikhoan = $taiKhoan->mataikhoan;
+
+   
+    $khachHang = new KhachHang();
+    $khachHang->hoten = $request->hoten;
+    $khachHang->dienthoai = $request->dienthoai;
+    $khachHang->email = $request->email;
+    $khachHang->mataikhoan = $mataikhoan; // Gán ID tài khoản
+
+    // Kiểm tra xem khách hàng đã được lưu thành công chưa
+   
+
+    
+    return redirect()->route('route-dangnhap')->with('success', 'Đăng ký thành công! Vui lòng đăng nhập.');
+}
 }
