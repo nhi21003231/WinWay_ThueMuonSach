@@ -20,9 +20,10 @@
             <thead>
                 <tr class="table-primary align-middle">
                     <th scope="col" width="15%">Mã danh mục</th>
-                    <th scope="col" width="20%">Tên danh mục</th>
-                    <th scope="col" width="45%">Mô tả</th>
-                    <th scope="col" width="20%">Số lượng ấn phẩm</th>
+                    <th scope="col" width="15%">Tên danh mục</th>
+                    <th scope="col" width="40%">Mô tả</th>
+                    <th scope="col" width="15%">Số lượng ấn phẩm</th>
+                    <th scope="col" width="15%">Chỉnh sửa</th>
                 </tr>
             </thead>
 
@@ -37,7 +38,12 @@
                                 return $chiTietAnPham->anPham->count();
                             }) }}
                         </td>
-
+                        <td>
+                            <a href="{{ route('route-cuahang-quanlykho-quanlydanhmuc-capnhatdanhmuc', ['madanhmuc' => $danhMuc->madanhmuc]) }}"
+                                class="btn btn-outline-primary">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        </td>
                     </tr>
                 @empty
                     <tr>

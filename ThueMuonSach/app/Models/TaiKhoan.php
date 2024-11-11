@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -36,5 +37,10 @@ class TaiKhoan extends Authenticatable
     public function getAuthPassword()
     {
         return $this->matkhau;
+    }
+
+    public function nhanvien():BelongsTo{
+
+        return $this->belongsTo(NhanVien::class,'mataikhoan','mataikhoan');
     }
 }

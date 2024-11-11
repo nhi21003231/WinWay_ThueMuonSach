@@ -13,6 +13,6 @@ class DsAnPhamSeeder extends Seeder
      */
     public function run(): void
     {
-        DsAnPham::factory(50)->create();
+        DsAnPham::factory(300)->create();
     }
 }

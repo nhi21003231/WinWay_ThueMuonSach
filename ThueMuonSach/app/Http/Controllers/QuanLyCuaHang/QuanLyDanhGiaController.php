@@ -35,7 +35,8 @@ class QuanLyDanhGiaController extends Controller
             })
             ->get();
 
-        return view('CuaHang.pages.QuanLyCuaHang.QuanLyDanhGia.index', compact('danhgiaList'));
+        $message = $danhgiaList->isEmpty() ? 'Không có dữ liệu' : null;
+        return view('CuaHang.pages.QuanLyCuaHang.QuanLyDanhGia.index', compact('danhgiaList', 'message'));
     }
 
     public function suaDanhGia(Request $request)

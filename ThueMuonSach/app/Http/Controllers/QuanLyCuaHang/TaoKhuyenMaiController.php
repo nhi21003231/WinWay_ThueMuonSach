@@ -22,8 +22,8 @@ class TaoKhuyenMaiController extends Controller
                 ->orWhere('ngayketthuc', 'like', '%' . $keyword . '%');
         })->get();
 
-        // Trả về view với danh sách kết quả tìm kiếm
-        return view('CuaHang.pages.QuanLyCuaHang.TaoKhuyenMai.index', compact('khuyenmaiList'));
+        $message = $khuyenmaiList->isEmpty() ? 'Không có dữ liệu' : null;
+        return view('CuaHang.pages.QuanLyCuaHang.TaoKhuyenMai.index', compact('khuyenmaiList', 'message'));
     }
 
     public function themCTKhuyenMai(Request $request)

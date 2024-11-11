@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Thuê Mượn Sách</title>
-
+    {{-- Logo --}}
+    <link rel="icon" type="image/jpg" href="{{ asset('app/logo_windway.jpg') }}">
     {{-- link css bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -20,8 +22,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     {{-- link css app --}}
-
-    <link rel="stylesheet" href="{{ asset('css/sass/override.scss') }}">
     <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/dangbao.css') }}  ">
@@ -58,10 +58,14 @@
         {{-- app js --}}
         <script src="{{ asset('js/huy.js') }}"></script>
         <script src="{{ asset('js/thanhba.js') }}"></script>
-        {{-- <script src="{{ asset('js/quanlycuahang.js') }}"></script> --}}
+        <script src="{{ asset('js/quanlycuahang.js') }}"></script>
 
         {{-- link thư viện thông báo (Toastr.js) --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+        {{-- Jquery --}}
+        <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
+
 
         {{-- hiển thị thông báo --}}
         <script>
@@ -100,7 +104,6 @@
         });
     @endif
         </script>
-
     </body>
 
 </html>

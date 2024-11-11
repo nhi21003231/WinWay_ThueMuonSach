@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class DsAnPham extends Model
 {
@@ -34,4 +35,12 @@ class DsAnPham extends Model
 
         return $this->hasMany(DanhGia::class, 'maanpham', 'maanpham');
     }
+
+    public function chitiethoadonthue():HasMany
+    {
+
+        return $this->hasMany(ChiTietHoaDonThue::class,'maanpham','maanpham');
+
+    }
 }
+

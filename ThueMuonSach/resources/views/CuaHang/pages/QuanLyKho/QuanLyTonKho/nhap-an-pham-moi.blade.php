@@ -3,7 +3,7 @@
 @section('content')
     <h2 class="mt-5 mb-2 text-center">Nhập ấn phẩm mới</h2>
 
-    <form action="{{ route('route-cuahang-quanlykho-quanlyanpham-nhapanphammoi') }}" method="POST"
+    <form action="{{ route('route-cuahang-quanlykho-quanlytonkho-nhapanphammoi') }}" method="POST"
         class="px-5 w-75 mx-auto py-5" enctype="multipart/form-data">
 
         @csrf
@@ -91,7 +91,7 @@
                 <label for="madanhmuc" class="form-label h4">Danh mục <span class="text-danger">*</span></label>
                 <div class="position-relative">
                     <select class="form-select @error('madanhmuc') is-invalid @enderror" name="madanhmuc" id="madanhmuc">
-                        <option value="" selected>Chưa chọn danh mục</option>
+                        <option value="">Chưa chọn danh mục</option>
                         @foreach ($dsDanhMuc as $danhMuc)
                             <option value="{{ $danhMuc->madanhmuc }}"
                                 {{ old('madanhmuc') == $danhMuc->madanhmuc ? 'selected' : '' }}>{{ $danhMuc->tendanhmuc }}
@@ -119,7 +119,7 @@
 
         <div class="row gx-5 gy-4 mb-3 pt-4">
             <div class="col-6">
-                <a href="{{ route('route-cuahang-quanlykho-quanlyanpham') }}" class="btn btn-danger w-100">Hủy</a>
+                <a href="{{ route('route-cuahang-quanlykho-quanlytonkho') }}" class="btn btn-danger w-100">Hủy</a>
             </div>
             <div class="col-6">
                 <button class="btn btn-success w-100" type="submit">Nhập</button>

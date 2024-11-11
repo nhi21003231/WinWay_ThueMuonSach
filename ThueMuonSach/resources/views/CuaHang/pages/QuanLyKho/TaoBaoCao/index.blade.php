@@ -4,7 +4,7 @@
 <div class="title p-2 bg-success w-25 rounded">
   <p class="fw-bold text-white fs-4 m-0 p-2">Tạo báo cáo</p>
 </div>
-<form action="" method="get">
+<form action="{{ URL::to('quan-ly-kho/tao-bao-cao') }}" method="post">
   @csrf
   <div class="row justify-content-end">
     <div class="col-4">
@@ -29,17 +29,26 @@
     <div class="col-3">
       <label for="startdate" class="form-label fw-bold">Từ ngày</label>
       <input type="date" name="startdate" id="startdate" class="form-control">
+      <span class="text-danger ps-2 " id="error-startdate"></span>
     </div>
     <div class="col-3">
       <label for="enddate" class="form-label fw-bold">Đến ngày</label>
       <input type="date" name="enddate" id="enddate" class="form-control">
     </div>
     <div class="col-12 d-flex justify-content-end mt-3">
-      <button type="submit" class="btn btn-success">Áp dụng</button>
+      <button type="button" class="btn btn-success btn-report">Áp dụng</button>
     </div>
   </div>
-  <div>
-    @include('CuaHang.pages.QuanLyKho.TaoBaoCao.table-report')
+  <div class="main-report bs-scroll position-relative">
+    {{-- @include('CuaHang.pages.QuanLyKho.TaoBaoCao.table-report') --}}
+  </div>
+  <div class="mt-4 d-none" id="action-report">
+    <input type="hidden" name="export_excel" value="1">
+    <button type="submit" class="btn btn-success" id="export-report">Xuất file
+      Excel
+    </button>
+    <button type="button" class="btn btn-secondary" id="cancel-report">Hủy</button>
   </div>
 </form>
+
 @endsection

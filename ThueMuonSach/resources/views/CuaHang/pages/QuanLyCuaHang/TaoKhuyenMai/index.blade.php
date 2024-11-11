@@ -10,9 +10,13 @@
     </button>
 
     <!-- Form Tìm Kiếm -->
-    <form action="{{ route('route-cuahang-quanlycuahang-taokhuyenmai') }}" method="GET" class="d-flex my-3">
-        <input type="text" name="keyword" class="form-control w-50" placeholder="Tìm kiếm nhân viên...">
+    {{-- <form action="{{ route('route-cuahang-quanlycuahang-taokhuyenmai') }}" method="GET" class="d-flex my-3">
+        <input type="text" name="keyword" class="form-control w-50" placeholder="Tìm kiếm khuyến mãi...">
         <button type="submit" class="btn btn-dark">Tìm kiếm</button>
+    </form> --}}
+
+    <form id="searchForm" action="{{ route('route-cuahang-quanlycuahang-taokhuyenmai') }}" method="GET" class="d-flex my-3">
+        <input type="text" name="keyword" id="searchInput" class="form-control w-50" placeholder="Tìm kiếm khuyến mãi...">
     </form>
 
     <!-- Form thêm khuyến mãi -->
@@ -94,57 +98,63 @@
                                 {{-- <th>Actions</th> --}}
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($khuyenmaiList as $khuyenmai)
-                            <tr>
-                                <td class="col-mactkm">{{ $khuyenmai->mactkm }}</td>
-                                <td class="col-tenchuongtrinh truncate">
-                                    <input type="hidden" name="id[]" value="{{ $khuyenmai->mactkm }}"> <!-- Trường ẩn cho ID -->
-                                    <input type="text" class="form-control" name="tenkhuyenmai[]" value="{{ $khuyenmai->tenchuongtrinhkm }}" required>
-                                </td>
-                                <td class="col-mota truncate">
-                                    <input type="text" class="form-control" name="mota[]" value="{{ $khuyenmai->mota }}" required>
-                                </td>
-                                <td class="col-ngayapdung">
-                                    <input type="datetime-local" class="form-control" name="ngayapdung[]" value="{{ \Carbon\Carbon::parse($khuyenmai->ngayapdung)->format('Y-m-d\TH:i') }}">
-                                </td>
-                                <td class="col-ngayketthuc">
-                                    <input type="datetime-local" class="form-control" name="ngayketthuc[]" value="{{ \Carbon\Carbon::parse($khuyenmai->ngayketthuc)->format('Y-m-d\TH:i') }}">
-                                </td>
-                                {{-- <td>
-                                    <button 
-                                        data-bs-toggle="modal" 
-                                        data-bs-target="#delete{{ $khuyenmai->mactkm }}" 
-                                        style="outline: none; border: none;" 
-                                        type="button" 
-                                        data-id="{{ $khuyenmai->mactkm }}"
-                                        class="btnDelete">
-                                        <i class="fas fa-trash text-danger"></i>
-                                    </button> 
-                                </td> --}}
-                                <!-- Modal Xóa -->
-                                {{-- <div class="modal fade" id="delete{{ $nhanvien->manhanvien }}" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Xóa nhân viên</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <tbody id="searchResults">
+                            @if ($message)
+                                <tr>
+                                    <td colspan="8" class="text-center">{{ $message }}</td>
+                                </tr>
+                            @else
+                                @foreach ($khuyenmaiList as $khuyenmai)
+                                    <tr>
+                                        <td class="col-mactkm">{{ $khuyenmai->mactkm }}</td>
+                                        <td class="col-tenchuongtrinh truncate">
+                                            <input type="hidden" name="id[]" value="{{ $khuyenmai->mactkm }}"> <!-- Trường ẩn cho ID -->
+                                            <input type="text" class="form-control" name="tenkhuyenmai[]" value="{{ $khuyenmai->tenchuongtrinhkm }}" required>
+                                        </td>
+                                        <td class="col-mota truncate">
+                                            <input type="text" class="form-control" name="mota[]" value="{{ $khuyenmai->mota }}" required>
+                                        </td>
+                                        <td class="col-ngayapdung">
+                                            <input type="datetime-local" class="form-control" name="ngayapdung[]" value="{{ \Carbon\Carbon::parse($khuyenmai->ngayapdung)->format('Y-m-d\TH:i') }}">
+                                        </td>
+                                        <td class="col-ngayketthuc">
+                                            <input type="datetime-local" class="form-control" name="ngayketthuc[]" value="{{ \Carbon\Carbon::parse($khuyenmai->ngayketthuc)->format('Y-m-d\TH:i') }}">
+                                        </td>
+                                        {{-- <td>
+                                            <button 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#delete{{ $khuyenmai->mactkm }}" 
+                                                style="outline: none; border: none;" 
+                                                type="button" 
+                                                data-id="{{ $khuyenmai->mactkm }}"
+                                                class="btnDelete">
+                                                <i class="fas fa-trash text-danger"></i>
+                                            </button> 
+                                        </td> --}}
+                                        <!-- Modal Xóa -->
+                                        {{-- <div class="modal fade" id="delete{{ $nhanvien->manhanvien }}" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Xóa nhân viên</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Bạn muốn xóa nhân viên này?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                        <form action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien.xoaNhanVien', $nhanvien->manhanvien) }}" method="POST">
+                                                            @csrf
+                                                            <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="modal-body">
-                                                Bạn muốn xóa nhân viên này?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                <form action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien.xoaNhanVien', $nhanvien->manhanvien) }}" method="POST">
-                                                    @csrf
-                                                    <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                            </tr>  
-                            @endforeach
+                                        </div> --}}
+                                    </tr>  
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                     <button type="submit" class="btn btn-danger">Cập nhật</button>
@@ -157,7 +167,25 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        autoResearch();
         getDefualtColumns();
         preventDefaultSelection();
     });
+
+    function autoResearch(){
+        $('#searchInput').on('input', function() {
+            let keyword = $(this).val();
+
+            // Gửi yêu cầu AJAX lên server để tìm kiếm
+            $.ajax({
+                url: "{{ route('route-cuahang-quanlycuahang-taokhuyenmai') }}",
+                method: 'GET',
+                data: { keyword: keyword },
+                success: function(response) {
+                    // Cập nhật lại nội dung của #searchResults trong bảng
+                    $('#searchResults').html($(response).find('#searchResults').html());
+                }
+            });
+        });
+    }
 </script>

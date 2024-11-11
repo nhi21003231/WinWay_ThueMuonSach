@@ -5,9 +5,13 @@
 
     <div id="dinhgiaanphamPage">
         <!-- Form Tìm Kiếm -->
-        <form action="{{ route('route-cuahang-quanlycuahang-dinhgiaanpham') }}" method="GET" class="d-flex my-3">
+        {{-- <form action="{{ route('route-cuahang-quanlycuahang-dinhgiaanpham') }}" method="GET" class="d-flex my-3">
             <input type="text" name="keyword" class="form-control w-50" placeholder="Tìm kiếm ấn phẩm...">
             <button type="submit" class="btn btn-dark">Tìm kiếm</button>
+        </form> --}}
+
+        <form id="searchForm" action="{{ route('route-cuahang-quanlycuahang-dinhgiaanpham') }}" method="GET" class="d-flex my-3">
+            <input type="text" name="keyword" id="searchInput" class="form-control w-50" placeholder="Tìm kiếm ấn phẩm...">
         </form>
 
         <div class="mt-4">
@@ -47,56 +51,62 @@
                                     {{-- <th>Actions</th> --}}
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($dsanphamList as $anpham)
-                                <tr>
-                                    <input type="hidden" name="id[]" value="{{ $anpham->maanpham }}"> <!-- Trường ẩn cho ID -->
-                                    <td class="col-maanpham">{{ $anpham->maanpham }}</td>
-                                    <td class="col-tenanpham">{{ $anpham->chitietanpham->tenanpham }}</td>
-                                    <td class="col-giathue">
-                                        <input type="text" class="form-control" name="giathue[]" value="{{ $anpham->giathue }}" required>
-                                    </td>
-                                    <td class="col-giacoc">
-                                        <input type="text" class="form-control" name="giacoc[]" value="{{ $anpham->giacoc }}" required>
-                                    </td>
-                                    <td class="col-namxuatban">{{ $anpham->chitietanpham->namxuatban }}</td>
-                                    <td class="col-hinhanh">
-                                        <img class="img-anpham w-50" src="{{ asset('img/anh-an-pham/' . $anpham->chitietanpham->hinhanh) }} " alt="">
-                                    </td>                                
-                                    {{-- <td>
-                                        <button 
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#delete{{ $anpham->maanpham }}" 
-                                            style="outline: none; border: none;" 
-                                            type="button" 
-                                            data-id="{{ $anpham->maanpham }}"
-                                            class="btnDelete">
-                                            <i class="fas fa-trash text-danger"></i>
-                                        </button> 
-                                    </td> --}}
-                                    <!-- Modal Xóa -->
-                                    {{-- <div class="modal fade" id="delete{{ $danhgia->madanhgia }}" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Xóa đánh giá</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Bạn muốn xóa đánh giá này?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                    <form action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien.xoaNhanVien', $danhgia->madanhgia) }}" method="POST">
-                                                        @csrf
-                                                        <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
-                                                    </form>
+                            <tbody id="searchResults">
+                                @if ($message)
+                                    <tr>
+                                        <td colspan="8" class="text-center">{{ $message }}</td>
+                                    </tr>
+                                @else
+                                    @foreach ($dsanphamList as $anpham)
+                                    <tr>
+                                        <input type="hidden" name="id[]" value="{{ $anpham->maanpham }}"> <!-- Trường ẩn cho ID -->
+                                        <td class="col-maanpham">{{ $anpham->maanpham }}</td>
+                                        <td class="col-tenanpham">{{ $anpham->chitietanpham->tenanpham }}</td>
+                                        <td class="col-giathue">
+                                            <input type="text" class="form-control" name="giathue[]" value="{{ $anpham->giathue }}" required>
+                                        </td>
+                                        <td class="col-giacoc">
+                                            <input type="text" class="form-control" name="giacoc[]" value="{{ $anpham->giacoc }}" required>
+                                        </td>
+                                        <td class="col-namxuatban">{{ $anpham->chitietanpham->namxuatban }}</td>
+                                        <td class="col-hinhanh text-center">
+                                            <img class="img-anpham" style="width: 180px" src="{{ asset('img/anh-an-pham/' . $anpham->chitietanpham->hinhanh) }} " alt="">
+                                        </td>                                
+                                        {{-- <td>
+                                            <button 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#delete{{ $anpham->maanpham }}" 
+                                                style="outline: none; border: none;" 
+                                                type="button" 
+                                                data-id="{{ $anpham->maanpham }}"
+                                                class="btnDelete">
+                                                <i class="fas fa-trash text-danger"></i>
+                                            </button> 
+                                        </td> --}}
+                                        <!-- Modal Xóa -->
+                                        {{-- <div class="modal fade" id="delete{{ $danhgia->madanhgia }}" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Xóa đánh giá</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Bạn muốn xóa đánh giá này?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                        <form action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien.xoaNhanVien', $danhgia->madanhgia) }}" method="POST">
+                                                            @csrf
+                                                            <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div> --}}
-                                </tr>  
-                                @endforeach
+                                        </div> --}}
+                                    </tr>  
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -105,11 +115,31 @@
             </form>
         </div> 
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            autoResearch();
+            getDefualtColumns();
+            preventDefaultSelection();
+        });
+    
+        function autoResearch(){
+            $('#searchInput').on('input', function() {
+                let keyword = $(this).val();
+    
+                // Gửi yêu cầu AJAX lên server để tìm kiếm
+                $.ajax({
+                    url: "{{ route('route-cuahang-quanlycuahang-dinhgiaanpham') }}",
+                    method: 'GET',
+                    data: { keyword: keyword },
+                    success: function(response) {
+                        // Cập nhật lại nội dung của #searchResults trong bảng
+                        $('#searchResults').html($(response).find('#searchResults').html());
+                    }
+                });
+            });
+        }
+    </script> 
 @endsection
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        getDefualtColumns();
-        preventDefaultSelection();
-    });
-</script>
+
+

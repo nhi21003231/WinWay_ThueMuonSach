@@ -4,27 +4,36 @@ $(document).ready(function () {
     $('.btn-tk').removeAttr('disabled');
   });
 
-  // -----------Thay đổi nút lưu
+  // -----------Change bg button update re-order
   var input = $('#form-dondattruoc').find('input, select');
 
   input.on('input', function (e) {
-
     e.preventDefault();
     $('#btn-Luu').removeClass('pe-none opacity-50');
   });
 
-  // Ajax search
+  // ------------------show notify delte customer
+  $('.btn-xoakh').click(function (e) {
+    const confirmation = confirm('Bạn có chắc chắn muốn xóa khách hàng này không?');
+    if (confirmation) {
+      
+      $('.btn-xoakh').attr('type', 'submit');
 
-  // Thiết lập CSRF token cho tất cả các yêu cầu AJAX
+    }
+  });
+
+  // ---------------------------------------------------------------AJAX-------------------------------------------------------------------------------//
+
+  // -------------------------Ajax search
+  // Setup CSRF token for all request Ajax
   $.ajaxSetup({
-
     headers: {
-      'X-CSRF-TOKEN': '{{ csrf_token() }}',
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
     },
   });
 
+  // --------------------Orderby in Ajax
   $('#sapxepDTT').change(function (e) {
-
     e.preventDefault();
 
     $.ajax({
@@ -33,7 +42,7 @@ $(document).ready(function () {
       url: '/nhan-vien/don-dat-truoc',
 
       data: {
-        search: $(this).val(), // Sử dụng giá trị của dropdown
+        search: $(this).val(),
       },
       success: function (data) {
         $('#list-DTT').html(data);
@@ -44,9 +53,8 @@ $(document).ready(function () {
     });
   });
 
-  // Xử lí khi phân trang khi Ajax
+  // -----------------------handle pagination when search ajax
   $(document).on('click', '.pagination a', function (e) {
-
     const url = $(this).attr('href');
     // const searchValue = $('input[name="TimKiem"]').val();
     const sortValue = $('#sapxepDTT').val();
@@ -64,24 +72,12 @@ $(document).ready(function () {
     });
   });
 
-  // hiển thị thông báo xóa
-  $('.btn-xoakh').click(function (e) {
-
-    const confirmation = confirm('Bạn có chắc chắn muốn xóa khách hàng này không?');
-    if (confirmation) {
-      // Submit form nếu người dùng xác nhận
-      $('.btn-xoakh').attr('type', 'submit');
-    }
-  });
-
-  // Ajax request dữ liệu cập nhật
+  // -------------Ajax Request infor Customer for function update
   $('.btn-update').click(function () {
-
     var eventID = $(this).attr('data-event-id');
     $('#customerID').val(eventID);
     // Ajax
     $.ajax({
-
       type: 'get',
       url: '/nhan-vien/customer-info',
       data: {
@@ -94,28 +90,24 @@ $(document).ready(function () {
     });
   });
 
-
-  // Lấy tất cả ô input
+  // -------------------Get all input in form modal customer
   $('#modal-khachhang').on('shown.bs.modal', function () {
-
     var findInputModal = $('.modal-body').find('input');
     findInputModal.on('input', function () {
       $('.btn-modal-update').removeAttr('disabled');
     });
   });
 
-  // lắng nghe sự kiện submit form
+  // -------------------listen event submit form update customer
   $('#form-capnhatCustomer').on('submit', function (e) {
-
     e.preventDefault();
 
     var eventID = $('.btn-update').attr('data-event-id');
     $('#customerID').val(eventID);
 
     var formData = $(this).serialize();
-    var csrfToken = $('input[name="_token"]').val();
 
-    // // Ajax
+    //----------Ajax
     $.ajax({
       type: 'PUT',
       url: '/nhan-vien/quan-ly-khach-hang/cap-nhat',
@@ -125,20 +117,19 @@ $(document).ready(function () {
 
         if (response.success) {
           toastr.success(response.message, 'Thành công', {
-            positionClass: 'toast-bottom-right', // Định vị trí thông báo
-            timeOut: '2000', // Thời gian tự động ẩn
+            positionClass: 'toast-bottom-right', 
+            timeOut: '2000', // set time hidden notify
             closeButton: true,
             newestOnTop: false,
           });
         }
-
+        // -----------Set time reload page
         setTimeout(() => {
           location.reload();
         }, 1500);
-
       },
+      // ---------------when request return errors
       error: function (xhr) {
-        
         if (xhr.status == 422) {
           var errors = xhr.responseJSON.errors;
           $('.text-danger').text('');
@@ -149,4 +140,48 @@ $(document).ready(function () {
       },
     });
   });
+
+  // ---------------Request create report with Ajax
+  $('.btn-report').click(function () {
+    var data = {
+      loaibc: $('#loaibc').val(),
+      danhmuc: $('#danhmuc').val(),
+      startdate: $('#startdate').val(),
+      enddate: $('#enddate').val(),
+    };
+
+    // console.log(data);
+    // ----------------Ajax
+    $.ajax({
+      type: 'post',
+      url: '/quan-ly-kho/tao-bao-cao',
+      data: data,
+      success: function (response) {
+        $('.main-report ').html(response);
+        $('#action-report').removeClass('d-none');
+        $('.text-danger').text('');
+        // console.log(response);
+      },
+      error: function (xhr) {
+        // --------------When request return with errors
+        if (xhr.status == 422) {
+          $('.main-report ').text('');
+          $('#action-report').addClass('d-none');
+          var errors = xhr.responseJSON.errors;
+          $('.text-danger').text('');
+          $.each(errors, function (key, value) {
+            $('#error-' + key).text(value[0]);
+          });
+        }
+      },
+    });
+  });
+  // ---Canncel function Create Report----------------------------------------------------------------------------
+  $('#cancel-report').click(function(){
+    location.reload()
+  })
+  // -------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------
 });
