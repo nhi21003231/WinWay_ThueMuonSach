@@ -8,29 +8,29 @@
           </td>
         </tr>
         <tr>
-          <th scope="col"></th>
-          <th scope="col">Tên Khách Hàng</th>
-          <th scope="col">Tên Sản Phẩm</th>
-          <th scope="col">Ngày Đặt</th>
-          <th scope="col"></th>
+          <th scope="col" class="text-center"></th>
+          <th scope="col" class="text-center">Tên Khách Hàng</th>
+          <th scope="col" class="text-center">Tên Ấn phẩm</th>
+          <th scope="col" class="text-center">Ngày Đặt</th>
+          <th scope="col" class="text-center"></th>
         </tr>
       </thead>
       <tbody>
         @php
         $stt = 1;
         @endphp
-        @foreach ($hoaDons as $items)
+        @foreach ($hoaDons as $item)
         <tr>
-          <td class="align-middle" scope="row">{{ $stt++ }}</td>
-          <td class="align-middle">{{ $items->khachHang->hoten }}</td>
-          <td class="align-middle">
-            @foreach ($items->chiTietHoaDons as $chitiet)
-            <p>{{ $chitiet->dsAnPham->chiTietAnPhams->tenanpham }}</p>
+          <td class="text-center align-middle" scope="row">{{ $stt++ }}</td>
+          <td class="text-center align-middle">{{ $item->khachHang->hoten }}</td> 
+          <td class="text-center align-middle">
+            @foreach ($item->chiTietHoaDons as $chitiet)
+            <p class="m-0 p-1">{{ $chitiet->dsAnPham->chiTietAnPham->tenanpham }}</p>
             @endforeach
           </td>
-          <td class="align-middle">{{ $items->ngaythue }}</td>
-          <td class="align-middle"><button type="button" class="btn btn-warning"><a class="nav-link text-white"
-                href="{{ URL::to('nhan-vien/don-dat-truoc/'.$items->mahoadon.'/chi-tiet') }}">Xem</a></button></td>
+          <td class="text-center align-middle">{{ $item->ngaythue }}</td>
+          <td class="text-center align-middle"><button type="button" class="btn btn-warning"><a class="nav-link text-white"
+                href="{{ URL::to('nhan-vien/don-dat-truoc/'.$item->mahoadon.'/chi-tiet') }}">Xem</a></button></td>
         </tr>
         @endforeach
       </tbody>
@@ -38,7 +38,7 @@
     {{ $hoaDons->appends(request()->input())->onEachSide(1)->links() }}
   </div>
 @else
-<div class="alert alert-info text-center" role="alert">
+<div class="alert alert-info text-center fw-bold" role="alert">
   Không có đơn đặt trước nào được tìm thấy.
 </div>
 @endif

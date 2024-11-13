@@ -3,8 +3,8 @@
 <div class="right row">
     <form class="col-6 mb-3" action="" method="GET">
         <div class="row ps-4">
-            <input type="text" class="form-control col-9 w-auto" placeholder="Tìm kiếm..." value="" name="TimKiem">
-            <button type="submit" class="ms-2 btn btn-primary col-3" value="TimKiem">Tìm kiếm</button>
+            <input type="text" class="form-control col-9 w-auto input-tk" placeholder="Tìm kiếm..." value="{{ old('TimKiem') }}" name="TimKiem">
+            <button type="submit" class="ms-2 btn btn-primary col-3 btn-tk" value="TimKiem" disabled>Tìm kiếm</button>
         </div>
     </form>
     <div class="col-6 mb-3 d-flex justify-content-end">

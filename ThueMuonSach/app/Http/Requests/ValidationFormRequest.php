@@ -23,9 +23,9 @@ class ValidationFormRequest extends FormRequest
     {
         return [
             //
-            'tenkhachhang'=>'required',
+            'tenkhachhang' => 'required|regex:/^[^!@#$%^&*()<>?\/\{}`~\.\,:;0-9\[\]]+$/',
 
-            'sodienthoai' => 'required|min:10|max:20',
+            'sodienthoai' => 'required|regex:/^0[1-9][0-9]{8}$/',
 
             'loaidon' => 'required',
 
@@ -42,12 +42,12 @@ class ValidationFormRequest extends FormRequest
         return [
 
             'tenkhachhang.required' => 'Vui lòng nhập tên khách hàng',
-            
+
+            'tenkhachhang.regex' => 'Họ tên không chứa số và kí tự đặc biệt',
+
             'sodienthoai.required' => 'vui lòng nhập số điện thoại',
 
-            'sodienthoai.min' => 'Số điện thoại phải đủ 10 số',
-
-            'sodienthoai.max' => 'Số điện thoại không vượt quá 10 số',
+            'sodienthoai.regex' => 'Số điện thoại không đúng định dạng',
 
             'diachi.required' => 'Vui lòng nhập địa chỉ',
 

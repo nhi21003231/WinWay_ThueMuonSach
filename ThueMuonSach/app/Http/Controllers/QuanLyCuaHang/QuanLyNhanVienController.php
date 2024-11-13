@@ -118,4 +118,5 @@ class QuanLyNhanVienController extends Controller
 
         return redirect()->back()->with('success', 'Cập nhật nhân viên thành công.');
     }
+
 }

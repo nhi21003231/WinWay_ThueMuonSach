@@ -1,0 +1,5 @@
+.bs-scroll {
+  max-height: 60vh;
+  overflow-y: scroll;
+  overflow-x: auto;
+}
