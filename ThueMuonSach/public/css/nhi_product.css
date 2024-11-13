@@ -1,0 +1,63 @@
+/* Danh sách ấn phẩm (sản phẩm) */
+.product-details {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Khoảng cách giữa các sản phẩm */
+    justify-content: center; /* Căn giữa các sản phẩm */
+}
+
+.product__details__pic {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 250px; /* Điều chỉnh kích thước tối đa cho mỗi sản phẩm */
+    transition: transform 0.2s ease;
+}
+
+.product__details__pic:hover {
+    transform: translateY(-5px);
+}
+
+.product__image {
+    width: 100%;
+    height: 200px; /* Đảm bảo chiều cao của các hình ảnh bằng nhau */
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.product__details__text {
+    padding: 10px 0;
+}
+
+.product__details__text h5 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.product__details__text p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .product__details__pic {
+        width: 100%; /* Cho phép sản phẩm chiếm toàn bộ chiều rộng */
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .product__details__text h5 {
+        font-size: 18px;
+    }
+}

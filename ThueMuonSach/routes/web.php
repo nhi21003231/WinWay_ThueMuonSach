@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KhachHang\ChiTietAnPhamController;
+use App\Http\Controllers\KhachHang\DanhSachAnPhamController;
 use App\Http\Controllers\KhachHang\GioHangController;
 use App\Http\Controllers\KhachHang\ThueAnPhamController;
 use App\Http\Controllers\KhachHang\TrangChuController;
@@ -20,10 +21,12 @@ use App\Http\Controllers\QuanLyKho\QuanLyDanhMucController;
 use App\Http\Controllers\QuanLyKho\TaoBaoCaoController;
 use App\Http\Controllers\KhachHang\LienHeController;
 use App\Http\Controllers\KhachHang\ChinhSachController;
+use App\Http\Controllers\KhachHang\TimKiemController;
 use App\Http\Controllers\QuanLyCuaHang\QuanLyDanhGiaController;
 use App\Http\Controllers\QuanLyKho\QuanLyTonKhoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\XacThucController;
+
 
 
 // 1 > Route đăng ký, đăng nhập (chung cho khách hàng và bên cửa hàng)
@@ -221,7 +224,6 @@ Route::prefix('/quan-ly-kho')->middleware('xac_thuc:quanlykho,admin')->group(fun
 Route::middleware('check_guest_or_customer')->group(function () {
     // -------- Route trang chủ
     Route::get('/', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-trangchu');
-
     // -------- Route chi tiết ấn phẩm
     Route::get('/chi-tiet-an-pham', [ChiTietAnPhamController::class, 'hienThiChiTietAnPham'])->name('route-khachhang-chitietanpham');
 
@@ -230,10 +232,12 @@ Route::middleware('check_guest_or_customer')->group(function () {
     Route::get('/lien-he', [LienHeController::class, 'LienHe'])->name('route-khachhang-lienhe');
 
     // -------- Route tìm kiếm ấn phẩm
-    Route::get('/tim-kiem-an-pham', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-timkiemanpham');
-
+    // Route::get('/tim-kiem-an-pham', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-timkiemanpham');
+    Route::get('/search', [TimKiemController::class, 'search'])->name('route-khachhang-timkiem');
     // -------- Route chính sách
     Route::get('/chinh-sach', [ChinhSachController::class, 'hienThiChinhSach'])->name('route-khachhang-chinhsach');
+    // -------- Route Danh sách ấn phẩm
+    Route::get('/danh-sach-an-pham', [DanhSachAnPhamController::class, 'hienThiDanhSachAnPham'])->name('route-khachhang-danhsachanpham');
 });
 
 
