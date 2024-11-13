@@ -9,7 +9,7 @@
                             <span>chưa nghĩ ra?</span>
                             <h2>ẤN PHẨM<br>TRI THỨC SINH VIÊN</h2>
                             <p>Có sẵn nhận và giao hàng miễn phí</p>
-                            <a href="{{ route('route-khachhang-chitietanpham') }}" class="primary-btn">XEM NGAY</a>
+                            <a href="{{ route('route-khachhang-danhsachanpham') }}" class="primary-btn">XEM NGAY</a>
                         </div>
                     </div>
                 </div>
@@ -25,6 +25,41 @@
                         <h2>Ấn phẩm nổi bật</h2>
                     </div>
                 </div>
+            </div>
+    </section>
+    @php
+    $chitietanpham = \App\Models\ChiTietAnPham::take(4)->get();
+    @endphp
+        <!-- Danh sách ấn phẩm -->
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                @if (isset($keyword) && $keyword)
+                    <div class="col-lg-12">
+                        <h5>Kết quả tìm kiếm cho "{{ $keyword }}"</h5>
+                    </div>
+                @endif
+
+                @forelse ($chitietanpham as $anPham)
+                    <div class="col-lg-3 col-md-4 mb-4">
+                        <div class="product__details__pic">
+                            <img src="{{ asset('/img/anh-an-pham/' . $anPham->hinhanh) }}" alt="{{ $anPham->tenanpham }}"
+                                class="product__image"
+                                onerror="this.onerror=null; this.src='{{ asset('/img/anh-an-pham/default.jpg') }}';">
+                            <div class="product__details__text">
+                                <a href="{{ route('route-khachhang-chitietanpham') }}"
+                                    class="primary-btn">{{ $anPham->tenanpham }}</a>
+                                    {{-- <a href="{{ route('route-khachhang-chitietanpham') }}"
+                                    class="primary-btn">{{ $ds_anpham->giathue }}</a> --}}
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-lg-12">
+                        <p>Không tìm thấy sản phẩm nào.</p>
+                    </div>
+                @endforelse
+            </div>
         </div>
     </section>
 @endsection

@@ -34,5 +34,6 @@ class ChiTietAnPham extends Model
 
         return $this->hasMany(DsAnPham::class,'mactanpham','mactanpham');
         
+        
     }
 }
