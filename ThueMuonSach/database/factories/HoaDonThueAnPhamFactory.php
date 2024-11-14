@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\HoaDonThueAnPham;
 use App\Models\KhachHang;
 use App\Models\NhanVien;
+use PhpOffice\PhpSpreadsheet\Calculation\TextData\Format;
+use Carbon\Carbon;
 
 class HoaDonThueAnPhamFactory extends Factory
 {
@@ -13,9 +15,14 @@ class HoaDonThueAnPhamFactory extends Factory
 
     public function definition(): array
     {
+
+        $ngayThue = $this->faker->dateTimeBetween('2024-10-01', '2024-12-31');
+
+        $ngayTra = Carbon::instance($ngayThue)->addDays(15);
+
         return [
-            'ngaythue' => $this->faker->date(),
-            'ngaytra' => $this->faker->date(),
+            'ngaythue' => $ngayThue->format('Y-m-d'),
+            'ngaytra' => $ngayTra->format('Y-m-d'),
             'phitracham' => $this->faker->randomFloat(2, 0, 100), // Phí trễ hạn ngẫu nhiên
             'ngaythanhtoan' => $this->faker->date(),
             'phuongthucthanhtoan' => $this->faker->randomElement(['Tiền mặt', 'Chuyển khoản']),

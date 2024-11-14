@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\KhachHang;
 use App\Models\TaiKhoan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -55,6 +56,12 @@ class TaiKhoanSeeder extends Seeder
             'vaitro' => 'khachhang',
         ]);
 
-        TaiKhoan::factory(10)->create();
+        $taikhoans = TaiKhoan::factory(50)->create();
+
+        foreach($taikhoans as $taikhoan){
+            KhachHang::factory()->create([
+                'mataikhoan' => $taikhoan->mataikhoan
+            ]);
+        }
     }
 }

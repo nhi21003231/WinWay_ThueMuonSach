@@ -10,6 +10,6 @@ class ChiTietHoaDonThueSeeder extends Seeder
     public function run(): void
     {
         // Tạo một số chi tiết hóa đơn thuê ngẫu nhiên
-        ChiTietHoaDonThue::factory()->count(50)->create();
+        // ChiTietHoaDonThue::factory()->count(50)->create();
     }
 }

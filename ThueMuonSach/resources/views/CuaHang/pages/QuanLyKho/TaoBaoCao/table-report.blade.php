@@ -1,6 +1,7 @@
 {{-- Không có dữ liệu --}}
-@if ($anphams->count() <= 0) <div class="alert alert-info text-center fw-bold mt-3" role="alert">
-  Không có dữ liệu
+@if ($anphams->count() <= 0) 
+  <div class="alert alert-info text-center fw-bold mt-3" role="alert">
+    Không có dữ liệu
   </div>
   @endif
   {{-- Variable php --}}

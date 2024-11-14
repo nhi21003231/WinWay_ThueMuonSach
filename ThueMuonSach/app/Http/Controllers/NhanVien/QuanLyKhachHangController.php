@@ -22,10 +22,10 @@ class QuanLyKhachHangController extends Controller
 
                 ->orwhere('dienthoai', 'like', '%' . $request->TimKiem . '%')
 
-                ->paginate(7);
+                ->paginate(4);
         } else {
 
-            $khachHangs = KhachHang::orderBy('hoten', 'asc')->paginate(7);
+            $khachHangs = KhachHang::orderBy('hoten', 'asc')->paginate(4);
         }
 
         return view('CuaHang.pages.NhanVien.QuanLyKhachHang.index', compact('khachHangs'));
@@ -75,6 +75,8 @@ class QuanLyKhachHangController extends Controller
     {
 
         $khachHang = KhachHang::where('makhachhang', $id)->first();
+        
+        // dd($khachHang->taikhoan);
 
         $hoaDon = HoaDonThueAnPham::where('makhachhang', $khachHang->makhachhang)
 
@@ -83,6 +85,12 @@ class QuanLyKhachHangController extends Controller
         if ($hoaDon->isNotEmpty()) {
 
             return redirect()->back()->with('error', 'Khách hàng vẫn còn đơn thuê không được xóa');
+        }
+
+        if($khachHang->taikhoan){
+
+            $khachHang->taikhoan->delete();
+
         }
 
         $khachHang->delete();

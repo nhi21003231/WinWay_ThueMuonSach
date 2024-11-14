@@ -16,9 +16,7 @@ $(document).ready(function () {
   $('.btn-xoakh').click(function (e) {
     const confirmation = confirm('Bạn có chắc chắn muốn xóa khách hàng này không?');
     if (confirmation) {
-      
       $('.btn-xoakh').attr('type', 'submit');
-
     }
   });
 
@@ -30,46 +28,6 @@ $(document).ready(function () {
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
     },
-  });
-
-  // --------------------Orderby in Ajax
-  $('#sapxepDTT').change(function (e) {
-    e.preventDefault();
-
-    $.ajax({
-      type: 'GET',
-
-      url: '/nhan-vien/don-dat-truoc',
-
-      data: {
-        search: $(this).val(),
-      },
-      success: function (data) {
-        $('#list-DTT').html(data);
-      },
-      error: function (xhr) {
-        console.error('AJAX Error:', xhr.responseText);
-      },
-    });
-  });
-
-  // -----------------------handle pagination when search ajax
-  $(document).on('click', '.pagination a', function (e) {
-    const url = $(this).attr('href');
-    // const searchValue = $('input[name="TimKiem"]').val();
-    const sortValue = $('#sapxepDTT').val();
-
-    $.ajax({
-      type: 'GET',
-      url: url,
-      data: {
-        // search: searchValue,
-        search: sortValue,
-      },
-      success: function (data) {
-        $('#list-DTT').html(data);
-      },
-    });
   });
 
   // -------------Ajax Request infor Customer for function update
@@ -117,7 +75,7 @@ $(document).ready(function () {
 
         if (response.success) {
           toastr.success(response.message, 'Thành công', {
-            positionClass: 'toast-bottom-right', 
+            positionClass: 'toast-bottom-right',
             timeOut: '2000', // set time hidden notify
             closeButton: true,
             newestOnTop: false,
@@ -177,9 +135,9 @@ $(document).ready(function () {
     });
   });
   // ---Canncel function Create Report----------------------------------------------------------------------------
-  $('#cancel-report').click(function(){
-    location.reload()
-  })
+  $('#cancel-report').click(function () {
+    location.reload();
+  });
   // -------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------
