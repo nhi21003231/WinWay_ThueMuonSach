@@ -61,6 +61,11 @@
 <script src="{{ asset('js/thanhba.js') }}"></script>
 <script src="{{ asset('js/quanlycuahang.js') }}"></script>
 
+{{-- link thư viện vẽ chart --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+
 {{-- link thư viện thông báo (Toastr.js) --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
