@@ -79,4 +79,13 @@ class TaoKhuyenMaiController extends Controller
         // Điều hướng về trang khuyến mãi với thông báo cập nhật thành công
         return redirect()->back()->with('success', 'Cập nhật khuyến mãi thành công.');
     }
+
+    public function xoaCTKhuyenMai($id)
+    {
+        $khuyenMai = ChuongTrinhKhuyenMai::findOrFail($id);
+
+        $khuyenMai->delete();
+
+        return redirect()->back()->with('success', 'Khuyến mãi đã được xóa thành công.');
+    }
 }

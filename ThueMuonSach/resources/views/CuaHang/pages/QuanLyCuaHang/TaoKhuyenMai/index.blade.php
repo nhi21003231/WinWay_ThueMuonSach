@@ -95,7 +95,7 @@
                                 <th id="col-mota">Mô tả</th>
                                 <th id="col-ngayapdung">Ngày áp dụng</th>
                                 <th id="col-ngayketthuc">Ngày kết thúc</th>
-                                {{-- <th>Actions</th> --}}
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="searchResults">
@@ -120,7 +120,8 @@
                                         <td class="col-ngayketthuc">
                                             <input type="datetime-local" class="form-control" name="ngayketthuc[]" value="{{ \Carbon\Carbon::parse($khuyenmai->ngayketthuc)->format('Y-m-d\TH:i') }}">
                                         </td>
-                                        {{-- <td>
+                                        {{-- xoa --}}
+                                        <td>
                                             <button 
                                                 data-bs-toggle="modal" 
                                                 data-bs-target="#delete{{ $khuyenmai->mactkm }}" 
@@ -130,28 +131,28 @@
                                                 class="btnDelete">
                                                 <i class="fas fa-trash text-danger"></i>
                                             </button> 
-                                        </td> --}}
+                                        </td>
                                         <!-- Modal Xóa -->
-                                        {{-- <div class="modal fade" id="delete{{ $nhanvien->manhanvien }}" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
+                                        <div class="modal fade" id="delete{{ $khuyenmai->mactkm }}" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Xóa nhân viên</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Xóa khuyến mãi</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        Bạn muốn xóa nhân viên này?
+                                                        Bạn muốn xóa khuyến mãi này?
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                        <form action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien.xoaNhanVien', $nhanvien->manhanvien) }}" method="POST">
+                                                        <form action="{{ route('route-cuahang-quanlycuahang-taokhuyenmai.xoaCTKhuyenMai', $khuyenmai->mactkm) }}" method="POST">
                                                             @csrf
                                                             <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
                                                         </form>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                     </tr>  
                                 @endforeach
                             @endif
