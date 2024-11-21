@@ -1,69 +1,112 @@
 @extends('CuaHang.layouts.index')
 
 @section('content')
-<div class="container">
-    <h2 class="text-center my-4">Báo cáo hóa đơn thuê tháng {{ $month }} năm {{ $year }}</h2>
+    <!-- Biểu đồ -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- Thêm plugin datalabels -->
 
     <!-- Form chọn tháng và năm -->
-    <form action="{{ route('route-cuahang-quanlycuahang-xembaocao') }}" method="GET" class="form-inline mb-3 justify-content-center">
-        <div class="form-group mx-2">
-            <label for="month">Chọn tháng:</label>
-            <select name="month" id="month" class="form-control">
-                @for ($m = 1; $m <= 12; $m++)
-                    <option value="{{ $m }}" {{ $m == $month ? 'selected' : '' }}>{{ $m }}</option>
-                @endfor
-            </select>
+    <form action="{{ route('route-cuahang-quanlycuahang-xembaocao') }}" method="GET" class="mb-4">
+        <div class="row align-content-center">
+            <div class="col-md-3">
+                <label for="year" class="form-label">Năm</label>
+                <select style="border: 2px solid rgb(5, 173, 240)" class="form-select" id="year" name="year" required>
+                    @for ($i = 2020; $i <= date('Y'); $i++)
+                        <option value="{{ $i }}" {{ request('year') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                    @endfor
+                </select>
+            </div>
+            <div class="col-md-3 align-self-end">
+                <button type="submit" class="btn btn-primary">Xem Biểu Đồ</button>
+            </div>
         </div>
-        <div class="form-group mx-2">
-            <label for="year">Chọn năm:</label>
-            <select name="year" id="year" class="form-control">
-                @for ($y = date('Y'); $y >= date('Y') - 5; $y--)
-                    <option value="{{ $y }}" {{ $y == $year ? 'selected' : '' }}>{{ $y }}</option>
-                @endfor
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Xem báo cáo</button>
     </form>
 
-    <!-- Bảng hiển thị hóa đơn -->
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped mt-4">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Khách hàng</th>
-                    <th>Ngày thuê</th>
-                    <th>Ngày trả</th>
-                    <th>Trạng thái</th>
-                    <th>Sản phẩm thuê</th>
-                    <th>Số lượng</th>
-                    <th>Thành tiền (VND)</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($hoaDonThue as $hoaDon)
-                    @foreach ($hoaDon->chiTietHoaDons as $chiTiet)
-                        <tr>
-                            @if ($loop->first) <!-- Chỉ hiển thị tên khách hàng và thông tin hóa đơn 1 lần -->
-                                <td>{{ $hoaDon->khachHang->hoten }}</td>
-                                <td>{{ \Carbon\Carbon::parse($hoaDon->ngaythue)->format('d/m/Y') }}</td>
-                                <td>{{ \Carbon\Carbon::parse($hoaDon->ngaytra)->format('d/m/Y') }}</td>
-                                <td>{{ $hoaDon->trangthai }}</td>
-                                <td>{{ $chiTiet->dsAnPham->tenanpham }}</td>
-                                <td>{{ $chiTiet->soluongthue }}</td>
-                                <td>{{ number_format($chiTiet->tienthue, 2) }}</td>
-                            @else
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>{{ $chiTiet->dsAnPham->tenanpham }}</td>
-                                <td>{{ $chiTiet->soluongthue }}</td>
-                                <td>{{ number_format($chiTiet->tienthue, 2) }}</td>
-                            @endif
-                        </tr>
-                    @endforeach
-                @endforeach
-            </tbody>
-        </table>
+    <!-- Biểu đồ -->
+    <div class="card">
+        <div class="card-body">
+            <canvas id="myChart" width="400" height="200"></canvas>
+        </div>
     </div>
-</div>
+
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar', // Loại biểu đồ bar
+            data: {
+                labels: {!! json_encode($labels) !!}, // Dữ liệu tháng
+                datasets: [{
+                    label: 'Doanh Thu',
+                    data: {!! json_encode($data) !!}, // Dữ liệu doanh thu
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Màu nền của các cột
+                    borderColor: 'rgba(54, 162, 235, 1)', // Màu viền của các cột
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        ticks: {
+                            color: 'red', // Màu xanh cho tên các tháng
+                            font: {
+                                size: 14, // Kích thước chữ cho tên tháng
+                                weight: 'bold', // In đậm tên tháng
+                            }
+                        },
+                        title: {
+                            display: true, // Hiển thị tiêu đề
+                            text: 'Doanh Thu Theo Tháng (Năm {{ request("year", date("Y")) }})', // Tiêu đề của trục X
+                            font: {
+                                size: 16, // Kích thước chữ của tiêu đề
+                                weight: 'bold', // In đậm tiêu đề
+                                style: 'italic' // Đổi chữ thành in nghiêng
+                            },
+                            color: '#2e9f0b', // Màu của tiêu đề
+                            padding: {top: 20} // Khoảng cách giữa tiêu đề và các cột
+                        }
+                    },
+                    y: {
+                        beginAtZero: true, // Đảm bảo trục Y bắt đầu từ 0
+                        ticks: {
+                            callback: function(value) {
+                                return value.toLocaleString(); // Hiển thị đơn vị với dấu phân cách hàng nghìn
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true, // Hiển thị legend (chú thích)
+                        position: 'top', // Vị trí của legend
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.raw.toLocaleString() + ' VND'; // Hiển thị doanh thu với đơn vị VND
+                            }
+                        }
+                    },
+                    datalabels: {
+                        color: '#2a76e7', // Màu sắc của số hiển thị
+                        font: {
+                            weight: 'bold', // In đậm số
+                            size: 12
+                        },
+                        formatter: function(value) {
+                            // Chỉ hiển thị số khi giá trị > 0 và thêm VND
+                            if (value > 0) {
+                                return value.toLocaleString() + ' VND'; // Định dạng số để hiển thị dấu phân cách hàng nghìn và VND
+                            }
+                            return ''; // Nếu giá trị là 0, không hiển thị gì
+                        },
+                        anchor: 'end',
+                        align: 'top',
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+    </script>
+
 @endsection

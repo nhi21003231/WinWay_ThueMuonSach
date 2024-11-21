@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class TaiKhoan extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
     protected $table = 'taikhoan'; // Liên kết tới bảng tai_khoan
 
@@ -43,4 +45,5 @@ class TaiKhoan extends Authenticatable
 
         return $this->belongsTo(NhanVien::class,'mataikhoan','mataikhoan');
     }
+
 }

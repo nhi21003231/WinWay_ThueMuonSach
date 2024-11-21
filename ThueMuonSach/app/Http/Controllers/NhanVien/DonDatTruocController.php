@@ -18,51 +18,39 @@ class DonDatTruocController extends Controller
 
     public function hienThiDonDatTruoc(Request $request)
     {
-        if ($request->ajax()) {
 
-            $query = HoaDonThueAnPham::where('loaidon', 'Đặt trước')->where('trangthai','Đang thuê');
+        // dd($request->all());
 
-            if ($request->search == 'moinhat') {
+        $query = HoaDonThueAnPham::where('loaidon', 'Đặt trước')->where('trangthai', 'Đang thuê');
 
-                $hoaDons = $query->orderBy('ngaythue', 'desc')->paginate(8);
+        if ($request->sort == 'moinhat') {
 
-            } else if ($request->search === 'cunhat') {
+            $hoaDons = $query->orderBy('ngaythue', 'desc')->paginate(5);
 
-                $hoaDons = $query->orderBy('ngaythue', 'asc')->paginate(8);
+        }
 
-            } else {
+        if ($request->sort == 'cunhat') {
 
-                $hoaDons = $query->paginate(8);
-            }
+            $hoaDons = $query->orderBy('ngaythue', 'asc')->paginate(5);
 
-            return view('CuaHang.pages.NhanVien.DonDatTruoc.ajax-don-dat-truoc', compact('hoaDons'));
         }
 
         // Xử lý tìm kiếm
-        if ($request->TimKiem != '') {
+        if ($request->has('TimKiem') && $request->TimKiem != '') {
 
-            $hoaDons = HoaDonThueAnPham::where('loaidon','Đặt trước')->where('trangthai','Đang thuê')
-            
-            ->whereHas('chiTietHoaDons.dsAnPham.chiTietAnPham', function ($query) use ($request) {
+            $query->whereHas('chiTietHoaDons.dsAnPham.chiTietAnPham', function ($query) use ($request) {
 
                 $query->where('tenanpham', 'like', '%' . $request->TimKiem . '%');
 
-            })
-            
-            ->orWhere(function ($query) use ($request) {
+            })->orWhereHas('khachHang', function ($query) use ($request) {
 
-                $query->whereHas('khachHang', function ($query) use ($request) {
+                $query->where('hoten', 'like', '%' . $request->TimKiem . '%');
 
-                    $query->where('hoten', 'like', '%' . $request->TimKiem . '%');
+            })->paginate(5);
 
-                });
-
-            })->paginate(7);
-            
-        } else {
-
-            $hoaDons = HoaDonThueAnPham::where('loaidon', 'Đặt trước')->where('trangthai','Đang thuê')->paginate(7);
         }
+
+        $hoaDons = $query->paginate(5);
 
         return view('CuaHang.pages.NhanVien.DonDatTruoc.index', compact('hoaDons'));
     }

@@ -5,10 +5,13 @@
         @include('Khachhang.layouts.header')
     </div>
 
-    <div class="content p-3" style="height: 1800px; background-color: rgb(234, 227, 240)">
+    {{-- <div class="content p-3" style="height: 800px; background-color: rgb(234, 227, 240)">
+        @yield('content')
+    </div> --}}
+    <div class="content p-3" style="min-height: 800px; background-color: rgb(234, 227, 240)">
         @yield('content')
     </div>
-
+    
     <div class="footer p-3" style="height: 300px; background-color: rgb(161, 161, 161)">
         @include('Khachhang.layouts.footer')
     </div>

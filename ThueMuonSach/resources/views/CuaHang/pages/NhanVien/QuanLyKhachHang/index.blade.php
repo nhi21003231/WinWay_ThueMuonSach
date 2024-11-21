@@ -53,7 +53,7 @@
         <td scope="row" class="align-middle">
           <button type="button" class="btn btn-warning btn-update" data-bs-toggle="modal"
             data-event-id="{{ $khachHang->makhachhang }}" data-bs-target="#modal-khachhang"><i
-              class="fa-regular fa-pen-to-square text-black"></i></button>
+              class="fa-regular fa-pen-to-square text-primary"></i></button>
           <form class="m-0 mt-2" action="{{ URL::to('nhan-vien/quan-ly-khach-hang/'.$khachHang->makhachhang) }}"
             method="post">
             @csrf

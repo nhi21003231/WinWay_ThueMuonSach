@@ -19,4 +19,4 @@ css tại public/css/app.css
 THƯỜNG XUYÊN PULL CODE, TẢI CSDL MỚI VỀ ĐỂ CHẠY, CŨNG THƯỜNG XUYÊN PUSH CODE LÊN (LÀM TỚI ĐÂU PUSH TỚI ĐÓ, ĐỂ NHIỀU PUSH LÊN DỄ BỊ TRÙNG SỬA THẤY BÀ LUÔN ĐÓ)
 -- Nên sử dụng full tiếng việt cho thống nhất nhe, từ tên biến, tên hàm luôn
 -----------------------------------------------------
-vào file php.ini => tìm extensions=gd => bỏ dấu chấm phải => sau đó chạy composer update 
+vào file php.ini => tìm extension=gd => bỏ dấu chấm phải => sau đó chạy composer update 

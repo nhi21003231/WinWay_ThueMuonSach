@@ -16,13 +16,16 @@ class KhachHangFactory extends Factory
 
     public function definition(): array
     {
+
+        $phoneNunber = '0' .$this->faker->randomElement(['9','8','6','3']) .$this->faker->numerify('########');
+        
         return [
             'hoten' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'dienthoai' => $this->faker->phoneNumber(),
+            'dienthoai' => $phoneNunber,
             'diachi' => $this->faker->address(),
             'lathanhvien' => $this->faker->boolean(),
-            'mataikhoan' => TaiKhoan::where('vaitro', 'khachhang')->inRandomOrder()->first()->mataikhoan, // Chỉ chọn tài khoản có vai trò "khachhang"
+            // 'mataikhoan' => TaiKhoan::where('vaitro', 'khachhang')->inRandomOrder()->first()->mataikhoan, // Chỉ chọn tài khoản có vai trò "khachhang"
 
         ];
     }

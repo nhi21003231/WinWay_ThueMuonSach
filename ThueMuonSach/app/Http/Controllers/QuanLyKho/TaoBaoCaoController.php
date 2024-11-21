@@ -42,7 +42,6 @@ class TaoBaoCaoController extends Controller
                 $query->where('created_at', '>=', $request->startdate);
             }
 
-            // dd($query->get());
             if(isset($request->enddate)){
 
                 $query->where('created_at','<=',$request->enddate);
@@ -50,6 +49,8 @@ class TaoBaoCaoController extends Controller
             }
 
             $anphams = $query->get();
+
+            // dd($anphams);
     
         }
 

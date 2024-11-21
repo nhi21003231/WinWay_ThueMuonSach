@@ -19,9 +19,9 @@ class KhachHangSeeder extends Seeder
             'dienthoai' => '0901234567',
             'diachi' => '123 Đường ABC, Quận 1, TP.HCM',
             'lathanhvien' => true,
-            'mataikhoan' => 7,
+            'mataikhoan' => 51,
         ]);
 
-        KhachHang::factory(50)->create();
+        // KhachHang::factory(20)->create();
     }
 }

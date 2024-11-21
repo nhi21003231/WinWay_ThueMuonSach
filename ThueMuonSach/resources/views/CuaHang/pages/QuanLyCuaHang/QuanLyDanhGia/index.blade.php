@@ -87,7 +87,7 @@
                                         </select>
                                     </td>
                                     
-                                    <td>
+                                    <td class="">
                                         <button 
                                             data-bs-toggle="modal" 
                                             data-bs-target="#delete{{ $danhgia->madanhgia }}" 
@@ -98,6 +98,7 @@
                                             <i class="fas fa-trash text-danger"></i>
                                         </button> 
                                     </td>
+
                                     <!-- Modal Xóa -->
                                     <div class="modal fade" id="delete{{ $danhgia->madanhgia }}" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -111,7 +112,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                    <form action="{{ route('route-cuahang-quanlycuahang-quanlydanhgia.xoaDanhGia', $danhgia->madanhgia) }}" method="POST">
+                                                    <form action="{{ route('route-cuahang-quanlycuahang-quanlydanhgia.xoaDanhGia', $danhgia->madanhgia) }}" method="DELETE">
                                                         @csrf
                                                         <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
                                                     </form>

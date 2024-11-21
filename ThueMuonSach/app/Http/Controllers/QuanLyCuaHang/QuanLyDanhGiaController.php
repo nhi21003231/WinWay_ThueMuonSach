@@ -62,17 +62,13 @@ class QuanLyDanhGiaController extends Controller
 
     public function xoaDanhGia($id)
     {
+        // Tìm đánh giá cần xóa
         $danhGia = DanhGia::findOrFail($id);
 
-        // Xóa tài khoản tương ứng
-        $danhgia = DanhGia::find($danhGia->mataikhoan);
-        if ($danhgia) {
-            $danhgia->delete();
-        }
-
-        // Xóa nhân viên
+        // Xóa đánh giá
         $danhGia->delete();
 
+        // Trả về thông báo thành công
         return redirect()->back()->with('success', 'Đánh giá đã được xóa thành công.');
     }
 }

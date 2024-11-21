@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class KhachHang extends Model
 {
@@ -25,9 +26,9 @@ class KhachHang extends Model
     ];
 
     // Định nghĩa quan hệ với bảng TaiKhoan
-    public function taikhoan()
+    public function taikhoan():HasOne
     {
-        return $this->belongsTo(TaiKhoan::class, 'mataikhoan', 'mataikhoan');
+        return $this->hasOne(TaiKhoan::class, 'mataikhoan', 'mataikhoan');
     }
 
     public function hoadons(): HasMany
