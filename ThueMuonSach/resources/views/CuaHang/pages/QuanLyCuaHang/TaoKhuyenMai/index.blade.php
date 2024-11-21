@@ -145,7 +145,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                        <form action="{{ route('route-cuahang-quanlycuahang-taokhuyenmai.xoaCTKhuyenMai', $khuyenmai->mactkm) }}" method="POST">
+                                                        <form action="{{ route('taoKhuyenMai.xoaCTKhuyenMai', $khuyenmai->mactkm) }}" method="POST">
                                                             @csrf
                                                             <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
                                                         </form>
