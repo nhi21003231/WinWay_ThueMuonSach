@@ -13,9 +13,6 @@ return new class extends Migration
     {
         Schema::create('chitiethoadonthue', function (Blueprint $table) {
             $table->integer('macthoadon')->autoIncrement();
-            $table->integer('soluongthue');
-            $table->decimal('tiencoc', 10, 2);
-            $table->decimal('tienthue', 10, 2);
             $table->integer('maanpham'); 
             $table->integer('mahoadon'); 
 

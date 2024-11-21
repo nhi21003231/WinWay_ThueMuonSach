@@ -16,11 +16,14 @@ return new class extends Migration
             $table->date('ngaythue');
             $table->date('ngaytra');
             $table->decimal('phitracham', 10, 2);
+            $table->decimal('thanhtien', 10, 2)->nullable();
             $table->date('ngaythanhtoan');
-            $table->enum('phuongthucthanhtoan', ['Tiền mặt', 'Chuyển khoản']);
+            $table->enum('phuongthucthanhtoan', ['Momo', 'Chuyển khoản']);
+            $table->string('mathamchieu', 100)->nullable();
             $table->enum('loaidon', ['Đặt trước', 'Đơn thuê']);
-            $table->enum('trangthai', ['Đang thuê', 'Đã trả']);
-            $table->integer('manhanvien'); // Thêm cột khóa ngoại
+            $table->enum('trangthai', ['Đang xử lý', 'Đang thuê', 'Đã trả']); 
+            $table->integer('soluongthue')->nullable();
+            $table->integer('manhanvien')->nullable(); // Thêm cột khóa ngoại
             $table->integer('makhachhang'); // Thêm cột khóa ngoại
             
             $table->foreign('manhanvien')->references('manhanvien')->on('nhanvien')->onDelete('cascade');
