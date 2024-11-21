@@ -5,8 +5,8 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="footer__about">
                     <div class="footer__about__logo" style="line-height: 150px">
-                        <a href="./index.html"><img src="img/logo1.png" alt="" width="50%"
-                                style="margin-left: 170px;"></a>
+                        <a href="{{ route('route-khachhang-trangchu') }}"><img src="{{ asset('img/logo1.png') }}" alt="" width="50%"
+                            style="margin-left: 170px;"></a>
                     </div>
                 </div>
             </div>

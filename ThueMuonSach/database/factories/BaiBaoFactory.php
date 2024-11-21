@@ -15,6 +15,7 @@ class BaiBaoFactory extends Factory
         return [
             'tieude' => $this->faker->sentence(5),
             'noidung' => $this->faker->paragraph(),
+            'hinhanh' => 'Doraemon1.jpg', // Hình ảnh mặc định
             'ngaydang' => $this->faker->date(),
             'manhanvien' => NhanVien::inRandomOrder()->first()->manhanvien, // Lấy nhân viên ngẫu nhiên
         ];

@@ -1,112 +1,64 @@
 @extends('KhachHang.layouts.index')
 
 @section('content')
-    <h1>Giỏ hàng</h1>
+<div class="container my-4">
+    <h2 class="mb-4">Giỏ hàng của bạn</h2>
 
-    <style>
-        .product-img {
-            width: 80px;
-            height: auto;
-        }
-        .remove-product {
-            color: red;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
+    <!-- Kiểm tra giỏ hàng có sản phẩm không -->
+    @if($cartItems && $cartItems->count() > 0)
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Tên sách</th>
+                    <th>Số lượng</th>
+                    <th>Giá cọc</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($cartItems as $item)
+                    <tr>
+                        <!-- Hình ảnh sách -->
+                        <td class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('img/anh-an-pham/' . $item->anPham->chiTietAnPham->hinhanh) }}" alt="{{ $item->anPham->chiTietAnPham->tenanpham }}" style="width: 80px; height: auto;">
+                        </td>
 
-<div class="container mt-5">
-    <h2>Giỏ Hàng Của Bạn (3 Sản Phẩm)</h2>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Sản phẩm</th>
-                <th>Đơn giá</th>
-                <th>Số lượng</th>
-                <th>Thành tiền</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Sản phẩm 1 -->
-            <tr>
-                <td>
-                    <div class="d-flex">
-                        <img src="{{ asset('img/SacXanhConMai.jpg') }}" alt="Sắc Xanh Còn Mãi" class="product-img me-3">
-                        <div>
-                            <strong>Sắc Xanh Còn Mãi - Góc Tối Học Đường Và Cuộc Đấu Tranh Cô Đơn Của Một Trái Tim Thuần Khiết</strong>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <span class="text-muted text-decoration-line-through">90.000đ</span> <strong>80.100đ</strong>
-                </td>
-                <td>
-                    <input type="number" value="1" min="1" class="form-control" style="width: 60px;" readonly>
-                </td>
-                <td><strong>80.100đ</strong></td>
-                <td>
-                    <span class="remove-product">Bỏ qua sản phẩm</span>
-                </td>
-            </tr>
+                        <!-- Tên sách -->
+                        <td>{{ $item->anPham->chiTietAnPham->tenanpham }}</td>
 
-            <!-- Sản phẩm 2 -->
-            <tr>
-                <td>
-                    <div class="d-flex">
-                        <img src="{{ asset('img/chuyen-hoa-thanh-phuc.jpg') }}" alt="Chuyện Họa Thành Phúc" class="product-img me-3">
-                        <div>
-                            <strong>Chuyện Họa Thành Phúc</strong>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <span class="text-muted text-decoration-line-through">65.000đ</span> <strong>52.650đ</strong>
-                </td>
-                <td>
-                    <input type="number" value="1" min="1" class="form-control" style="width: 60px;" readonly>
-                </td>
-                <td><strong>52.650đ</strong></td>
-                <td>
-                    <span class="remove-product">Bỏ qua sản phẩm</span>
-                </td>
-            </tr>
+                        <td>{{ $item->soluong }}</td>
 
-            <!-- Sản phẩm 3 -->
-            <tr>
-                <td>
-                    <div class="d-flex">
-                        <img src="{{ asset('img/ky-luat-lam-nen-con-nguoi.jpg') }}" alt="Combo Kỷ Luật Làm Nên Con Người" class="product-img me-3">
-                        <div>
-                            <strong>Combo Kỷ Luật Làm Nên Con Người + Không Còn Đường Lùi Mới Có Thành Công (Bộ 2 Cuốn)</strong>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <span class="text-muted text-decoration-line-through">92.000đ</span> <strong>41.400đ</strong>
-                </td>
-                <td>
-                    <input type="number" value="1" min="1" class="form-control" style="width: 60px;" readonly>
-                </td>
-                <td><strong>41.400đ</strong></td>
-                <td>
-                    <span class="remove-product">Bỏ qua sản phẩm</span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                        <!-- Giá cọc -->
+                        <td>{{ number_format($item->anPham->giacoc, 0, ',', '.') }} VND</td>
 
-    <div class="d-flex justify-content-between align-items-center">
-        <p class="fw-bold">Tạm Tính: 174.150đ</p>
-        <div>
-            <button class="btn btn-success">Tiếp tục mua hàng</button>
-            <button class="btn btn-primary">Tiến hành thanh toán</button>
+                        <!-- Nút xóa sản phẩm khỏi giỏ hàng -->
+                        <td>
+                            <form action="{{ route('route-khachhang-xoakhoigiohang', ['maanpham' => $item->anPham->maanpham]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                            </form>                                                       
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+        <!-- Tổng tiền giỏ hàng -->
+        <div class="text-end mt-4" >
+            <h4>Tổng cộng: {{ number_format($totalPrice, 0, ',', '.') }} VND</h4>
+            <a href="{{ route('route-khachhang-thueanpham') }}" class="btn btn-success">Đăng ký thuê</a>
         </div>
-    </div>
+
+    @else
+        <p>Giỏ hàng của bạn hiện đang trống.</p>
+        <a href="{{ route('route-khachhang-danhsachanpham') }}" class="btn btn-primary">Tiếp tục thuê sách</a>
+        <div class="d-flex justify-content-center">
+            <img src="{{ asset('img/no-item-cart.jpg') }}" alt="Empty Cart" class="img-fluid mx-auto" style="width: 400px; height: auto;">
+        </div>
+    @endif
 </div>
 
-
-</body>
 @endsection
 

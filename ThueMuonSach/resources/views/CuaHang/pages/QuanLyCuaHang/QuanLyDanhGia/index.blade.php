@@ -112,7 +112,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                    <form action="{{ route('route-cuahang-quanlycuahang-quanlydanhgia.xoaDanhGia', $danhgia->madanhgia) }}" method="DELETE">
+                                                    <form action="{{ route('route-cuahang-quanlycuahang-quanlydanhgia.xoaDanhGia', $danhgia->madanhgia) }}" method="POST">
                                                         @csrf
                                                         <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
                                                     </form>

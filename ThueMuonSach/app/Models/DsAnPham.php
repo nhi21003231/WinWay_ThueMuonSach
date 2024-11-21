@@ -22,6 +22,7 @@ class DsAnPham extends Model
         'dathue',
         'dathanhly',
         'mactanpham',
+        // 'dattruoc',// Thêm cột đặt trước
     ];
 
     // Định nghĩa quan hệ với bảng ChiTietAnPham
@@ -41,6 +42,19 @@ class DsAnPham extends Model
 
         return $this->hasMany(ChiTietHoaDonThue::class,'maanpham','maanpham');
 
+    }
+    //lộc
+    public function gioHang()
+    {
+        return $this->hasMany(GioHang::class, 'maanpham');
+    }
+    
+    public function anPham()
+    {
+
+        return $this->hasMany(DsAnPham::class,'mactanpham','mactanpham');
+        
+        
     }
 }
 

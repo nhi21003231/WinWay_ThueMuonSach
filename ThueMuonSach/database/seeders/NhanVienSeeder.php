@@ -36,6 +36,12 @@ class NhanVienSeeder extends Seeder
             'email' => 'nhanvien2@gmail.com',
             'mataikhoan' => '4',
         ]);
+        NhanVien::create([
+            'hoten' => 'Võ Văn Nhí',
+            'sodienthoai' => '0912345678',
+            'email' => 'admin@gmail.com',
+            'mataikhoan' => '1',
+        ]);
 
         // Tạo một số nhân viên ngẫu nhiên
         // NhanVien::factory()->count(10)->create();
