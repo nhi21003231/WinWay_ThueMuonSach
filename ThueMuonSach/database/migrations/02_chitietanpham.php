@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('tacgia', 100)->nullable();
             $table->integer('namxuatban')->nullable();
             $table->string('hinhanh', 100);
+            $table->decimal('giathue', 10, 2)->nullable();
+            $table->decimal('giacoc', 10, 2)->nullable();
             $table->integer('madanhmuc'); // Thêm cột khóa ngoại
             
             // Khóa ngoại tham chiếu đến `madanhmuc` trong bảng `danhmuc`

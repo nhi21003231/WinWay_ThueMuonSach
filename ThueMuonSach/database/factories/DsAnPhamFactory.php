@@ -26,8 +26,6 @@ class DsAnPhamFactory extends Factory
 
         return [
             'tinhtrang' => $tinhtrang,
-            'giathue' => $this->faker->randomFloat(2, 10000, 500000), // Giá thuê ngẫu nhiên
-            'giacoc' => $this->faker->randomFloat(2, 20000, 1000000), // Giá cọc ngẫu nhiên
             'vitri' => $this->faker->streetAddress(), // Vị trí ngẫu nhiên
             'dathue' => $dathue,
             'dathanhly' => $dathanhly,

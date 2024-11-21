@@ -14,7 +14,7 @@ class ChiTietAnPhamSeeder extends Seeder
     {
         $data = [
             // Sách Giáo Khoa
-            ['tenanpham' => 'Toán 12', 'tacgia' => 'Bộ Giáo dục và Đào tạo', 'namxuatban' => 2023, 'madanhmuc' => 1, 'hinhanh' => 'toan-12.jpg'],
+            ['tenanpham' => 'Toán 12', 'tacgia' => 'Bộ Giáo dục và Đào tạo', 'namxuatban' => 2023, 'madanhmuc' => 1, 'hinhanh' => 'toan-12.jpg', 'giacoc' => 100000, 'giathue' => 50000],
             ['tenanpham' => 'Văn 12', 'tacgia' => 'Bộ Giáo dục và Đào tạo', 'namxuatban' => 2023, 'madanhmuc' => 1, 'hinhanh' => 'van-12.jpg'],
             ['tenanpham' => 'Hóa học 12', 'tacgia' => 'Bộ Giáo dục và Đào tạo', 'namxuatban' => 2023, 'madanhmuc' => 1, 'hinhanh' => 'hoa-hoc-12.jpg'],
             ['tenanpham' => 'Sinh học 12', 'tacgia' => 'Bộ Giáo dục và Đào tạo', 'namxuatban' => 2023, 'madanhmuc' => 1, 'hinhanh' => 'sinh-hoc-12.jpg'],
@@ -73,6 +73,9 @@ class ChiTietAnPhamSeeder extends Seeder
         ];
 
         foreach ($data as $item) {
+            $item['giacoc'] = rand(50000, 200000); // Random deposit between 50,000 and 200,000
+            $item['giathue'] = rand(10000, 50000); // Random rental price between 10,000 and 50,000
+
             ChiTietAnPham::create($item);
         }
 

@@ -25,9 +25,9 @@ class HoaDonThueAnPhamFactory extends Factory
             'ngaytra' => $ngayTra->format('Y-m-d'),
             'phitracham' => $this->faker->randomFloat(2, 0, 100), // Phí trễ hạn ngẫu nhiên
             'ngaythanhtoan' => $this->faker->date(),
-            'phuongthucthanhtoan' => $this->faker->randomElement(['Tiền mặt', 'Chuyển khoản']),
+            'phuongthucthanhtoan' => $this->faker->randomElement(['Momo', 'Chuyển khoản']),
             'loaidon' => $this->faker->randomElement(['Đặt trước', 'Đơn thuê']),
-            'trangthai' => $this->faker->randomElement(['Đang thuê', 'Đã trả']),
+            'trangthai' => $this->faker->randomElement(['Đang xử lý', 'Đang thuê', 'Đã trả']),
             'manhanvien' => NhanVien::inRandomOrder()->first()->manhanvien, // Lấy nhân viên ngẫu nhiên
             'makhachhang' => KhachHang::inRandomOrder()->first()->makhachhang, // Lấy khách hàng ngẫu nhiên
 

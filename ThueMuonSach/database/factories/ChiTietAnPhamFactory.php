@@ -21,6 +21,8 @@ class ChiTietAnPhamFactory extends Factory
             'tacgia' => $this->faker->name(),
             'namxuatban' => $this->faker->year(),
             'hinhanh' => 'nha-gia-kim.jpg', // Hình ảnh mặc định
+            // 'giathue' => $this->faker->randomFloat(2, 10000, 500000), // Giá thuê ngẫu nhiên
+            // 'giacoc' => $this->faker->randomFloat(2, 20000, 1000000), // Giá cọc ngẫu nhiên
             'madanhmuc' => DanhMuc::inRandomOrder()->first()->madanhmuc,
         ];
     }
