@@ -24,13 +24,20 @@
     {{-- link css app --}}
     <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('css/dangbao.css') }}  ">
+    <link rel="stylesheet" href="{{ asset('css/cuong_dangbao.css') }}  ">
     <link rel="stylesheet" href="{{ asset('css/nhi_header.css') }}  ">
     <link rel="stylesheet" href="{{ asset('css/thanhba.css') }}  ">
     <link rel="stylesheet" href="{{ asset('css/nhi_contact.css') }}  ">
     <link rel="stylesheet" href="{{ asset('css/nhi_product.css') }}  ">
+    <link rel="stylesheet" href="{{ asset('css/nhi_danhgia.css') }}  ">
     <link rel="stylesheet" href="{{ asset('css/quanlycuahang.css') }}">
     <link rel="stylesheet" href="{{ asset('css/huynh_xacthuc.css') }}  ">
+    <link rel="stylesheet" href="{{ asset('css/loc-chitietanpham.css') }}  ">
+
+    {{-- link Owl Carousel --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
 </head>
 
@@ -60,6 +67,8 @@
 <script src="{{ asset('js/huy.js') }}"></script>
 <script src="{{ asset('js/thanhba.js') }}"></script>
 <script src="{{ asset('js/quanlycuahang.js') }}"></script>
+<script src="{{ asset('js/loc-chitietanpham.js') }}"></script>
+<script src="{{ asset('js/nhi_trangchu.js') }}"></script>
 
 {{-- link thư viện vẽ chart --}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -73,6 +82,8 @@
 {{-- Jquery --}}
 <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
 
+{{-- link Owl Carousel --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
 {{-- hiển thị thông báo --}}
 <script>
@@ -110,6 +121,7 @@
             newestOnTop: false,
         });
     @endif
+
 </script>
 </body>
 

@@ -37,4 +37,10 @@ class KhachHang extends Model
         return $this->hasMany(HoaDonThueAnPham::class);
 
     }
+    //lộc
+        // Định nghĩa quan hệ với bảng gioHang
+    public function gioHang()
+    {
+        return $this->hasMany(GioHang::class, 'makhachhang');
+    }
 }

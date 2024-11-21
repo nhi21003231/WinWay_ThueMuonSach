@@ -64,6 +64,7 @@ $(document).ready(function () {
     var findInputModal = $('.modal-body').find('input');
     findInputModal.on('input', function () {
       $('.btn-modal-update').removeAttr('disabled');
+      // console.log('aaaa')
     });
   });
 

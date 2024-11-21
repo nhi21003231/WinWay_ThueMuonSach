@@ -77,7 +77,7 @@
 <form id="form-capnhatCustomer" method="post">
   @csrf
   <input type="hidden" name="customerID" id="customerID" value="">
-  <div class="modal fade" id="modal-khachhang" tabindex="-1" aria-labelledby="modalkhachhang" aria-hidden="true">
+  <div class="modal fade" id="modal-khachhang" tabindex="-1" aria-labelledby="modalkhachhang" aria-hidden="true" aria-modal="true">
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header bg-info opacity-75 bg-gradient text-center">

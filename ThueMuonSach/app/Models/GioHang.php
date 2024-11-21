@@ -17,10 +17,11 @@ class GioHang extends Model
     protected $fillable = [
         'maanpham',
         'makhachhang',
+        'soluong',
     ];
 
     // Định nghĩa quan hệ với bảng DS_AnPham
-    public function sanPham()
+    public function anPham()
     {
         return $this->belongsTo(DsAnPham::class, 'maanpham', 'maanpham');
     }

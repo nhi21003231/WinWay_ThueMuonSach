@@ -110,13 +110,14 @@ class XacThucController extends Controller
 
   
     $mataikhoan = $taiKhoan->mataikhoan;
+
    
     $khachHang = new KhachHang();
     $khachHang->hoten = $request->hoten;
     $khachHang->dienthoai = $request->dienthoai;
     $khachHang->email = $request->email;
     $khachHang->mataikhoan = $mataikhoan; // Gán ID tài khoản
-    $khachHang->save();
+    $khachHang->save(); // Lưu khách hàng
 
     // Kiểm tra xem khách hàng đã được lưu thành công chưa
    

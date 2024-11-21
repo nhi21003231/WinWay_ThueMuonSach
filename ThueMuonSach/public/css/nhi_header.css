@@ -636,7 +636,7 @@ ol {
 }
 
 .hero__search__form form input {
-	width: 70%;
+	width: 100%;
 	border: none;
 	height: 48px;
 	font-size: 16px;
@@ -655,11 +655,11 @@ ol {
 	height: 50px;
 }
 
-.hero__search__icon {
+/* .hero__search__icon {
 	float: right;
-}
+} */
 
-.hero__search__lo__icon {
+/* .hero__search__lo__icon {
 	font-size: 18px;
 	height: 50px;
 	width: 50px;
@@ -669,7 +669,7 @@ ol {
 	border-radius: 50%;
 	float: left;
 	margin-right: 20px;
-}
+} */
 
 .hero__search__phone__text {
 	overflow: hidden;
@@ -898,7 +898,7 @@ ol {
   Latest Product
 -----------------------*/
 
-.latest-product {
+/* .latest-product {
 	padding-top: 80px;
 	padding-bottom: 0;
 }
@@ -966,13 +966,13 @@ ol {
 	display: block;
 	color: #252525;
 	font-weight: 700;
-}
+} */
 
 /*---------------------
   Form BLog
 -----------------------*/
 
-.from-blog {
+/* .from-blog {
 	padding-top: 50px;
 	padding-bottom: 50px;
 }
@@ -983,7 +983,7 @@ ol {
 
 .from-blog__title {
 	margin-bottom: 70px;
-}
+} */
 
 /*---------------------
   Breadcrumb
@@ -2567,8 +2567,8 @@ ol {
   Footer
 -----------------------*/
 .footer {
-	/* background: #FFE0ED; */
-	background: powderblue;
+	background: #FFE0ED;
+	/* background: powderblue; */
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
@@ -2590,15 +2590,15 @@ ol {
 /* 
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
-@media only screen and (min-width: 1200px) {
+/* @media only screen and (min-width: 1200px) {
 	.container {
 		max-width: 1170px;
 	}
-}
+} */
 
 /* Medium Device = 1200px */
 
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
+/* @media only screen and (min-width: 992px) and (max-width: 1199px) {
 	.header__menu ul li {
 		margin-right: 45px;
 	}
@@ -2623,11 +2623,11 @@ ol {
 	.shoping__discount form input {
 		width: 240px;
 	}
-}
+} */
 
 /* Tablet Device = 768px */
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+/* @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.hero__categories {
 		margin-bottom: 30px;
 	}
@@ -2846,11 +2846,11 @@ ol {
 	.over_hid {
 		overflow: hidden;
 	}
-}
+} */
 
 /* Wide Mobile = 480px */
 
-@media only screen and (max-width: 767px) {
+/* @media only screen and (max-width: 767px) {
 	.hero__categories {
 		margin-bottom: 30px;
 	}
@@ -3103,11 +3103,11 @@ ol {
 	.over_hid {
 		overflow: hidden;
 	}
-}
+} */
 
 /* Small Device = 320px */
 
-@media only screen and (max-width: 479px) {
+/* @media only screen and (max-width: 479px) {
 	.hero__search__form form .hero__search__categories {
 		display: none;
 	}
@@ -3152,4 +3152,4 @@ ol {
 	.blog__details__hero__text h2 {
 		font-size: 24px;
 	}
-}
+} */

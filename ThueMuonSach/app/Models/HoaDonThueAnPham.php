@@ -24,6 +24,12 @@ class HoaDonThueAnPham extends Model
         'loaidon',
         'trangthai',
         'manhanvien',
+        'makhachhang',
+    ];
+    protected $dates = [
+        'ngaythue',
+        'ngaytra',
+        'ngaythanhtoan',
     ];
 
     // Định nghĩa quan hệ với bảng NhanVien
@@ -45,4 +51,9 @@ class HoaDonThueAnPham extends Model
         return $this->hasMany(ChiTietHoaDonThue::class,'mahoadon','mahoadon');
 
     }
+        // // Phương thức kiểm tra trạng thái
+        // public function isHetHang()
+        // {
+        //     return $this->trangthai === 'đã thuê';
+        // }
 }

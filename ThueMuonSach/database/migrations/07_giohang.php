@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('giohang', function (Blueprint $table) {
             $table->integer('maanpham'); 
             $table->integer('makhachhang'); 
+            $table->integer('soluong');
 
             $table->foreign('maanpham')->references('maanpham')->on('ds_anpham')->onDelete('cascade');
             $table->foreign('makhachhang')->references('makhachhang')->on('khachhang')->onDelete('cascade');

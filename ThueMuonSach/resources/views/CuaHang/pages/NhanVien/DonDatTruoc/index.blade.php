@@ -8,7 +8,7 @@
             <button type="submit" class="ms-2 btn btn-primary col-3 btn-tk" value="TimKiem" disabled>Tìm kiếm</button>
         </div>
     </form>
-    <form action="" method="get" class="col-6 mb-3 d-flex justify-content-end">
+    <form action="" method="get" class="col-6 mb-3 row justify-content-end">
         <select name="sort" id="sort" class="form-select w-50" onchange="this.form.submit()">
             <option value="">Sắp xếp theo...</option>
             <option value="moinhat">Sắp xếp theo mới nhất</option>

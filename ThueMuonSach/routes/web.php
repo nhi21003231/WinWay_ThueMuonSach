@@ -22,6 +22,12 @@ use App\Http\Controllers\QuanLyKho\TaoBaoCaoController;
 use App\Http\Controllers\KhachHang\LienHeController;
 use App\Http\Controllers\KhachHang\ChinhSachController;
 use App\Http\Controllers\KhachHang\TimKiemController;
+use App\Http\Controllers\KhachHang\HoaDonController;
+use App\Http\Controllers\KhachHang\ThongTinController;
+use App\Http\Controllers\KhachHang\CacBaiBaoController;
+use App\Http\Controllers\KhachHang\DanhGiaController;
+use App\Http\Controllers\KhachHang\GiaHanController;
+use App\Http\Controllers\KhachHang\HoaDonThueAnPhamController;
 use App\Http\Controllers\QuanLyCuaHang\QuanLyDanhGiaController;
 use App\Http\Controllers\QuanLyKho\QuanLyTonKhoController;
 use Illuminate\Support\Facades\Route;
@@ -64,10 +70,17 @@ Route::prefix('/nhan-vien')->middleware('xac_thuc:nhanvien,admin')->group(functi
     // -------- Route quản lý ấn phẩm
     Route::get('/dang-bai-bao', [DangBaiBaoController::class, 'hienThiDangBaiBao'])
         ->name('route-cuahang-nhanvien-dangbaibao');
-
+// Route để hiển thị form thêm bài báo
+Route::get('/dang-bai-bao/thembaibao', [DangBaiBaoController::class, 'thembaibao'])->name('dangbaibao.thembaibao');
+// Route để xử lý lưu bài báo
+    Route::post('/dang-bai-bao', [DangBaiBaoController::class, 'xuLyNhapBaiBao'])->name('dangbaibao.store');
+    Route::get('/dangbaibao/suabaibao', [DangBaiBaoController::class, 'suabaibao'])->name('dangbaibao.suabaibao');
+    Route::post('/dangbaibao/update', [DangBaiBaoController::class, 'update'])->name('dangbaibao.update');
+    Route::delete('/dangbaibao/{tieude}', [DangBaiBaoController::class, 'destroy'])->name('dangbaibao.xoa');
     // -------- Route đăng ký thành viên
     Route::get('/dang-ky-thanh-vien', [DangKyThanhVienController::class, 'hienThiDangKyThanhVien'])
         ->name('route-cuahang-nhanvien-dangkythanhvien');
+        Route::post('/dang-ky-thanh-vien/cap-nhat', [DangKyThanhVienController::class, 'capNhatThanhVien'])->name('route-cuahang-nhanvien-dangkythanhvien-capnhat');
 
     // -------- Route đơn đặc trước
     Route::get('/don-dat-truoc', [DonDatTruocController::class, 'hienThiDonDatTruoc'])
@@ -80,6 +93,8 @@ Route::prefix('/nhan-vien')->middleware('xac_thuc:nhanvien,admin')->group(functi
     // -------- Route quản lý ấn phẩm
     Route::get('/quan-ly-an-pham', [NhanVienQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])
         ->name('route-cuahang-nhanvien-quanlyanpham');
+    Route::get('/quan-ly-an-pham/{mahoadon}', [NhanVienQuanLyAnPhamController::class, 'show'])->name('quanlyanpham.chitiethoadon');
+    Route::post('/quan-ly-an-pham/{mahoadon}', [NhanVienQuanLyAnPhamController::class, 'traSach'])->name('traSach');
 
     // -------- Route quản lý khách hàng
     Route::get('/quan-ly-khach-hang', [QuanLyKhachHangController::class, 'hienThiQuanLyKhachHang'])
@@ -96,7 +111,9 @@ Route::prefix('/nhan-vien')->middleware('xac_thuc:nhanvien,admin')->group(functi
     // -------- Route thống kê doanh thu
     Route::get('/thong-ke-doanh-thu', [ThongKeDoanhThuController::class, 'hienThiThongKeDoanhThu'])
         ->name('route-cuahang-nhanvien-thongkedoanhthu');
+        Route::get('/thong-ke-doanh-thu/chi-tiet-doanh-thu', [ThongKeDoanhThuController::class, 'chiTietDoanhThu'])->name('chi-tiet-doanh-thu');
 });
+
 
 
 
@@ -150,6 +167,8 @@ Route::prefix('/quan-ly-cua-hang')->middleware('xac_thuc:quanlycuahang,admin')->
         ->name('route-cuahang-quanlycuahang-quanlydanhgia.suaDanhGia');
     Route::post('/quan-ly-danh-gia/{id}', [QuanLyDanhGiaController::class, 'xoaDanhGia'])
         ->name('route-cuahang-quanlycuahang-quanlydanhgia.xoaDanhGia');
+        // nhí làm
+    Route::post('/danhgia/updateStatus', [DanhGiaController::class, 'updateStatus'])->name('route-cuahang-quanlycuahang-quanlydanhgia.updateStatus');
 });
 
 
@@ -227,7 +246,7 @@ Route::middleware('check_guest_or_customer')->group(function () {
     // -------- Route trang chủ
     Route::get('/', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-trangchu');
     // -------- Route chi tiết ấn phẩm
-    Route::get('/chi-tiet-an-pham', [ChiTietAnPhamController::class, 'hienThiChiTietAnPham'])->name('route-khachhang-chitietanpham');
+    Route::get('/chi-tiet-an-pham/{mactanpham}', [ChiTietAnPhamController::class, 'hienThiChiTietAnPham'])->name('route-khachhang-chitietanpham');
 
     // -------- Route liên hệ
     // Route::get('/lien-he', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-lienhe');
@@ -238,8 +257,17 @@ Route::middleware('check_guest_or_customer')->group(function () {
     Route::get('/search', [TimKiemController::class, 'search'])->name('route-khachhang-timkiem');
     // -------- Route chính sách
     Route::get('/chinh-sach', [ChinhSachController::class, 'hienThiChinhSach'])->name('route-khachhang-chinhsach');
+    // -------- Route cac bai bao
+    Route::get('/cac-bai-bao', [CacBaiBaoController::class, 'hienThiCacBaiBao'])->name('route-khachhang-cacbaibao');
+    // -------- Route chi tiết bài báo
+    Route::get('/cac-bai-bao/{mabaibao}', [CacBaiBaoController::class, 'hienThiChiTietBaiBao'])->name('route-khachhang-chitietbaibao');
+
     // -------- Route Danh sách ấn phẩm
     Route::get('/danh-sach-an-pham', [DanhSachAnPhamController::class, 'hienThiDanhSachAnPham'])->name('route-khachhang-danhsachanpham');
+    // -------- Route danh sách ấn phẩm theo danh mục
+    Route::get('/danh-muc/{danhMuc}', [DanhSachAnPhamController::class, 'hienThiDanhMuc'])->name('route-khachhang-danhmuc');
+    // -------- Route đặt trước ấn phẩm
+    // Route::post('/dat-truoc-an-pham/{maanpham}', [DanhSachAnPhamController::class, 'datTruocAnPham'])->name('route-khachhang-dattruocanpham');
 });
 
 
@@ -248,13 +276,44 @@ Route::middleware('check_guest_or_customer')->group(function () {
 // -------- Route thuê ấn phẩm
 Route::middleware('xac_thuc:khachhang')->group(function () {
     Route::get('/thue-an-pham', [ThueAnPhamController::class, 'hienThiThueAnPham'])->name('route-khachhang-thueanpham');
+    Route::post('thue-an-pham/sua-thong-tin-thue', [ThueAnPhamController::class, 'suaThongTinThue'])->name('route-khachhang-thueanpham-suathongtinthue');
+    Route::get('thue-an-pham/hoa-don', [HoaDonThueAnPhamController::class, 'hienThiHoaDon'])->name('route-khachhang-thueanpham-hoadon');
+    Route::post('thue-an-pham/hoa-don/xu-ly-thanh-toan', [HoaDonThueAnPhamController::class, 'xuLyThanhToan'])->name('route-khachhang-thueanpham-xulyhoadon');
+    Route::post('thue-an-pham/hoa-don/ngan-hang', [HoaDonThueAnPhamController::class, 'chuyenKhoan'])->name('route-khachhang-thueanpham-nganhang');
+    Route::post('thue-an-pham/hoa-don/ngan-hang/xuly', [HoaDonThueAnPhamController::class, 'xuLyChuyenKhoan'])->name('route-khachhang-thueanpham-xulynganhang');
+    Route::get('thue-an-pham/hoa-don/ngan-hang', [HoaDonThueAnPhamController::class, 'hienThiChuyenKhoan'])->name('route-khachhang-thueanpham-nganhang-get');
 
+    //    // -------- Route đặt trước ấn phẩm
+    // //    Route::get('/dat-truoc-an-pham/{mactanpham}', [DanhSachAnPhamController::class, 'datTruocAnPham'])->name('route-khachhang-dattruocanpham');
+    // Route::get('/dat-truoc-an-pham/{mactanpham}', [DanhSachAnPhamController::class, 'hienThiFormDatTruoc'])->name('route-khachhang-hienthiformdattruoc');
+    // Route::post('/dat-truoc-an-pham/{mactanpham}', [DanhSachAnPhamController::class, 'datTruocAnPham'])->name('route-khachhang-dattruocanpham');
+    // Route::post('/dat-truoc-an-pham/{mactanpham}', [DanhSachAnPhamController::class, 'datTruocAnPham'])->name('route-khachhang-dattruoc-suathongtindattruoc');
+
+    // -------- Route đặt trước ấn phẩm
+    Route::get('/dat-truoc-an-pham/{mactanpham}', [DanhSachAnPhamController::class, 'hienThiFormDatTruoc'])->name('route-khachhang-hienthiformdattruoc');
+    Route::post('/dat-truoc-an-pham/{mactanpham}', [DanhSachAnPhamController::class, 'datTruocAnPham'])->name('route-khachhang-dattruocanpham');
+    // Route::post('/dattruoc-suathongtindattruoc/{mactanpham}', [DanhSachAnPhamController::class, 'suaThongTinDatTruoc'])->name('dattruoc-suathongtindattruoc');
+Route::post('/hoadondattruoc/{mactanpham}', [DanhSachAnPhamController::class, 'hienThiHoaDonDatTruoc'])->name('route-khachhang-hoadondattruoc');
+Route::post('/khachhang/thanhToan/{mactanpham}', [DanhSachAnPhamController::class, 'hienThiThanhToan'])->name('route-khachhang-thanhToan');
+Route::post('/khachhang/dattruoc/xulynganhang', [HoaDonThueAnPhamController::class, 'xuLyChuyenKhoan_DatTruoc'])->name('route-khachhang-dattruoc-xulynganhang');
     // -------- Route giỏ hàng
     Route::get('/gio-hang', [GioHangController::class, 'hienThiGioHang'])->name('route-khachhang-giohang');
+    Route::post('gio-hang/them-vao-gio-hang/{maanpham}', [GioHangController::class, 'themVaoGioHang']) -> name('route-khachhang-themvaogiohang');
+    Route::delete('gio-hang/xoa-khoi-gio-hang/{maanpham}', [GioHangController::class, 'xoaKhoiGioHang']) -> name('route-khachhang-xoakhoigiohang');
 
     // -------- Route quản lý mua hàng
     Route::get('/quan-ly-mua-hang', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-quanlymuahang');
 
     // -------- Route lịch sử mua hàng
-    Route::get('/lich-su-mua-hang', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-lichsumuahang');
+    // Route::get('/lich-su-thue', [HoaDonController::class, 'lichSuThue'])->name('route-khachhang-lichsuthue');
+    Route::get('/lich-su-thue', [HoaDonController::class, 'lichSuThue'])->name('route-khachhang-lichsuthue');
+    // -------- Route đánh giá ấn phẩm
+    Route::post('/danhgia/store', [DanhGiaController::class, 'store'])->name('danhgia.store');
+    Route::get('/danhgia/{mactanpham}', [DanhGiaController::class, 'create'])->name('danhgia.create');
+    // -------- Route gia hạn ấn phẩm
+    Route::get('/giahan/create/{mactanpham}', [GiaHanController::class, 'create'])->name('giahan.create');
+    Route::post('/giahan/store/{mactanpham}', [GiaHanController::class, 'store'])->name('giahan.store');
+    // -------- Route thông tin cá nhân
+    Route::get('/thong-tin-ca-nhan', [ThongTinController::class, 'show'])->name('route-khachhang-thongtincanhan');
+    Route::put('/cap-nhat-thong-tin', [ThongTinController::class, 'capNhatThongTin'])->name('route-khachhang-capnhatthongtin');
 });

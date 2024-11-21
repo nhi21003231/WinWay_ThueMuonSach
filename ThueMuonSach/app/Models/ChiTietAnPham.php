@@ -15,7 +15,7 @@ class ChiTietAnPham extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'mactanpham',
+        // 'mactanpham',
         'tenanpham', 
         'tacgia', 
         'namxuatban', 
@@ -35,5 +35,9 @@ class ChiTietAnPham extends Model
         return $this->hasMany(DsAnPham::class,'mactanpham','mactanpham');
         
         
+    }
+    public function chiTietAnPham()
+    {
+        return $this->belongsTo(ChiTietAnPham::class, 'mactanpham', 'mactanpham');
     }
 }

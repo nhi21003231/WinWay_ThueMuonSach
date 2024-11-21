@@ -16,6 +16,7 @@ class GioHangFactory extends Factory
         return [
             'maanpham' => DsAnPham::inRandomOrder()->first()->maanpham, // Lấy sản phẩm ngẫu nhiên
             'makhachhang' => KhachHang::inRandomOrder()->first()->makhachhang, // Lấy khách hàng ngẫu nhiên
+            'soluong' => 1, // Số lượng mặc định là 1
         ];
     }
 }

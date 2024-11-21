@@ -33,4 +33,5 @@ class ChiTietHoaDonThue extends Model
     {
         return $this->belongsTo(DsAnPham::class, 'maanpham', 'maanpham');
     }
+    
 }

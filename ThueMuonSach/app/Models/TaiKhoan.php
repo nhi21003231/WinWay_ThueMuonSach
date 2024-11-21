@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class TaiKhoan extends Authenticatable
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'taikhoan'; // Liên kết tới bảng tai_khoan
 
@@ -41,14 +41,15 @@ class TaiKhoan extends Authenticatable
         return $this->matkhau;
     }
 
-    public function nhanvien():BelongsTo{
+    public function nhanvien(): BelongsTo
+    {
 
-        return $this->belongsTo(NhanVien::class,'mataikhoan','mataikhoan');
+        return $this->belongsTo(NhanVien::class, 'mataikhoan', 'mataikhoan');
     }
-
-    public function khachhang():HasOne{
-
-        return $this->hasOne(KhachHang::class,'mataikhoan','mataikhoan');
+    //lộc
+    // Quan hệ với KhachHang
+    public function khachHang()
+    {
+        return $this->hasOne(KhachHang::class, 'mataikhoan', 'mataikhoan');
     }
-
 }
