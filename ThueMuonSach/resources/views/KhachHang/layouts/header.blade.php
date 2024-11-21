@@ -19,10 +19,10 @@
                             <a href="{{ route('route-khachhang-lienhe') }}"><i class="fa fa-phone"></i></a>
                             <a href="{{ route('route-khachhang-giohang') }}"><i class="fa fa-shopping-bag"></i></a>
                             @auth
-                                <a href="{{ route('route-dangxuat') }}">Đăng xuất</a><br>
+                            <a href="{{ route('route-dangxuat') }}">Đăng xuất</a><br>
                             @else
-                                <a href="{{ route('route-dangnhap') }}">Đăng nhập</a><br>
-                                <!-- <a href="{{ route('route-dangky') }}">Đăng ký</a><br> -->
+                            <a href="{{ route('route-dangnhap') }}">Đăng nhập</a><br>
+                            <!-- <a href="{{ route('route-dangky') }}">Đăng ký</a><br> -->
                             @endauth
                         </div>
                     </div>
@@ -42,7 +42,7 @@
             </div> -->
         <div class="hero__search">
             <div class="hero__search__form">
-                <form action="{{ route('route-khachhang-timkiem') }}"method="GET">
+                <form action="{{ route('route-khachhang-timkiem') }}" method="GET">
                     <input type="text" name="search" placeholder="Nhập ấn phẩm cần tìm.">
                     <button type="submit" class="site-btn">TÌM</button>
                 </form>

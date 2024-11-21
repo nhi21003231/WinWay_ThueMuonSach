@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
   // -------------Remove disable for button Search
   $('.input-tk').on('input', function () {
     $('.btn-tk').removeAttr('disabled');
@@ -9,20 +10,29 @@ $(document).ready(function () {
 
   input.on('input', function (e) {
     e.preventDefault();
+
     $('#btn-Luu').removeClass('pe-none opacity-50');
+
   });
 
   // ------------------show notify delte customer
-  $('.btn-xoakh').click(function (e) {
-    const confirmation = confirm('Bạn có chắc chắn muốn xóa khách hàng này không?');
-    if (confirmation) {
-      $('.btn-xoakh').attr('type', 'submit');
-    }
+  $(".btn-xoakh").click(function() {
+    swal({
+      title: "Xóa khách hàng!",
+      text: "Bạn có chắc muốn xóa khách hàng này!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        $('#form-deleteCustomer').submit();
+      }
+    });
   });
 
   // ---------------------------------------------------------------AJAX-------------------------------------------------------------------------------//
 
-  // -------------------------Ajax search
   // Setup CSRF token for all request Ajax
   $.ajaxSetup({
     headers: {
@@ -34,6 +44,7 @@ $(document).ready(function () {
   $('.btn-update').click(function () {
     var eventID = $(this).attr('data-event-id');
     $('#customerID').val(eventID);
+
     // Ajax
     $.ajax({
       type: 'get',

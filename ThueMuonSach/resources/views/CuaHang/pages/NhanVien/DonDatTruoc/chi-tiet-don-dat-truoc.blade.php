@@ -1,8 +1,8 @@
 @extends('CuaHang.layouts.index')
 @section('content')
 <div class="row">
-  <div class="pt-3 text-center text-primary col mb-2 fw-bold">
-    <h3>Thông Tin Đơn Hàng</h3>
+  <div class="py-2 text-center col mb-2 fw-bold text-uppercase bg-warning text-white">
+    <h3 class="m-0">Thông Tin Đơn Hàng</h3>
   </div>
   <form id="form-dondattruoc" action="{{ URL::to('nhan-vien/don-dat-truoc/'.$hoaDonThue->mahoadon) }}" method="POST">
     @method('PUT')

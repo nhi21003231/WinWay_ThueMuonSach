@@ -107,7 +107,7 @@
                                 class="product__image"
                                 onerror="this.onerror=null; this.src='{{ asset('/img/anh-an-pham/default.jpg') }}';">
                             <div class="product__details__text">
-                                <a href="{{ route('route-khachhang-chitietanpham') }}"
+                                <a href="{{ URL::to(''.$anPham->mactanpham.'/chi-tiet-an-pham') }}"
                                     class="primary-btn">{{ $anPham->tenanpham }}</a>
                                     {{-- <a href="{{ route('route-khachhang-chitietanpham') }}"
                                     class="primary-btn">{{ $ds_anpham->giathue }}</a> --}}

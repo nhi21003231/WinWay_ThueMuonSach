@@ -46,4 +46,9 @@ class TaiKhoan extends Authenticatable
         return $this->belongsTo(NhanVien::class,'mataikhoan','mataikhoan');
     }
 
+    public function khachhang():HasOne{
+
+        return $this->hasOne(KhachHang::class,'mataikhoan','mataikhoan');
+    }
+
 }

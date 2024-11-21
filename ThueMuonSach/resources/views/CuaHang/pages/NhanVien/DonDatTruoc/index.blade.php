@@ -24,7 +24,7 @@
                     <thead>
                         <tr>
                             <td colspan="5" class="bg-primary text-white text-start opacity-75">
-                                <p class="m-0 p-1 fs-5">Đơn đặt trước</p>
+                                <p class="m-0 p-1 fs-5">Danh Sách Đơn Đặt Trước</p>
                             </td>
                         </tr>
                         <tr>

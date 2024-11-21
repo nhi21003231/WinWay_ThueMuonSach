@@ -43,6 +43,7 @@ class XacThucController extends Controller
             // Kiểm tra vai trò
             if ($taiKhoan->vaitro === 'khachhang') {
                 Auth::login($taiKhoan);
+                // dd(Auth::user()->khachhang);
                 return redirect()->route('route-khachhang-trangchu')->with('success', 'Đăng nhập thành công!');
             } else {
                 return redirect()->back()->with('error', 'Bạn không có quyền truy cập.');

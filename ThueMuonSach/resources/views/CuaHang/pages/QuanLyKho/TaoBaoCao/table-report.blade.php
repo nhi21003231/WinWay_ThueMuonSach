@@ -39,3 +39,11 @@
       @endif
   </table>
 @endif
+
+<script>
+  @if (isset($anphams))
+  var data = <?php echo json_encode($anphams); ?>;
+  console.log(data); // JavaScript object
+  @endif
+  
+</script>
