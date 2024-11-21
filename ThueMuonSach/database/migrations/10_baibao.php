@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('tieude', 100);
             // 30/10 đổi noidung từ string thành text
             $table->text('noidung');
+            $table->string('hinhanh', 100);
             $table->date('ngaydang');
             $table->integer('manhanvien'); // Thêm cột khóa ngoại
 

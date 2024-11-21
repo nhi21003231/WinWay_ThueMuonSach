@@ -16,10 +16,10 @@ class TimKiemController extends Controller
         // $chitietanpham = DanhSachAnPham::where('tenanpham', 'like', '%' . $keyword . '%')->get();
         if ($keyword) {
             // Nếu có từ khóa, tìm kiếm theo tên sản phẩm
-            $chitietanpham = ChiTietAnPham::where('tenanpham', 'like', '%' . $keyword . '%')->get();
+            $chitietanpham = ChiTietAnPham::where('tenanpham', 'like', '%' . $keyword . '%')->paginate();
         } else {
             // Nếu không có từ khóa, lấy tất cả sản phẩm
-            $chitietanpham = ChiTietAnPham::all();
+            $chitietanpham = ChiTietAnPham::paginate();
         }
         // Trả về view cùng với kết quả tìm kiếm
         // return view('KhachHang.DanhSachAnPham', compact('chitietanpham'));

@@ -123,7 +123,7 @@
         <li>
             <a href="{{ route('route-cuahang-nhanvien-dondattruoc') }}"
                 class="nav-link {{ Request::routeIs('route-cuahang-nhanvien-dondattruoc*') ? 'active' : 'link-dark' }}">
-                Đơn đặc trước
+                Đơn đặt trước
             </a>
         </li>
         <li>
