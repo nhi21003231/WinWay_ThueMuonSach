@@ -87,7 +87,7 @@
                                         </select>
                                     </td>
                                     
-                                    <td>
+                                    <td class="">
                                         <button 
                                             data-bs-toggle="modal" 
                                             data-bs-target="#delete{{ $danhgia->madanhgia }}" 
@@ -98,6 +98,7 @@
                                             <i class="fas fa-trash text-danger"></i>
                                         </button> 
                                     </td>
+
                                     <!-- Modal Xóa -->
                                     <div class="modal fade" id="delete{{ $danhgia->madanhgia }}" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
                                         <div class="modal-dialog">

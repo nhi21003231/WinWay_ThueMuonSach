@@ -40,7 +40,7 @@ Route::middleware('check_guest')->group(function () {
     // ---- 1.1 > Route đăng nhập
     Route::get('/dang-nhap', [XacThucController::class, 'hienThiDangNhap'])->name('route-dangnhap');
     Route::post('/dang-nhap', [XacThucController::class, 'dangNhap']);
-    
+
 
     Route::get('/dang-nhap/quan-tri', [XacThucController::class, 'hienThiDangNhapQuanTri'])->name('route-dangnhap-quantri');
     Route::post('/dang-nhap/quan-tri', [XacThucController::class, 'dangNhapQuanTri']);
@@ -100,14 +100,14 @@ Route::get('/dang-bai-bao/thembaibao', [DangBaiBaoController::class, 'thembaibao
     Route::get('/quan-ly-khach-hang', [QuanLyKhachHangController::class, 'hienThiQuanLyKhachHang'])
         ->name('route-cuahang-nhanvien-quanlykhachhang');
 
-    Route::get('/customer-info',[QuanLyKhachHangController::class,'layThongTinKH']);
+    Route::get('/customer-info', [QuanLyKhachHangController::class, 'layThongTinKH']);
 
-    Route::put('/quan-ly-khach-hang/cap-nhat',[QuanLyKhachHangController::class,'capNhatThongTinKH']);
+    Route::put('/quan-ly-khach-hang/cap-nhat', [QuanLyKhachHangController::class, 'capNhatThongTinKH']);
 
-    Route::delete('/quan-ly-khach-hang/{id}',[QuanLyKhachHangController::class,'xoaKhachHang'])
+    Route::delete('/quan-ly-khach-hang/{id}', [QuanLyKhachHangController::class, 'xoaKhachHang'])
         ->name('route-cuahang-nhanvien-quanlykhachhang-xoakhachhang');
 
-    Route::get('/quan-ly-khach-hang/export',[QuanLyKhachHangController::class,'exportExcel']);
+    Route::get('/quan-ly-khach-hang/export', [QuanLyKhachHangController::class, 'exportExcel']);
     // -------- Route thống kê doanh thu
     Route::get('/thong-ke-doanh-thu', [ThongKeDoanhThuController::class, 'hienThiThongKeDoanhThu'])
         ->name('route-cuahang-nhanvien-thongkedoanhthu');
@@ -157,6 +157,8 @@ Route::prefix('/quan-ly-cua-hang')->middleware('xac_thuc:quanlycuahang,admin')->
         ->name('route-cuahang-quanlycuahang-taokhuyenmai.suaCTKhuyenMai');
     Route::post('/tao-khuyen-mai/them', [TaoKhuyenMaiController::class, 'themCTKhuyenMai'])
         ->name('route-cuahang-quanlycuahang-taokhuyenmai.themCTKhuyenMai');
+    Route::post('/tao-khuyen-mai/{id}', [TaoKhuyenMaiController::class, 'xoaCTKhuyenMai'])
+        ->name('route-cuahang-quanlycuahang-taokhuyenmai.xoaCTKhuyenMai');
 
     // -------- Route quản lý đánh giá
     Route::get('/quan-ly-danh-gia', [QuanLyDanhGiaController::class, 'hienThiDanhGia'])
@@ -232,7 +234,7 @@ Route::prefix('/quan-ly-kho')->middleware('xac_thuc:quanlykho,admin')->group(fun
     Route::get('/tao-bao-cao', [TaoBaoCaoController::class, 'hienThiTaoBaoCao'])
         ->name('route-cuahang-quanlykho-taobaocao');
 
-    Route::post('/tao-bao-cao',[TaoBaoCaoController::class,'taoBC']);
+    Route::post('/tao-bao-cao', [TaoBaoCaoController::class, 'taoBC']);
 });
 
 
@@ -315,4 +317,3 @@ Route::post('/khachhang/dattruoc/xulynganhang', [HoaDonThueAnPhamController::cla
     Route::get('/thong-tin-ca-nhan', [ThongTinController::class, 'show'])->name('route-khachhang-thongtincanhan');
     Route::put('/cap-nhat-thong-tin', [ThongTinController::class, 'capNhatThongTin'])->name('route-khachhang-capnhatthongtin');
 });
-
