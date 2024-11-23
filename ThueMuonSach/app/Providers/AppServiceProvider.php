@@ -3,8 +3,12 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\ChiTietHoaDonThue;
+use App\Observers\ChiTietHoaDonThueObserver;
+
 
 use Illuminate\Pagination\Paginator;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -22,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Paginator::useBootstrapFive();
+        ChiTietHoaDonThue::observe(ChiTietHoaDonThueObserver::class);
     }
 }
