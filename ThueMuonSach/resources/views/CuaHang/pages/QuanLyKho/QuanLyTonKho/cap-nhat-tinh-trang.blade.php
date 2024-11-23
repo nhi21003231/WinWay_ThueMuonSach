@@ -48,10 +48,10 @@
                                 </div>
                             </td>
                             <td class="search-column">
-                                {{ $anPham->giathue > 0 ? number_format($anPham->giathue, 0, ',', '.') . 'VNĐ' : 'Chưa định giá' }}
+                                {{ $anPham->chiTietAnPham->giathue > 0 ? number_format($anPham->chiTietAnPham->giathue, 0, ',', '.') . 'VNĐ' : 'Chưa định giá' }}
                             </td>
                             <td class="search-column">
-                                {{ $anPham->giacoc > 0 ? number_format($anPham->giacoc, 0, ',', '.') . 'VNĐ' : 'Chưa định giá' }}
+                                {{ $anPham->chiTietAnPham->giacoc > 0 ? number_format($anPham->chiTietAnPham->giacoc, 0, ',', '.') . 'VNĐ' : 'Chưa định giá' }}
                             </td>
                             <td class="search-column">{{ $anPham->vitri }}</td>
                             <td>
