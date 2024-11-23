@@ -5,6 +5,7 @@ namespace App\Http\Controllers\QuanLyCuaHang;
 use App\Http\Controllers\Controller;
 use App\Models\ChuongTrinhKhuyenMai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class TaoKhuyenMaiController extends Controller
 {
@@ -82,10 +83,12 @@ class TaoKhuyenMaiController extends Controller
 
     public function xoaCTKhuyenMai($id)
     {
+        // dd($id);
         $khuyenMai = ChuongTrinhKhuyenMai::findOrFail($id);
 
         $khuyenMai->delete();
 
         return redirect()->back()->with('success', 'Khuyến mãi đã được xóa thành công.');
     }
+
 }

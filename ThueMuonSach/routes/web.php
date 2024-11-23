@@ -70,9 +70,9 @@ Route::prefix('/nhan-vien')->middleware('xac_thuc:nhanvien,admin')->group(functi
     // -------- Route quản lý ấn phẩm
     Route::get('/dang-bai-bao', [DangBaiBaoController::class, 'hienThiDangBaiBao'])
         ->name('route-cuahang-nhanvien-dangbaibao');
-// Route để hiển thị form thêm bài báo
-Route::get('/dang-bai-bao/thembaibao', [DangBaiBaoController::class, 'thembaibao'])->name('dangbaibao.thembaibao');
-// Route để xử lý lưu bài báo
+    // Route để hiển thị form thêm bài báo
+    Route::get('/dang-bai-bao/thembaibao', [DangBaiBaoController::class, 'thembaibao'])->name('dangbaibao.thembaibao');
+    // Route để xử lý lưu bài báo
     Route::post('/dang-bai-bao', [DangBaiBaoController::class, 'xuLyNhapBaiBao'])->name('dangbaibao.store');
     Route::get('/dangbaibao/suabaibao', [DangBaiBaoController::class, 'suabaibao'])->name('dangbaibao.suabaibao');
     Route::post('/dangbaibao/update', [DangBaiBaoController::class, 'update'])->name('dangbaibao.update');
@@ -80,7 +80,7 @@ Route::get('/dang-bai-bao/thembaibao', [DangBaiBaoController::class, 'thembaibao
     // -------- Route đăng ký thành viên
     Route::get('/dang-ky-thanh-vien', [DangKyThanhVienController::class, 'hienThiDangKyThanhVien'])
         ->name('route-cuahang-nhanvien-dangkythanhvien');
-        Route::post('/dang-ky-thanh-vien/cap-nhat', [DangKyThanhVienController::class, 'capNhatThanhVien'])->name('route-cuahang-nhanvien-dangkythanhvien-capnhat');
+    Route::post('/dang-ky-thanh-vien/cap-nhat', [DangKyThanhVienController::class, 'capNhatThanhVien'])->name('route-cuahang-nhanvien-dangkythanhvien-capnhat');
 
     // -------- Route đơn đặc trước
     Route::get('/don-dat-truoc', [DonDatTruocController::class, 'hienThiDonDatTruoc'])
@@ -111,7 +111,7 @@ Route::get('/dang-bai-bao/thembaibao', [DangBaiBaoController::class, 'thembaibao
     // -------- Route thống kê doanh thu
     Route::get('/thong-ke-doanh-thu', [ThongKeDoanhThuController::class, 'hienThiThongKeDoanhThu'])
         ->name('route-cuahang-nhanvien-thongkedoanhthu');
-        Route::get('/thong-ke-doanh-thu/chi-tiet-doanh-thu', [ThongKeDoanhThuController::class, 'chiTietDoanhThu'])->name('chi-tiet-doanh-thu');
+    Route::get('/thong-ke-doanh-thu/chi-tiet-doanh-thu', [ThongKeDoanhThuController::class, 'chiTietDoanhThu'])->name('chi-tiet-doanh-thu');
 });
 
 
@@ -158,7 +158,8 @@ Route::prefix('/quan-ly-cua-hang')->middleware('xac_thuc:quanlycuahang,admin')->
     Route::post('/tao-khuyen-mai/them', [TaoKhuyenMaiController::class, 'themCTKhuyenMai'])
         ->name('route-cuahang-quanlycuahang-taokhuyenmai.themCTKhuyenMai');
     Route::post('/tao-khuyen-mai/{id}', [TaoKhuyenMaiController::class, 'xoaCTKhuyenMai'])
-        ->name('route-cuahang-quanlycuahang-taokhuyenmai.xoaCTKhuyenMai');
+        ->name('taoKhuyenMai.xoaCTKhuyenMai');
+
 
     // -------- Route quản lý đánh giá
     Route::get('/quan-ly-danh-gia', [QuanLyDanhGiaController::class, 'hienThiDanhGia'])
@@ -167,7 +168,7 @@ Route::prefix('/quan-ly-cua-hang')->middleware('xac_thuc:quanlycuahang,admin')->
         ->name('route-cuahang-quanlycuahang-quanlydanhgia.suaDanhGia');
     Route::post('/quan-ly-danh-gia/{id}', [QuanLyDanhGiaController::class, 'xoaDanhGia'])
         ->name('route-cuahang-quanlycuahang-quanlydanhgia.xoaDanhGia');
-        // nhí làm
+    // nhí làm
     Route::post('/danhgia/updateStatus', [DanhGiaController::class, 'updateStatus'])->name('route-cuahang-quanlycuahang-quanlydanhgia.updateStatus');
 });
 
@@ -293,13 +294,13 @@ Route::middleware('xac_thuc:khachhang')->group(function () {
     Route::get('/dat-truoc-an-pham/{mactanpham}', [DanhSachAnPhamController::class, 'hienThiFormDatTruoc'])->name('route-khachhang-hienthiformdattruoc');
     Route::post('/dat-truoc-an-pham/{mactanpham}', [DanhSachAnPhamController::class, 'datTruocAnPham'])->name('route-khachhang-dattruocanpham');
     // Route::post('/dattruoc-suathongtindattruoc/{mactanpham}', [DanhSachAnPhamController::class, 'suaThongTinDatTruoc'])->name('dattruoc-suathongtindattruoc');
-Route::post('/hoadondattruoc/{mactanpham}', [DanhSachAnPhamController::class, 'hienThiHoaDonDatTruoc'])->name('route-khachhang-hoadondattruoc');
-Route::post('/khachhang/thanhToan/{mactanpham}', [DanhSachAnPhamController::class, 'hienThiThanhToan'])->name('route-khachhang-thanhToan');
-Route::post('/khachhang/dattruoc/xulynganhang', [HoaDonThueAnPhamController::class, 'xuLyChuyenKhoan_DatTruoc'])->name('route-khachhang-dattruoc-xulynganhang');
+    Route::post('/hoadondattruoc/{mactanpham}', [DanhSachAnPhamController::class, 'hienThiHoaDonDatTruoc'])->name('route-khachhang-hoadondattruoc');
+    Route::post('/khachhang/thanhToan/{mactanpham}', [DanhSachAnPhamController::class, 'hienThiThanhToan'])->name('route-khachhang-thanhToan');
+    Route::post('/khachhang/dattruoc/xulynganhang', [HoaDonThueAnPhamController::class, 'xuLyChuyenKhoan_DatTruoc'])->name('route-khachhang-dattruoc-xulynganhang');
     // -------- Route giỏ hàng
     Route::get('/gio-hang', [GioHangController::class, 'hienThiGioHang'])->name('route-khachhang-giohang');
-    Route::post('gio-hang/them-vao-gio-hang/{maanpham}', [GioHangController::class, 'themVaoGioHang']) -> name('route-khachhang-themvaogiohang');
-    Route::delete('gio-hang/xoa-khoi-gio-hang/{maanpham}', [GioHangController::class, 'xoaKhoiGioHang']) -> name('route-khachhang-xoakhoigiohang');
+    Route::post('gio-hang/them-vao-gio-hang/{maanpham}', [GioHangController::class, 'themVaoGioHang'])->name('route-khachhang-themvaogiohang');
+    Route::delete('gio-hang/xoa-khoi-gio-hang/{maanpham}', [GioHangController::class, 'xoaKhoiGioHang'])->name('route-khachhang-xoakhoigiohang');
 
     // -------- Route quản lý mua hàng
     Route::get('/quan-ly-mua-hang', [TrangChuController::class, 'hienThiTrangChu'])->name('route-khachhang-quanlymuahang');

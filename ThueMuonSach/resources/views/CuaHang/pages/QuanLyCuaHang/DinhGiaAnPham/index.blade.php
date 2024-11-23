@@ -61,12 +61,12 @@
                                     <tr>
                                         <input type="hidden" name="id[]" value="{{ $anpham->maanpham }}"> <!-- Trường ẩn cho ID -->
                                         <td class="col-maanpham">{{ $anpham->maanpham }}</td>
-                                        <td class="col-tenanpham">{{ $anpham->chitietanpham->tenanpham }}</td>
+                                        <td class="col-tenanpham">{{ $anpham->chiTietAnPham->tenanpham }}</td>
                                         <td class="col-giathue">
-                                            <input type="text" class="form-control" name="giathue[]" value="{{ $anpham->giathue }}" required>
+                                            <input type="text" class="form-control" name="giathue[]" value="{{ $anpham->chitietanpham->giathue }}" required>
                                         </td>
                                         <td class="col-giacoc">
-                                            <input type="text" class="form-control" name="giacoc[]" value="{{ $anpham->giacoc }}" required>
+                                            <input type="text" class="form-control" name="giacoc[]" value="{{ $anpham->chitietanpham->giacoc }}" required>
                                         </td>
                                         <td class="col-namxuatban">{{ $anpham->chitietanpham->namxuatban }}</td>
                                         <td class="col-hinhanh text-center">
