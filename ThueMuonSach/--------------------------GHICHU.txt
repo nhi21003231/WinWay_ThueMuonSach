@@ -20,3 +20,5 @@ THƯỜNG XUYÊN PULL CODE, TẢI CSDL MỚI VỀ ĐỂ CHẠY, CŨNG THƯỜNG 
 -- Nên sử dụng full tiếng việt cho thống nhất nhe, từ tên biến, tên hàm luôn
 -----------------------------------------------------
 vào file php.ini => tìm extension=gd => bỏ dấu chấm phải => sau đó chạy composer update 
+
+---Mỗi lần pull về nên chạy lại csdl để không bị lỗi

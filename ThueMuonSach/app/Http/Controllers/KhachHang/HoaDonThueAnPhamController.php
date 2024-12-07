@@ -342,6 +342,8 @@ class HoaDonThueAnPhamController extends Controller
     }
     public function xuLyChuyenKhoan_DatTruoc(Request $request)
     {
+
+        dd($request->all());
         $user = Auth::user();
         $khachHang = $user->khachHang;
 

@@ -80,7 +80,7 @@ class QuanLyKhachHangController extends Controller
 
         $hoaDon = HoaDonThueAnPham::where('makhachhang', $khachHang->makhachhang)
 
-            ->where('trangthai', 'Đang thuê')->get();
+            ->where('trangthai', '<>','Đã trả')->get();
 
         if ($hoaDon->isNotEmpty()) {
 

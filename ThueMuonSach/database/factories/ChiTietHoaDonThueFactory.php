@@ -15,7 +15,6 @@ class ChiTietHoaDonThueFactory extends Factory
     {
         return [
             'maanpham' => DsAnPham::inRandomOrder()->first()->maanpham, // Lấy sản phẩm ngẫu nhiên
-            'mahoadon' => HoaDonThueAnPham::inRandomOrder()->first()->mahoadon, // Lấy hóa đơn ngẫu nhiên
         ];
     }
 }

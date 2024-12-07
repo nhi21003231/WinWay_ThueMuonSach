@@ -2,14 +2,14 @@
 
 @section('content')
 <div class="row">
-  <div class="col-4">
+  <div class="col-4 ps-4">
     <form action="{{ URL::to('nhan-vien/quan-ly-khach-hang') }}" class="input-group" method="get">
       <input type="text" class="form-control input-tk" name="TimKiem" placeholder="Nhập tên khách hàng...">
       <button type="submit" class=" btn btn-primary btn-tk" disabled>Tìm kiếm</button>
     </form>
   </div>
 </div>
-<div class="row mt-3 bg-primary opacity-75 bg-gradient align-items-center" style="height: 60px">
+<div class="row mt-3 bg-primary opacity-75 bg-gradient align-items-center p-0" style="height: 60px">
   <div class="col-8">
     <p class="text-white m-0 fs-5 fw-bold p-1">Danh sách khách hàng</p>
   </div>

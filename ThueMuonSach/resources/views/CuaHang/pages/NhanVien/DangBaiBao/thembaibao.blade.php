@@ -33,7 +33,7 @@
         </div>
         <div class="mb-3">
             <label for="manhanvien" class="form-label">Mã Nhân Viên</label>
-            <input type="number" class="form-control" id="manhanvien" name="manhanvien" required>
+            <input type="number" class="form-control" id="manhanvien" name="manhanvien" value="{{ Auth::user()->nhanvien->manhanvien }}" readonly>
         </div>
         <div class="mb-3">
             <label for="hinhanh" class="form-label">Hình Ảnh</label>

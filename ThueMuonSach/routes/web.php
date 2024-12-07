@@ -86,6 +86,9 @@ Route::prefix('/nhan-vien')->middleware('xac_thuc:nhanvien,admin')->group(functi
     Route::get('/don-dat-truoc', [DonDatTruocController::class, 'hienThiDonDatTruoc'])
         ->name('route-cuahang-nhanvien-dondattruoc');
 
+    // Update  Status Re-order
+    Route::put('/update/status',[DonDatTruocController::class,'updateStatus']);
+
     Route::get('/don-dat-truoc/{hoaDonThue}/chi-tiet', [DonDatTruocController::class, 'chiTietDonDatTruoc'])
         ->name('route-cuahang-nhanvien-dondattruoc-chitiet');
 

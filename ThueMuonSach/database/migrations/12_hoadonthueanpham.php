@@ -21,13 +21,15 @@ return new class extends Migration
             $table->enum('phuongthucthanhtoan', ['Momo', 'Chuyển khoản']);
             $table->string('mathamchieu', 100)->nullable();
             $table->enum('loaidon', ['Đặt trước', 'Đơn thuê']);
-            $table->enum('trangthai', ['Đang xử lý', 'Đang thuê', 'Đã trả']); 
+            $table->enum('trangthai', ['Đang xử lý','Đang chờ sách','Đã có sách', 'Đang thuê', 'Đã trả']); 
             $table->integer('soluongthue')->nullable();
             $table->integer('manhanvien')->nullable(); // Thêm cột khóa ngoại
             $table->integer('makhachhang'); // Thêm cột khóa ngoại
-            
+            $table->integer('mactanpham')->nullable();
+
             $table->foreign('manhanvien')->references('manhanvien')->on('nhanvien')->onDelete('cascade');
             $table->foreign('makhachhang')->references('makhachhang')->on('khachhang')->onDelete('cascade');
+            $table->foreign('mactanpham')->references('mactanpham')->on('chitietanpham')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -41,6 +43,7 @@ return new class extends Migration
         Schema::table('hoadonthueanpham', function (Blueprint $table) {
             $table->dropForeign(['manhanvien']);
             $table->dropForeign(['makhachhang']);
+            $table->dropForeign(['mactanpham']);
         });
         
         Schema::dropIfExists('hoadonthueanpham');

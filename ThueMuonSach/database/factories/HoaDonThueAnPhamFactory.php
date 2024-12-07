@@ -2,11 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\ChiTietAnPham;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\HoaDonThueAnPham;
 use App\Models\KhachHang;
 use App\Models\NhanVien;
 use Carbon\Carbon;
+use SebastianBergmann\Type\NullType;
 
 class HoaDonThueAnPhamFactory extends Factory
 {
@@ -22,9 +24,12 @@ class HoaDonThueAnPhamFactory extends Factory
 
         // Set trangthai dựa trên loaidon
         $trangThai = $loaiDon === 'Đặt trước'
-            ? 'Đang xử lý'
+            ?  $this->faker->randomElement(['Đang xử lý', 'Đang chờ sách'])
             : $this->faker->randomElement(['Đang xử lý', 'Đang thuê', 'Đã trả']);
-
+        // Set mactanpham
+        $mactanpham = $loaiDon === 'Đặt trước'
+            ?  ChiTietAnPham::inRandomOrder()->first()->mactanpham
+            : Null;
         return [
             'ngaythue' => $ngayThue->format('Y-m-d'),
             'ngaytra' => $ngayTra->format('Y-m-d'),
@@ -35,6 +40,7 @@ class HoaDonThueAnPhamFactory extends Factory
             'trangthai' => $trangThai,
             'manhanvien' => NhanVien::inRandomOrder()->first()->manhanvien, // Lấy nhân viên ngẫu nhiên
             'makhachhang' => KhachHang::inRandomOrder()->first()->makhachhang, // Lấy khách hàng ngẫu nhiên
+            'mactanpham' => $mactanpham,
         ];
     }
 }

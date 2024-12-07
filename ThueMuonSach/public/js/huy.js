@@ -17,16 +17,18 @@ $(document).ready(function () {
 
   // ------------------show notify delte customer
   $(".btn-xoakh").click(function() {
-    swal({
-      title: "Xóa khách hàng!",
-      text: "Bạn có chắc muốn xóa khách hàng này!",
+    Swal.fire({
+      title: "Xóa khách hàng?",
+      text: "Bạn có chắc muốn xóa khách hàng nay",
       icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-    .then((willDelete) => {
-      if (willDelete) {
-        $('#form-deleteCustomer').submit();
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Đồng ý"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // console.log('aaaa')
+        $('#form-deleteCustomer').submit()
       }
     });
   });
@@ -39,6 +41,35 @@ $(document).ready(function () {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
     },
   });
+
+  // ----------------------Re-order---------------------------------------------------//
+  // ------------Ajax Request Accept Re-order
+  $('.status-accept').click(function () { 
+    var accept_data = $(this).data('id');
+    // console.log(accept_data);
+
+    $.ajax({
+      type: "put",
+      url: "/nhan-vien/update/status",
+      data: {
+        orderID:accept_data
+      },
+      // dataType: "dataType",
+      success: function (response) {
+        if (response.success) {
+          toastr.success(response.success,response.message, {
+            positionClass: 'toast-bottom-right',
+            timeOut: '2000', // set time hidden notify
+            closeButton: true,
+            newestOnTop: false,
+          });
+        }
+        setTimeout(()=>{
+          location.reload();
+        },1000)
+      }
+    });
+   })
 
   // -------------Ajax Request infor Customer for function update
   $('.btn-update').click(function () {

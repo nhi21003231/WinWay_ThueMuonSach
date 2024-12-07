@@ -51,9 +51,18 @@ class HoaDonThueAnPham extends Model
         return $this->hasMany(ChiTietHoaDonThue::class,'mahoadon','mahoadon');
 
     }
+
+    public function chitietanpham(): BelongsTo
+    {
+
+        return $this->belongsTo(ChiTietAnPham::class,'mactanpham','mactanpham');
+
+    }
         // // Phương thức kiểm tra trạng thái
         // public function isHetHang()
         // {
         //     return $this->trangthai === 'đã thuê';
         // }
+
+        
 }

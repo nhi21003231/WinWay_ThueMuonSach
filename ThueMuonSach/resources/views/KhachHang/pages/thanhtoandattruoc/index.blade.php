@@ -50,6 +50,7 @@
                                 @csrf
                                 {{-- <input type="hidden" name="grandTotal" value="{{ $grandTotal }}">
                                 <input type="hidden" name="paymentReference" value="{{ $paymentReference }}"> --}}
+                                <input type="hidden" name="id_ctanpham" value="{{ $anPham->mactanpham }}">
                                 <button type="submit" class="btn btn-success btn-lg">
                                     <i class="fas fa-credit-card me-2"></i> Thanh Toán Ngay
                                 </button>

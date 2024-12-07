@@ -8,7 +8,9 @@ use App\Http\Requests\ValidationFormRequest;
 
 use App\Models\HoaDonThueAnPham;
 use App\Http\Controllers\Controller;
-
+use App\Models\ChiTietAnPham;
+use App\Models\ChiTietHoaDonThue;
+use App\Models\DsAnPham;
 
 class DonDatTruocController extends Controller
 {
@@ -21,40 +23,56 @@ class DonDatTruocController extends Controller
 
         // dd($request->all());
 
-        $query = HoaDonThueAnPham::where('loaidon', 'Đặt trước')->where('trangthai', 'Đang thuê');
+        $query = HoaDonThueAnPham::where('loaidon', 'Đặt trước')->orderBy('trangthai','asc');
 
         if ($request->sort == 'moinhat') {
 
-            $hoaDons = $query->orderBy('ngaythue', 'desc')->paginate(5);
+            $hoaDons = $query->orderBy('ngaythue', 'desc')->paginate(7);
 
         }
 
         if ($request->sort == 'cunhat') {
 
-            $hoaDons = $query->orderBy('ngaythue', 'asc')->paginate(5);
+            $hoaDons = $query->orderBy('ngaythue', 'asc')->paginate(7);
 
         }
 
         // Xử lý tìm kiếm
         if ($request->has('TimKiem') && $request->TimKiem != '') {
 
-            $query->whereHas('chiTietHoaDons.dsAnPham.chiTietAnPham', function ($query) use ($request) {
+            $query->where(function($query) use ($request){
 
-                $query->where('tenanpham', 'like', '%' . $request->TimKiem . '%');
+                $query->whereHas('chiTietHoaDons.dsAnPham.chiTietAnPham', function ($query) use ($request) {
 
-            })->orWhereHas('khachHang', function ($query) use ($request) {
-
-                $query->where('hoten', 'like', '%' . $request->TimKiem . '%');
-
-            })->paginate(5);
+                    $query->where('tenanpham', 'like', '%' . $request->TimKiem . '%');
+    
+                })->orWhereHas('khachHang', function ($query) use ($request) {
+    
+                    $query->where('hoten', 'like', '%' . $request->TimKiem . '%');
+    
+                });
+            });
 
         }
 
-        $hoaDons = $query->paginate(5);
+        $hoaDons = $query->paginate(7);
 
         return view('CuaHang.pages.NhanVien.DonDatTruoc.index', compact('hoaDons'));
     }
 
+    // Update Status Re-order
+    public function updateStatus(Request $request){
+
+        $hoaDon = HoaDonThueAnPham::find($request->orderID);
+
+        // dd($hoaDon);
+
+        $hoaDon->trangthai = 'Đang chờ sách';
+
+        $hoaDon->save();
+
+        return response()->json(['success' => 'Đơn đặt trước đã được xác nhận!']);
+    }
 
     // Lấy thông tin chi tiết
     public function chiTietDonDatTruoc(HoaDonThueAnPham $hoaDonThue)
@@ -70,17 +88,36 @@ class DonDatTruocController extends Controller
 
         $request->validated();
 
+        $anpham = DsAnPham::where('mactanpham',$request->id_ctanpham)
+                            
+                            ->where('dathue',0)->first();
+
+        
+        $ctHoaDon = ChiTietHoaDonThue::create([
+            'maanpham' => $anpham->maanpham,
+            'mahoadon' => $id,
+        ]);
+
+        $ctHoaDon->save();
+
         $hoadon = HoaDonThueAnPham::find($id);
 
         $hoadon->loaidon = $request->loaidon;
 
+        $hoadon->trangthai = 'Đang thuê';
+
+        $hoadon->mactanpham = Null;
+
         $hoadon->save();
 
-        $hoadon->khachHang->hoten = $request->tenkhachhang;
+        $anpham->dathue = 1;
 
-        $hoadon->khachHang->diachi = $request->diachi;
+        $anpham->save();
+        // $hoadon->khachHang->hoten = $request->tenkhachhang;
 
-        $hoadon->khachHang->save();
+        // $hoadon->khachHang->diachi = $request->diachi;
+
+        // $hoadon->khachHang->save();
 
         // dd('update success');
 

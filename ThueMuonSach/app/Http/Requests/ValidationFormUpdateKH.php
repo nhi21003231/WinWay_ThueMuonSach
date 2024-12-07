@@ -27,7 +27,7 @@ class ValidationFormUpdateKH extends FormRequest
 
             'sdtkh' => 'required|regex:/^0[1-9][0-9]{8}$/',
 
-            'email' => 'required|email',
+            'email' => 'required|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
 
             'diachi' => 'required'
             //
@@ -46,6 +46,8 @@ class ValidationFormUpdateKH extends FormRequest
             'sdtkh.regex' => 'Số điện thoại không đúng định dạng',
 
             'email.required' => 'Vui lòng nhập email khách hàng',
+
+            'email.regex' => 'Email không đúng định dạng',
 
             'diachi.required' => 'Vui lòng nhập địa chỉ khách hàng',
         ];
