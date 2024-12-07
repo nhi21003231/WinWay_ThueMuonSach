@@ -198,6 +198,8 @@ class HoaDonThueAnPhamController extends Controller
 
     public function xuLyMoMo(Request $request)
     {
+
+        dd($request->all());
         $user = Auth::user();
         $khachHang = $user->khachHang;
     

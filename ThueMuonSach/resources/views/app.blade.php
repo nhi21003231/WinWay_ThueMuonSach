@@ -33,7 +33,6 @@
     <link rel="stylesheet" href="{{ asset('css/quanlycuahang.css') }}">
     <link rel="stylesheet" href="{{ asset('css/huynh_xacthuc.css') }}  ">
     <link rel="stylesheet" href="{{ asset('css/loc-chitietanpham.css') }}  ">
-
     {{-- link Owl Carousel --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet"
@@ -78,6 +77,7 @@
 {{-- link thư viện thông báo (Toastr.js) --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {{-- Jquery --}}
 <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
 

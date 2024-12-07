@@ -20,11 +20,10 @@
                             <a href="{{ route('route-khachhang-lienhe') }}"><i class="fa fa-phone"></i></a>
                             <a href="{{ route('route-khachhang-giohang') }}"><i class="fa fa-shopping-bag"></i></a>
                             @auth
-                                {{-- <a href="{{ route('route-khachhang-thongtincanhan') }}"><i class="fa fa-user"></i></a> --}}
-                                <a href="{{ route('route-dangxuat') }}">Đăng xuất</a><br>
+                            <a href="{{ route('route-dangxuat') }}">Đăng xuất</a><br>
                             @else
-                                <a href="{{ route('route-dangnhap') }}">Đăng nhập</a><br>
-                                <!-- <a href="{{ route('route-dangky') }}">Đăng ký</a><br> -->
+                            <a href="{{ route('route-dangnhap') }}">Đăng nhập</a><br>
+                            <!-- <a href="{{ route('route-dangky') }}">Đăng ký</a><br> -->
                             @endauth
                         </div>
                     </div>
@@ -44,7 +43,7 @@
             </div> -->
         <div class="hero__search">
             <div class="hero__search__form">
-                <form action="{{ route('route-khachhang-timkiem') }}"method="GET">
+                <form action="{{ route('route-khachhang-timkiem') }}" method="GET">
                     <input type="text" name="search" placeholder="Nhập ấn phẩm cần tìm.">
                     <button type="submit" class="site-btn">TÌM</button>
                 </form>
@@ -59,19 +58,32 @@
                     <li><a href="{{ route('route-khachhang-danhsachanpham') }}">Ấn phẩm</a>
                         <ul class="header__menu__dropdown">
                             <li><a href="{{ route('route-khachhang-danhsachanpham') }}">Tất cả ấn phẩm</a></li>
-                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách du lịch']) }}">Sách du lịch</a></li>
-                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách giáo khoa']) }}">Sách giáo khoa</a></li>
-                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách văn học']) }}">Sách văn học</a></li>
-                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách khoa học']) }}">Sách khoa học</a></li>
-                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách lịch sử']) }}">Sách lịch sử</a></li>
-                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách tâm lý']) }}">Sách tâm lý</a></li>
-                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách kinh tế']) }}">Sách kinh tế</a></li>
-                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách y học']) }}">Sách y học</a></li>
-                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách công nghệ']) }}">Sách công nghệ</a></li>
-                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách nghệ thuật']) }}">Sách nghệ thuật</a></li>
-                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách thiếu nhi']) }}">Sách thiếu nhi</a></li>
-                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Truyện tranh']) }}">Truyện tranh</a></li>
-                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách khác']) }}">Sách khác</a></li>
+                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách du lịch']) }}">Sách du
+                                    lịch</a></li>
+                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách giáo khoa']) }}">Sách
+                                    giáo khoa</a></li>
+                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách văn học']) }}">Sách văn
+                                    học</a></li>
+                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách khoa học']) }}">Sách
+                                    khoa học</a></li>
+                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách lịch sử']) }}">Sách
+                                    lịch sử</a></li>
+                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách tâm lý']) }}">Sách tâm
+                                    lý</a></li>
+                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách kinh tế']) }}">Sách
+                                    kinh tế</a></li>
+                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách y học']) }}">Sách y
+                                    học</a></li>
+                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách công nghệ']) }}">Sách
+                                    công nghệ</a></li>
+                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách nghệ thuật']) }}">Sách
+                                    nghệ thuật</a></li>
+                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách thiếu nhi']) }}">Sách
+                                    thiếu nhi</a></li>
+                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Truyện tranh']) }}">Truyện
+                                    tranh</a></li>
+                            <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách khác']) }}">Sách
+                                    khác</a></li>
                         </ul>
                     </li>
                     <li><a href="{{ route('route-khachhang-lienhe') }}">Liên hệ</a></li>

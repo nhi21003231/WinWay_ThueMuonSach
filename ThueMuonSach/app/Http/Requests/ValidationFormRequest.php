@@ -29,6 +29,8 @@ class ValidationFormRequest extends FormRequest
 
             'loaidon' => 'required',
 
+            // 'trangthai' => 'required',
+
             'diachi' => 'required',
 
             'ngaythue' => 'required|date',
@@ -56,6 +58,8 @@ class ValidationFormRequest extends FormRequest
             'ngaydukien.after_or_equal' => 'Vui lòng chọn ngày dự kiến nhận lớn hơn ngày thuê',
 
             'loaidon.required' => 'Vui lòng chọn loại đơn',
+
+            // 'trangthai.required' => 'Vui lòng chọn trạng thái',
         ];
     }
 }

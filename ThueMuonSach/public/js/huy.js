@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
   // -------------Remove disable for button Search
   $('.input-tk').on('input', function () {
     $('.btn-tk').removeAttr('disabled');
@@ -9,20 +10,31 @@ $(document).ready(function () {
 
   input.on('input', function (e) {
     e.preventDefault();
+
     $('#btn-Luu').removeClass('pe-none opacity-50');
+
   });
 
   // ------------------show notify delte customer
-  $('.btn-xoakh').click(function (e) {
-    const confirmation = confirm('Bạn có chắc chắn muốn xóa khách hàng này không?');
-    if (confirmation) {
-      $('.btn-xoakh').attr('type', 'submit');
-    }
+  $(".btn-xoakh").click(function() {
+    Swal.fire({
+      title: "Xóa khách hàng?",
+      text: "Bạn có chắc muốn xóa khách hàng nay",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Đồng ý"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // console.log('aaaa')
+        $('#form-deleteCustomer').submit()
+      }
+    });
   });
 
   // ---------------------------------------------------------------AJAX-------------------------------------------------------------------------------//
 
-  // -------------------------Ajax search
   // Setup CSRF token for all request Ajax
   $.ajaxSetup({
     headers: {
@@ -30,10 +42,40 @@ $(document).ready(function () {
     },
   });
 
+  // ----------------------Re-order---------------------------------------------------//
+  // ------------Ajax Request Accept Re-order
+  $('.status-accept').click(function () { 
+    var accept_data = $(this).data('id');
+    // console.log(accept_data);
+
+    $.ajax({
+      type: "put",
+      url: "/nhan-vien/update/status",
+      data: {
+        orderID:accept_data
+      },
+      // dataType: "dataType",
+      success: function (response) {
+        if (response.success) {
+          toastr.success(response.success,response.message, {
+            positionClass: 'toast-bottom-right',
+            timeOut: '2000', // set time hidden notify
+            closeButton: true,
+            newestOnTop: false,
+          });
+        }
+        setTimeout(()=>{
+          location.reload();
+        },1000)
+      }
+    });
+   })
+
   // -------------Ajax Request infor Customer for function update
   $('.btn-update').click(function () {
     var eventID = $(this).attr('data-event-id');
     $('#customerID').val(eventID);
+
     // Ajax
     $.ajax({
       type: 'get',
@@ -53,6 +95,7 @@ $(document).ready(function () {
     var findInputModal = $('.modal-body').find('input');
     findInputModal.on('input', function () {
       $('.btn-modal-update').removeAttr('disabled');
+      // console.log('aaaa')
     });
   });
 

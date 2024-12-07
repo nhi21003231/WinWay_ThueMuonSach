@@ -6,6 +6,22 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- Thêm plugin datalabels -->
 
     <!-- Form chọn tháng và năm -->
+    {{-- <form action="{{ route('route-cuahang-quanlycuahang-xembaocao') }}" method="GET" class="mb-4">
+        <div class="row align-content-center">
+            <div class="col-md-3">
+                <label for="year" class="form-label">Năm</label>
+                <select style="border: 2px solid rgb(5, 173, 240)" class="form-select" id="year" name="year" required>
+                    @for ($i = 2020; $i <= date('Y'); $i++)
+                        <option value="{{ $i }}" {{ request('year') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                    @endfor
+                </select>
+            </div>
+            <div class="col-md-3 align-self-end">
+                <button type="submit" class="btn btn-primary">Xem Biểu Đồ</button>
+            </div>
+        </div>
+    </form> --}}
+
     <form action="{{ route('route-cuahang-quanlycuahang-xembaocao') }}" method="GET" class="mb-4">
         <div class="row align-content-center">
             <div class="col-md-3">
@@ -15,6 +31,14 @@
                         <option value="{{ $i }}" {{ request('year') == $i ? 'selected' : '' }}>{{ $i }}</option>
                     @endfor
                 </select>
+            </div>
+            <div class="col-md-3">
+                <label for="start_date" class="form-label">Từ ngày</label>
+                <input type="date" id="start_date" name="start_date" class="form-control" value="{{ request('start_date') }}">
+            </div>
+            <div class="col-md-3">
+                <label for="end_date" class="form-label">Đến ngày</label>
+                <input type="date" id="end_date" name="end_date" class="form-control" value="{{ request('end_date') }}">
             </div>
             <div class="col-md-3 align-self-end">
                 <button type="submit" class="btn btn-primary">Xem Biểu Đồ</button>

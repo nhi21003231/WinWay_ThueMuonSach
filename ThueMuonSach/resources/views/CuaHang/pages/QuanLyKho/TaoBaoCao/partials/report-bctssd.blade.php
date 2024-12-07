@@ -17,15 +17,26 @@
     <tr>
       <th scope="row">{{ $stt++ }}</th>
       <td>{{ $anpham->tenanpham }}</td>
+      {{--  --}}
+      @php
+          $countt = 0;
+        @endphp
+        @foreach ($anpham->anpham as $item)
+          {{-- {{ ->macthoadon }} --}}
+          @foreach ($item->chitiethoadonthue as $item)
+            @php
+              $countt++;
+            @endphp
+          @endforeach
+        @endforeach
+      {{--  --}}
       <td>
-        {{ $anpham->anpham->sum(function($item){
-          return $item->chitiethoadonthue->sum('soluongthue');
-        })}}
+        {{ $countt }}
       </td>
       @foreach ($anpham->anpham as $item)
         @foreach ($item->chitiethoadonthue as $item)
           @php
-            $tongtsthue+=$item->soluongthue
+            $tongtsthue++;
           @endphp
         @endforeach
       @endforeach

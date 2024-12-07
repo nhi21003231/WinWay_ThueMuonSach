@@ -15,9 +15,14 @@ class HoaDonThueAnPhamSeeder extends Seeder
 
         foreach ($hoaDons as $hoaDon) {
             // Số lượng chi tiết ngẫu nhiên cho mỗi hóa đơn
-            ChiTietHoaDonThue::factory()->count(rand(1, 3))->create([
+           if($hoaDon->loaidon == 'Đơn thuê')
+           {
+
+            ChiTietHoaDonThue::factory()->create([
                 'mahoadon' => $hoaDon->mahoadon,
             ]);
+
+           }
         }
     }
 }

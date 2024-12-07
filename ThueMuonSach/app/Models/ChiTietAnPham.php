@@ -40,4 +40,9 @@ class ChiTietAnPham extends Model
     {
         return $this->belongsTo(ChiTietAnPham::class, 'mactanpham', 'mactanpham');
     }
+
+    public function hoadonthue():HasMany
+    {
+        return $this->hasMany(HoaDonThueAnPham::class, 'mactanpham', 'mactanpham');
+    }
 }

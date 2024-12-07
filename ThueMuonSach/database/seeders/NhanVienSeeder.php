@@ -43,6 +43,50 @@ class NhanVienSeeder extends Seeder
             'mataikhoan' => '1',
         ]);
 
+        NhanVien::create([
+            'hoten' => 'Nhân viên text 6',
+            'sodienthoai' => '0912345678',
+            'email' => 'text6@gmail.com',
+            'mataikhoan' => '6',
+        ]);
+
+        NhanVien::create([
+            'hoten' => 'Nhân viên text 7',
+            'sodienthoai' => '0912345678',
+            'email' => 'text7@gmail.com',
+            'mataikhoan' => '7',
+        ]);
+
+        NhanVien::create([
+            'hoten' => 'Nhân viên text 8',
+            'sodienthoai' => '0912345678',
+            'email' => 'text8@gmail.com',
+            'mataikhoan' => '8',
+        ]);
+
+        NhanVien::create([
+            'hoten' => 'Nhân viên text 9',
+            'sodienthoai' => '0912345678',
+            'email' => 'text9@gmail.com',
+            'mataikhoan' => '9',
+        ]);
+
+        NhanVien::create([
+            'hoten' => 'Nhân viên text 10',
+            'sodienthoai' => '0912345678',
+            'email' => 'text10@gmail.com',
+            'mataikhoan' => '10',
+        ]);
+
+        NhanVien::create([
+            'hoten' => 'Nhân viên text 11',
+            'sodienthoai' => '0912345678',
+            'email' => 'text11@gmail.com',
+            'mataikhoan' => '11',
+        ]);
+
+
+
         // Tạo một số nhân viên ngẫu nhiên
         // NhanVien::factory()->count(10)->create();
     }

@@ -39,9 +39,6 @@
       <button type="button" class="btn btn-success btn-report">Áp dụng</button>
     </div>
   </div>
-  <div class="main-report bs-scroll position-relative">
-    {{-- @include('CuaHang.pages.QuanLyKho.TaoBaoCao.table-report') --}}
-  </div>
   <div class="mt-4 d-none" id="action-report">
     <input type="hidden" name="export_excel" value="1">
     <button type="submit" class="btn btn-success" id="export-report">Xuất file
@@ -50,5 +47,9 @@
     <button type="button" class="btn btn-secondary" id="cancel-report">Hủy</button>
   </div>
 </form>
+<div class="main-report bs-scroll position-relative">
+  {{-- @include('CuaHang.pages.QuanLyKho.TaoBaoCao.table-report') --}}
+</div>
 
 @endsection
+
