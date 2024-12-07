@@ -30,7 +30,7 @@
                         <td>{{ $item->soluong }}</td>
 
                         <!-- Giá cọc -->
-                        <td>{{ number_format($item->anPham->giacoc, 0, ',', '.') }} VND</td>
+                        <td>{{ number_format($item->anPham->chiTietAnPham->giacoc, 0, ',', '.') }} VND</td>
 
                         <!-- Nút xóa sản phẩm khỏi giỏ hàng -->
                         <td>

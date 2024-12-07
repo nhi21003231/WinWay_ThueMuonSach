@@ -46,7 +46,7 @@ class GioHangController extends Controller
                 $cartItems = $khachHang->gioHang()->with('anpham', 'anpham.chitietanpham')
                 ->get();
                 $totalPrice = $cartItems->sum(function ($item) {
-                    return $item->anPham->giacoc;
+                    return $item->anPham->chiTietAnPham->giacoc;
                 });
 
                 return view('KhachHang.pages.GioHang.index', [
