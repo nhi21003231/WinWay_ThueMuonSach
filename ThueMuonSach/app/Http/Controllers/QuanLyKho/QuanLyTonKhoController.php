@@ -123,6 +123,11 @@ class QuanLyTonKhoController extends Controller
         $messages = [];
 
         foreach ($request->input('soluong') as $index => $soluong) {
+            // Quy tắc chung cho tất cả các trường số lượng
+            $rules["soluong.$index"] = 'integer|min:0';
+            $messages["soluong.$index.integer"] = "Số lượng phải là số nguyên.";
+            $messages["soluong.$index.min"] = "Số lượng không được nhỏ hơn 0.";
+
             if ($soluong > 0) {
                 // Thêm các quy tắc cho các dòng có số lượng lớn hơn 0
                 $rules["vitri.$index"] = 'required|string|max:100';
@@ -130,14 +135,10 @@ class QuanLyTonKhoController extends Controller
 
                 // Tùy chỉnh thông báo lỗi cho từng dòng
                 $messages["vitri.$index.required"] = "Vui lòng nhập vị trí.";
+                $messages["vitri.$index.max"] = "Vị trí không được vượt quá 100 ký tự.";
                 $messages["tinhtrang.$index.required"] = "Vui lòng chọn tình trạng.";
                 $messages["tinhtrang.$index.in"] = "Tình trạng phải là một trong các giá trị: Mới, Cũ, Hư hỏng.";
             }
-
-            // Quy tắc chung cho tất cả các trường số lượng
-            $rules["soluong.$index"] = 'integer|min:0';
-            $messages["soluong.$index.integer"] = "Số lượng phải là số nguyên.";
-            $messages["soluong.$index.min"] = "Số lượng không được nhỏ hơn 0.";
         }
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -168,7 +169,7 @@ class QuanLyTonKhoController extends Controller
             }
 
             if ($countInserted > 0) {
-                return redirect()->route('route-cuahang-quanlykho-quanlytonkho')->with('success', 'Nhập ấn phẩm đã có thành công!');
+                return redirect()->route('route-cuahang-quanlykho-quanlytonkho')->with('success', 'Nhập ấn phẩm thành công!');
             } else {
                 return redirect()->back()->with('info', 'Không có ấn phẩm nào được nhập.');
             }

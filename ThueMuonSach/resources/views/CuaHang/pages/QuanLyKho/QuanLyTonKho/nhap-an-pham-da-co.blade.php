@@ -65,9 +65,8 @@
                                 </select>
                             </td>
                             <td>
-                                <input type="number" class="form-control @error("soluong.$index") is-invalid @enderror"
-                                    name="soluong[{{ $index }}]" value="{{ old("soluong.$index", 0) }}" required
-                                    min="0">
+                                <input type="" class="form-control @error("soluong.$index") is-invalid @enderror"
+                                    name="soluong[{{ $index }}]" value="{{ old("soluong.$index", 0) }}" >
                             </td>
                         </tr>
                     @empty

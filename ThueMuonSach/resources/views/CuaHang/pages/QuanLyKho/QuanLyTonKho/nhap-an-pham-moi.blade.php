@@ -48,8 +48,8 @@
             <div class="col-6">
                 <label for="soluong" class="form-label h4">Số lượng <span class="text-danger">*</span></label>
                 <div class="position-relative">
-                    <input type="number" class="form-control @error('soluong') is-invalid @enderror" name="soluong"
-                        id="soluong" value="{{ old('soluong', 1) }}" placeholder="Nhập số lượng" min="1">
+                    <input type="" class="form-control @error('soluong') is-invalid @enderror" name="soluong"
+                        id="soluong" value="{{ old('soluong', 1) }}" placeholder="Nhập số lượng">
                     @error('soluong')
                         <div class="text-danger position-absolute" style="top: 106%; left: 0; font-size: 11px">
                             {{ $message }}</div>
@@ -62,7 +62,7 @@
             <div class="col-6">
                 <label for="namxuatban" class="form-label h4">Năm xuất bản</label>
                 <div class="position-relative">
-                    <input type="number" class="form-control @error('namxuatban') is-invalid @enderror" name="namxuatban"
+                    <input type="" class="form-control @error('namxuatban') is-invalid @enderror" name="namxuatban"
                         id="namxuatban" value="{{ old('namxuatban') }}" placeholder="Nhập năm xuất bản">
                     @error('namxuatban')
                         <div class="text-danger position-absolute" style="top: 106%; left: 0; font-size: 11px">

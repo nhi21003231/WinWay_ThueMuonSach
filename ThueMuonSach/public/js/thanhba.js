@@ -54,19 +54,18 @@ function toMauDongNhapAnPham() {
     // Kiểm tra và tô màu ngay khi trang tải
     quantityInputs.forEach((input) => {
         const row = input.closest("tr");
-        const quantity = parseInt(input.value, 10);
 
-        // Tô màu cho các ô đã có số lượng khác 0 ngay từ đầu
-        if (quantity > 0) {
+        // Tô màu nếu giá trị ban đầu khác "0" và không rỗng
+        if (input.value !== "0" && input.value.trim() !== "") {
             row.classList.add("table-info");
         }
 
         // Lắng nghe sự kiện thay đổi giá trị trong quá trình nhập
         input.addEventListener("input", function () {
-            const newQuantity = parseInt(this.value, 10);
+            const value = this.value.trim(); // Loại bỏ khoảng trắng thừa
 
-            // Tô màu hoặc xóa màu dòng khi thay đổi số lượng
-            if (newQuantity > 0) {
+            // Tô màu nếu giá trị khác "0" và không rỗng
+            if (value !== "0" && value !== "") {
                 row.classList.add("table-info");
             } else {
                 row.classList.remove("table-info");
@@ -74,6 +73,7 @@ function toMauDongNhapAnPham() {
         });
     });
 }
+
 
 // Hàm tìm kiếm
 function timKiemAnPham() {
