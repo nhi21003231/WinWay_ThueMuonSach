@@ -52,9 +52,8 @@
 
                     <!-- Nút thanh toán qua MoMo -->
                     <div class="text-center">
-                        {{-- <form action="{{ route('momo.process') }}" method="POST"> --}}
 
-                             <form action="{{ route('route-khachhang-thueanpham-xulymomo') }}" method="POST">
+                        <form action="{{ route('route-khachhang-thueanpham-xulymomo') }}" method="POST">
                             @csrf
                             <input type="hidden" name="grandTotal" value="{{ $grandTotal }}">
                             <input type="hidden" name="paymentReference" value="{{ $paymentReference }}">

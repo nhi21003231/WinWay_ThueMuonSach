@@ -60,7 +60,7 @@
                     </div>
 
                     <!-- Form Xác Nhận Thông Tin -->
-                    {{-- <form action="{{ route('update-info.post') }}" method="POST" class="needs-validation" novalidate> --}}
+    
                         <form action="{{ route('route-khachhang-thueanpham-suathongtinthue') }}" method="POST" class="needs-validation" novalidate>
                         @csrf
                         <div class="mb-3">
@@ -69,17 +69,25 @@
                             </label>
                             <input type="text" id="hoten" name="hoten" class="form-control" value="{{ $khachHang->hoten ?? '' }}"  readonly placeholder="Nhập họ và tên của bạn">
                         </div>
+
                         <div class="mb-3">
                             <label for="diachi" class="form-label">
                                 <i class="fas fa-map-marker-alt"></i> Địa chỉ
                             </label>
-                            <input type="text" id="diachi" name="diachi" class="form-control" value="{{ $khachHang->diachi ?? '' }}" required placeholder="Nhập địa chỉ của bạn">
+                            <input type="text" id="diachi" name="diachi" class="form-control" value="{{ old('diachi', $khachHang->diachi ?? '') }}" required placeholder="Nhập địa chỉ của bạn">
+                            @if ($errors->has('diachi'))
+                                <span class="text-danger">{{ $errors->first('diachi') }}</span>
+                            @endif
                         </div>
+
                         <div class="mb-4">
-                            <label for="sdt" class="form-label">
+                            <label for="dienthoai" class="form-label">
                                 <i class="fas fa-phone"></i> Số điện thoại
                             </label>
-                            <input type="text" id="dientoai" name="dienthoai" class="form-control" value="{{ $khachHang->dienthoai ?? '' }}" required placeholder="Nhập số điện thoại">
+                            <input type="text" id="dienthoai" name="dienthoai" class="form-control" value="{{ old('dienthoai', $khachHang->dienthoai ?? '') }}" required placeholder="Nhập số điện thoại">
+                            @if ($errors->has('dienthoai'))
+                                <span class="text-danger">{{ $errors->first('dienthoai') }}</span>
+                            @endif
                         </div>
 
                         <!-- Nút Gửi -->

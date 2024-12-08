@@ -3,11 +3,7 @@
     margin-bottom: 50px
 }
 
-<<<<<<< HEAD
 .a1 {
-=======
-.row_1 {
->>>>>>> c8a879c89188c3fd29c75ce780e1a97d16a0c8bc
     padding-top: 20px;
 }
 
@@ -108,25 +104,6 @@
 .tab-btn.active {
     background-color: #4caf50;
     color: white;
-}
-
-
-/* nhí css phần đánh giá */
-
-.review {
-    background-color: #f9f9f9;
-}
-
-.review p {
-    margin: 0;
-}
-
-.review .text-warning .fa-star {
-    color: #ffc107;
-}
-
-.review .text-warning .far.fa-star {
-    color: #e4e5e9;
 }
 
 
