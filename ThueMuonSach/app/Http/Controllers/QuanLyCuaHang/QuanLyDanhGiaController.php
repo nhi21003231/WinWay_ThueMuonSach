@@ -48,17 +48,31 @@ class QuanLyDanhGiaController extends Controller
 
             // Nếu đánh giá tồn tại, thực hiện cập nhật
             if ($danhgia) {
+                // Xây dựng mảng dữ liệu và quy tắc cho từng trường
+                $dataToValidate = [];
+                $rules = [];
+
+                // Kiểm tra và validate trường số sao
+                $sosao = $request->input('sosao')[$index];
+                if (!is_numeric($sosao) || $sosao < 1 || $sosao > 5) {
+                    return redirect()->back()->with('error', 'Số sao phải là một số từ 1 đến 5.');
+                }
+
+                // Nếu validate thành công, tiếp tục cập nhật các trường còn lại
                 $danhgia->binhluan = $request->input('binhluan')[$index];
                 $danhgia->trangthai = $request->input('trangthai')[$index];
-                $danhgia->sosao = $request->input('sosao')[$index];
+                $danhgia->sosao = $sosao;
                 $danhgia->ngaydanhgia = $request->input('ngaydanhgia')[$index];
-                $danhgia->save(); // Lưu thay đổi vào cơ sở dữ liệu
+
+                // Lưu thay đổi vào cơ sở dữ liệu
+                $danhgia->save();
             }
         }
 
         // Sau khi cập nhật, chuyển hướng về trang quản lý đánh giá và hiển thị thông báo
         return redirect()->back()->with('success', 'Cập nhật đánh giá thành công.');
     }
+
 
     public function xoaDanhGia($id)
     {

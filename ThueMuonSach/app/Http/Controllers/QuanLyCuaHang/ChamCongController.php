@@ -29,7 +29,6 @@ class ChamCongController extends Controller
         return view('CuaHang.pages.QuanLyCuaHang.ChamCong.index', compact('chamcongList', 'message'));
     }
 
-
     public function updateChamCong(Request $request)
     {
         // Lặp qua từng mã chấm công
@@ -38,11 +37,33 @@ class ChamCongController extends Controller
             $chamCong = ChamCong::where('machamcong', $machamcong)->first();
 
             if ($chamCong) {
-                // Cập nhật các trường tương ứng
-                $chamCong->thoigianvao = $request->thoigianvao[$index]; // Thời gian vào
-                $chamCong->thoigianra = $request->thoigianra[$index]; // Thời gian ra
-                $chamCong->ghinhan = $request->ghinhan[$index]; // Ghi nhận
-                $chamCong->save(); // Lưu lại bản ghi
+                // Kiểm tra và cập nhật thời gian vào (thoigianvao)
+                $thoigianvao = !empty($request->thoigianvao[$index]) ? $request->thoigianvao[$index] : null;
+
+                // Kiểm tra và cập nhật thời gian ra (thoigianra)
+                $thoigianra = !empty($request->thoigianra[$index]) ? $request->thoigianra[$index] : null;
+
+                // Kiểm tra nếu có thời gian vào và thời gian ra
+                if ($thoigianvao && $thoigianra) {
+                    // Kiểm tra nếu thời gian vào lớn hơn thời gian ra
+                    if (strtotime($thoigianvao) > strtotime($thoigianra)) {
+                        return redirect()->back()->with('error', 'Thời gian vào phải trước thời gian ra.');
+                    }
+                }
+
+                // Kiểm tra nếu thời gian ra trống thì cập nhật ghi nhận là 'Vắng mặt'
+                if (empty($thoigianra)) {
+                    $chamCong->ghinhan = 'Vắng mặt';
+                } else {
+                    $chamCong->ghinhan = $request->ghinhan[$index]; // Cập nhật ghi nhận nếu có
+                }
+
+                // Cập nhật các trường còn lại
+                $chamCong->thoigianvao = $thoigianvao;
+                $chamCong->thoigianra = $thoigianra;
+
+                // Lưu lại bản ghi
+                $chamCong->save();
             }
         }
 

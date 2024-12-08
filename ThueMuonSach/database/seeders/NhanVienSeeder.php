@@ -34,7 +34,7 @@ class NhanVienSeeder extends Seeder
             'hoten' => 'Duy Cường',
             'sodienthoai' => '0901234589',
             'email' => 'nhanvien2@gmail.com',
-            'mataikhoan' => '4',
+            'mataikhoan' => '5',
         ]);
         NhanVien::create([
             'hoten' => 'Võ Văn Nhí',

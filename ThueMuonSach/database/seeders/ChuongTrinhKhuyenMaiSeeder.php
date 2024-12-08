@@ -20,42 +20,42 @@ class ChuongTrinhKhuyenMaiSeeder extends Seeder
 
         ChuongTrinhKhuyenMai::create([
             'tenchuongtrinhkm' => 'Sale 50%',
-            'mota' => 'Sale 50% nhân dịp lễ',
+            'mota' => 'Sale 23% nhân dịp lễ',
             'ngayapdung' => Carbon::createFromFormat('d/m/Y H:i', '23/03/2003 08:00'),
             'ngayketthuc' => Carbon::createFromFormat('d/m/Y H:i', '24/03/2003 23:59'),
             'manhanvien' => 2
         ]);
         ChuongTrinhKhuyenMai::create([
-            'tenchuongtrinhkm' => 'Sale 50%',
-            'mota' => 'Sale 50% nhân dịp lễ',
+            'tenchuongtrinhkm' => 'Sale 65%',
+            'mota' => 'Sale 24% nhân dịp lễ',
             'ngayapdung' => Carbon::createFromFormat('d/m/Y H:i', '23/03/2003 08:00'),
             'ngayketthuc' => Carbon::createFromFormat('d/m/Y H:i', '24/03/2003 23:59'),
             'manhanvien' => 2
         ]);
         ChuongTrinhKhuyenMai::create([
-            'tenchuongtrinhkm' => 'Sale 50%',
-            'mota' => 'Sale 50% nhân dịp lễ',
+            'tenchuongtrinhkm' => 'Sale 33%',
+            'mota' => 'Sale 25% nhân dịp lễ',
             'ngayapdung' => Carbon::createFromFormat('d/m/Y H:i', '23/03/2003 08:00'),
             'ngayketthuc' => Carbon::createFromFormat('d/m/Y H:i', '24/03/2003 23:59'),
             'manhanvien' => 2
         ]);
         ChuongTrinhKhuyenMai::create([
-            'tenchuongtrinhkm' => 'Sale 50%',
-            'mota' => 'Sale 50% nhân dịp lễ',
+            'tenchuongtrinhkm' => 'Sale 30%',
+            'mota' => 'Sale 26% nhân dịp lễ',
             'ngayapdung' => Carbon::createFromFormat('d/m/Y H:i', '23/03/2003 08:00'),
             'ngayketthuc' => Carbon::createFromFormat('d/m/Y H:i', '24/03/2003 23:59'),
             'manhanvien' => 2
         ]);
         ChuongTrinhKhuyenMai::create([
-            'tenchuongtrinhkm' => 'Sale 50%',
-            'mota' => 'Sale 50% nhân dịp lễ',
+            'tenchuongtrinhkm' => 'Sale 27%',
+            'mota' => 'Sale 27% nhân dịp lễ',
             'ngayapdung' => Carbon::createFromFormat('d/m/Y H:i', '23/03/2003 08:00'),
             'ngayketthuc' => Carbon::createFromFormat('d/m/Y H:i', '24/03/2003 23:59'),
             'manhanvien' => 2
         ]);
         ChuongTrinhKhuyenMai::create([
-            'tenchuongtrinhkm' => 'Sale 50%',
-            'mota' => 'Sale 50% nhân dịp lễ',
+            'tenchuongtrinhkm' => 'Sale 28%',
+            'mota' => 'Sale 28% nhân dịp lễ',
             'ngayapdung' => Carbon::createFromFormat('d/m/Y H:i', '23/03/2003 08:00'),
             'ngayketthuc' => Carbon::createFromFormat('d/m/Y H:i', '24/03/2003 23:59'),
             'manhanvien' => 2

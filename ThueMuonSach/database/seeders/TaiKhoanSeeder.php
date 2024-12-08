@@ -58,7 +58,7 @@ class TaiKhoanSeeder extends Seeder
 
         $taikhoans = TaiKhoan::factory(50)->create();
 
-        foreach($taikhoans as $taikhoan){
+        foreach ($taikhoans as $taikhoan) {
             KhachHang::factory()->create([
                 'mataikhoan' => $taikhoan->mataikhoan
             ]);
