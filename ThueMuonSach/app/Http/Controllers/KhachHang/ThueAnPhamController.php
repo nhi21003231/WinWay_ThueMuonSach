@@ -50,9 +50,12 @@ class ThueAnPhamController extends Controller
     public function suaThongTinThue(Request $request)
     {
         $request->validate([
-            'hoten' => 'required|string|max:255',
             'diachi' => 'required|string|max:255',
-            'dienthoai' => 'required|string|max:20',
+            'dienthoai' => 'required|regex:/^0[3,7,8,9][0-9]{8}$/',
+        ], [
+            'diachi.required' => 'Vui lòng nhập địa chỉ.',
+            'dienthoai.required' => 'Vui lòng nhập số điện thoại.',
+            'dienthoai.regex' => 'Số điện thoại không hợp lệ.',
         ]);
 
         $user = Auth::user();

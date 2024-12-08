@@ -90,6 +90,11 @@ class HoaDonThueAnPhamController extends Controller
             
             $grandTotal = $totalPrice;
 
+            //Tính tổng số lượng
+            $totalQuantity = $cartItems->sum(function ($item) {
+                return $item->soluong;
+            });
+
             // Tạo mã tham chiếu thanh toán duy nhất
             $paymentReference = 'BANK' . now()->timestamp . '-' . $khachHang->makhachhang;
 
@@ -98,7 +103,7 @@ class HoaDonThueAnPhamController extends Controller
                 'khachHang' => $khachHang,
                 'cartItems' => $cartItems,
                 'totalPrice' => $totalPrice,
-    
+                'totalQuantity' => $totalQuantity,
                 'grandTotal' => $grandTotal,
                 'paymentReference' => $paymentReference,
             ]);
@@ -115,6 +120,7 @@ class HoaDonThueAnPhamController extends Controller
         if ($khachHang) {
             $ngayThue = now();
             $ngayTra = $ngayThue->copy()->addDays(15);
+            $soluong = $request->input('totalQuantity');
             $thanhtien = $request->input('grandTotal');; // Tổng tiền cọc
             // $tienThueTong = $request->input('grandTotal'); // Tổng tiền thuê
     
@@ -128,6 +134,7 @@ class HoaDonThueAnPhamController extends Controller
                 'loaidon' => 'Đơn thuê',
                 'trangthai' => 'Đang xử lý',
                 'thanhtien' => $thanhtien,
+                'soluongthue' => $soluong,
                 'mathamchieu' => $request->input('paymentReference'),
                 'manhanvien' => 1, // Có thể gán nhân viên nếu cần
                 'makhachhang' => $khachHang->makhachhang,
@@ -199,7 +206,6 @@ class HoaDonThueAnPhamController extends Controller
     public function xuLyMoMo(Request $request)
     {
 
-        dd($request->all());
         $user = Auth::user();
         $khachHang = $user->khachHang;
     
@@ -219,6 +225,7 @@ class HoaDonThueAnPhamController extends Controller
                 'loaidon' => 'Đơn thuê',
                 'trangthai' => 'Đang xử lý',
                 'thanhtien' => $thanhtien,
+               
                 'mathamchieu' => $request->input('paymentReference'),
                 'manhanvien' => 1, // Có thể gán nhân viên nếu cần
                 'makhachhang' => $khachHang->makhachhang,
@@ -235,8 +242,8 @@ class HoaDonThueAnPhamController extends Controller
     
                 // Lưu chi tiết thuê ấn phẩm
                 DB::table('chitiethoadonthue')->insert([
-                    'mahoadon' => $hoaDon, // Mã hoá đơn vừa tạo
-                    'maanpham' => $item->maanpham, // Mã ấn phẩm               
+                    'maanpham' => $item->maanpham, // Mã ấn phẩm 
+                    'mahoadon' => $hoaDon, // Mã hoá đơn vừa tạo             
                     'created_at' => now(), // Thêm giá trị
                     'updated_at' => now(), // Thêm giá trị
                 ]);

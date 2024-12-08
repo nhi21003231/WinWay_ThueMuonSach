@@ -22,8 +22,8 @@
                 {{-- <p class="book-author"><strong>Tác giả:</strong> {{ $anPham->chiTietAnPham->tacgia }}</p>
                <p class="book-year"><strong>Năm xuất bản:</strong> {{ $anPham->chiTietAnPham->namxuatban }}</p>
                <p class="book-catagory"><strong>Danh mục:</strong> {{ $anPham->chiTietAnPham->danhMuc->tendanhmuc }}</p> --}}
-                <p class="book-price"><strong>Giá cọc:</strong> {{ number_format($anPham->chiTietAnPham->giathue, 0, ',', '.') }} VND</p>
-                <p class="book-price"><strong>Giá thuê:</strong> {{ number_format($anPham->chiTietAnPham->giacoc, 0, ',', '.') }} VND</p>
+                <p class="book-price"><strong>Giá cọc:</strong> {{ number_format($anPham->chiTietAnPham->giacoc, 0, ',', '.') }} VND</p>
+                <p class="book-price"><strong>Giá thuê:</strong> {{ number_format($anPham->chiTietAnPham->giathue, 0, ',', '.') }} VND</p>
                 <p class="book-status">
                     <strong>Trạng thái:</strong>
                     {{-- <span class="{{ $anPham->dathue ? 'text-danger' : 'text-success' }}">
