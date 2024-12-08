@@ -8,12 +8,6 @@ use Illuminate\Http\Request;
 
 class QuanLyDanhGiaController extends Controller
 {
-    // public function hienThiDanhGia()
-    // {
-    //     $danhgiaList = DanhGia::all();
-    //     return view('CuaHang.pages.QuanLyCuaHang.QuanLyDanhGia.index', compact('danhgiaList'));
-    // }
-
     public function hienThiDanhGia(Request $request)
     {
         $keyword = $request->input('keyword');

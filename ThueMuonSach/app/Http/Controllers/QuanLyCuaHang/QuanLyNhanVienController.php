@@ -198,34 +198,4 @@ class QuanLyNhanVienController extends Controller
         return redirect()->back()->with('success', 'Cập nhật nhân viên thành công.');
     }
 
-
-    // public function suaNhanVien(Request $request)
-    // {
-    //     // Lặp qua từng nhân viên để cập nhật thông tin
-    //     foreach ($request->id as $index => $id) {
-    //         $nhanvien = NhanVien::find($id);
-    //         if ($nhanvien) {
-    //             // Cập nhật các thông tin cơ bản của nhân viên
-    //             $nhanvien->hoten = $request->hoten[$index];
-    //             $nhanvien->email = $request->email[$index];
-    //             $nhanvien->sodienthoai = $request->sodienthoai[$index];
-
-    //             // Cập nhật chức vụ nếu có
-    //             if (isset($request->ghinhan[$index])) {
-    //                 $nhanvien->taikhoan->vaitro = $request->ghinhan[$index];
-    //             }
-
-    //             // Cập nhật mật khẩu nếu có mật khẩu mới
-    //             if (!empty($request->matkhau[$index])) {
-    //                 $nhanvien->taikhoan->matkhau = Hash::make($request->matkhau[$index]);
-    //             }
-
-    //             // Lưu các thay đổi
-    //             $nhanvien->taikhoan->save(); // Lưu tài khoản
-    //             $nhanvien->save(); // Lưu nhân viên
-    //         }
-    //     }
-
-    //     return redirect()->back()->with('success', 'Cập nhật nhân viên thành công.');
-    // }
 }

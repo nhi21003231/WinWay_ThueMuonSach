@@ -9,12 +9,6 @@ use Illuminate\Http\Request;
 
 class DinhGiaAnPhamController extends Controller
 {
-    // public function hienThiDinhGiaAnPham()
-    // {
-    //     $dsanphamList = DsAnPham::all();
-    //     return view('CuaHang.pages.QuanLyCuaHang.DinhGiaAnPham.index', compact('dsanphamList'));
-    // }
-
     public function hienThiDinhGiaAnPham(Request $request)
     {
         $keyword = $request->input('keyword');
