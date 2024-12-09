@@ -12,37 +12,35 @@ class XemBaoCaoController extends Controller
 {
     public function hienThiXemBaoCao(Request $request)
     {
-        // Lấy giá trị năm, ngày bắt đầu và ngày kết thúc từ request
-        $year = $request->input('year', date('Y'));
-        $startDate = $request->input('start_date', Carbon::createFromDate($year, 1, 1)->startOfYear());
-        $endDate = $request->input('end_date', Carbon::createFromDate($year, 12, 31)->endOfYear());
-
-        // Chuyển đổi ngày bắt đầu và ngày kết thúc thành Carbon
-        $startDate = Carbon::parse($startDate)->startOfDay();
-        $endDate = Carbon::parse($endDate)->endOfDay();
+        // Lấy tháng bắt đầu, tháng kết thúc và năm từ request (hoặc giá trị mặc định)
+        $startMonth = $request->input('start_month', 1); // Mặc định tháng bắt đầu là tháng 1
+        $endMonth = $request->input('end_month', date('m')); // Mặc định tháng kết thúc là tháng hiện tại
+        $year = $request->input('year', date('Y')); // Mặc định năm là năm hiện tại
 
         // Thiết lập ngôn ngữ Carbon thành tiếng Việt
         Carbon::setLocale('vi');
 
-        // Lấy danh sách doanh thu theo tháng trong khoảng thời gian
+        // Khởi tạo mảng cho nhãn và dữ liệu
         $labels = [];
         $data = [];
 
-        for ($i = 1; $i <= 12; $i++) {
+        // Lấy doanh thu cho từng tháng trong khoảng thời gian từ startMonth đến endMonth
+        for ($i = $startMonth; $i <= $endMonth; $i++) {
+            // Tính ngày bắt đầu và ngày kết thúc của tháng i
             $monthStart = Carbon::create($year, $i, 1)->startOfMonth();
             $monthEnd = Carbon::create($year, $i, 1)->endOfMonth();
 
-            // Chỉ tính doanh thu nếu tháng nằm trong khoảng thời gian được chọn
-            if ($monthStart->between($startDate, $endDate) || $monthEnd->between($startDate, $endDate)) {
-                $totalRevenue = HoaDonThueAnPham::whereBetween('ngaythue', [$monthStart, $monthEnd])
-                    ->sum('thanhtien');
+            // Tính tổng doanh thu cho tháng đó
+            $totalRevenue = HoaDonThueAnPham::whereBetween('ngaythue', [$monthStart, $monthEnd])
+                ->sum('thanhtien');
 
-                $monthName = $monthStart->isoFormat('MMMM');
-                $labels[] = ucwords($monthName);
-                $data[] = $totalRevenue;
-            }
+            // Thêm vào mảng nhãn (tên tháng) và dữ liệu (doanh thu)
+            $monthName = $monthStart->isoFormat('MMMM'); // Tên tháng (ví dụ: Tháng Một)
+            $labels[] = ucwords($monthName);
+            $data[] = $totalRevenue;
         }
 
+        // Trả về view với dữ liệu
         return view('CuaHang.pages.QuanLyCuaHang.XemBaoCao.index', compact('labels', 'data'));
     }
 }
