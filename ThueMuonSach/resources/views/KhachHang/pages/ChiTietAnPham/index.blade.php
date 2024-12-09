@@ -39,7 +39,7 @@
 
                 <!-- Nút thêm vào giỏ hàng hoặc đặt trước tùy theo tình trạng -->
                 @if ($soLuongChuaThue > 0)
-                    <form action="{{ route('route-khachhang-themvaogiohang', ['maanpham' => $anPham->maanpham]) }}"
+                    <form action="{{ route('route-khachhang-themvaogiohang', ['mactanpham' => $anPham->mactanpham]) }}"
                         method="POST" class="d-inline">
                         @csrf
                         <button type="submit" class="btn-custom btn-add-to-cart mt-3">
@@ -47,18 +47,7 @@
                         </button>
                     </form>
                 @else
-                    {{-- <form id="preorder-form-{{ $anpham->maanpham }}" action="{{ route('preorder.save', ['maanpham' => $anpham->maanpham]) }}" method="POST" class="d-inline"> --}}
-                    {{-- @csrf
-                    <button type="button" class="btn-custom btn-preorder mt-3">
-                        Đặt trước
-                    </button>
-                    </form> --}}
-                    {{-- <form action="{{ route('route-khachhang-hienthiformdattruoc', ['mactanpham' => $anPham->mactanpham]) }}" method="POST" class="d-inline">
-                        @csrf
-                        <button type="submit" class="btn-custom btn-preorder mt-3">
-                            Đặt trước
-                        </button>
-                    </form> --}}
+                    
                     <a href="{{ route('route-khachhang-hienthiformdattruoc', ['mactanpham' => $anPham->mactanpham]) }}" class="btn-custom btn-preorder mt-3">
                         Đặt trước
                     </a>

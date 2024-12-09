@@ -56,6 +56,7 @@
                         <form action="{{ route('route-khachhang-thueanpham-xulymomo') }}" method="POST">
                             @csrf
                             <input type="hidden" name="grandTotal" value="{{ $grandTotal }}">
+                            <input type="hidden" name="totalQuantity" value="{{ $totalQuantity }}">
                             <input type="hidden" name="paymentReference" value="{{ $paymentReference }}">
                             <button type="submit" class="btn btn-success btn-submit btn-lg">
                                 <i class="fas fa-mobile-alt me-2"></i> Xác nhận thanh toán

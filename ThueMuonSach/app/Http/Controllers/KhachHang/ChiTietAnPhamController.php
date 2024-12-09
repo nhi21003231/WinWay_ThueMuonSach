@@ -60,26 +60,31 @@ class ChiTietAnPhamController extends Controller
         // Lấy danh sách ấn phẩm cùng với thông tin chi tiết ấn phẩm và danh mục liên quan
         $anPham = DsAnPham::with(['chiTietAnPham', 'chiTietAnPham.danhMuc'])
             ->where('mactanpham', $mactanpham)
-            ->where('dathanhly', false)
-            // ->first();
-            ->firstOrFail();
+            
+            
+            ->first();
+
+            // ->firstOrFail();
         
         // Đếm số lượng ấn phẩm chưa thuê
         $soLuongChuaThue = DsAnPham::where('dathanhly', false)
             ->where('mactanpham', $mactanpham)
             ->where('dathue', false)
+            ->where('tinhtrang',['Mới','Cũ'])
             ->count();
+        
         // Lấy danh sách đánh giá theo mactanpham
         $danhGias = DanhGia::whereHas('dsAnPham', function($query) use ($mactanpham) {
             $query->where('mactanpham', $mactanpham);
         })->with('khachHang')->get();
 
         // return view('KhachHang.pages.ChiTietAnPham.index', compact('anPham', 'soLuongChuaThue'));
-        return view('KhachHang.pages.ChiTietAnPham.index', compact('anPham', 'soLuongChuaThue', 'danhGias'));
+        return view('KhachHang.pages.ChiTietAnPham.index', compact('anPham', 'soLuongChuaThue','mactanpham', 'danhGias'));
     }
     public function show($mactanpham)
     {
         $anPham = DsAnPham::with('danhGias.khachHang')->findOrFail($mactanpham);
         return view('KhachHang.pages.ChiTietAnPham.index', compact('anPham'));
     }
+
 }

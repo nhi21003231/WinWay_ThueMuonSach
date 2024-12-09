@@ -304,7 +304,7 @@ Route::middleware('xac_thuc:khachhang')->group(function () {
     Route::post('/khachhang/dattruoc/xulynganhang', [HoaDonThueAnPhamController::class, 'xuLyChuyenKhoan_DatTruoc'])->name('route-khachhang-dattruoc-xulynganhang');
     // -------- Route giỏ hàng
     Route::get('/gio-hang', [GioHangController::class, 'hienThiGioHang'])->name('route-khachhang-giohang');
-    Route::post('gio-hang/them-vao-gio-hang/{maanpham}', [GioHangController::class, 'themVaoGioHang'])->name('route-khachhang-themvaogiohang');
+    Route::post('gio-hang/them-vao-gio-hang/{mactanpham}', [GioHangController::class, 'themVaoGioHang'])->name('route-khachhang-themvaogiohang');
     Route::delete('gio-hang/xoa-khoi-gio-hang/{maanpham}', [GioHangController::class, 'xoaKhoiGioHang'])->name('route-khachhang-xoakhoigiohang');
 
     // -------- Route quản lý mua hàng

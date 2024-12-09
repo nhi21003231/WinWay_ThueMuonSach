@@ -61,7 +61,7 @@ class GioHangController extends Controller
         }
     }
 
-    public function themVaoGioHang(Request $request, $maanpham)
+    public function themVaoGioHang(Request $request, $mactanpham)
     {
         if (Auth::guard('web')->check()) {
             $user = Auth::user();
@@ -72,12 +72,18 @@ class GioHangController extends Controller
             if (!$khachHang) {
                 return redirect()->back()->with('error', 'Không tìm thấy thông tin khách hàng.');
             }
-
+            // dd($mactanpham);
             $anPham = DsAnPham::with(['chiTietAnPham', 'chiTietAnPham.danhMuc'])
-            ->where('maanpham', $maanpham)
-            ->where('dathanhly', false)
+            ->where('mactanpham', $mactanpham)
+            ->where('dathue',false)
+            ->where('dathanhly',false)
+            ->where('tinhtrang',['Mới','Cũ'])
             ->first();
 
+            // Lấy maanpham của ấn phẩm vừa tìm thấy
+            $maanpham = $anPham->maanpham;
+
+            
             // Kiểm tra nếu ấn phẩm đã có trong giỏ hàng của người dùng
             $existsInCart = GioHang::where('makhachhang', $khachHang->makhachhang)
                                 ->where('maanpham', $maanpham)
@@ -86,7 +92,7 @@ class GioHangController extends Controller
             if ($existsInCart) {
                 return redirect()->back()->with('error', 'Ấn phẩm đã có trong giỏ hàng của bạn.');
             }
-
+           
             // Thêm ấn phẩm vào giỏ hàng
             GioHang::create([
                 'makhachhang' => $khachHang->makhachhang,
