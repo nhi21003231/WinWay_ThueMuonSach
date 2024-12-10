@@ -49,6 +49,21 @@ class TaiKhoanSeeder extends Seeder
             'matkhau' => '123',
             'vaitro' => 'nhanvien',
         ]);
+        TaiKhoan::create([
+            'tentaikhoan' => 'nhanvien4',
+            'matkhau' => '123',
+            'vaitro' => 'nhanvien',
+        ]);
+        TaiKhoan::create([
+            'tentaikhoan' => 'nhanvien5',
+            'matkhau' => '123',
+            'vaitro' => 'nhanvien',
+        ]);
+        TaiKhoan::create([
+            'tentaikhoan' => 'nhanvien6',
+            'matkhau' => '123',
+            'vaitro' => 'nhanvien',
+        ]);
 
         TaiKhoan::create([
             'tentaikhoan' => 'khachhang',

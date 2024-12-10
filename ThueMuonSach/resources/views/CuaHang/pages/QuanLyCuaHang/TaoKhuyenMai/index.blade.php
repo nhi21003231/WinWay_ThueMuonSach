@@ -1,3 +1,4 @@
+
 @extends('CuaHang.layouts.index')
 
 @section('content')
@@ -8,12 +9,6 @@
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalID">
         Thêm khuyến mãi
     </button>
-
-    <!-- Form Tìm Kiếm -->
-    {{-- <form action="{{ route('route-cuahang-quanlycuahang-taokhuyenmai') }}" method="GET" class="d-flex my-3">
-        <input type="text" name="keyword" class="form-control w-50" placeholder="Tìm kiếm khuyến mãi...">
-        <button type="submit" class="btn btn-dark">Tìm kiếm</button>
-    </form> --}}
 
     <form id="searchForm" action="{{ route('route-cuahang-quanlycuahang-taokhuyenmai') }}" method="GET" class="d-flex my-3">
         <input type="text" name="keyword" id="searchInput" class="form-control w-50" placeholder="Tìm kiếm khuyến mãi...">
@@ -66,7 +61,7 @@
     {{-- Danh sách --}}
     <div class="mt-4">
         <div class="d-flex justify-content-between align-content-center mb-2">
-            <h3>Danh sách nhân viên</h3>
+            <h3>Chương trình khuyến mãi</h3>
             <div class="dropdown ms-3">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                     Chọn cột hiển thị
@@ -109,7 +104,7 @@
                                     <tr>
                                         <td class="col-mactkm">{{ $khuyenmai->mactkm }}</td>
                                         <td class="col-tenchuongtrinh truncate">
-                                            <input type="hidden" name="id[]" value="{{ $khuyenmai->mactkm }}"> <!-- Trường ẩn cho ID -->
+                                            <input type="hidden" name="id[]" value="{{ $khuyenmai->mactkm }}">
                                             <input type="text" class="form-control" name="tenkhuyenmai[]" value="{{ $khuyenmai->tenchuongtrinhkm }}" required>
                                         </td>
                                         <td class="col-mota truncate">
@@ -121,45 +116,19 @@
                                         <td class="col-ngayketthuc">
                                             <input type="datetime-local" class="form-control" name="ngayketthuc[]" value="{{ \Carbon\Carbon::parse($khuyenmai->ngayketthuc)->format('Y-m-d\TH:i') }}">
                                         </td>
-                                        {{-- xoa --}}
                                         <td class="col-hanhdong">
                                             <button 
                                                 data-bs-toggle="modal" 
-                                                data-bs-target="#delete{{ $khuyenmai->mactkm }}" 
+                                                data-bs-target="#deleteModal" 
                                                 style="outline: none; border: none;" 
                                                 type="button" 
-                                                data-id="{{ $khuyenmai->mactkm }}"
+                                                data-id="{{ $khuyenmai->mactkm }}" 
+                                                data-name="{{ $khuyenmai->tenchuongtrinhkm }}" 
                                                 class="btnDelete">
                                                 <i class="fas fa-trash text-danger"></i>
-                                            </button> 
-                                            <button type="submit" class="btn btn-danger">Cập nhật</button>
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">Cập nhật</button>
                                         </td>
-                                        <!-- Modal Xóa -->
-                                        <div class="modal fade" id="delete{{ $khuyenmai->mactkm }}" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Xóa khuyến mãi</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Bạn muốn xóa khuyến mãi này?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                        {{-- <form action="{{ route('route-cuahang-quanlycuahang-taokhuyenmai.xoaCTKhuyenMai', $khuyenmai->mactkm) }}" method="POST">
-                                                            @csrf
-                                                            <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
-                                                        </form> --}}
-                                                        <form action="{{ route('route-cuahang-quanlycuahang-taokhuyenmai.xoaCTKhuyenMai', $khuyenmai->mactkm) }}" method="POST">
-                                                            @csrf
-                                                            <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
-                                                        </form>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </tr>  
                                 @endforeach
                             @endif
@@ -170,6 +139,29 @@
         </form>
     </div> 
 </div>
+
+<!-- Modal Xóa -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Xóa khuyến mãi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="deleteMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <form id="deleteForm" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Xóa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 <script>
@@ -184,22 +176,30 @@
                 event.preventDefault(); // Ngăn chặn hành động mặc định
             }
         });
+        document.querySelectorAll('.btnDelete').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const id = button.getAttribute('data-id');
+                const name = button.getAttribute('data-name');
+                const deleteForm = document.getElementById('deleteForm');
+                const deleteMessage = document.getElementById('deleteMessage');
+                deleteMessage.textContent = `Bạn có chắc chắn muốn xóa khuyến mãi: "${name}" không?`;
+                deleteForm.setAttribute('action', `{{ route('route-cuahang-quanlycuahang-taokhuyenmai.xoaCTKhuyenMai', '') }}/${id}`);
+            });
+        });
     });
 
-    function autoResearch(){
-        $('#searchInput').on('input', function() {
-            let keyword = $(this).val();
-
-            // Gửi yêu cầu AJAX lên server để tìm kiếm
-            $.ajax({
-                url: "{{ route('route-cuahang-quanlycuahang-taokhuyenmai') }}",
-                method: 'GET',
-                data: { keyword: keyword },
-                success: function(response) {
-                    // Cập nhật lại nội dung của #searchResults trong bảng
-                    $('#searchResults').html($(response).find('#searchResults').html());
-                }
-            });
+    function autoResearch() {
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function() {
+            const keyword = searchInput.value;
+            fetch("{{ route('route-cuahang-quanlycuahang-taokhuyenmai') }}?keyword=" + keyword)
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newResults = doc.getElementById('searchResults').innerHTML;
+                    document.getElementById('searchResults').innerHTML = newResults;
+                });
         });
     }
 </script>

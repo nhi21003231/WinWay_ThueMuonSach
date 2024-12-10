@@ -143,43 +143,49 @@
                                                 <input type="text" class="form-control" name="sodienthoai[]" value="{{ $nhanvien->sodienthoai }}" required>
                                             </td>
                                             <td class="col-hanhdong">
-                                                <button data-bs-toggle="modal" data-bs-target="#delete{{ $nhanvien->manhanvien }}" style="outline: none; border: none;" type="button" data-id="{{ $nhanvien->manhanvien }}" class="btnDelete">
+                                                <button 
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#deleteModal" 
+                                                    style="outline: none; border: none;" 
+                                                    type="button" 
+                                                    data-id="{{ $nhanvien->manhanvien }}" 
+                                                    data-name="{{ $nhanvien->manhanvien }}" 
+                                                    class="btnDelete">
                                                     <i class="fas fa-trash text-danger"></i>
-                                                </button> 
+                                                </button>
                                                 <button type="submit" class="btn btn-primary">Cập nhật</button>
                                             </td>
-
-                                            <!-- Modal Xóa -->
-                                            <div class="modal fade" id="delete{{ $nhanvien->manhanvien }}" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Xóa nhân viên</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Bạn muốn xóa nhân viên này?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                            <form action="{{ route('route-cuahang-quanlycuahang-quanlynhanvien.xoaNhanVien', $nhanvien->manhanvien) }}" method="POST">
-                                                                @csrf
-                                                                <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </tr>
                                     @endforeach
                                 @endif
                             </tbody>
                         </table>
                     </div>
-                    {{-- <button type="submit" class="btn btn-danger">Cập nhật</button> --}}
                 </div> 
             </form>
         </div> 
+    </div>
+
+    <!-- Modal Xóa -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Xóa nhân viên</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="deleteMessage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <form id="deleteForm" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Xóa</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
@@ -195,22 +201,31 @@
                 event.preventDefault(); // Ngăn chặn hành động mặc định
             }
         });
+
+        document.querySelectorAll('.btnDelete').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const id = button.getAttribute('data-id');
+                const name = button.getAttribute('data-name');
+                const deleteForm = document.getElementById('deleteForm');
+                const deleteMessage = document.getElementById('deleteMessage');
+                deleteMessage.textContent = `Bạn có chắc chắn muốn xóa nhân viên: "${name}" không?`;
+                deleteForm.setAttribute('action', `{{ route('route-cuahang-quanlycuahang-quanlynhanvien.xoaNhanVien', '') }}/${id}`);
+            });
+        });
     });
 
-    function autoResearch(){
-        $('#searchInput').on('input', function() {
-            let keyword = $(this).val();
-
-            // Gửi yêu cầu AJAX lên server để tìm kiếm
-            $.ajax({
-                url: "{{ route('route-cuahang-quanlycuahang-quanlynhanvien') }}",
-                method: 'GET',
-                data: { keyword: keyword },
-                success: function(response) {
-                    // Cập nhật lại nội dung của #searchResults trong bảng
-                    $('#searchResults').html($(response).find('#searchResults').html());
-                }
-            });
+    function autoResearch() {
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function() {
+            const keyword = searchInput.value;
+            fetch("{{ route('route-cuahang-quanlycuahang-quanlynhanvien') }}?keyword=" + keyword)
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newResults = doc.getElementById('searchResults').innerHTML;
+                    document.getElementById('searchResults').innerHTML = newResults;
+                });
         });
     }
  

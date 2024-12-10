@@ -4,6 +4,7 @@ namespace App\Http\Controllers\QuanLyCuaHang;
 
 use App\Http\Controllers\Controller;
 use App\Models\ChuongTrinhKhuyenMai;
+use App\Models\NhanVien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -50,7 +51,7 @@ class TaoKhuyenMaiController extends Controller
             'mota' => $request->mota,
             'ngayapdung' => $request->ngayapdung, // Đây sẽ là datetime
             'ngayketthuc' => $request->ngayketthuc, // Đây cũng sẽ là datetime
-            'manhanvien' => $request->manhanvien, // Chỉnh sửa thành lấy giá trị từ request
+            'manhanvien' => 2, // Chỉnh sửa thành lấy giá trị từ request
         ]);
 
         // Nếu tất cả điều kiện đều hợp lệ, trả về thông báo thành công

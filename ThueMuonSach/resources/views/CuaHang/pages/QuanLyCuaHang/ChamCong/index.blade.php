@@ -81,7 +81,7 @@
                                         </td>
                                         <input type="hidden" name="machamcong[]" value="{{ $chamcong->machamcong }}">
                                         <td class="col-hanhdong">
-                                            <button type="submit" class="btn btn-danger mt-3">Cập nhật</button>
+                                            <button type="submit" class="btn btn-primary mt-3">Cập nhật</button>
                                         </td>
                                     </tr>
                                     @endforeach

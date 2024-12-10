@@ -91,38 +91,16 @@
                                     <td class="col-hanhdong">
                                         <button 
                                             data-bs-toggle="modal" 
-                                            data-bs-target="#delete{{ $danhgia->madanhgia }}" 
+                                            data-bs-target="#deleteModal" 
                                             style="outline: none; border: none;" 
                                             type="button" 
-                                            data-id="{{ $danhgia->madanhgia }}"
+                                            data-id="{{ $danhgia->madanhgia }}" 
+                                            data-name="{{ $danhgia->madanhgia }}" 
                                             class="btnDelete">
                                             <i class="fas fa-trash text-danger"></i>
                                         </button>
-
-                                        <button type="submit" class="btn btn-danger mt-1">Cập nhật</button>
+                                        <button type="submit" class="btn btn-primary">Cập nhật</button>
                                     </td>
-
-                                    <!-- Modal Xóa -->
-                                    <div class="modal fade" id="delete{{ $danhgia->madanhgia }}" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Xóa đánh giá</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Bạn muốn xóa đánh giá này?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                    <form action="{{ route('route-cuahang-quanlycuahang-quanlydanhgia.xoaDanhGia', $danhgia->madanhgia) }}" method="POST">
-                                                        @csrf
-                                                        <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </tr>  
                                 @endforeach
                             @endif
@@ -133,6 +111,30 @@
            
         </form>
     </div> 
+
+
+<!-- Modal Xóa -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Xóa khuyến mãi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="deleteMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <form id="deleteForm" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Xóa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 <script>
@@ -146,6 +148,17 @@
             if (event.key === 'Enter') {
                 event.preventDefault(); // Ngăn chặn hành động mặc định
             }
+        });
+
+        document.querySelectorAll('.btnDelete').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const id = button.getAttribute('data-id');
+                const name = button.getAttribute('data-name');
+                const deleteForm = document.getElementById('deleteForm');
+                const deleteMessage = document.getElementById('deleteMessage');
+                deleteMessage.textContent = `Bạn có chắc chắn muốn xóa đánh giá: "${name}" không?`;
+                deleteForm.setAttribute('action', `{{ route('route-cuahang-quanlycuahang-quanlydanhgia.xoaDanhGia', '') }}/${id}`);
+            });
         });
     });
 

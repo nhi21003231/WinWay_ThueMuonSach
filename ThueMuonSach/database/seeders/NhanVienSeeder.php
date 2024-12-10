@@ -70,20 +70,7 @@ class NhanVienSeeder extends Seeder
             'email' => 'text9@gmail.com',
             'mataikhoan' => '9',
         ]);
-
-        NhanVien::create([
-            'hoten' => 'Nhân viên text 10',
-            'sodienthoai' => '0912345678',
-            'email' => 'text10@gmail.com',
-            'mataikhoan' => '10',
-        ]);
-
-        NhanVien::create([
-            'hoten' => 'Nhân viên text 11',
-            'sodienthoai' => '0912345678',
-            'email' => 'text11@gmail.com',
-            'mataikhoan' => '11',
-        ]);
+ 
 
 
 
