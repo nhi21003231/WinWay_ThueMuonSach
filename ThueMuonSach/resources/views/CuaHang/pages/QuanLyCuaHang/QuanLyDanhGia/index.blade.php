@@ -23,8 +23,8 @@
                 <div class="dropdown-menu p-3" style="min-width: 200px;">
                     <!-- Checkbox chọn cột -->
                     <label><input type="checkbox" class="column-toggle" data-column="madanhgia" checked> Mã ĐG</label><br>
-                    <label><input type="checkbox" class="column-toggle" data-column="maanpham" checked> Mã AP</label><br>
-                    <label><input type="checkbox" class="column-toggle" data-column="makhachhang" checked> Mã KH</label><br>
+                    {{-- <label><input type="checkbox" class="column-toggle" data-column="maanpham" checked> Mã AP</label><br> --}}
+                    {{-- <label><input type="checkbox" class="column-toggle" data-column="makhachhang" checked> Mã KH</label><br> --}}
                     <label><input type="checkbox" class="column-toggle" data-column="tenanpham" checked> Tên AP</label><br>
                     <label><input type="checkbox" class="column-toggle" data-column="tenkhachhang" checked> Tên KH</label><br>
                     <label><input type="checkbox" class="column-toggle" data-column="binhluan" checked> Bình luận</label><br>
@@ -46,8 +46,8 @@
                         <thead class="table-light">
                             <tr>
                                 <th id="col-madanhgia">Mã ĐG</th>
-                                <th id="col-maanpham">Mã AP</th>
-                                <th id="col-makhachhang">Mã KH</th>
+                                {{-- <th id="col-maanpham">Mã AP</th> --}}
+                                {{-- <th id="col-makhachhang">Mã KH</th> --}}
                                 <th id="col-tenanpham">Tên AP</th>
                                 <th id="col-tenkhachhang">Tên KH</th>
                                 <th id="col-binhluan">Bình luận</th>
@@ -66,8 +66,8 @@
                                 @foreach ($danhgiaList as $danhgia)
                                 <tr>
                                     <td class="col-madanhgia">{{ $danhgia->madanhgia }}</td>
-                                    <td class="col-maanpham">{{ $danhgia->maanpham }}</td>
-                                    <td class="col-makhachhang">{{ $danhgia->makhachhang }}</td>
+                                    {{-- <td class="col-maanpham">{{ $danhgia->maanpham }}</td> --}}
+                                    {{-- <td class="col-makhachhang">{{ $danhgia->makhachhang }}</td> --}}
                                     <td class="col-tenanpham">{{ $danhgia->dsanpham->chitietanpham ? $danhgia->dsanpham->chitietanpham->tenanpham : 'Không có dữ liệu' }}</td>
                                     <td class="col-tenkhachhang">{{ $danhgia->khachhang->hoten }}</td>
                                     <td class="col-binhluan truncate">
