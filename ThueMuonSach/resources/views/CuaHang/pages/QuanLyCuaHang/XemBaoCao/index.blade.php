@@ -44,8 +44,6 @@
             </div>
         </div>
     </form>
-    
-    
 
     <!-- Biểu đồ -->
     <div class="card">
