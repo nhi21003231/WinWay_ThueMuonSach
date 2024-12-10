@@ -30,7 +30,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row"><i class="fas fa-credit-card me-2"></i>Số Tài Khoản</th>
-                                        <td>1234567890</td>
+                                        <td>0382583013</td>
                                     </tr>
                                     <tr>
                                         <th scope="row"><i class="fas fa-user me-2"></i>Chủ Tài Khoản</th>
@@ -45,11 +45,11 @@
                         </div>
                         <!-- Nút Thanh Toán -->
                         <div class="text-center">
-                            {{-- <form action="{{ route('bank.process') }}" method="POST"> --}}
+                            <!-- {{-- <form action="{{ route('bank.process') }}" method="POST"> --}} -->
                             <form action="{{ route('route-khachhang-dattruoc-xulynganhang') }}" method="POST">
                                 @csrf
-                                {{-- <input type="hidden" name="grandTotal" value="{{ $grandTotal }}">
-                                <input type="hidden" name="paymentReference" value="{{ $paymentReference }}"> --}}
+                                <!-- {{-- <input type="hidden" name="grandTotal" value="{{ $grandTotal }}">
+                                <input type="hidden" name="paymentReference" value="{{ $paymentReference }}"> --}} -->
                                 <input type="hidden" name="id_ctanpham" value="{{ $anPham->mactanpham }}">
                                 <button type="submit" class="btn btn-success btn-lg">
                                     <i class="fas fa-credit-card me-2"></i> Thanh Toán Ngay

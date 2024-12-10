@@ -54,13 +54,18 @@
                     <!-- Nút Thanh Toán -->
                     <div class="text-center">
                        
-                            <form action="{{ route('route-khachhang-thueanpham-xulynganhang') }}" method="POST">
+                    <form action="{{isset($type) ? route('route-khachhang-dattruoc-them'): route('route-khachhang-thueanpham-xulynganhang') }}" method="POST">
                             @csrf
+                           @if(isset($anPham))
+                                <input type="hidden" name="id_ctanpham" value="{{ $anPham->mactanpham }}">
+                                <input type="hidden" name="payment_method" value="{{ $payment_method }}">
+                            @endif
                             <input type="hidden" name="grandTotal" value="{{ $grandTotal }}">
                             <input type="hidden" name="totalQuantity" value="{{ $totalQuantity }}">
+                            
                             <input type="hidden" name="paymentReference" value="{{ $paymentReference }}">
-                            <button type="submit" class="btn btn-success btn-lg">
-                                <i class="fas fa-credit-card me-2"></i> Thanh Toán Ngay
+                            <button type="submit" class="btn btn-success btn-submit btn-lg">
+                                <i class="fas fa-mobile-alt me-2"></i> Xác nhận thanh toán
                             </button>
                         </form>
                     </div>
