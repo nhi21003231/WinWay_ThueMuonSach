@@ -107,7 +107,7 @@
                                     <i class="fas fa-user"></i> Họ và tên
                                 </label>
                                 <input type="text" id="hoten" name="hoten" class="form-control" value="{{ $khachHang->hoten ?? '' }}" readonly placeholder="Nhập họ và tên của bạn">
-                            </div>
+                            </div>  
                             <div class="mb-3">
                                 <label for="diachi" class="form-label">
                                     <i class="fas fa-map-marker-alt"></i> Địa chỉ
