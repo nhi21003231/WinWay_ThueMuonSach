@@ -1,7 +1,7 @@
 @extends('KhachHang.layouts.index')
 @section('content')
     <div class="container">
-        <h2>Lịch Sử Thuê Ấn Phẩm</h2>
+        <h2 class="mb-3">Lịch Sử Thuê Ấn Phẩm</h2>
         @if ($hoadons->isEmpty())
             <div class="alert alert-info" role="alert">
                 Chưa có ấn phẩm nào đã thuê.
@@ -67,18 +67,18 @@
                                 @foreach ($hoadon->chiTietHoaDons as $chitiet)
                                     @if ($hoadon->trangthai == 'Đã trả')
                                         <a href="{{ route('danhgia.create', $chitiet->dsAnPham->mactanpham) }}"
-                                            class="">
+                                            class="btn btn-outline-danger btn-sm">
                                             Đánh giá
                                         </a><br>
                                     @endif
                                 @endforeach
                                 @if ($hoadon->trangthai !== 'Đã trả')
                                     <a href="{{ route('giahan.create', $chitiet->dsAnPham->maanpham) }}"
-                                        class="btn btn-primary btn-sm">Gia hạn</a>
+                                        class="btn btn-primary btn-sm {{ $hoadon->trangthai == 'Đang xử lý' ? "disabled" : "" }}">Gia hạn</a>
                                 @endif
                             </td>
 
-                            
+
                         </tr>
                     @endforeach
                 </tbody>
