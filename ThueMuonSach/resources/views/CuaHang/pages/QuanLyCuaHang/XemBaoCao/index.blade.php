@@ -12,7 +12,7 @@
                 <label for="start_month" class="form-label">Từ tháng</label>
                 <select style="border: 2px solid rgb(5, 173, 240)" class="form-select" id="start_month" name="start_month" required>
                     @for ($i = 1; $i <= 12; $i++)
-                        <option value="{{ $i }}" {{ request('start_month') == $i ? 'selected' : '' }}>
+                        <option value="{{ $i }}" {{ (request('start_month') == $i || (!request('start_month') && $i == 1)) ? 'selected' : '' }}>
                             {{ $i }}
                         </option>
                     @endfor
@@ -22,7 +22,7 @@
                 <label for="end_month" class="form-label">Đến tháng</label>
                 <select style="border: 2px solid rgb(5, 173, 240)" class="form-select" id="end_month" name="end_month" required>
                     @for ($i = 1; $i <= 12; $i++)
-                        <option value="{{ $i }}" {{ request('end_month') == $i ? 'selected' : '' }}>
+                        <option value="{{ $i }}" {{ (request('end_month') == $i || (!request('end_month') && $i == 12)) ? 'selected' : '' }}>
                             {{ $i }}
                         </option>
                     @endfor
@@ -32,7 +32,7 @@
                 <label for="year" class="form-label">Năm</label>
                 <select style="border: 2px solid rgb(5, 173, 240)" class="form-select" id="year" name="year" required>
                     @for ($i = 2020; $i <= date('Y'); $i++)
-                        <option value="{{ $i }}" {{ request('year') == $i ? 'selected' : '' }}>
+                        <option value="{{ $i }}" {{ (request('year') == $i || (!request('year') && $i == 2024)) ? 'selected' : '' }}>
                             {{ $i }}
                         </option>
                     @endfor
@@ -44,6 +44,7 @@
             </div>
         </div>
     </form>
+    
     
 
     <!-- Biểu đồ -->
