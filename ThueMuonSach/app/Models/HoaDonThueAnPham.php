@@ -19,12 +19,15 @@ class HoaDonThueAnPham extends Model
         'ngaythue',
         'ngaytra',
         'phitracham',
+        'thanhtien',
         'ngaythanhtoan',
         'phuongthucthanhtoan',
         'loaidon',
         'trangthai',
+        'soluongthue',
         'manhanvien',
         'makhachhang',
+        'mactanpham',
     ];
     protected $dates = [
         'ngaythue',

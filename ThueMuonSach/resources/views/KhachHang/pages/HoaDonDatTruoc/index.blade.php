@@ -63,16 +63,45 @@
                             </tbody>
                         </table>
                     </div>
+                    <!-- Phương Thức Thanh Toán -->
+                    <div class="mb-4">
+                        <div class="section-header">
+                            <h5>Phương thức thanh toán</h5>
+                        </div>
+                        {{-- <form action="{{ route('payment.process') }}" method="POST"> --}}
+                            <form action="{{ route('route-khachhang-dattruoc-xulyhoadon')}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="id_ctanpham" value="{{ $anPham->mactanpham }}">
+                            <div class="form-check mb-2">
+                                <input type="radio" id="momo" name="payment_method" value="momo" class="form-check-input" required>
+                                <label for="momo" class="form-check-label">
+                                    <i id="momo" class="fas fa-wallet me-2"></i> <span id="momo">Thanh toán qua MoMo</span>
+                                </label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input type="radio" id="bank" name="payment_method" value="bank" class="form-check-input" required>
+                                <label for="bank" class="form-check-label">
+                                    <i id="bank" class="fas fa-university me-2"></i> <span id="bank">Thanh toán qua Ngân hàng</span>
+                                </label>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success btn-submit btn-lg">
+                                    <i class="fas fa-arrow-right me-2"></i> Thanh toán
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
                     <!-- Nút Đặt Trước và Hủy -->
-                    <div class="text-center">
+                    <!-- <div class="text-center">
                         <form action="{{ route('route-khachhang-thanhToan', ['mactanpham' => $anPham->mactanpham]) }}" method="POST" class="d-inline">
                             @csrf
                             <button type="submit" class="btn btn-primary btn-lg">
                                 <i class="fas fa-check me-2"></i> Đặt Trước
                             </button>
                         </form>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="card-footer text-muted text-center">
                     <small>Chúng tôi cam kết bảo mật thông tin của bạn.</small>

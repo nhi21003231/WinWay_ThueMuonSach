@@ -82,7 +82,7 @@
           <div class="mt-4 col-6">
             {{-- tên ấn phẩm --}}
             <div class="bbbbb">
-              <h5 class=" p-2 fw-bold">Tên sách: <span class="fw-normal">{{ $hoaDonThue->chitietanpham->anpham->count() }}</span></h5>
+              <h5 class=" p-2 fw-bold">Tên sách: <span class="fw-normal">{{ $hoaDonThue->chitietanpham->tenanpham }}</span></h5>
             </div>
             <div class="bbbbb mt-2">
               <h5 class=" p-2 fw-bold">Tác giả: <span class="fw-normal">{{ $hoaDonThue->chitietanpham->tacgia }}</span></h5>

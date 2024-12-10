@@ -57,7 +57,7 @@
                                 {{ $item->trangthai }}
                                 </button>
                             </td>
-                            <td class="text-center align-middle">
+                            <td class="text-center align-middle comfirm-re-order">
                                 <button type="button" 
                                     class="btn status-accept border border-none p-0 px-1 text-center " 
                                     {{ $item->trangthai != 'Đang xử lý'?'disabled':'' }}

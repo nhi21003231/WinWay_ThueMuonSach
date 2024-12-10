@@ -48,7 +48,7 @@
                     </form>
                 @else
                     
-                    <a href="{{ route('route-khachhang-hienthiformdattruoc', ['mactanpham' => $anPham->mactanpham]) }}" class="btn-custom btn-preorder mt-3">
+                    <a href="{{ URL::to('dat-truoc-an-pham/'.$anPham->mactanpham.'') }}" class="btn-custom btn-preorder mt-3">
                         Đặt trước
                     </a>
                 @endif
