@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use App\Models\DanhMuc;
 use App\Models\ChiTietHoaDonThue;
 use App\Observers\ChiTietHoaDonThueObserver;
 
@@ -27,5 +29,8 @@ class AppServiceProvider extends ServiceProvider
         //
         Paginator::useBootstrapFive();
         ChiTietHoaDonThue::observe(ChiTietHoaDonThueObserver::class);
+        View::composer('*', function ($view) {
+            $view->with('dsDanhMuc', DanhMuc::all());
+        });
     }
 }

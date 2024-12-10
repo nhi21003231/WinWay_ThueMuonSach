@@ -45,13 +45,21 @@ class GioHangController extends Controller
             if ($khachHang) {
                 $cartItems = $khachHang->gioHang()->with('anpham', 'anpham.chitietanpham')
                 ->get();
+
+                // Tính tổng tiền cọc giỏ hàng
                 $totalPrice = $cartItems->sum(function ($item) {
                     return $item->anPham->chiTietAnPham->giacoc;
                 });
 
+                // Tính tổng tiền thuê giỏ hàng
+                $totalPriceThue = $cartItems->sum(function ($item) {
+                    return $item->anPham->chitietanpham->giathue;
+                });
+
                 return view('KhachHang.pages.GioHang.index', [
                     'cartItems' => $cartItems,
-                    'totalPrice' => $totalPrice
+                    'totalPrice' => $totalPrice,
+                    'totalPriceThue' => $totalPriceThue
                 ]);
             } else {
                 return redirect()->back()->with('error', 'Không tìm thấy thông tin giỏ hàng.');

@@ -27,10 +27,16 @@ class HoaDonThueAnPhamController extends Controller
             return redirect()->route('route-khachhang-giohang')->with('error', 'Giỏ hàng của bạn đang trống.');
         }
 
-        // Tính tổng tiền giỏ hàng
+        // Tính tổng tiền cọc giỏ hàng
         $totalPrice = $cartItems->sum(function ($item) {
             return $item->anPham->chitietanpham->giacoc;
         });
+
+        // Tính tổng tiền thuê giỏ hàng
+        $totalPriceThue = $cartItems->sum(function ($item) {
+            return $item->anPham->chitietanpham->giathue;
+        });
+
         //Tính tổng số lượng
         $totalQuantity = $cartItems->sum(function ($item) {
             return $item->soluong;
@@ -44,7 +50,7 @@ class HoaDonThueAnPhamController extends Controller
             'khachHang' => $khachHang,
             'cartItems' => $cartItems,
             'totalPrice' => $totalPrice,
-            // 'shippingFee' => $shippingFee,
+            'totalPriceThue' => $totalPriceThue,
             'grandTotal' => $grandTotal,
             'totalQuantity' => $totalQuantity,
             'ngayThue' => $ngayThue,

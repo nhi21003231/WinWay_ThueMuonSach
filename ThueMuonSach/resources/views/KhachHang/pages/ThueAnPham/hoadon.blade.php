@@ -89,6 +89,7 @@
                                         <th scope="col">Ảnh sản phẩm</th>
                                         <th scope="col">Tên ấn phẩm</th>
                                         <th scope="col">Số lượng</th>
+                                        <th scope="col">Giá thuê</th>
                                         <th scope="col">Giá cọc</th>
                                     </tr>
                                 </thead>
@@ -102,6 +103,9 @@
                                             <td >{{ $item->anPham->chitietanpham->tenanpham }}</td>
                                             <!-- Số lượng -->
                                             <td>{{ $item->soluong }}</td>
+
+                                            <td>{{ number_format($item->anPham->chiTietAnPham->giathue, 0, ',', '.') }} VND</td>
+
                                             <td>{{ number_format($item->anPham->chiTietAnPham->giacoc, 0, ',', '.') }} VND</td>
                                         </tr>
                                     @endforeach
@@ -111,7 +115,8 @@
                         <div class="d-flex justify-content-end">
                             <div class="me-5">
                                 <p><strong>Số lượng: </strong>  {{$totalQuantity}}</p>
-                                <p><strong>Tổng tiền giỏ hàng:</strong> {{ number_format($totalPrice, 0, ',', '.') }} VND</p>
+                                <p><strong>Tổng tiền thuê:</strong> {{ number_format($totalPriceThue, 0, ',', '.') }} VND</p>
+                                <p><strong>Tổng tiền cọc:</strong> {{ number_format($totalPrice, 0, ',', '.') }} VND</p>
 
                             </div>
                         </div>

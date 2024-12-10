@@ -18,8 +18,11 @@ class DsAnPhamFactory extends Factory
         // Khởi tạo ngẫu nhiên tình trạng
         $tinhtrang = $this->faker->randomElement(['Mới', 'Cũ', 'Hư hỏng']);
 
-        // Nếu tình trạng là "Hư hỏng", đặt "dathue" là false
-        $dathue = $tinhtrang === 'Hư hỏng' ? false : $this->faker->boolean();
+        // Khởi tạo mã chi tiết sản phẩm ngẫu nhiên
+        $mactanpham = ChiTietAnPham::inRandomOrder()->first()->mactanpham;
+
+        // Kiểm tra nếu mã sản phẩm là 4 thì đặt dathue = 1
+        $dathue = $mactanpham == 4 ? 1 : ($tinhtrang === 'Hư hỏng' ? 0 : $this->faker->boolean());
 
         // Nếu "dathue" là true, "dathanhly" phải là false; nếu "dathue" là false, "dathanhly" ngẫu nhiên
         $dathanhly = $dathue ? false : $this->faker->boolean();
@@ -29,7 +32,7 @@ class DsAnPhamFactory extends Factory
             'vitri' => $this->faker->streetAddress(), // Vị trí ngẫu nhiên
             'dathue' => $dathue,
             'dathanhly' => $dathanhly,
-            'mactanpham' => ChiTietAnPham::inRandomOrder()->first()->mactanpham, // Sử dụng mã chi tiết ấn phẩm có sẵn
+            'mactanpham' => $mactanpham, // Mã chi tiết sản phẩm
         ];
     }
 }

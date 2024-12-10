@@ -21,7 +21,7 @@
                     </div>
 
                     <!-- Confirm Gia Hạn -->
-                    <form action="{{ route('giahan.store', $anPham->mactanpham) }}" method="POST">
+                    <form action="{{ route('giahan.store', $anPham->maanpham) }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-success">Xác Nhận Gia Hạn 15 Ngày</button>
                     </form>
