@@ -4,6 +4,7 @@
     <!-- Biểu đồ -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- Thêm plugin datalabels -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
     <form action="{{ route('route-cuahang-quanlycuahang-xembaocao') }}" method="GET" class="mb-4">
         <div class="row align-content-center">
@@ -39,6 +40,7 @@
             </div>
             <div class="col-md-3 align-self-end">
                 <button type="submit" class="btn btn-primary">Xem Biểu Đồ</button>
+                <button type="submit" name="export_excel" value="1" class="btn btn-success">Xuất Excel</button>
             </div>
         </div>
     </form>
@@ -132,3 +134,32 @@
     </script>
 
 @endsection
+
+
+<script>
+    // Hàm để xuất biểu đồ
+    function exportChart() {
+        var canvas = document.getElementById('myChart'); // Lấy đối tượng canvas
+        html2canvas(canvas).then(function (canvas) {
+            var image = canvas.toDataURL('image/png'); // Chuyển đổi canvas thành hình ảnh PNG
+            var formData = new FormData();
+            formData.append('chart_image', image);
+
+            // Gửi hình ảnh qua Ajax
+            fetch('{{ route('route-cuahang-quanlycuahang-xembaocao') }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}' // Thêm CSRF token
+                }
+            }).then(response => response.json())
+            .then(data => {
+                // Thực hiện hành động sau khi gửi dữ liệu thành công (nếu cần)
+                alert('Biểu đồ đã được xuất!');
+            });
+        });
+    }
+
+    // Thêm sự kiện khi nhấn nút "Xuất Excel"
+    document.getElementById('exportExcelBtn').addEventListener('click', exportChart);
+</script>
