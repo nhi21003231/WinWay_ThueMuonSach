@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BaiBaoSeeder::class);
         $this->call(ChuongTrinhKhuyenMaiSeeder::class);
         $this->call(HoaDonThueAnPhamSeeder::class);
-        // $this->call(ChiTietHoaDonThueSeeder::class);
+        $this->call(ChiTietHoaDonThueSeeder::class);
 
         // // Tạo dữ liệu cho bảng tài khoản 
         // \App\Models\TaiKhoan::factory(10)->create();

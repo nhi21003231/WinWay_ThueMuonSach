@@ -27,7 +27,7 @@ class DanhGiaController extends Controller
         $danhgia->binhluan = $request->danhgia;
         $danhgia->sosao = $request->sosao;
         $danhgia->ngaydanhgia = now();
-        $danhgia->makhachhang = auth()->id(); // id tai khoan hien tai
+        $danhgia->makhachhang = auth()->user()->khachhang->makhachhang; // id tai khoan hien tai
         $danhgia->save();
 
         return redirect()->route('route-khachhang-lichsuthue')->with('success', 'Đánh giá của bạn đã được lưu.');
