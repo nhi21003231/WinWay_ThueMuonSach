@@ -120,6 +120,13 @@
             autoResearch();
             getDefualtColumns();
             preventDefaultSelection();
+
+            // Chặn phím Enter trong form tìm kiếm
+            document.getElementById('searchInput').addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Ngăn chặn hành động mặc định
+                }
+            });
         });
     
         function autoResearch(){
