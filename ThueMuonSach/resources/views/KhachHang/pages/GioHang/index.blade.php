@@ -12,7 +12,8 @@
                     <th></th>
                     <th>Tên sách</th>
                     <th>Số lượng</th>
-                    <th>Giá cọc</th>
+                    <th>Giá thuê</th>
+                    <th>Giá cọc</th>
                     <th></th>
                 </tr>
             </thead>
@@ -29,8 +30,12 @@
 
                         <td>{{ $item->soluong }}</td>
 
+                        <!-- Giá thuê -->
+                        <td>{{ number_format($item->anPham->chiTietAnPham->giathue, 0, ',', '.') }} VND</td>
+
                         <!-- Giá cọc -->
                         <td>{{ number_format($item->anPham->chiTietAnPham->giacoc, 0, ',', '.') }} VND</td>
+                        
 
                         <!-- Nút xóa sản phẩm khỏi giỏ hàng -->
                         <td>
@@ -45,9 +50,11 @@
             </tbody>
         </table>
 
-        <!-- Tổng tiền giỏ hàng -->
+
+        <!-- Tổng tiền thuê và cọc giỏ hàng -->
         <div class="text-end mt-4" >
-            <h4>Tổng cộng: {{ number_format($totalPrice, 0, ',', '.') }} VND</h4>
+            <h4>Tổng tiền thuê: {{ number_format($totalPriceThue, 0, ',', '.') }} VND</h4>
+            <h4>Tổng tiền cọc: {{ number_format($totalPrice, 0, ',', '.') }} VND</h4>
             <a href="{{ route('route-khachhang-thueanpham') }}" class="btn btn-success">Đăng ký thuê</a>
         </div>
 

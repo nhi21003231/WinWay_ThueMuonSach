@@ -7,17 +7,17 @@
 
 @extends('KhachHang.layouts.index')
 @section('content')
-    <h1>Chi tiết ấn phẩm</h1>
+    <h2 class="text-center fw-bold">CHI TIẾT ẤN PHẨM</h2>
     <div class="container book-detail-container mb-5">
-        <div class="row">
+        <div class="row justify-content-center">
             <!-- Phần bên trái: Hình ảnh của ấn phẩm -->
-            <div class="col-md-5 text-center">
+            <div class="col-md-6 text-center">
                 <img src="{{ asset('img/anh-an-pham/' . $anPham->chiTietAnPham->hinhanh) }}"
                     alt="{{ $anPham->chiTietAnPham->tenanpham }}" class="chitiet-image">
             </div>
 
             <!-- Phần bên phải: Thông tin ấn phẩm -->
-            <div class="col-md-7 book-info">
+            <div class="col-md-6 book-info">
                 <h1 class="book-title">{{ $anPham->chiTietAnPham->tenanpham }}</h1>
                 {{-- <p class="book-author"><strong>Tác giả:</strong> {{ $anPham->chiTietAnPham->tacgia }}</p>
                <p class="book-year"><strong>Năm xuất bản:</strong> {{ $anPham->chiTietAnPham->namxuatban }}</p>
@@ -26,10 +26,6 @@
                 <p class="book-price"><strong>Giá thuê:</strong> {{ number_format($anPham->chiTietAnPham->giathue, 0, ',', '.') }} VND</p>
                 <p class="book-status">
                     <strong>Trạng thái:</strong>
-                    {{-- <span class="{{ $anPham->dathue ? 'text-danger' : 'text-success' }}">
-                               {{ $anPham->dathue ? 'Đã thuê' : 'Chưa thuê' }}
-                   </span> --}}
-                    <!-- Hiển thị trạng thái "Còn hàng" nếu có ít nhất 1 cuốn chưa thuê -->
                     @if ($soLuongChuaThue > 0)
                         <span class="stock-status text-success"><strong>Còn hàng</strong></span>
                     @else
@@ -71,8 +67,8 @@
                     <p class="tab-book-author"><strong>Tác giả:</strong> {{ $anPham->chiTietAnPham->tacgia }}</p>
                     <p class="tab-book-year"><strong>Năm xuất bản:</strong> {{ $anPham->chiTietAnPham->namxuatban }}</p>
                     <div class="tab-book-description">
-                        <p><strong>Mô tả:</strong></p>
-                        <p>{!! nl2br(e($anPham->chiTietAnPham->danhMuc->mota)) !!}</p>
+                        <p><strong>Mô tả: </strong>{!! nl2br(e($anPham->chiTietAnPham->danhMuc->mota)) !!}</p>
+                        {{-- <p>{!! nl2br(e($anPham->chiTietAnPham->danhMuc->mota)) !!}</p> --}}
                     </div>
                 </div>
                 {{-- nhí làm cái này --}}
