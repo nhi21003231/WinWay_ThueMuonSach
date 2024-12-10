@@ -161,7 +161,7 @@ Route::prefix('/quan-ly-cua-hang')->middleware('xac_thuc:quanlycuahang,admin')->
     Route::post('/tao-khuyen-mai/them', [TaoKhuyenMaiController::class, 'themCTKhuyenMai'])
         ->name('route-cuahang-quanlycuahang-taokhuyenmai.themCTKhuyenMai');
     Route::post('/tao-khuyen-mai/{id}', [TaoKhuyenMaiController::class, 'xoaCTKhuyenMai'])
-        ->name('taoKhuyenMai.xoaCTKhuyenMai');
+        ->name('route-cuahang-quanlycuahang-taokhuyenmai.xoaCTKhuyenMai');
 
 
     // -------- Route quản lý đánh giá

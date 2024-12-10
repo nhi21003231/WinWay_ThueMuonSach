@@ -141,11 +141,14 @@ class TaoKhuyenMaiController extends Controller
 
     public function xoaCTKhuyenMai($id)
     {
-        // dd($id);
+        // Tìm khuyến mãi theo ID
         $khuyenMai = ChuongTrinhKhuyenMai::findOrFail($id);
 
+        // Xóa khuyến mãi
         $khuyenMai->delete();
 
-        return redirect()->back()->with('success', 'Khuyến mãi đã được xóa thành công.');
+        // Trả về trang trước với thông báo "Xóa thành công"
+        return redirect()->route('route-cuahang-quanlycuahang-taokhuyenmai')
+            ->with('success', 'Khuyến mãi đã được xóa thành công.');
     }
 }

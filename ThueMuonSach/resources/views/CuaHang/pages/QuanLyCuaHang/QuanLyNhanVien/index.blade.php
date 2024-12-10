@@ -85,9 +85,10 @@
                         <label><input type="checkbox" class="column-toggle" data-column="hoten" checked> Họ tên</label><br>
                         <label><input type="checkbox" class="column-toggle" data-column="chucvu" checked> Chức vụ</label><br>
                         <label><input type="checkbox" class="column-toggle" data-column="tentaikhoan" checked> Tài khoản</label><br>
-                        <label><input type="checkbox" class="column-toggle" data-column="matkhau" checked> Mật khẩu</label><br>
+                        {{-- <label><input type="checkbox" class="column-toggle" data-column="matkhau" checked> Mật khẩu</label><br> --}}
                         <label><input type="checkbox" class="column-toggle" data-column="email" checked> Email</label><br>
                         <label><input type="checkbox" class="column-toggle" data-column="sodienthoai" checked> SDT</label><br>
+                        <label><input type="checkbox" class="column-toggle" data-column="hanhdong" checked>Hành động</label><br>
                         
                         <!-- Nút Bỏ chọn -->
                         <button type="button" class="btn btn-link mt-2" id="resetColumns">Bỏ chọn</button>
@@ -105,10 +106,10 @@
                                     <th id="col-hoten">Họ tên</th>
                                     <th id="col-chucvu">Chức vụ</th>
                                     <th id="col-tentaikhoan">Tài khoản</th>
-                                    <th id="col-matkhau">Mật khẩu</th>
+                                    {{-- <th id="col-matkhau">Mật khẩu</th> --}}
                                     <th id="col-email">Email</th>
                                     <th id="col-sodienthoai">SDT</th>
-                                    <th>Actions</th>
+                                    <th id="col-hanhdong">Hành động</th>
                                 </tr>
                             </thead>
                             <tbody id="searchResults">
@@ -132,19 +133,20 @@
                                                 </select>
                                             </td>
                                             <td class="col-tentaikhoan">{{ $nhanvien->taikhoan->tentaikhoan }}</td>
-                                            <td class="col-matkhau truncate">
+                                            {{-- <td class="col-matkhau truncate">
                                                 <input type="text" class="form-control" name="matkhau[]" value="{{ optional($nhanvien->taikhoan)->matkhau }}" required>
-                                            </td>
+                                            </td> --}}
                                             <td class="col-email truncate">
                                                 <input type="email" class="form-control" name="email[]" value="{{ $nhanvien->email }}" required>
                                             </td>
                                             <td class="col-sodienthoai truncate">
                                                 <input type="text" class="form-control" name="sodienthoai[]" value="{{ $nhanvien->sodienthoai }}" required>
                                             </td>
-                                            <td>
+                                            <td class="col-hanhdong">
                                                 <button data-bs-toggle="modal" data-bs-target="#delete{{ $nhanvien->manhanvien }}" style="outline: none; border: none;" type="button" data-id="{{ $nhanvien->manhanvien }}" class="btnDelete">
                                                     <i class="fas fa-trash text-danger"></i>
                                                 </button> 
+                                                <button type="submit" class="btn btn-primary">Cập nhật</button>
                                             </td>
 
                                             <!-- Modal Xóa -->
@@ -173,8 +175,8 @@
                                 @endif
                             </tbody>
                         </table>
-                        <button type="submit" class="btn btn-danger">Cập nhật</button>
                     </div>
+                    {{-- <button type="submit" class="btn btn-danger">Cập nhật</button> --}}
                 </div> 
             </form>
         </div> 

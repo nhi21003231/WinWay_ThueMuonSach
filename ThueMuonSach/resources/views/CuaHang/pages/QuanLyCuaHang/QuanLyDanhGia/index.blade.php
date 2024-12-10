@@ -31,6 +31,7 @@
                     <label><input type="checkbox" class="column-toggle" data-column="sosao" checked> Số sao</label><br>
                     <label><input type="checkbox" class="column-toggle" data-column="ngaydanhgia" checked> Ngày đánh giá</label><br>
                     <label><input type="checkbox" class="column-toggle" data-column="trangthai" checked> Trạng thái</label><br>
+                    <label><input type="checkbox" class="column-toggle" data-column="hanhdong" checked> Hành động</label><br>
                     
                     <!-- Nút Bỏ chọn -->
                     <button type="button" class="btn btn-link mt-2" id="resetColumns">Bỏ chọn</button>
@@ -53,7 +54,7 @@
                                 <th id="col-sosao">Số sao</th>
                                 <th id="col-ngaydanhgia">Ngày đánh giá</th>
                                 <th id="col-trangthai">Trạng thái</th>
-                                <th>Actions</th>
+                                <th id="col-hanhdong">Hành động</th>
                             </tr>
                         </thead>
                         <tbody id="searchResults">
@@ -87,7 +88,7 @@
                                         </select>
                                     </td>
                                     
-                                    <td class="">
+                                    <td class="col-hanhdong">
                                         <button 
                                             data-bs-toggle="modal" 
                                             data-bs-target="#delete{{ $danhgia->madanhgia }}" 
@@ -96,7 +97,9 @@
                                             data-id="{{ $danhgia->madanhgia }}"
                                             class="btnDelete">
                                             <i class="fas fa-trash text-danger"></i>
-                                        </button> 
+                                        </button>
+
+                                        <button type="submit" class="btn btn-danger mt-1">Cập nhật</button>
                                     </td>
 
                                     <!-- Modal Xóa -->
@@ -126,8 +129,8 @@
                         </tbody>
                     </table>
                 </div>
-                <button type="submit" class="btn btn-danger mt-1">Cập nhật</button>
             </div> 
+           
         </form>
     </div> 
 @endsection

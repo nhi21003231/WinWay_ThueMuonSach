@@ -2,19 +2,19 @@
 function getDefualtColumns() {
     let defaultColumns;
     if (document.getElementById('quanlynhanvienPage')) {
-        defaultColumns = ['manhanvien', 'hoten', 'chucvu', 'tentaikhoan', 'matkhau', 'email', 'sodienthoai'];   
+        defaultColumns = ['manhanvien', 'hoten', 'chucvu', 'tentaikhoan', 'email', 'sodienthoai', 'hanhdong'];   
     } else if(document.getElementById('chamcongPage'))
     {
-        defaultColumns = ['machamcong', 'manhanvien', 'hoten', 'checkin', 'checkout', 'ghinhan'];
+        defaultColumns = ['machamcong', 'manhanvien', 'hoten', 'checkin', 'checkout', 'ghinhan', 'hanhdong'];
     } else if(document.getElementById('dinhgiaanphamPage'))
     {
-        defaultColumns = ['maanpham', 'tenanpham', 'giathue', 'giacoc', 'namxuatban', 'hinhanh'];
+        defaultColumns = ['maanpham', 'tenanpham', 'tacgia', 'namxuatban', 'giathue', 'giacoc', 'hinhanh', 'hanhdong'];
     } else if(document.getElementById('taokhuyenmaiPage'))
     {
-        defaultColumns = ['mactkm', 'tenchuongtrinh', 'mota', 'ngayapdung', 'ngayketthuc'];
+        defaultColumns = ['mactkm', 'tenchuongtrinh', 'mota', 'ngayapdung', 'ngayketthuc', 'hanhdong'];
     } else if(document.getElementById('quanlydanhgiaPage'))
     {
-        defaultColumns = ['madanhgia', 'tenanpham', 'tenkhachhang', 'binhluan', 'sosao', 'ngaydanhgia', 'trangthai'];
+        defaultColumns = ['madanhgia', 'tenanpham', 'tenkhachhang', 'binhluan', 'sosao', 'ngaydanhgia', 'trangthai', 'hanhdong'];
     }
 
     // Gán sự kiện click cho từng checkbox
