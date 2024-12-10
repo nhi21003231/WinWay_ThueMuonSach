@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\QuanLyCuaHang;
 
+use App\Exports\DoanhThuExport;
 use App\Http\Controllers\Controller;
 use App\Models\ChiTietHoaDonThue;
 use App\Models\HoaDonThueAnPham;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class XemBaoCaoController extends Controller
 {
@@ -38,6 +40,11 @@ class XemBaoCaoController extends Controller
             $monthName = $monthStart->isoFormat('MMMM'); // Tên tháng (ví dụ: Tháng Một)
             $labels[] = ucwords($monthName);
             $data[] = $totalRevenue;
+        }
+
+        // Kiểm tra nếu nút "Xuất Excel" được nhấn
+        if ($request->has('export_excel')) {
+            return Excel::download(new DoanhThuExport($startMonth, $endMonth, $year), 'doanh_thu.xlsx');
         }
 
         // Trả về view với dữ liệu

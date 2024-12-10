@@ -33,6 +33,7 @@
                         <label><input type="checkbox" class="column-toggle" data-column="checkin" checked> Check-In</label><br>
                         <label><input type="checkbox" class="column-toggle" data-column="checkout" checked> Check-Out</label><br>
                         <label><input type="checkbox" class="column-toggle" data-column="ghinhan" checked> Ghi nhận</label><br>
+                        <label><input type="checkbox" class="column-toggle" data-column="hanhdong" checked>Hành động</label><br>
                         
                         <!-- Nút Bỏ chọn -->
                         <button type="button" class="btn btn-link mt-2" id="resetColumns">Bỏ chọn</button>
@@ -52,6 +53,7 @@
                                     <th id="col-checkin">Thời gian vào</th>
                                     <th id="col-checkout">Thời gian ra</th>
                                     <th id="col-ghinhan">Ghi nhận</th>
+                                    <th id="col-hanhdong">Hành động</th>
                                 </tr>
                             </thead>
                             <tbody id="searchResults">
@@ -78,6 +80,9 @@
                                             </select>
                                         </td>
                                         <input type="hidden" name="machamcong[]" value="{{ $chamcong->machamcong }}">
+                                        <td class="col-hanhdong">
+                                            <button type="submit" class="btn btn-danger mt-3">Cập nhật</button>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 @endif
@@ -85,7 +90,6 @@
                         </table>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-danger mt-3">Cập nhật</button>
             </form> 
         </div>
     </div>

@@ -78,6 +78,7 @@
                     <label><input type="checkbox" class="column-toggle" data-column="mota" checked> Mô tả</label><br>
                     <label><input type="checkbox" class="column-toggle" data-column="ngayapdung" checked> Ngày áp dụng</label><br>
                     <label><input type="checkbox" class="column-toggle" data-column="ngayketthuc" checked> Ngày kết thúc</label><br>
+                    <label><input type="checkbox" class="column-toggle" data-column="hanhdong" checked> Hành động</label><br>
                     <!-- Nút Bỏ chọn -->
                     <button type="button" class="btn btn-link mt-2" id="resetColumns">Bỏ chọn</button>
                 </div>
@@ -95,7 +96,7 @@
                                 <th id="col-mota">Mô tả</th>
                                 <th id="col-ngayapdung">Ngày áp dụng</th>
                                 <th id="col-ngayketthuc">Ngày kết thúc</th>
-                                <th>Actions</th>
+                                <th id="col-hanhdong">Hành động</th>
                             </tr>
                         </thead>
                         <tbody id="searchResults">
@@ -121,7 +122,7 @@
                                             <input type="datetime-local" class="form-control" name="ngayketthuc[]" value="{{ \Carbon\Carbon::parse($khuyenmai->ngayketthuc)->format('Y-m-d\TH:i') }}">
                                         </td>
                                         {{-- xoa --}}
-                                        <td>
+                                        <td class="col-hanhdong">
                                             <button 
                                                 data-bs-toggle="modal" 
                                                 data-bs-target="#delete{{ $khuyenmai->mactkm }}" 
@@ -131,6 +132,7 @@
                                                 class="btnDelete">
                                                 <i class="fas fa-trash text-danger"></i>
                                             </button> 
+                                            <button type="submit" class="btn btn-danger">Cập nhật</button>
                                         </td>
                                         <!-- Modal Xóa -->
                                         <div class="modal fade" id="delete{{ $khuyenmai->mactkm }}" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
@@ -145,10 +147,15 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                        <form action="{{ route('taoKhuyenMai.xoaCTKhuyenMai', $khuyenmai->mactkm) }}" method="POST">
+                                                        {{-- <form action="{{ route('route-cuahang-quanlycuahang-taokhuyenmai.xoaCTKhuyenMai', $khuyenmai->mactkm) }}" method="POST">
+                                                            @csrf
+                                                            <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
+                                                        </form> --}}
+                                                        <form action="{{ route('route-cuahang-quanlycuahang-taokhuyenmai.xoaCTKhuyenMai', $khuyenmai->mactkm) }}" method="POST">
                                                             @csrf
                                                             <button type="submit" class="bg-danger btn btn-primary">Xóa</button>
                                                         </form>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -158,7 +165,6 @@
                             @endif
                         </tbody>
                     </table>
-                    <button type="submit" class="btn btn-danger">Cập nhật</button>
                 </div>
             </div> 
         </form>
