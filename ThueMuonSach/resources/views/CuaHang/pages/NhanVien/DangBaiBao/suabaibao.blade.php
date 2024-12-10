@@ -18,7 +18,7 @@
         </div>
     @endif
 
-    <form action="{{ route('dangbaibao.update') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('route-cuahang-nhanvien-dangbaibao-sua') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">

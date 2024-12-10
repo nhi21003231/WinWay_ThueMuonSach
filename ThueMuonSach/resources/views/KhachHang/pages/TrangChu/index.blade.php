@@ -14,25 +14,25 @@
                         </div>
                     </div> --}}
                     <div class="owl-carousel owl-theme">
-                    <div class="hero__item"
-                        style="background-image: url('{{ asset('img/bganpham1.jpg') }}'); background-size: cover; background-position: center;">
-                        <div class="hero__text">
-                            <span>chưa nghĩ ra?</span>
-                            <h2>ẤN PHẨM<br>TRI THỨC SINH VIÊN</h2>
-                            <p>Có sẵn nhận và giao hàng miễn phí</p>
-                            <a href="{{ route('route-khachhang-danhsachanpham') }}" class="primary-btn">XEM NGAY</a>
+                        <div class="hero__item"
+                            style="background-image: url('{{ asset('img/bganpham8.png') }}'); background-size: cover; background-position: center;">
+                            <div class="hero__text">
+                                <span>chưa nghĩ ra?</span>
+                                <h2>ẤN PHẨM<br>TRI THỨC SINH VIÊN</h2>
+                                <p>Có sẵn nhận và giao hàng miễn phí</p>
+                                <a href="{{ route('route-khachhang-danhsachanpham') }}" class="primary-btn">XEM NGAY</a>
+                            </div>
+                        </div>
+                        <div class="hero__item"
+                            style="background-image: url('{{ asset('img/bganpham6.png') }}'); background-size: cover; background-position: center;">
+                            <div class="hero__text">
+                                <span>chưa nghĩ ra?</span>
+                                <h2>ẤN PHẨM<br>TRI THỨC SINH VIÊN</h2>
+                                <p>Có sẵn nhận và giao hàng miễn phí</p>
+                                <a href="{{ route('route-khachhang-danhsachanpham') }}" class="primary-btn">XEM NGAY</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="hero__item"
-                        style="background-image: url('{{ asset('img/bganpham2.jpg') }}'); background-size: cover; background-position: center;">
-                        <div class="hero__text">
-                            <span>chưa nghĩ ra?</span>
-                            <h2>ẤN PHẨM<br>TRI THỨC SINH VIÊN</h2>
-                            <p>Có sẵn nhận và giao hàng miễn phí</p>
-                            <a href="{{ route('route-khachhang-danhsachanpham') }}" class="primary-btn">XEM NGAY</a>
-                        </div>
-                    </div>
-                </div>
                 </div>
             </div>
         </div>

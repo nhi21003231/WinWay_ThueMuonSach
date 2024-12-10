@@ -73,7 +73,7 @@ class ChiTietAnPhamSeeder extends Seeder
         ];
 
         foreach ($data as $item) {
-            $item['giacoc'] = rand(50000, 200000); // Random deposit between 50,000 and 200,000
+            $item['giacoc'] = rand( 50000, 200000); // Random deposit between 50,000 and 200,000
             $item['giathue'] = rand(10000, 50000); // Random rental price between 10,000 and 50,000
 
             ChiTietAnPham::create($item);

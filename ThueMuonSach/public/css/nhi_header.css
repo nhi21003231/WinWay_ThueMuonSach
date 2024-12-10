@@ -542,9 +542,9 @@ ol {
 	background: #ffffff;
 }
 
-.hero.hero-normal .hero__search {
+/* .hero.hero-normal .hero__search {
 	margin-bottom: 0;
-}
+} */
 
 .hero__categories__all {
 	background: #FFBFCC;
@@ -600,7 +600,7 @@ ol {
 }
 
 .hero__search__form {
-	width: 600px;
+	width: 700px;
 	height: 50px;
 	border: 1px solid #ebebeb;
 	position: relative;
@@ -692,7 +692,7 @@ ol {
 
 .hero__text h2 {
 	font-size: 46px;
-	color: #252525;
+	color: #f3e8e8;
 	line-height: 52px;
 	font-weight: 700;
 	margin: 10px 0;

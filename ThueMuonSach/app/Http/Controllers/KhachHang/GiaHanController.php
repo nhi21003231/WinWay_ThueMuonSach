@@ -21,16 +21,18 @@ class GiaHanController extends Controller
         return view('KhachHang.pages.GiaHan.index', compact('anPham'));
     }
 
-    public function store(Request $request, $mactanpham)
+    public function store(Request $request, $maanpham)
     {
         // Retrieve the product details
-        $anPham = DsAnPham::with('chiTietAnPham')->findOrFail($mactanpham);
-
+        $anPham = DsAnPham::with('chiTietAnPham')->where('maanpham', $maanpham)->firstOrFail();
+        Log::info('Product details retrieved.', ['anPham' => $anPham]);
+    
         // Update the rental period
-        $hoadon = HoaDonThueAnPham::whereHas('chiTietHoaDons', function($query) use ($mactanpham) {
-            $query->where('maanpham', $mactanpham);
+        $hoadon = HoaDonThueAnPham::whereHas('chiTietHoaDons', function($query) use ($maanpham) {
+            $query->where('maanpham', $maanpham);
         })->first();
-
+        Log::info('Invoice details retrieved.', ['hoadon' => $hoadon]);
+    
         if ($hoadon) {
             // Check if the rental period has already been extended
             $originalNgayTra = Carbon::parse($hoadon->ngaythue)->addDays(15);
@@ -38,20 +40,19 @@ class GiaHanController extends Controller
                 Log::info('Rental period has already been extended.');
                 return redirect()->back()->with('error', 'Bạn chỉ có thể gia hạn một lần.');
             }
-
+    
             // Extend the return date by 15 days
             $newNgayTra = Carbon::parse($hoadon->ngaytra)->addDays(15);
-
+    
             $hoadon->ngaytra = $newNgayTra;
             $hoadon->save();
-
+    
             Log::info('Rental period extended successfully.', ['hoadon' => $hoadon]);
-
+    
             return redirect()->route('route-khachhang-trangchu')->with('success', 'Gia hạn thành công.');
         }
-
-        Log::error('Invoice not found.', ['mactanpham' => $mactanpham]);
+    
+        Log::error('Invoice not found.', ['maanpham' => $maanpham]);
         return redirect()->back()->with('error', 'Không tìm thấy hoá đơn. Vui lòng thử lại.');
     }
-
 }

@@ -21,7 +21,7 @@
         </div>
     @endif
 
-    <form action="{{ route('dangbaibao.store') }}" method="POST" enctype="multipart/form-data"> <!-- Thêm enctype -->
+    <form action="{{ route('route-cuahang-nhanvien-dangbaibao-store') }}" method="POST" enctype="multipart/form-data"> <!-- Thêm enctype -->
         @csrf
         <div class="mb-3">
             <label for="tieude" class="form-label">Tiêu Đề</label>
@@ -33,11 +33,11 @@
         </div>
         <div class="mb-3">
             <label for="manhanvien" class="form-label">Mã Nhân Viên</label>
-            <input type="number" class="form-control" id="manhanvien" name="manhanvien" value="{{ Auth::user()->nhanvien->manhanvien }}" readonly>
+            <input type="number" class="form-control" id="manhanvien" name="manhanvien" required>
         </div>
         <div class="mb-3">
             <label for="hinhanh" class="form-label">Hình Ảnh</label>
-            <input type="file" class="form-control" id="hinhanh" name="hinhanh" accept="image/*"> <!-- Thêm trường tải hình ảnh -->
+            <input type="file" class="form-control" id="hinhanh" name="hinhanh" accept="image/*" required> <!-- Thêm thuộc tính required -->
         </div>
         <button type="submit" class="btn btn-primary">Đăng Bài Báo</button>
         <a href="{{ URL::to('nhan-vien/dang-bai-bao') }}" class="btn btn-secondary">Quay lại</a>

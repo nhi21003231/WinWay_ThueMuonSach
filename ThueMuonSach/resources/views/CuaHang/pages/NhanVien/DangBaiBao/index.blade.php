@@ -20,7 +20,7 @@
     </div>
 
     <button id="cuong-nuttimkiem" class="cuong-bb-btn-primary me-auto">Tìm kiếm</button>
-    <a href="{{ route('dangbaibao.thembaibao') }}" class="btn btn-success" id="cuong-dangbaibao">Đăng bài báo mới</a>
+    <a href="{{ route('route-cuahang-nhanvien-dangbaibao-thembaibao') }}" class="btn btn-success" id="cuong-dangbaibao">Đăng bài báo mới</a>
 </div>
 
 @csrf
@@ -52,8 +52,8 @@
                     <td class="search-column">{{ $CTBaiBao->ngaydang }}</td>
                     <td class="search-column">{{ $CTBaiBao->nhanVien->hoten }}</td>
                     <td class="search-column">
-                        <a href="{{ route('dangbaibao.suabaibao', ['tieude' => $CTBaiBao->tieude]) }}" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square text-black"></i></a>
-                        <form action="{{ route('dangbaibao.xoa', ['tieude' => $CTBaiBao->tieude]) }}" method="POST" style="display:inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xoá bài báo này?');">
+                        <a href="{{ route('route-cuahang-nhanvien-dangbaibao-suabaibao', ['tieude' => $CTBaiBao->tieude]) }}" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square text-black"></i></a>
+                        <form action="{{ route('route-cuahang-nhanvien-dangbaibao-xoa', ['tieude' => $CTBaiBao->tieude]) }}" method="POST" style="display:inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xoá bài báo này?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm"><i class="fa-regular fa-trash-can"></i></button>

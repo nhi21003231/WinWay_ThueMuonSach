@@ -34,22 +34,22 @@
 </header>
 <!-- Hero Section Begin -->
 <div class="container">
-    <div class="row">
-
-        <!-- <div class="col-lg-3">
-                <div class="header__logo">
-                    <a href="./index.php"><img src="./img/logo1.png" alt="" width="40%" style="margin-left: 170px;"></a>
-                </div>
-            </div> -->
-        <div class="hero__search">
-            <div class="hero__search__form">
-                <form action="{{ route('route-khachhang-timkiem') }}" method="GET">
-                    <input type="text" name="search" placeholder="Nhập ấn phẩm cần tìm.">
-                    <button type="submit" class="site-btn">TÌM</button>
-                </form>
+    <div class="row align-items-center">
+        <div class="col-lg-1">
+            <div class="header__logo">
+                <a href="{{ route('route-khachhang-trangchu') }}"><img src="{{ asset('img/logo1.png') }}" alt="Logo" width="50%"></a>
             </div>
         </div>
-
+        <div class="col-lg-9">
+            <div class="hero__search">
+                <div class="hero__search__form">
+                    <form action="{{ route('route-khachhang-timkiem') }}" method="GET">
+                        <input type="text" name="search" placeholder="Nhập ấn phẩm cần tìm.">
+                        <button type="submit" class="site-btn">TÌM</button>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="col-lg-12">
             <nav class="header__menu">
                 <ul>
@@ -57,7 +57,7 @@
                     {{-- <li><a href="{{ route('route-khachhang-danhsachanpham') }}">Ấn phẩm</a> </li> --}}
                     <li><a href="{{ route('route-khachhang-danhsachanpham') }}">Ấn phẩm</a>
                         <ul class="header__menu__dropdown">
-                            <li><a href="{{ route('route-khachhang-danhsachanpham') }}">Tất cả ấn phẩm</a></li>
+                            {{-- <li><a href="{{ route('route-khachhang-danhsachanpham') }}">Tất cả ấn phẩm</a></li>
                             <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách du lịch']) }}">Sách du
                                     lịch</a></li>
                             <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách giáo khoa']) }}">Sách
@@ -83,7 +83,11 @@
                             <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Truyện tranh']) }}">Truyện
                                     tranh</a></li>
                             <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => 'Sách khác']) }}">Sách
-                                    khác</a></li>
+                                    khác</a></li> --}}
+                                            @foreach($dsDanhMuc as $category)
+                                                <li><a href="{{ route('route-khachhang-danhmuc', ['danhMuc' => $category->tendanhmuc]) }}">{{ $category->tendanhmuc }}</a></li>
+                                            @endforeach
+
                         </ul>
                     </li>
                     <li><a href="{{ route('route-khachhang-lienhe') }}">Liên hệ</a></li>
