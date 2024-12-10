@@ -103,6 +103,8 @@ class DonDatTruocController extends Controller
 
         $hoadon = HoaDonThueAnPham::find($id);
 
+        $hoadon->ngaytra = now()->addDays(15);
+
         $hoadon->loaidon = $request->loaidon;
 
         $hoadon->trangthai = 'Đang thuê';

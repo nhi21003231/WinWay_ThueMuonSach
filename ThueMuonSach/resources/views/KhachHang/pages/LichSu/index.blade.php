@@ -19,8 +19,7 @@
                         {{-- <th>Số Lượng</th> --}}
                         <th>Tiền Thuê</th>
                         <th>Tiền Cọc</th>
-                        <th>Đánh giá</th>
-                        <th>Gia hạn</th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,16 +72,13 @@
                                         </a><br>
                                     @endif
                                 @endforeach
-                            </td>
-
-                            <td>
-                                @if ($chitiet->danhgia)
-                                    {{ $chitiet->danhgia }}
-                                @else
+                                @if ($hoadon->trangthai !== 'Đã trả')
                                     <a href="{{ route('giahan.create', $chitiet->dsAnPham->maanpham) }}"
                                         class="btn btn-primary btn-sm">Gia hạn</a>
                                 @endif
                             </td>
+
+                            
                         </tr>
                     @endforeach
                 </tbody>

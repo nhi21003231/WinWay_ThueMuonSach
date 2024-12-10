@@ -35,7 +35,7 @@
                             <td>{{ $hoaDon->ngaytra }}</td>
                             <td>{{ $hoaDon->trangthai }}</td>
                             <td>
-                                <a href="{{ route('quanlyanpham.chitiethoadon', ['mahoadon' => $hoaDon->mahoadon]) }}"
+                                <a href="{{ route('route-cuahang-nhanvien-quanlyanpham-chitiethoadon', ['mahoadon' => $hoaDon->mahoadon]) }}"
                                     class="btn btn-info btn-sm">Xem Chi Tiết</a>
                             </td>
                             <td>

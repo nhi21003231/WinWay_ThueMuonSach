@@ -105,7 +105,9 @@ Route::delete('/dangbaibao/{tieude}', [DangBaiBaoController::class, 'destroy'])
     // -------- Route quản lý ấn phẩm
     Route::get('/quan-ly-an-pham', [NhanVienQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])
         ->name('route-cuahang-nhanvien-quanlyanpham');
-    Route::get('/quan-ly-an-pham/{mahoadon}', [NhanVienQuanLyAnPhamController::class, 'show'])->name('quanlyanpham.chitiethoadon');
+    // Route::get('/quan-ly-an-pham/{mahoadon}', [NhanVienQuanLyAnPhamController::class, 'show'])->name('quanlyanpham.chitiethoadon');
+    Route::get('/quan-ly-an-pham/{mahoadon}', [NhanVienQuanLyAnPhamController::class, 'show'])
+    ->name('route-cuahang-nhanvien-quanlyanpham-chitiethoadon');
     Route::post('/quan-ly-an-pham/{mahoadon}', [NhanVienQuanLyAnPhamController::class, 'traSach'])->name('traSach');
     Route::post('/update-status/{mahoadon}', [NhanVienQuanLyAnPhamController::class, 'updateStatus'])->name('updateStatus');
 
