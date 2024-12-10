@@ -33,6 +33,8 @@ use App\Http\Controllers\QuanLyKho\QuanLyTonKhoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\XacThucController;
 
+use App\Http\Controllers\KhachHang\DatTruocController;
+
 
 
 // 1 > Route đăng ký, đăng nhập (chung cho khách hàng và bên cửa hàng)
@@ -161,7 +163,7 @@ Route::prefix('/quan-ly-cua-hang')->middleware('xac_thuc:quanlycuahang,admin')->
     Route::post('/tao-khuyen-mai/them', [TaoKhuyenMaiController::class, 'themCTKhuyenMai'])
         ->name('route-cuahang-quanlycuahang-taokhuyenmai.themCTKhuyenMai');
     Route::post('/tao-khuyen-mai/{id}', [TaoKhuyenMaiController::class, 'xoaCTKhuyenMai'])
-        ->name('taoKhuyenMai.xoaCTKhuyenMai');
+        ->name('route-cuahang-quanlycuahang-taokhuyenmai.xoaCTKhuyenMai');
 
 
     // -------- Route quản lý đánh giá
@@ -301,7 +303,15 @@ Route::middleware('xac_thuc:khachhang')->group(function () {
     // Route::post('/dattruoc-suathongtindattruoc/{mactanpham}', [DanhSachAnPhamController::class, 'suaThongTinDatTruoc'])->name('dattruoc-suathongtindattruoc');
     Route::post('/hoadondattruoc/{mactanpham}', [DanhSachAnPhamController::class, 'hienThiHoaDonDatTruoc'])->name('route-khachhang-hoadondattruoc');
     Route::post('/khachhang/thanhToan/{mactanpham}', [DanhSachAnPhamController::class, 'hienThiThanhToan'])->name('route-khachhang-thanhToan');
-    Route::post('/khachhang/dattruoc/xulynganhang', [HoaDonThueAnPhamController::class, 'xuLyChuyenKhoan_DatTruoc'])->name('route-khachhang-dattruoc-xulynganhang');
+    // Route::post('/khachhang/dattruoc/xulynganhang', [HoaDonThueAnPhamController::class, 'xuLyChuyenKhoan_DatTruoc'])->name('route-khachhang-dattruoc-xulynganhang');
+    Route::post('dat-truoc/hoa-don/xu-ly-thanh-toan', [DatTruocController::class, 'hienThiThanhToanDatTruoc'])->name('route-khachhang-dattruoc-xulyhoadon');
+
+    Route::post('dat-truoc/them', [DatTruocController::class, 'luudonhang'])->name('route-khachhang-dattruoc-them');
+
+    // Route::get('dat-truoc/hoa-don/ngan-hang', [DatTruocController::class, 'hienThiThanhToanDatTruoc'])->name('route-khachhang-dattruoc-nganhang');
+    // Route::post('dat-truoc/hoa-don/ngan-hang/xulynganhang', [HoaDonThueAnPhamController::class, 'xuLyNganHang'])->name('route-khachhang-dattruoc-xulynganhang');
+    // Route::get('dat-truoc/hoa-don/momo', [DatTruocController::class, 'hienThiThanhToanDatTruoc'])->name('route-khachhang-dattruoc-momo');
+    // Route::post('dat-truoc/hoa-don/momo/xulymomo', [HoaDonThueAnPhamController::class, 'xuLyMoMo'])->name('route-khachhang-dattruoc-xulymomo');
     // -------- Route giỏ hàng
     Route::get('/gio-hang', [GioHangController::class, 'hienThiGioHang'])->name('route-khachhang-giohang');
     Route::post('gio-hang/them-vao-gio-hang/{mactanpham}', [GioHangController::class, 'themVaoGioHang'])->name('route-khachhang-themvaogiohang');

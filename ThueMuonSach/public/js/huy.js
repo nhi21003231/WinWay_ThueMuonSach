@@ -19,7 +19,7 @@ $(document).ready(function () {
   $(".btn-xoakh").click(function() {
     Swal.fire({
       title: "Xóa khách hàng?",
-      text: "Bạn có chắc muốn xóa khách hàng nay",
+      text: "Bạn có chắc muốn xóa khách hàng này",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -47,26 +47,39 @@ $(document).ready(function () {
   $('.status-accept').click(function () { 
     var accept_data = $(this).data('id');
     // console.log(accept_data);
-
-    $.ajax({
-      type: "put",
-      url: "/nhan-vien/update/status",
-      data: {
-        orderID:accept_data
-      },
-      // dataType: "dataType",
-      success: function (response) {
-        if (response.success) {
-          toastr.success(response.success,response.message, {
-            positionClass: 'toast-bottom-right',
-            timeOut: '2000', // set time hidden notify
-            closeButton: true,
-            newestOnTop: false,
-          });
-        }
-        setTimeout(()=>{
-          location.reload();
-        },1000)
+    Swal.fire({
+      title: "Xác nhận đơn hàng?",
+      text: "Bạn có muốn xác nhận đơn hàng này.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Đồng ý"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // console.log('aaaa')
+        $.ajax({
+          type: "put",
+          url: "/nhan-vien/update/status",
+          data: {
+            orderID:accept_data
+          },
+          // dataType: "dataType",
+          success: function (response) {
+            if (response.success) {
+              toastr.success(response.success,response.message, {
+                positionClass: 'toast-bottom-right',
+                timeOut: '2000', // set time hidden notify
+                closeButton: true,
+                newestOnTop: false,
+              });
+            }
+            setTimeout(()=>{
+              location.reload();
+            },1000)
+          }
+        });
+        
       }
     });
    })

@@ -62,4 +62,14 @@ class ValidationFormRequest extends FormRequest
             // 'trangthai.required' => 'Vui lòng chọn trạng thái',
         ];
     }
+
+    public function withValidator($validator)
+    {
+        // Thêm kiểm tra tùy chỉnh sau khi áp dụng quy tắc
+        $validator->after(function ($validator) {
+            if ($this->loaidon === 'Đặt trước') {
+                $validator->errors()->add('loaidon', 'Loại đơn không được là "Đặt trước"!');
+            }
+        });
+    }
 }

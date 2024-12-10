@@ -44,7 +44,7 @@ class DanhSachAnPhamController extends Controller
     // }
     public function hienThiFormDatTruoc($mactanpham)
     {
-        $anPham = DsAnPham::findOrFail($mactanpham);
+        $anPham = ChiTietAnPham::findOrFail($mactanpham);
         $taiKhoan = Auth::user();
         $khachHang = KhachHang::where('mataikhoan', $taiKhoan->mataikhoan)->first();
     
@@ -85,8 +85,7 @@ public function hienThiHoaDonDatTruoc(Request $request, $mactanpham)
         $khachHang->save();
     }
     // $anPham = chitietanpham::findOrFail($mactanpham);
-    $anPham = DsAnPham::with('chiTietAnPham')->findOrFail($mactanpham);
-
+    $anPham = ChiTietAnPham::findOrFail($mactanpham);
     // Pass the data to the view
     return view('KhachHang.pages.HoaDonDatTruoc.index', compact('khachHang', 'anPham'));
 }

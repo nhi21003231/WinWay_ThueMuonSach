@@ -86,11 +86,12 @@ class DonDatTruocController extends Controller
     public function capNhatDonDatTruoc(ValidationFormRequest $request, $id)
     {
 
+        // dd($request->all());
         $request->validated();
 
         $anpham = DsAnPham::where('mactanpham',$request->id_ctanpham)
                             
-                            ->where('dathue',0)->first();
+                            ->where('dathue',0)->first();   
 
         
         $ctHoaDon = ChiTietHoaDonThue::create([
@@ -101,6 +102,8 @@ class DonDatTruocController extends Controller
         $ctHoaDon->save();
 
         $hoadon = HoaDonThueAnPham::find($id);
+
+        $hoadon->ngaytra = now()->addDays(15);
 
         $hoadon->loaidon = $request->loaidon;
 

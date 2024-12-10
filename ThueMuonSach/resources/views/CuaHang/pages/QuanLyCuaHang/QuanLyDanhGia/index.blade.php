@@ -23,14 +23,15 @@
                 <div class="dropdown-menu p-3" style="min-width: 200px;">
                     <!-- Checkbox chọn cột -->
                     <label><input type="checkbox" class="column-toggle" data-column="madanhgia" checked> Mã ĐG</label><br>
-                    <label><input type="checkbox" class="column-toggle" data-column="maanpham" checked> Mã AP</label><br>
-                    <label><input type="checkbox" class="column-toggle" data-column="makhachhang" checked> Mã KH</label><br>
+                    {{-- <label><input type="checkbox" class="column-toggle" data-column="maanpham" checked> Mã AP</label><br> --}}
+                    {{-- <label><input type="checkbox" class="column-toggle" data-column="makhachhang" checked> Mã KH</label><br> --}}
                     <label><input type="checkbox" class="column-toggle" data-column="tenanpham" checked> Tên AP</label><br>
                     <label><input type="checkbox" class="column-toggle" data-column="tenkhachhang" checked> Tên KH</label><br>
                     <label><input type="checkbox" class="column-toggle" data-column="binhluan" checked> Bình luận</label><br>
                     <label><input type="checkbox" class="column-toggle" data-column="sosao" checked> Số sao</label><br>
                     <label><input type="checkbox" class="column-toggle" data-column="ngaydanhgia" checked> Ngày đánh giá</label><br>
                     <label><input type="checkbox" class="column-toggle" data-column="trangthai" checked> Trạng thái</label><br>
+                    <label><input type="checkbox" class="column-toggle" data-column="hanhdong" checked> Hành động</label><br>
                     
                     <!-- Nút Bỏ chọn -->
                     <button type="button" class="btn btn-link mt-2" id="resetColumns">Bỏ chọn</button>
@@ -45,15 +46,15 @@
                         <thead class="table-light">
                             <tr>
                                 <th id="col-madanhgia">Mã ĐG</th>
-                                <th id="col-maanpham">Mã AP</th>
-                                <th id="col-makhachhang">Mã KH</th>
+                                {{-- <th id="col-maanpham">Mã AP</th> --}}
+                                {{-- <th id="col-makhachhang">Mã KH</th> --}}
                                 <th id="col-tenanpham">Tên AP</th>
                                 <th id="col-tenkhachhang">Tên KH</th>
                                 <th id="col-binhluan">Bình luận</th>
                                 <th id="col-sosao">Số sao</th>
                                 <th id="col-ngaydanhgia">Ngày đánh giá</th>
                                 <th id="col-trangthai">Trạng thái</th>
-                                <th>Actions</th>
+                                <th id="col-hanhdong">Hành động</th>
                             </tr>
                         </thead>
                         <tbody id="searchResults">
@@ -65,8 +66,8 @@
                                 @foreach ($danhgiaList as $danhgia)
                                 <tr>
                                     <td class="col-madanhgia">{{ $danhgia->madanhgia }}</td>
-                                    <td class="col-maanpham">{{ $danhgia->maanpham }}</td>
-                                    <td class="col-makhachhang">{{ $danhgia->makhachhang }}</td>
+                                    {{-- <td class="col-maanpham">{{ $danhgia->maanpham }}</td> --}}
+                                    {{-- <td class="col-makhachhang">{{ $danhgia->makhachhang }}</td> --}}
                                     <td class="col-tenanpham">{{ $danhgia->dsanpham->chitietanpham ? $danhgia->dsanpham->chitietanpham->tenanpham : 'Không có dữ liệu' }}</td>
                                     <td class="col-tenkhachhang">{{ $danhgia->khachhang->hoten }}</td>
                                     <td class="col-binhluan truncate">
@@ -87,7 +88,7 @@
                                         </select>
                                     </td>
                                     
-                                    <td class="">
+                                    <td class="col-hanhdong">
                                         <button 
                                             data-bs-toggle="modal" 
                                             data-bs-target="#delete{{ $danhgia->madanhgia }}" 
@@ -96,7 +97,9 @@
                                             data-id="{{ $danhgia->madanhgia }}"
                                             class="btnDelete">
                                             <i class="fas fa-trash text-danger"></i>
-                                        </button> 
+                                        </button>
+
+                                        <button type="submit" class="btn btn-danger mt-1">Cập nhật</button>
                                     </td>
 
                                     <!-- Modal Xóa -->
@@ -126,8 +129,8 @@
                         </tbody>
                     </table>
                 </div>
-                <button type="submit" class="btn btn-danger mt-1">Cập nhật</button>
             </div> 
+           
         </form>
     </div> 
 @endsection
@@ -137,6 +140,13 @@
         autoResearch();
         getDefualtColumns();
         preventDefaultSelection();
+
+        // Chặn phím Enter trong form tìm kiếm
+        document.getElementById('searchInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Ngăn chặn hành động mặc định
+            }
+        });
     });
 
     function autoResearch(){
