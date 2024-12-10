@@ -86,7 +86,6 @@ public function hienThiHoaDonDatTruoc(Request $request, $mactanpham)
     }
     // $anPham = chitietanpham::findOrFail($mactanpham);
     $anPham = ChiTietAnPham::findOrFail($mactanpham);
-    // dd($mactanpham);
     // Pass the data to the view
     return view('KhachHang.pages.HoaDonDatTruoc.index', compact('khachHang', 'anPham'));
 }

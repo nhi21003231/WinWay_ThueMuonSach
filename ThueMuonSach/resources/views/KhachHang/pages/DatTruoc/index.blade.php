@@ -137,11 +137,11 @@
         </div>
     </div>
 </div>
-@if($khachHang)
+{{-- @if($khachHang)
     <p>Khách hàng: {{ $khachHang->hoten }}</p>
 @else
     <p>Không tìm thấy thông tin khách hàng.</p>
-@endif
+@endif --}}
     
 @endsection
 

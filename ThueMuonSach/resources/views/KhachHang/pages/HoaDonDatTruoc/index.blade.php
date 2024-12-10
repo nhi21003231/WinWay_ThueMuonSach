@@ -69,7 +69,7 @@
                             <h5>Phương thức thanh toán</h5>
                         </div>
                         {{-- <form action="{{ route('payment.process') }}" method="POST"> --}}
-                            <form action="{{ URL::to('dat-truoc/hoa-don/xu-ly-thanh-toan') }}" method="POST">
+                            <form action="{{ route('route-khachhang-dattruoc-xulyhoadon')}}" method="POST">
                             @csrf
                             <input type="hidden" name="id_ctanpham" value="{{ $anPham->mactanpham }}">
                             <div class="form-check mb-2">
@@ -91,15 +91,17 @@
                             </div>
                         </form>
                     </div>
+                </div>
+
                     <!-- Nút Đặt Trước và Hủy -->
-                    <div class="text-center">
-                        {{-- <form action="{{ route('route-khachhang-thanhToan', ['mactanpham' => $anPham->mactanpham]) }}" method="POST" class="d-inline">
+                    <!-- <div class="text-center">
+                        <form action="{{ route('route-khachhang-thanhToan', ['mactanpham' => $anPham->mactanpham]) }}" method="POST" class="d-inline">
                             @csrf
                             <button type="submit" class="btn btn-primary btn-lg">
                                 <i class="fas fa-check me-2"></i> Đặt Trước
                             </button>
-                        </form> --}}
-                    </div>
+                        </form>
+                    </div> -->
                 </div>
                 <div class="card-footer text-muted text-center">
                     <small>Chúng tôi cam kết bảo mật thông tin của bạn.</small>
