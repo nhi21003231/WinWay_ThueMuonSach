@@ -142,7 +142,7 @@ class HoaDonThueAnPhamController extends Controller
                 'thanhtien' => $thanhtien,
                 'soluongthue' => $soluong,
                 'mathamchieu' => $request->input('paymentReference'),
-                'manhanvien' => 1, // Có thể gán nhân viên nếu cần
+                'manhanvien' => null, // Có thể gán nhân viên nếu cần
                 'makhachhang' => $khachHang->makhachhang,
                 'created_at' => now(), // Thêm giá trị
                 'updated_at' => now(), // Thêm giá trị
@@ -243,7 +243,7 @@ class HoaDonThueAnPhamController extends Controller
                 'thanhtien' => $thanhtien,
                 'soluongthue' => $soluong,
                 'mathamchieu' => $request->input('paymentReference'),
-                'manhanvien' => 1, // Có thể gán nhân viên nếu cần
+                'manhanvien' => null, // Có thể gán nhân viên nếu cần
                 'makhachhang' => $khachHang->makhachhang,
                 'created_at' => now(), // Thêm giá trị
                 'updated_at' => now(), // Thêm giá trị

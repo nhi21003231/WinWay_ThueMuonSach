@@ -19,9 +19,15 @@ class CacBaiBaoController extends Controller
         // Truyền dữ liệu đến view
         return view('KhachHang.pages.CacBaiBao.index', compact('cacbaibao'));
     }
-    public function hienThiChiTietBaiBao($id)
+//     public function hienThiChiTietBaiBao($id)
+// {
+//     $baiBao = BaiBao::findOrFail($id);
+//     return view('KhachHang.pages.CacBaiBao.chitiet', compact('baiBao'));
+// }
+public function hienThiChiTietBaiBao($id)
 {
     $baiBao = BaiBao::findOrFail($id);
-    return view('KhachHang.pages.CacBaiBao.chitiet', compact('baiBao'));
+    $otherArticles = BaiBao::where('mabaibao', '!=', $id)->take(3)->get(); // Fetch 3 other articles
+    return view('KhachHang.pages.CacBaiBao.chitiet', compact('baiBao', 'otherArticles'));
 }
 }

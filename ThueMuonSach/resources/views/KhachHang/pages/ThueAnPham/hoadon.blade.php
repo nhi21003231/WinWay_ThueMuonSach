@@ -52,7 +52,7 @@
         <div class="col-md-10">
             <!-- Card Giỏ Hàng -->
             <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-danger text-white">
                     <h4 class="mb-0 d-flex align-items-center justify-content-center">
                         <i class="fas fa-shopping-cart me-2"></i> Đơn hàng của Bạn
                     </h4>

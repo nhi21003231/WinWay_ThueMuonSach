@@ -22,6 +22,7 @@ class HoaDonThueAnPham extends Model
         'thanhtien',
         'ngaythanhtoan',
         'phuongthucthanhtoan',
+        'mathamchieu',
         'loaidon',
         'trangthai',
         'soluongthue',

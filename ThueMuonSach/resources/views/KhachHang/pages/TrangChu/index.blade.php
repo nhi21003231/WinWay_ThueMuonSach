@@ -49,7 +49,6 @@
             </div>
     </section>
     @php
-        // $chitietanpham = \App\Models\ChiTietAnPham::take(4)->get();
         $chitietanpham = \App\Models\ChiTietAnPham::paginate(4);
     @endphp
     <!-- Danh sách ấn phẩm -->

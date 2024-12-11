@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\HoaDonThueAnPham;
 use App\Models\ChiTietHoaDonThue;
 use App\Models\ChiTietAnPham;
+use Illuminate\Support\Facades\Auth;
 
 class QuanLyAnPhamController extends Controller
 {
@@ -16,6 +17,7 @@ class QuanLyAnPhamController extends Controller
         $hoadon = HoaDonThueAnPham::whereIn('trangthai', ['Đang xử lý',  'Đang thuê', 'Đã trả'])
         ->where('loaidon', 'Đơn thuê')
             ->orderByRaw("FIELD(trangthai, 'Đang xử lý', 'Đang thuê', 'Đã trả')") // Sắp xếp trạng thái
+            ->orderBy('mahoadon', 'asc') // Sắp xếp mahoadon thuê tăng dần
             ->paginate(10); // Sử dụng phân trang với 10 mục mỗi trang
     
         return view('CuaHang.pages.NhanVien.QuanLyAnPham.index', compact('hoadon'));
@@ -55,9 +57,11 @@ class QuanLyAnPhamController extends Controller
         if ($hoaDon->trangthai !== 'Đang thuê') {
             return redirect()->back()->with('error', 'Hóa đơn không thể được trả vì trạng thái không phải là "Đang Thuê".');
         }
+        $manhanvien = Auth::user()->nhanVien->manhanvien;
     
         // Cập nhật trạng thái của hóa đơn
         $hoaDon->trangthai = 'Đã trả';
+        $hoaDon->manhanvien = $manhanvien;
         $hoaDon->save();
         
         return redirect()->route('route-cuahang-nhanvien-quanlyanpham')->with('success', 'Trả sách thành công!');

@@ -2,19 +2,19 @@
 .rating {
     direction: rtl;
     unicode-bidi: bidi-override;
-    text-align: center;
+    text-align: left;
 }
 .rating input {
     display: none;
 }
 .rating label {
-    color: #ddd;
+    /* color: #ddd; */
     font-size: 30px;
     padding: 0;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
-.rating input:checked ~ label,
+/* .rating input:checked ~ label,
 .rating input:hover ~ label,
 .rating label:hover ~ label {
     color: #f5b301;
-}
+} */

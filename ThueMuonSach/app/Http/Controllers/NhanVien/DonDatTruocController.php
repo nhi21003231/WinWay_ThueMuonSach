@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ChiTietAnPham;
 use App\Models\ChiTietHoaDonThue;
 use App\Models\DsAnPham;
+use Illuminate\Support\Facades\Auth;
 
 class DonDatTruocController extends Controller
 {
@@ -66,8 +67,10 @@ class DonDatTruocController extends Controller
         $hoaDon = HoaDonThueAnPham::find($request->orderID);
 
         // dd($hoaDon);
+        $manhanvien = Auth::user()->nhanVien->manhanvien;
 
         $hoaDon->trangthai = 'Đang chờ sách';
+        $hoaDon->manhanvien = $manhanvien;
 
         $hoaDon->save();
 

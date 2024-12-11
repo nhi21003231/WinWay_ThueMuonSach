@@ -84,7 +84,7 @@
         <div class="col-md-7">
             <!-- Card Xác Nhận Thông Tin Thuê -->
             <div class="card shadow-sm">
-                <div class="card-header bg-info text-white">
+                <div class="card-header bg-danger text-white">
                     <h4 class="mb-0 d-flex align-items-center justify-content-center">
                         <i class="fas fa-info-circle me-2"></i> Xác Nhận Thông Tin Đặt Trước
                     </h4>

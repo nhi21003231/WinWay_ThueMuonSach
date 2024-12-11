@@ -44,7 +44,7 @@ class HoaDonThueAnPhamSeeder extends Seeder
                 'trangthai' => 'Đang xử lý',
                 'soluongthue' => 1,
                 'manhanvien' => 1,
-                'makhachhang' => 7,
+                'makhachhang' => 10,
                 'mactanpham' => 4,
                 'created_at' => '2024-06-01 08:00:00',
                 'updated_at' => '2024-06-01 08:00:00'

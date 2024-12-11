@@ -7,13 +7,17 @@ use Illuminate\Http\Request;
 
 use App\Models\ChiTietAnPham;
 use App\Models\HoaDonThueAnPham;
+use Illuminate\Support\Facades\Auth;
 class DatTruocController extends Controller
 {
     public function hienThiThanhToanDatTruoc(Request $request){
         // dd($request->all());
+        if (Auth::guard('web')->check()) {
+        $user = Auth::user();
+        $khachHang = $user->khachHang;
         $anPham = ChiTietAnPham::findOrFail($request->id_ctanpham);
         $grandTotal = $anPham->giacoc;
-        $khachHang = auth()->user();
+        // $khachHang = auth()->user();
         $totalQuantity = 1;
         $type = 'Đặt trước';
         // dd($grandTotal); 
@@ -30,7 +34,7 @@ class DatTruocController extends Controller
             'payment_method'=>$request->payment_method,
             ]);
         }else{
-            $paymentReference = 'bank' . now()->timestamp . '-' . $khachHang->makhachhang;
+            $paymentReference = 'BANK' . now()->timestamp . '-' . $khachHang->makhachhang;
             return view('KhachHang.pages.ThueAnPham.nganhang', [
             'anPham' => $anPham,
             'grandTotal' => $grandTotal,
@@ -41,6 +45,9 @@ class DatTruocController extends Controller
             'payment_method'=>'Chuyển khoản',
             ]);
         }
+    }else{
+        return redirect()->route('route-khachhang-dangnhap');
+    }
         
         
     }
@@ -52,7 +59,8 @@ class DatTruocController extends Controller
             // $ngayTra = $ngayThue->copy()->addDays(15);
             $thanhtien = $request->input('grandTotal');
         $hoadon = HoaDonThueAnPham::create([
-                'ngaythue' => $ngayThue,
+                // 'ngaythue' => $ngayThue,
+                'ngaythue' => null,
                 'ngaytra' => null,
                 'phitracham' => 0, // Có thể điều chỉnh phí trả chậm nếu cần
                 'thanhtien' => $thanhtien,
@@ -64,7 +72,7 @@ class DatTruocController extends Controller
                 
                 'soluongthue' => 1,
                 
-                'manhanvien' => 1, // Có thể gán nhân viên nếu cần
+                'manhanvien' => null, // Có thể gán nhân viên nếu cần
                 'makhachhang' => $khachHang->khachHang->makhachhang,
                 'mactanpham' => $request->id_ctanpham,
         ]);

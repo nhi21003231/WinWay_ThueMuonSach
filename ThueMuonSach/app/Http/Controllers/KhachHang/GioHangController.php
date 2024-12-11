@@ -85,7 +85,7 @@ class GioHangController extends Controller
             ->where('mactanpham', $mactanpham)
             ->where('dathue',false)
             ->where('dathanhly',false)
-            ->where('tinhtrang',['Mới','Cũ'])
+            ->whereIn('tinhtrang',['Mới','Cũ'])
             ->first();
 
             // Lấy maanpham của ấn phẩm vừa tìm thấy

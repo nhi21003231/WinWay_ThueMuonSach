@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <!-- Card Hóa Đơn Đặt Trước -->
             <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-danger text-white">
                     <h4 class="mb-0 d-flex align-items-center justify-content-center">
                         <i class="fas fa-file-invoice me-2"></i> Hóa Đơn Đặt Trước
                     </h4>

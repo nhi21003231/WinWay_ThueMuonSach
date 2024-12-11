@@ -70,7 +70,7 @@ class ChiTietAnPhamController extends Controller
         $soLuongChuaThue = DsAnPham::where('dathanhly', false)
             ->where('mactanpham', $mactanpham)
             ->where('dathue', false)
-            ->where('tinhtrang',['Mới','Cũ'])
+            ->whereIn('tinhtrang',['Mới','Cũ'])
             ->count();
         
         // Lấy danh sách đánh giá theo mactanpham

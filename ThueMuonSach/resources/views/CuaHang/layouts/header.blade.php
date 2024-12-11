@@ -23,15 +23,19 @@
             <span class="me-3">
                 <h5>
                     @if (auth()->user()->vaitro === 'admin')
-                        Admin
+                        {{-- Admin --}}
+                        {{ auth()->user()->nhanvien->hoten }}
                     @elseif (auth()->user()->vaitro === 'quanlycuahang')
-                        Quản lý cửa hàng
+                        {{-- Quản lý cửa hàng --}}
+                        {{ auth()->user()->nhanvien->hoten }}
                     @elseif (auth()->user()->vaitro === 'quanlykho')
-                        Quản lý kho
+                        {{-- Quản lý kho --}}
+                        {{ auth()->user()->nhanvien->hoten }}
                     @elseif (auth()->user()->vaitro === 'nhanvien')
-                        Nhân viên
+                        {{-- Nhân viên --}}
+                        {{ auth()->user()->nhanvien->hoten }}
                     @else
-                        Vai trò không xác định
+                        {{-- Vai trò không xác định --}}
                     @endif
                 </h5>
             </span>

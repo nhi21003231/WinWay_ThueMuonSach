@@ -97,9 +97,21 @@ class XacThucController extends Controller
     $request->validate([
         'tentaikhoan' => 'required|string|max:255|unique:taikhoan',
         'hoten' => 'required|string|max:255',
-        'dienthoai' => 'required|string|digits_between:10,15',
+        'dienthoai' => 'required|string|digits_between:10,11',
         'email' => 'required|email|unique:khachhang',
         'matkhau' => 'required|string|min:3|confirmed', // Kiểm tra mật khẩu và xác nhận
+    ], [
+        'tentaikhoan.required' => 'Vui lòng nhập tên đăng nhập',
+        'tentaikhoan.unique' => 'Tên đăng nhập đã tồn tại',
+        'hoten.required' => 'Vui lòng nhập họ tên',
+        'dienthoai.required' => 'Vui lòng nhập số điện thoại',
+        'dienthoai.digits_between' => 'Số điện thoại không đúng định dạng',
+        'email.required' => 'Vui lòng nhập email',
+        'email.email' => 'Email không đúng định dạng',
+        'email.unique' => 'Email đã tồn tại',
+        'matkhau.required' => 'Vui lòng nhập mật khẩu',
+        'matkhau.min' => 'Mật khẩu phải có ít nhất 3 ký tự',
+        'matkhau.confirmed' => 'Xác nhận mật khẩu không khớp',
     ]);
 
    

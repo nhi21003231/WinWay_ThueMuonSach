@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('hoadonthueanpham', function (Blueprint $table) {
             $table->integer('mahoadon')->autoIncrement();
-            $table->date('ngaythue');
+            $table->date('ngaythue')->nullable();
             $table->date('ngaytra')->nullable();
             $table->decimal('phitracham', 10, 2);
             $table->decimal('thanhtien', 10, 2)->nullable();

@@ -4,6 +4,17 @@
 <h1>Nhân viên - Quản lý ấn phẩm</h1>
 @endsection --}}
 {{-- // cường --}}
+<style>
+ .custom-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url('data:image/svg+xml;utf8,<svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5H7z" fill="currentColor"/></svg>') no-repeat right 10px center;
+    background-color: white;
+    background-size: 30px;
+    padding-right: 30px;
+}   
+</style>
 @extends('CuaHang.layouts.index')
 
 @section('content')
@@ -43,7 +54,7 @@
                                     method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <select name="trangthai" class="form-control" onchange="this.form.submit()"
+                                        <select name="trangthai" class="form-control custom-select" onchange="this.form.submit()"
                                             {{ $hoaDon->trangthai != 'Đang xử lý' ? 'disabled' : '' }}>
                                             @if ($hoaDon->trangthai == 'Đang xử lý' || $hoaDon->trangthai == 'Đang thuê')
                                                 <option value="Đang xử lý"

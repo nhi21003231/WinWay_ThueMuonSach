@@ -9,7 +9,7 @@
         <div class="col-md-8">
             <!-- Card Thanh Toán -->
             <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-danger text-white">
                     <h2 class="mb-0 d-flex align-items-center justify-content-center">
                         <i class="fas fa-university me-2"></i> Thanh Toán Qua Ngân Hàng
                     </h2>
