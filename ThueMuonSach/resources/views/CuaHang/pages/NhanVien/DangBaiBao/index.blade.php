@@ -24,8 +24,8 @@
 </div>
 
 @csrf
-<div class="scroll-container ba-fixed-header-table mb-4">
-    <table class="cuong-bb-table mb-3 text-center align-middle">
+<div class="ba-scroll-container ba-fixed-header-table mb-4">
+    <table class="table text-center align-middle" id="ba-danhsach">
         <thead>
             <tr class="cuong-bb-table-primary align-middle">
                 <th scope="col" width="15%">Hình Ảnh</th> <!-- Cột hình ảnh -->
