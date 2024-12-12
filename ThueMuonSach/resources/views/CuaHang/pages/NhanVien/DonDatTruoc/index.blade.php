@@ -58,7 +58,7 @@
                             <td class=" align-middle" style="width: 150px">{{ $item->khachHang->hoten }}</td>
                             <td class="align-middle">{{ number_format($item->chitietanpham->giacoc,0,'.',',') }}VNĐ
                             </td>
-                            <td class=" align-middle">{{ \Carbon\Carbon::parse($item->ngaythue)->format('d-m-Y') }}</td>
+                            <td class=" align-middle">{{ \Carbon\Carbon::parse($item->ngaythanhtoan)->format('d-m-Y') }}</td>
                             <td class=" align-middle">
                                 <button type="button"
                                     class="btn p-0 px-2 rounded-pill disabled
