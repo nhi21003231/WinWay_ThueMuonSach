@@ -179,7 +179,7 @@
         @isset($danhMuc)
         <h2>Danh Mục: {{ $danhMuc->tendanhmuc }}</h2>
         @else
-        <h2>Tất Cả Ấn Phẩm</h2>
+        <h2><center>Tất Cả Ấn Phẩm</center></h2> <br>
         @endisset
         <div class="row">
             @forelse($chitietanpham as $anPham)

@@ -18,7 +18,7 @@ class DanhSachAnPhamController extends Controller
     {
 
             // $chitietanpham = ChiTietAnPham::take(8)->get();
-            $chitietanpham = ChiTietAnPham::paginate(8);
+            $chitietanpham = ChiTietAnPham::paginate(12);
 
         return view('KhachHang.pages.DanhSachAnPham.index', compact('chitietanpham'));
 
