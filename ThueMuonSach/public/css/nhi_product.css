@@ -17,6 +17,7 @@
     width: 100%;
     max-width: 250px; /* Điều chỉnh kích thước tối đa cho mỗi sản phẩm */
     transition: transform 0.2s ease;
+    margin: auto;
 }
 
 .product__details__pic:hover {

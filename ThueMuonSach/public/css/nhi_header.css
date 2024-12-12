@@ -123,13 +123,18 @@ ol {
 .primary-btn {
 	display: inline-block;
 	font-size: 14px;
-	padding: 10px 28px 10px;
+	padding: 12px 0;
+	width: 100%;
 	color: #ffffff;
 	text-transform: uppercase;
 	font-weight: 700;
 	background: pink;
 	letter-spacing: 1px;
 	border: 1px;
+	display: block; /* Đảm bảo thẻ a chiếm toàn bộ chiều rộng của phần tử cha */
+    white-space: nowrap; /* Ngăn không cho văn bản xuống dòng */
+    overflow: hidden; /* Ẩn phần văn bản vượt quá chiều rộng */
+    text-overflow: ellipsis; /* Thêm dấu ba chấm ở cuối nếu văn bản bị cắt *6px */
 }
 
 .site-btn {
