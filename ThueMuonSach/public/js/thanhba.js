@@ -74,7 +74,6 @@ function toMauDongNhapAnPham() {
     });
 }
 
-
 // Hàm tìm kiếm
 function timKiemAnPham() {
     const searchInput = document.getElementById("ba-timkiem");

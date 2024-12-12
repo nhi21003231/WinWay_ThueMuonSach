@@ -42,7 +42,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title">
+                    <div class="section-title mb-3">
                         <h2>Ấn phẩm nổi bật</h2>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                 @endif
 
                 @forelse ($chitietanpham as $anPham)
-                    <div class="col-lg-3 col-md-4 mb-4">
+                    <div class="col-lg-3 col-md-4 mb-5">
                         <div class="product__details__pic">
                             {{-- <img src="{{ asset('/img/anh-an-pham/' . $anPham->hinhanh) }}" alt="{{ $anPham->tenanpham }}"
                                 class="product__image"
@@ -87,6 +87,12 @@
                         <p>Không tìm thấy sản phẩm nào.</p>
                     </div>
                 @endforelse
+            </div>
+
+            <div class="row mt-4 mb-5">
+                <div class="col-12">
+                    <a href="{{ route('route-khachhang-danhsachanpham') }}" class="primary-btn rounded-5 mx-auto text-center" style="width: 200px">Xem thêm</a>
+                </div>
             </div>
         </div>
     </section>

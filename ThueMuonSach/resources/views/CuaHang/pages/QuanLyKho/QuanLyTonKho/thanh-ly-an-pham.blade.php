@@ -80,19 +80,43 @@
                 <a href="{{ route('route-cuahang-quanlykho-quanlytonkho') }}" class="btn btn-danger w-100">Hủy</a>
             </div>
             <div class="col-6">
-                <button type="submit" class="btn btn-success w-100">Thanh lý</button>
+                <button type="submit" class="btn btn-success w-100" id="btn-thanhly">Thanh lý</button>
             </div>
         </div>
     </form>
 @endsection
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var anPhams = @json($anPhams);
+   document.addEventListener("DOMContentLoaded", function () {
+    var anPhams = @json($anPhams);
 
-        if (anPhams.length !== 0) {
-            toMauDongThanhLy();
-            timKiemAnPham();
-        }
+    if (anPhams.length !== 0) {
+        toMauDongThanhLy();
+        timKiemAnPham();
+    }
+
+    // Xử lý sự kiện nhấn nút thanh lý
+    const btnThanhLy = document.getElementById('btn-thanhly');
+    btnThanhLy.addEventListener('click', function (e) {
+        e.preventDefault(); // Ngăn chặn hành động mặc định
+
+        Swal.fire({
+            title: 'Xác nhận thanh lý?',
+            text: 'Bạn có chắc chắn muốn thanh lý các ấn phẩm đã chọn?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Tô màu dòng trước khi gửi form
+                toMauDongThanhLy();
+                document.querySelector('form').submit(); // Gửi form nếu người dùng xác nhận
+            }
+        });
     });
+});
+
 </script>
