@@ -32,8 +32,9 @@
         </div>
 
         <div class="mb-3">
-            <label for="manhanvien" class="form-label">Mã Nhân Viên</label>
-            <input type="text" class="form-control" id="manhanvien" name="manhanvien" value="{{ old('manhanvien', $baiBao->manhanvien) }}" required>
+            <label for="manhanvien" class="form-label">Tên Nhân Viên</label>
+            <input type="text" class="form-control" id="manhanvien" name="manhanvien" required
+                value="{{ Auth::user()->nhanvien->hoten }}">
         </div>
 
         <div class="mb-3">

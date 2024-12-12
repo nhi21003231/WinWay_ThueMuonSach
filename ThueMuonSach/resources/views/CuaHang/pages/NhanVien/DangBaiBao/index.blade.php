@@ -14,14 +14,14 @@
     </div>
 @endif
 
-{{-- <div class="hstack gap-2 mb-4">
-    <div class="w-25">
+<div class="hstack gap-2 mb-4">
+    {{-- <div class="w-25">
         <input id="cuong-timkiem" class="cuong-bb-form-control me-2" type="text" placeholder="Tìm kiếm..." aria-label="Search">
-    </div>
+    </div> --}}
 
-    <button id="cuong-nuttimkiem" class="cuong-bb-btn-primary me-auto">Tìm kiếm</button>
+    {{-- <button id="cuong-nuttimkiem" class="cuong-bb-btn-primary me-auto">Tìm kiếm</button> --}}
     <a href="{{ route('route-cuahang-nhanvien-dangbaibao-thembaibao') }}" class="btn btn-success" id="cuong-dangbaibao">Đăng bài báo mới</a>
-</div> --}}
+</div>
 
 @csrf
 <div class="scroll-container ba-fixed-header-table mb-4">
