@@ -49,7 +49,7 @@
             </div>
     </section>
     @php
-        $chitietanpham = \App\Models\ChiTietAnPham::paginate(4);
+        $chitietanpham = \App\Models\ChiTietAnPham::paginate(8);
     @endphp
     <!-- Danh sách ấn phẩm -->
     <section class="product-details spad">

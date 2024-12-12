@@ -99,7 +99,7 @@
                     <!-- Form Xác Nhận Thông Tin -->
                     {{-- <form action="{{ route('update-info.post') }}" method="POST" class="needs-validation" novalidate> --}}
                         {{-- <form action="{{ route('dattruoc-suathongtindattruoc', ['mactanpham' => $anPham->mactanpham]) }}" method="POST" class="needs-validation" novalidate> --}}
-                            <form action="{{ route('route-khachhang-hoadondattruoc', ['mactanpham' => $anPham->mactanpham]) }}" method="POST" class="needs-validation" novalidate>
+                            <form action="{{ route('route-khachhang-hoadondattruoc', ['mactanpham' => $anPham->mactanpham]) }}" method="POST" class="needs-validation" >
                             {{-- <form action="{{ route('route-khachhang-thueanpham-xulyhoadon') }}" method="POST"> --}}
                             @csrf
                             <div class="mb-3">

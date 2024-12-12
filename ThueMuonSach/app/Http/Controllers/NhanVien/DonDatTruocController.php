@@ -23,16 +23,16 @@ class DonDatTruocController extends Controller
 
         // dd($request->all());
 
-        $query = HoaDonThueAnPham::where('loaidon', 'Đặt trước')->orderBy('trangthai', 'asc');
+        $query = HoaDonThueAnPham::where('loaidon', 'Đặt trước')->orderBy('trangthai','asc');
 
         if ($request->sort == 'moinhat') {
 
-            $hoaDons = $query->orderBy('ngaythue', 'desc')->paginate(7);
+            $hoaDons = $query->orderBy('ngaythanhtoan', 'desc')->paginate(7);
         }
 
         if ($request->sort == 'cunhat') {
 
-            $hoaDons = $query->orderBy('ngaythue', 'asc')->paginate(7);
+            $hoaDons = $query->orderBy('ngaythanhtoan', 'asc')->paginate(7);
         }
 
         // Xử lý tìm kiếm
@@ -88,6 +88,8 @@ class DonDatTruocController extends Controller
 
                     ->where('dathue', 0)
 
+                    ->where('dathanhly',0)
+
                     ->where('tinhtrang','<>','Hư hỏng')
 
                     ->first();
@@ -99,17 +101,17 @@ class DonDatTruocController extends Controller
 
         $ctHoaDon->save();
 
-        $hoadon = HoaDonThueAnPham::find($request->orderID);
+        $hoaDon->ngaythue = now();
 
-        $hoadon->ngaytra = now()->addDays(15);
+        $hoaDon->ngaytra = now()->addDays(15);
 
-        $hoadon->loaidon = 'Đơn thuê';
+        $hoaDon->loaidon = 'Đơn thuê';
 
-        $hoadon->trangthai = 'Đang thuê';
+        $hoaDon->trangthai = 'Đang thuê';
 
-        $hoadon->mactanpham = Null;
+        $hoaDon->mactanpham = Null;
 
-        $hoadon->save();
+        $hoaDon->save();
 
         $anpham->dathue = 1;
 
@@ -125,10 +127,13 @@ class DonDatTruocController extends Controller
 
         $anpham = DsAnPham::where('mactanpham', $request->id_ctanpham)
 
-            ->where('dathue', 0)
-            ->where('tinhtrang','<>','Hư hỏng')
-            ->first();
+                 ->where('dathue', 0)
 
+                ->where('dathanhly',0)
+                    
+                ->where('tinhtrang','<>','Hư hỏng')
+
+                ->first();
 
         $ctHoaDon = ChiTietHoaDonThue::create([
             'maanpham' => $anpham->maanpham,
@@ -137,17 +142,19 @@ class DonDatTruocController extends Controller
 
         $ctHoaDon->save();
 
-        $hoadon = HoaDonThueAnPham::find($id);
+        $hoaDon = HoaDonThueAnPham::find($id);
 
-        $hoadon->ngaytra = now()->addDays(15);
+        $hoaDon->ngaythue = now();
 
-        $hoadon->loaidon = $request->loaidon;
+        $hoaDon->ngaytra = now()->addDays(15);
 
-        $hoadon->trangthai = 'Đang thuê';
+        $hoaDon->loaidon = $request->loaidon;
 
-        $hoadon->mactanpham = Null;
+        $hoaDon->trangthai = 'Đang thuê';
 
-        $hoadon->save();
+        $hoaDon->mactanpham = Null;
+
+        $hoaDon->save();
 
         $anpham->dathue = 1;
 
