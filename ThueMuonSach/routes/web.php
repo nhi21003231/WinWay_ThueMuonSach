@@ -97,11 +97,13 @@ Route::delete('/dangbaibao/{tieude}', [DangBaiBaoController::class, 'destroy'])
 
     // Update  Status Re-order
     Route::put('/update/status',[DonDatTruocController::class,'updateStatus']);
-
+    Route::put('/don-dat-truoc/quickly-status',[DonDatTruocController::class, 'moveTypeOrderQuickly']);
+    
     Route::get('/don-dat-truoc/{hoaDonThue}/chi-tiet', [DonDatTruocController::class, 'chiTietDonDatTruoc'])
         ->name('route-cuahang-nhanvien-dondattruoc-chitiet');
-
+    // Update Order
     Route::put('/don-dat-truoc/{id}', [DonDatTruocController::class, 'capNhatDonDatTruoc']);
+    
     // -------- Route quản lý ấn phẩm
     Route::get('/quan-ly-an-pham', [NhanVienQuanLyAnPhamController::class, 'hienThiQuanLyAnPham'])
         ->name('route-cuahang-nhanvien-quanlyanpham');

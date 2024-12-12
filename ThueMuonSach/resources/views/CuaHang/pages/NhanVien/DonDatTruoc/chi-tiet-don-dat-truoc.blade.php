@@ -88,10 +88,10 @@
               <h5 class=" p-2 fw-bold">Tác giả: <span class="fw-normal">{{ $hoaDonThue->chitietanpham->tacgia }}</span></h5>
             </div>
             <div class="bbbbb mt-2">
-              <h5 class=" p-2 fw-bold">Giá thuê: <span class="fw-normal">{{ number_format($hoaDonThue->chitietanpham->giathue, 0, ',', '.') }} VNĐ</span></h5>
+              <h5 class=" p-2 fw-bold">Giá thuê: <span class="fw-normal">{{ number_format($hoaDonThue->chitietanpham->giathue, 0, '.', ',') }} VNĐ</span></h5>
             </div>
             <div class="bbbbb mt-2">
-              <h5 class=" p-2  fw-bold">Giá cọc: <span class="fw-normal">{{ number_format($hoaDonThue->chitietanpham->giacoc, 0, ',', '.') }} VNĐ</span></h5>
+              <h5 class=" p-2  fw-bold">Giá cọc: <span class="fw-normal">{{ number_format($hoaDonThue->chitietanpham->giacoc, 0, '.', ',') }} VNĐ</span></h5>
             </div>
           </div>
           <div class="text-center mt-2 col-6">
@@ -99,7 +99,7 @@
           </div>
           {{-- Ngày thuê --}}
           <div class="pt-4 col-6">
-            <label for="ngaythue" class="form-label fw-bold ps-2">Ngày Thuê:</label>
+            <label for="ngaythue" class="form-label fw-bold ps-2">Ngày Đặt:</label>
             <input type="date" class="form-control" value="{{ $hoaDonThue->ngaythue }}" name="ngaythue" readonly>
           </div>
           {{-- Ngày dự kiến nhận --}}

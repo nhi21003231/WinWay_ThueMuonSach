@@ -78,7 +78,7 @@ class QuanLyTonKhoController extends Controller
         try {
             // Lấy file và tạo tên mới
             $file = $request->file('fileanh');
-            $extension = $file->getClientOriginalExtension();
+            $extension = $file->getClientOriginalExtension(); // Lấy phần mở rộng của tên file
             $newFileName = Str::slug($request->input('tenanpham'), '_') . '_' . time() . '.' . $extension;
 
             // Lưu file ảnh với tên mới
@@ -119,66 +119,77 @@ class QuanLyTonKhoController extends Controller
 
     public function xuLyNhapAnPhamDaCo(Request $request)
     {
+        // Khởi tạo mảng chứa quy tắc và thông báo lỗi
         $rules = [];
         $messages = [];
 
+        // Lặp qua danh sách số lượng để xây dựng quy tắc kiểm tra dữ liệu
         foreach ($request->input('soluong') as $index => $soluong) {
-            // Quy tắc chung cho tất cả các trường số lượng
+            // Quy tắc kiểm tra số lượng là số nguyên và không nhỏ hơn 0
             $rules["soluong.$index"] = 'integer|min:0';
             $messages["soluong.$index.integer"] = "Số lượng phải là số nguyên.";
             $messages["soluong.$index.min"] = "Số lượng không được nhỏ hơn 0.";
 
             if ($soluong > 0) {
-                // Thêm các quy tắc cho các dòng có số lượng lớn hơn 0
+                // Nếu số lượng > 0, thêm quy tắc kiểm tra vị trí và tình trạng
                 $rules["vitri.$index"] = 'required|string|max:100';
                 $rules["tinhtrang.$index"] = 'required|in:Mới,Cũ,Hư hỏng';
 
-                // Tùy chỉnh thông báo lỗi cho từng dòng
+                // Thông báo lỗi tùy chỉnh cho vị trí
                 $messages["vitri.$index.required"] = "Vui lòng nhập vị trí.";
                 $messages["vitri.$index.max"] = "Vị trí không được vượt quá 100 ký tự.";
+
+                // Thông báo lỗi tùy chỉnh cho tình trạng
                 $messages["tinhtrang.$index.required"] = "Vui lòng chọn tình trạng.";
                 $messages["tinhtrang.$index.in"] = "Tình trạng phải là một trong các giá trị: Mới, Cũ, Hư hỏng.";
             }
         }
 
+        // Kiểm tra dữ liệu đầu vào với các quy tắc đã thiết lập
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
+            // Nếu dữ liệu không hợp lệ, trả về trang trước kèm thông báo lỗi
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
         }
 
         try {
-            $countInserted = 0; // Biến đếm số lượng ấn phẩm được nhập thành công
+            // Biến đếm số lượng bản ghi được thêm thành công
+            $countInserted = 0;
 
+            // Lặp qua danh sách ID chi tiết ấn phẩm để xử lý từng bản ghi
             foreach ($request->input('ctanpham_ids') as $index => $ctanphamId) {
                 $soluong = $request->input("soluong.$index");
 
-                // Chỉ xử lý các bản ghi có số lượng lớn hơn 0
+                // Chỉ xử lý nếu số lượng > 0
                 if ($soluong > 0) {
                     for ($i = 0; $i < $soluong; $i++) {
+                        // Tạo mới bản ghi trong bảng ds_anpham
                         DsAnPham::create([
                             'mactanpham' => $ctanphamId,
                             'vitri' => $request->input("vitri.$index"),
                             'tinhtrang' => $request->input("tinhtrang.$index")
                         ]);
-                        $countInserted++;
+                        $countInserted++; // Tăng biến đếm
                     }
                 }
             }
 
+            // Kiểm tra số lượng bản ghi đã thêm để phản hồi
             if ($countInserted > 0) {
+                // Nếu có bản ghi được thêm, chuyển hướng với thông báo thành công
                 return redirect()->route('route-cuahang-quanlykho-quanlytonkho')->with('success', 'Nhập ấn phẩm thành công!');
             } else {
+                // Nếu không có bản ghi nào được thêm, thông báo không có thay đổi
                 return redirect()->back()->with('info', 'Không có ấn phẩm nào được nhập.');
             }
         } catch (\Exception $e) {
+            // Nếu xảy ra lỗi trong quá trình xử lý, trả về thông báo lỗi
             return redirect()->back()->with('error', 'Đã xảy ra lỗi khi nhập ấn phẩm!');
         }
     }
-
-
 
 
     // Thanh lý ấn phẩm
@@ -229,23 +240,32 @@ class QuanLyTonKhoController extends Controller
 
     public function xuLyCapNhatTinhTrang(Request $request)
     {
+        // Lấy danh sách ID của các ấn phẩm từ yêu cầu
         $anPhamIds = $request->input('anpham_ids');
+        // Lấy danh sách tình trạng tương ứng với từng ấn phẩm
         $tinhTrangs = $request->input('tinh_trang');
 
         try {
+            // Lặp qua danh sách ID ấn phẩm để xử lý cập nhật
             foreach ($anPhamIds as $id) {
+                // Kiểm tra nếu tình trạng được chỉ định cho ấn phẩm có ID này
                 if (isset($tinhTrangs[$id])) {
+                    // Tìm bản ghi ấn phẩm theo ID
                     $anPham = DsAnPham::find($id);
                     if ($anPham) {
+                        // Cập nhật tình trạng của ấn phẩm
                         $anPham->tinhtrang = $tinhTrangs[$id];
+                        // Lưu thay đổi vào cơ sở dữ liệu
                         $anPham->save();
                     }
                 }
             }
 
+            // Chuyển hướng với thông báo thành công
             return redirect()->route('route-cuahang-quanlykho-quanlytonkho')
                 ->with('success', 'Cập nhật tình trạng ấn phẩm thành công.');
         } catch (\Exception $e) {
+            // Nếu có lỗi, chuyển hướng với thông báo lỗi
             return redirect()->route('route-cuahang-quanlykho-quanlytonkho')
                 ->with('error', 'Đã xảy ra lỗi khi cập nhật tình trạng ấn phẩm!');
         }

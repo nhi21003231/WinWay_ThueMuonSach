@@ -8,7 +8,6 @@ use App\Http\Requests\ValidationFormRequest;
 
 use App\Models\HoaDonThueAnPham;
 use App\Http\Controllers\Controller;
-use App\Models\ChiTietAnPham;
 use App\Models\ChiTietHoaDonThue;
 use App\Models\DsAnPham;
 use Illuminate\Support\Facades\Auth;
@@ -24,36 +23,31 @@ class DonDatTruocController extends Controller
 
         // dd($request->all());
 
-        $query = HoaDonThueAnPham::where('loaidon', 'Đặt trước')->orderBy('trangthai','asc');
+        $query = HoaDonThueAnPham::where('loaidon', 'Đặt trước')->orderBy('trangthai', 'asc');
 
         if ($request->sort == 'moinhat') {
 
             $hoaDons = $query->orderBy('ngaythue', 'desc')->paginate(7);
-
         }
 
         if ($request->sort == 'cunhat') {
 
             $hoaDons = $query->orderBy('ngaythue', 'asc')->paginate(7);
-
         }
 
         // Xử lý tìm kiếm
         if ($request->has('TimKiem') && $request->TimKiem != '') {
 
-            $query->where(function($query) use ($request){
+            $query->where(function ($query) use ($request) {
 
                 $query->whereHas('chiTietHoaDons.dsAnPham.chiTietAnPham', function ($query) use ($request) {
 
                     $query->where('tenanpham', 'like', '%' . $request->TimKiem . '%');
-    
                 })->orWhereHas('khachHang', function ($query) use ($request) {
-    
+
                     $query->where('hoten', 'like', '%' . $request->TimKiem . '%');
-    
                 });
             });
-
         }
 
         $hoaDons = $query->paginate(7);
@@ -62,7 +56,8 @@ class DonDatTruocController extends Controller
     }
 
     // Update Status Re-order
-    public function updateStatus(Request $request){
+    public function updateStatus(Request $request)
+    {
 
         $hoaDon = HoaDonThueAnPham::find($request->orderID);
 
@@ -84,19 +79,57 @@ class DonDatTruocController extends Controller
         return view('CuaHang.pages.NhanVien.DonDatTruoc.chi-tiet-don-dat-truoc', compact('hoaDonThue'));
     }
 
+    public function moveTypeOrderQuickly(Request $request)
+    {
+
+        $hoaDon = HoaDonThueAnPham::where('mahoadon', $request->orderID)->first();
+
+        $anpham = DsAnPham::where('mactanpham', $hoaDon->mactanpham)
+
+                    ->where('dathue', 0)
+
+                    ->where('tinhtrang','<>','Hư hỏng')
+
+                    ->first();
+
+        $ctHoaDon = ChiTietHoaDonThue::create([
+            'maanpham' => $anpham->maanpham,
+            'mahoadon' => $request->orderID,
+        ]);
+
+        $ctHoaDon->save();
+
+        $hoadon = HoaDonThueAnPham::find($request->orderID);
+
+        $hoadon->ngaytra = now()->addDays(15);
+
+        $hoadon->loaidon = 'Đơn thuê';
+
+        $hoadon->trangthai = 'Đang thuê';
+
+        $hoadon->mactanpham = Null;
+
+        $hoadon->save();
+
+        $anpham->dathue = 1;
+
+        $anpham->save();
+
+        return response()->json(['success'=>'Đơn hàng đã được chuyển thành đơn thuê.']);
+    }
     // Cập nhật đơn đặt trước
 
     public function capNhatDonDatTruoc(ValidationFormRequest $request, $id)
     {
 
-        // dd($request->all());
-        $request->validated();
 
-        $anpham = DsAnPham::where('mactanpham',$request->id_ctanpham)
-                            
-                            ->where('dathue',0)->first();   
+        $anpham = DsAnPham::where('mactanpham', $request->id_ctanpham)
 
-        
+            ->where('dathue', 0)
+            ->where('tinhtrang','<>','Hư hỏng')
+            ->first();
+
+
         $ctHoaDon = ChiTietHoaDonThue::create([
             'maanpham' => $anpham->maanpham,
             'mahoadon' => $id,
