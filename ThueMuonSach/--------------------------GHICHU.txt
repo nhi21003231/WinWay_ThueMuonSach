@@ -24,3 +24,5 @@ vào file php.ini => tìm extension=gd => bỏ dấu chấm phải => sau đó c
 ---Mỗi lần pull về nên chạy lại csdl để không bị lỗi
 
 -- 10/12/2024 QUản lý cửa hàng: chạy lệnh: "composer require maatwebsite/excel" để xuất excel
+
+-- Lệnh run schedule: php artisan schedule:work

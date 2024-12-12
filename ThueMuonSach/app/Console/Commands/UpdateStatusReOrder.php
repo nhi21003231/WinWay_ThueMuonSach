@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Console\Commands;
+
 use Illuminate\Support\Facades\Log;
 
 use Illuminate\Console\Command;
 use App\Models\HoaDonThueAnPham;
+use App\Models\ChiTietAnPham;
 
 class UpdateStatusReOrder extends Command
 {
@@ -28,29 +30,27 @@ class UpdateStatusReOrder extends Command
     public function handle()
     {
         //
-        $hoaDons = HoaDonThueAnPham::where('loaidon','Đặt trước')
-                
-                                    ->where('trangthai','Đang chờ sách')
+        $hoaDons = HoaDonThueAnPham::where('loaidon', 'Đặt trước')
 
-                                    ->get();
+            ->where('trangthai', 'Đang chờ sách')
+
+            ->get();
 
         foreach ($hoaDons as $hoaDon) {
+            $count = ChiTietAnPham::where('mactanpham', $hoaDon->mactanpham)
+                ->whereHas('anpham', function ($query) {
+                    $query->where('dathue', 0)
+                        ->where('tinhtrang', '<>', 'Hư hỏng')
+                        ->where('dathanhly', 0);
+                })
+                ->count();
 
-            $hasAvailable = false;
-
-            $count = $hoaDon->chitietanpham->anpham->where('dathue',0)->count();
-
-            if($count > 0 ){
-
+            if ($count > 0) {
                 $hoaDon->trangthai = 'Đã có sách';
-                
                 $hoaDon->save();
-                
-                Log::info("Cập nhật trạng thái hóa đơn #{$hoaDon->id}, #{$count} thành 'Đã có sách'");
+
+                Log::info("Cập nhật trạng thái hóa đơn #{$hoaDon->mahoadon}, #{$count} thành 'Đã có sách'");
             }
         }
-
-        $this->info('Hoàn thành cập nhật trạng thái hóa đơn.');
-        
     }
 }

@@ -90,6 +90,7 @@ class HoaDonThueAnPhamSeeder extends Seeder
 
         foreach ($hoaDons as $hoaDon) {
             // Số lượng chi tiết ngẫu nhiên cho mỗi hóa đơn
+            
             if ($hoaDon->loaidon == 'Đơn thuê') {
                 // Get only available items (not rented and not marked for liquidation)
                 $availableItems = DsAnPham::where('dathue', false)
