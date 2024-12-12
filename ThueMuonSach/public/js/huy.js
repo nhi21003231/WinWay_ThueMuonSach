@@ -1,40 +1,10 @@
 $(document).ready(function () {
-
   // -------------Remove disable for button Search
   $('.input-tk').on('input', function () {
     $('.btn-tk').removeAttr('disabled');
   });
 
-  // -----------Change bg button update re-order
-  var input = $('#form-dondattruoc').find('input, select');
-
-  input.on('input', function (e) {
-    e.preventDefault();
-
-    $('#btn-Luu').removeClass('pe-none opacity-50');
-
-  });
-
-  // ------------------show notify delte customer
-  $(".btn-xoakh").click(function() {
-    Swal.fire({
-      title: "Xóa khách hàng?",
-      text: "Bạn có chắc muốn xóa khách hàng này",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Đồng ý"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // console.log('aaaa')
-        $('#form-deleteCustomer').submit()
-      }
-    });
-  });
-
   // ---------------------------------------------------------------AJAX-------------------------------------------------------------------------------//
-
   // Setup CSRF token for all request Ajax
   $.ajaxSetup({
     headers: {
@@ -42,47 +12,95 @@ $(document).ready(function () {
     },
   });
 
-  // ----------------------Re-order---------------------------------------------------//
-  // ------------Ajax Request Accept Re-order
-  $('.status-accept').click(function () { 
+  // =================================Function Re-order===================================================
+  // -----------Change bg button update re-order
+  var input = $('#form-dondattruoc').find('input, select');
+
+  input.on('input', function (e) {
+    e.preventDefault();
+
+    $('#btn-Luu').removeClass('pe-none opacity-50');
+  });
+
+  // ------------Ajax Request Accept-status Re-order
+  $('.status-accept').click(function () {
     var accept_data = $(this).data('id');
     // console.log(accept_data);
     Swal.fire({
-      title: "Xác nhận đơn hàng?",
-      text: "Bạn có muốn xác nhận đơn hàng này.",
-      icon: "warning",
+      title: 'Xác nhận đơn hàng?',
+      text: 'Bạn có muốn xác nhận đơn hàng này.',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Đồng ý"
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Đồng ý',
     }).then((result) => {
       if (result.isConfirmed) {
         // console.log('aaaa')
         $.ajax({
-          type: "put",
-          url: "/nhan-vien/update/status",
+          type: 'put',
+          url: '/nhan-vien/update/status',
           data: {
-            orderID:accept_data
+            orderID: accept_data,
           },
           // dataType: "dataType",
           success: function (response) {
             if (response.success) {
-              toastr.success(response.success,response.message, {
+              toastr.success(response.success, response.message, {
                 positionClass: 'toast-bottom-right',
                 timeOut: '2000', // set time hidden notify
                 closeButton: true,
                 newestOnTop: false,
               });
             }
-            setTimeout(()=>{
+            setTimeout(() => {
               location.reload();
-            },1000)
-          }
+            }, 1000);
+          },
         });
-        
       }
     });
-   })
+  });
+
+  // ----------------------Move Type Order Quickly
+  $('.quickly-order').click(function () {
+    var data_id = $(this).data('id');
+
+    Swal.fire({
+      title: 'Đơn hàng này đã có sách',
+      text: 'Bạn có muốn chuyển đơn hàng này thành đơn thuê?.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Đồng ý',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: 'put',
+          url: '/nhan-vien/don-dat-truoc/quickly-status',
+          data: {
+            orderID: data_id,
+          },
+          success: function (response) {
+            if (response.success) {
+              toastr.success(response.success, response.message, {
+                positionClass: 'toast-bottom-right',
+                timeOut: '2000', // set time hidden notify
+                closeButton: true,
+                newestOnTop: false,
+              });
+            }
+            setTimeout(() => {
+              location.reload();
+            }, 1000);
+          },
+        });
+      }
+    });
+  });
+
+  // =================================Function Customer manager====================================
 
   // -------------Ajax Request infor Customer for function update
   $('.btn-update').click(function () {
@@ -108,11 +126,10 @@ $(document).ready(function () {
     var findInputModal = $('.modal-body').find('input');
     findInputModal.on('input', function () {
       $('.btn-modal-update').removeAttr('disabled');
-      // console.log('aaaa')
     });
   });
 
-  // -------------------listen event submit form update customer
+  // -------------------Submit form update customer
   $('#form-capnhatCustomer').on('submit', function (e) {
     e.preventDefault();
 
@@ -155,6 +172,23 @@ $(document).ready(function () {
     });
   });
 
+  // ------------------show notify delte customer
+  $('.btn-xoakh').click(function () {
+    Swal.fire({
+      title: 'Xóa khách hàng?',
+      text: 'Bạn có chắc muốn xóa khách hàng này',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Đồng ý',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $('#form-deleteCustomer').submit();
+      }
+    });
+  });
+  // =========================================Function Crete Report==================================
   // ---------------Request create report with Ajax
   $('.btn-report').click(function () {
     var data = {
@@ -163,8 +197,6 @@ $(document).ready(function () {
       startdate: $('#startdate').val(),
       enddate: $('#enddate').val(),
     };
-
-    // console.log(data);
     // ----------------Ajax
     $.ajax({
       type: 'post',
